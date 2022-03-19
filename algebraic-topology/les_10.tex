@@ -1,0 +1,183 @@
+\lesson{10}{di 17 dec 2019 10:26}{Ham sandwich theorem}
+
+\begin{theorem}
+    Let $f: S^1 \to S^{1}$ such that $f$ is antipode preserving: $f(A x) = Af(x)$.
+    Then $d(f)$ is odd.
+\end{theorem}
+\begin{proof}
+    Picture:
+\begin{figure}[H]
+    \centering
+    \incfig{antipode-preserving-maps}
+    \label{fig:antipode-preserving-maps}
+\end{figure}
+What is $f_*: H_1(S^{1}) \to  H_1(S^{1})$?
+$H_1(S^{1}) \cong \Z = \left<\alpha \right> = \left< c + d \right>$.
+Note that $d = A  \circ c$.
+
+Now, Let's look at the image of $c$ under  $f$.
+The only thing we know, is that it starts at $f(a)$ and ends at $f(b) = A f(a)$.
+Let  $\gamma$ be the path that is the half circle, counterclockwise from $f(b)$ to $f(a)$.
+Then $f  \circ  c + \gamma \in Z_1(S^{1})$.
+Indeed, $\partial(f  \circ  c + \gamma) = f(b) - f(a) + f(a) - f(b) = 0$.
+Then $\left<f  \circ  c + \gamma \right> \in H_1(S^{1})$.
+This has to be equal to $m \left<\alpha \right>$ for some $m \in \Z$.
+
+Now, $A_*: H_1(S^{1}) \to  H_1(S^{1})$.
+We know that $d(A_*) = (-1)^{2} = 1$, so this is just the identity map:
+\[
+    A_*(\left<\alpha \right>) = A_* \left<c + d \right> = \left<A  \circ  c + A  \circ  d \right> = \left<d + c \right> = \left<\alpha \right>
+.\] 
+So \[
+m \left<\alpha \right> = A_* \left<f  \circ  c + \gamma \right>
+= \left<A  \circ  f  \circ  c + A  \circ  \gamma \right>
+.\]
+Now, $A  \circ  \gamma$ is the path from $f(a)$ to $f(b)$, going counter clockwise. Now, we assume $A  \circ  f = f  \circ  A$, so
+\[
+m \left<\alpha \right> = \left<f  \circ  d + A  \circ  \gamma \right>
+.\] 
+Now, also
+\begin{align*}
+    2 m \left<a \right> &= \left<f  \circ  c + \gamma \right> + \left< f  \circ  d + A  \circ  \gamma \right>\\
+                        &= \left<f  \circ  c + f  \circ  d + \gamma + A  \circ  \gamma \right>\\
+                        \intertext{$\gamma + A  \circ  \gamma$ is a one cycle, and $f  \circ  c + f  \circ  d$ is also a one cycle}
+                        &= \left<f  \circ  c + f  \circ  d \right> + \left<\gamma + A  \circ  \gamma \right>\\
+                        &= f_* \left< c + d \right> + \left< \alpha \right>\\
+                        &= f_* \left< \alpha \right> + \left<\alpha \right>
+.\end{align*} 
+So
+\[
+    f_* \left<\alpha \right> = (2m - 1) \left<\alpha \right>
+,\] 
+for some integer $m$.
+\end{proof}
+\marginpar{TODO: In problem: say that one cycles}
+
+\begin{remark}
+    Exercise: even maps have even degrees: $f(A x) = f(x)$.
+\end{remark}
+\begin{remark}
+    We don't use $- x$ for $Ax$ because it could be misleading: this $-$ has nothing to do with the $-$ from the abelian homology group.
+\end{remark}
+
+\begin{theorem}
+    Let $f: S^{n} \to  S^{n}$ such that $f(Ax) = A f(x)$.
+    Then  $d(f)$ is odd.
+\end{theorem}
+\begin{proof}
+    We don't prove this.
+\end{proof}
+
+\begin{theorem}
+    There is no continuous antipodal preserving map from $S^2 \to  S^{1}$.
+\end{theorem}
+\begin{proof}
+    Suppose there is such a map.
+    \begin{figure}[H]
+        \centering
+        \incfig{no-antipodal-preserving-map-from-s2-to-s1}
+        % \caption{no antipodal preserving map from s2 to s1}
+        \label{fig:no-antipodal-preserving-map-from-s2-to-s1}
+    \end{figure}
+\[
+    \begin{tikzcd}
+        S^2 \arrow[r, "f"] & S^{1}\\
+        S^{1} \arrow[u, "i"] \arrow[ur, swap, "f|_{S^{1}}"] &
+    \end{tikzcd}
+\]
+Then we have
+\[
+    \begin{tikzcd}
+        H_1(S^{2}) = 0 \arrow[r, "f_*"] &H_1(S^{1}) = \Z\\
+        H_1(S^{1}) = \Z \arrow[u, "i_*"] \arrow[ur, swap, "\cdot (2k+1)"]
+    \end{tikzcd}
+\]
+But $(f_*  \circ  i_*)(1) = 0$, but $(f|_{S^{1}})_*(1) = 2k+1$, which is odd, and certainly not $0$.
+This works for all higher dimensional spheres to $S^1$.
+\end{proof}
+
+
+\begin{theorem}[Borsuk-Ulam theorem]
+    \emph{There are two antipodal points on the earth such that both the temperature and air pressure are the same.}
+    If $f: S^{2} \to  \R^2$ is continuous.
+    Then there exists $x \in S^2$ such that $f(x) = f(-x)$.
+\end{theorem}
+\begin{proof}
+    Suppose $f(x) \neq f(-x)$ for all  $x \in S^2$.
+    Then  we define
+    \[
+        g: S^2 \to  \R^2: x \mapsto \frac{f(x) - f(-x)}{\|f(x) - f(-x)\|} \in S^1
+    .\] 
+    Then $g(-x) = -g(x)$, which is a contradiction with the previous theorem.
+\end{proof}
+\begin{remark}
+    Also holds for $S^{n}\to \R^n$.
+\end{remark}
+
+\begin{theorem}[Ham Sandwich theorem]
+    \emph{Suppose you give me two pieces of break and 1 slice of ham. Then it is possible to divide both the pieces of bread and the slice of ham in equal pieces by 1 straight cut of knife.}
+\end{theorem}
+\begin{proof}
+    Consider for each $v \in S^{2}$ a plane $P_v \subset \R^3$.
+    $P_v \perp v$ and  $P_v$ cuts the slice of ham exactly in two.
+    We define the ``upper side'' of the plane to be the half to which $v$ is pointing to.
+
+    If you have some weird ham which which you can cut in multiple places in half, then you take the middel of the line segment. This makes it unique.
+
+    Note that $P_v = P_{-v}$.
+\begin{figure}[H]
+    \centering
+    \incfig{ham-sandwich-theorem}
+    % \caption{ham sandwich theorem}
+    \label{fig:ham-sandwich-theorem}
+\end{figure}
+
+Now, consider 
+\[
+    f: S^{2} \to  \R^2: v \mapsto (f_1(v), f_2(v))
+.\] 
+Then $f_1(v)$ is the volume of bread $b_1$ above $P_v$.
+Then $f_2(v)$ is the volume of bread $b_2$ above $P_v$.
+
+Now, you should believe that $f_1$ and $f_2$ are continuous. (Proving this precisely needs measure theory etc.)
+So, now, we can use the Borsak Ulam theorem.
+So there exists a $v \in S^{2}$ such that $f(v) = f(-v)$.
+So  $f_1(v) = f_1(-v)$, so volume of bread $b_1$ above $P_v$ is the volume of bread $b_1$ below $P_v$, and similar for  $f_2$.
+This proves the Ham sandwich theorem.
+\end{proof}
+
+Last result.
+\begin{theorem}
+    Let $A_1, A_2, A_3$ be three closed subsets of $S^2$ such that $S^2 = A_1 \cup A_2 \cup A_3$.
+    Then at least one of the $A_i$ contains a pair of antipodal points.
+\end{theorem}
+\begin{proof}
+    Let $f: S^2 \to \R^2$ mapping $ x\mapsto (d(x, A_1), d(x, A_2))$.
+    \[
+        d(x, A_i) = \min_{y \in A_i} d(x, y)
+    .\] 
+    Then, there exists a point $x \in S^2$ such that $f(x) = f(-x)$.
+    So
+     \[
+         d(x, A_1) = d(-x, A_1) \qquad d(x, A_2) = d(-x, A_2)
+    .\] 
+    \begin{description}
+        \item[Possibility 1] $d(x, A_1) = 0$. Then $x \in A_1$ and $-x \in A_1$.
+        \item[Possibility 2] $d(x, A_2) = 0$. Then $x \in A_2$ and $-x \in A_2$.
+        \item[Possibility 3] $d(x, A_2) \neq 0 \neq d(x, A_1)$: $x, -x \not\in A_1$ and $x, -x \not\in A_2$. As $x \in S^2$, $x, -x \in A_3$.
+    \end{description}
+\end{proof}
+
+\begin{remark}
+    This also works for $2$ (Just take $A_3 = \O$), but this doesn't work for $4$.
+\end{remark}
+\begin{figure}[H]
+    \centering
+    \incfig{example-with-four-elements}
+    \caption{Example with four elements}
+    \label{fig:example-with-four-elements}
+\end{figure}
+\begin{remark}
+    Time on schedule is when you have to enter the room.
+    Hand over problems after exam.
+\end{remark}

@@ -1,0 +1,216 @@
+%\lesson{1}{wo 25 sep 2019 15:00}{Introduction}
+%\begin{itemize}
+%    \item Marco Zambon. TA: R. Storm
+%    \item Literature: Tu, Lee
+%    \item Exercises: Mondays. Look at exercises in advance. (part of exam is based on them)
+%    \item Take home sheets: $2$, two weeks to solve them. 6/20. (solving together is allowed.) \emph{Write up by hand; no typing}
+%    \item Exam: 16/20.
+%        \begin{itemize}
+%            \item 2 problems (closed book) (inspired by homework problems)
+%            \item 2 questions (closed book)
+%        \end{itemize}
+%        Oral defence of this and one TH.
+%    \item Time: 16:10 -- 18:00
+%\end{itemize}
+
+\chapter{Differentiable manifolds}
+\setcounter{section}{-1}
+\section{Topological spaces}
+
+\begin{definition}[Topological space]
+    A topological space is $(X, \sigma)$ where  $X$ is a set and $\sigma$
+  a family of subsets of $X$, called  open sets, such that:
+    \begin{itemize}
+        \item $\O, X \in \sigma$ 
+        \item $\bigcup_{i \in I} U_i \in \sigma$ whenever $ U_i \in \sigma$ for all $i$
+        \item $\bigcap_{i<n} U_i \in \sigma$ whenever $ U_i \in \sigma$ for all $i$
+    \end{itemize}
+\end{definition}
+
+Let $(X, \sigma)$ be a topological space.
+\begin{definition}[Open neighbourhood]
+    An open subset that contains $p \in X$ is called a (open) neighbourhood of $p$.
+\end{definition}
+\begin{definition}[Subspace topology]
+    If $Y \subset X$ then $(Y, \sigma_Y)$ is a topological space, where
+    \[
+    \sigma_Y = \{U \cap Y  \mid  U \in \sigma\} 
+    .\]  We call $\sigma_Y$ the subspace topology.
+\end{definition}
+\begin{eg}
+Endowing $\mathbb{R}^2$ with the Euclidean topology,
+the subspace topology on    $\mathbb R \times \{0\}\subset \mathbb{R}^2$ is also the
+ Euclidean topology.
+\end{eg}
+
+\begin{definition}[Quotient topology]
+    Let $\sim $ be an equivalence relation on $X$.
+    Consider $\pi: X \to  X / \sim $.
+    Then $X / \sim $ is a topological space, where the open sets are by definition sets such that $\pi^{-1}(U)$ is open in $X$.
+\end{definition}
+\begin{definition}[Continuous functions]
+    A function $f: X_1 \to  X_2$ is called continuous iff $\forall  U \in \sigma_2: f ^{-1}(U) \in \sigma_1$.
+\end{definition}
+\begin{definition}
+    A topological space is called Hausdorff iff
+    $\forall x, y \in X$, there exist neighbourhoods $U$ of $x$, $V$ of $y$ such that $U \cap V = \O$.
+\end{definition}
+\begin{eg}
+%[Not Hausdorff]
+ Endow $\mathbb R^2 \setminus \{0\}$   with the equivalence relation given by the thick lines and the two half lines in the following figure. That is:
+    \[
+        (x, y) \sim (x', y') \iff \begin{cases}
+            x = x' & \text{if $x \neq 0$}\\
+            y y' > 0 & \text{if $x = 0$.}
+        \end{cases}
+    \] 
+  Then the quotient topology on $(\mathbb R^2 \setminus \{0\}) / \sim $ is not Hausdorff.
+\end{eg}
+\begin{figure}[ht]
+    \centering
+    \incfig{not-hausdorff-example}
+    \caption{Example of a topology which is not Hausdorff}
+    \label{fig:not-hausdorff-example}
+\end{figure}
+\begin{definition}[Basis for a topology]
+    A basis for a topology is $S \subset \sigma$ such that every open set of $X$ is a union of elements of $S$.
+\end{definition}
+
+\begin{definition}[C2]
+    A space $(X, \sigma)$ is second countable if there exists a countable basis.
+\end{definition}
+\begin{eg}
+    $\mathbb R^{n}$ is second countable. 
+   Indeed $\{ B_{\frac{1}{m}}(x)  \mid  x \in \mathbb Q^{n}, m \in \N\} $ is a countable basis for the topology. Here $B_{r}(x)$ is the open ball with radius $r$ around $x$.
+\end{eg}
+\section{Differentiable manifolds}
+\begin{definition}[Topological manifold]
+    A topological manifold $M$ of dimension~$m$ is a second countable, Hausdorff topological space which is locally homeomorphic to $\mathbb R^{m}$.
+\end{definition}
+\begin{remark}
+`Locally homeomorphic to $\mathbb R^{m}$' means that $\forall p \in M, $ there exists a neighborhood $U$ of $p$ and a homeomorphism $\phi: U \to  V \underset{\text{open}}{\subset} \mathbb R^{m}$. Recall that homeomorphism means: bijective map that is continuous in \emph{both} directions.   
+\end{remark}
+
+\begin{definition}[Chart]
+    The pair $(U, \phi)$ is called a chart.
+\end{definition}
+
+\begin{remark}\leavevmode 
+    \begin{itemize}
+        \item Any subset of a Hausdorff space is Hausdorff
+        \item Any subset of a C2 space is C2.
+    \end{itemize}
+\end{remark}
+
+
+
+\begin{definition}[Compatibility]
+    Two charts $(U_1, \phi_1)$ and $(U_2, \phi_2)$ are called smoothly compatible if 
+    \[
+        \phi_2 \circ(\phi_1)^{-1}  |_{\phi_1(U_1 \cap  U_2)}: \phi_1(U_1 \cap  U_2) \to  \phi_2(U_1 \cap U_2)
+    \] 
+    is a diffeomorphism (i.e. bijective, differentiable and inverse differentiable, where ``differentiable'' means that all partial derivatives exist).
+\end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{compatible}
+    \caption{Compatible charts}
+    \label{fig:compatible}
+\end{figure}
+
+\begin{definition}[Smooth atlas]
+    A smooth atlas for $M$ is called a collection of charts $\{(U_\alpha, \phi_\alpha)\}$ such that $\bigcup_{\alpha} U_\alpha = M$ and any two charts are smoothly compatible.
+\end{definition}
+\begin{definition}[Maximal smooth atlas]
+    A smooth atlas $\mathcal A$ is maximal if: whenever $\mathcal B$ is a smooth atlas and $\mathcal A \subset \mathcal B$ then $\mathcal B = \mathcal A$.
+\end{definition}
+\begin{definition}[Differentiable manifold ]
+    A differentiable manifold (also called a smooth manifold) is a topological manifold $M$ together with a maximal smooth atlas.
+\end{definition}
+\begin{remark}
+    Given a smooth atlas $\mathcal A$ on a topological manifold  $M$, there exists a unique maximal smooth atlas containing it, namely
+    \[
+        \{(V, \psi)  \mid  (V, \psi) \text{ is smoothly compatible with all charts of $\mathcal A$}\} 
+    .\] 
+\end{remark}
+
+\begin{eg}
+    Let $U \subset \R^n$. It's a smooth manifold: an atlas is $\{(U, \text{Id})\}$. Take the maximal smooth atlas containing it.
+\end{eg}
+\begin{eg}
+    Let $S^{n} := \{\mathbf{x} \in \mathbb R^{n+1}  \mid \|\mathbf{x}\| = 1\}$.
+    The sphere $S^{n}$ with the subspace topology is Hausdorff and C2, simply because $\mathbb R^{n+1} $ is.
+    Two charts are given by the stereographic projections from the Northpole $N$ and Southpole $S$:
+    \begin{align*}
+        \phi_N: S^{n} \setminus \{N\} \to \mathbb R^{n}: (x_1, \ldots, x_{n +1}) &\mapsto \frac{(x_1, \ldots, x_n)}{1 - x_{n+1}}\\
+        \phi_S: S^{n} \setminus \{S\} \to \mathbb R^{n}: (x_1, \ldots, x_{n+1}) &\mapsto \frac{(x_1, \ldots, x_n)}{1 + x_{n+1}}
+    .\end{align*}
+
+    Now, $\phi_N$ and  $\phi_S$ are homomorphisms.
+    Furthermore, $\|\phi_N(p)\|\cdot \|\phi_S(p)\| = 1$, which allows us to calculate the inverse of $\phi_{N}$.
+    Hence
+    \[
+        (\phi_S \circ \phi_N ^{-1})|_{\phi_N(S^n\setminus\{N,S\})}: \R^n \setminus \{0\} \to  \R^n \setminus \{0\}: y \mapsto \frac{y}{\|y\|^2}
+    ,\] 
+    so $\phi_N$ and  $\phi_S$ are smoothly compatible.
+    Take the maximal smooth atlas containing  $\phi_N$ and  $\phi_S$.
+\end{eg}
+\begin{remark}
+    We could have started with other points $P,Q\in S^n$ instead of $N, S$. The smooth atlases $\{\phi_P,\phi_Q\}$ and $\{\phi_N,\phi_S\}$ would be different, but they define    the same maximal smooth atlas.
+\end{remark}
+
+\section{Differentiable map}
+Let $M$ be a smooth manifold.
+
+\begin{definition}[Smooth function]
+    A function $f: M \to  \mathbb R$ is differentiable (or smooth) at $p \in M$ iff $\exists$ a chart $(U, \phi)$ around $p$ such that $f \circ \phi^{-1}$ is differentiable in $\phi(p)$.
+\end{definition}
+
+
+\begin{figure}[H]
+    \centering
+    \incfig{smooth-function-to-r}
+    \caption{Smooth function from $M$ to $\mathbb R$}
+    \label{fig:smooth-function-to-r}
+\end{figure}
+
+\begin{remark}
+    If $f \circ \phi^{-1}$ is differentiable at $p$ for a chart $(U, \phi)$, then $f \circ \psi^{-1}$ is also differentiable at $p$, for any other chart $(V,\psi)$ (in the maximal atlas of $M$).
+\end{remark}
+\begin{proof}
+    We want to argue that $f \circ \psi^{-1}$ is smooth.
+    \[
+        f \circ \psi^{-1} = \underbrace{(f \circ \phi^{-1})}_{C^{\infty}} \circ \underbrace{(\phi \circ \psi^{-1})}_{C^{\infty}}
+    .\] 
+\end{proof}
+\begin{notation}
+    We write $C^{\infty}(M)$ to denote all smooth functions  $M \to  \mathbb R$.
+\end{notation}
+\begin{definition}[Smooth map]
+
+    $f: M \to  N$ is differentiable at $p \in M$ iff
+    \begin{itemize}
+        \item it is continuous
+        \item there exists charts $(U_M,\phi_M)$ around $p$ and $(U_N,\phi_N)$  around $f(p)$ such that 
+            $\phi_N \circ f \circ \phi_M^{-1}$ is differentiable at $\phi_M(p)$
+    \end{itemize}
+
+\end{definition}
+\begin{remark} The map $\phi_N \circ f \circ \phi_M^{-1}$  is defined on 
+$\phi_M(U_M\cap f^{-1}(U_N))$.
+The continuity of $f$ ensures that this is an open neighborhood of $\phi_M(p)$ in $\mathbb{R}^m$, hence it makes sense to talk about the differentiability of the above map at 
+$\phi_M(p)$.
+\end{remark}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{smooth-function-from-m-to-n}
+    \caption{Smooth function from $M$ to $N$}
+    \label{fig:smooth-function-from-m-to-n}
+\end{figure}
+
+\begin{remark}
+A map $f$ being a differentiable and a homeomorphism does not imply that $f$ is a diffeomorphism (which also include the differentiability of the inverse).
+For instance, $f\colon \mathbb R\to \mathbb R, x\mapsto x^3$ is not a diffeomorphism, because the inverse $x\mapsto \sqrt[3]{x}$ is not differentiable at zero.
+\end{remark}

@@ -1,0 +1,179 @@
+%\lesson{5}{wo 23 okt 2019 16:09}{Lie bracket}
+% \begin{remark}
+%     In a week, some problems will get posted on toledo.
+%     12 days to solve them.
+%     You can hand them in during the exercise session.
+% \end{remark}
+
+\section{The Lie bracket of vector fields}
+We denote $C^{\infty}(M)=\{\text{smooth functions from $M$ to $\R$}\}$.
+\begin{remark}
+    $C^{\infty}(M)$ is an algebra: it is a vectorspace, but we can also multiply two functions.
+\end{remark}
+
+
+
+\begin{definition}[Derivation of $C^{\infty}(M)$]
+    A derivation of $C^{\infty}(M)$ is a linear map $D: C^{\infty}(M) \to  C^{\infty}(M)$ such that
+    \[
+        D(fg) = D(f) g + f D(g)
+    .\] 
+\end{definition}
+
+
+\begin{remark}
+    If $D_1, D_2$ are derivations of $C^{\infty}(M)$, then  the commutator 
+ $D_1\circ D_2 - D_2\circ D_1$ 
+    is also a derivation. But
+    $D_1\circ D_2$ on its own is not a derivation!
+\end{remark}
+\begin{prop}
+    There is a linear map 
+    \begin{align*}
+        \Phi: \mathfrak{X}(M) &\longrightarrow \text{Derivations of $C^{\infty}(M)$} \\
+        X &\longmapsto (f \mapsto f_*(X) \in C^{\infty}(M))
+    .\end{align*}
+ Here   $f_*(X)$ is the function on $M$ given by $(f_*(X))_{p} = (f_*)_p(X|_p) \in T_{f(p)}\R \cong \R$.
+We denote $f_*(X) =: X(f)$.
+\end{prop}
+\begin{proof}
+    We'll show that $\forall X \in \mathfrak{X}(M)$, $\Phi(X)$ is a derivation.
+    Let $f, g \in C^{\infty}(M)$, $p \in M$. Let $\gamma$ be a curve in $M$ such that $\gamma(0) = p, [\gamma] = X_p$.
+    Then 
+     \begin{align*}
+         (fg)_{* p} (X_p) &= [ (fg)  \circ  \gamma] \in T_{(fg)(p)} \R\\
+                          &\cong ((fg)  \circ \gamma)'(0) \in \R\\
+                          &= [(f  \circ \gamma) \cdot (g  \circ  \gamma)]'(0)\\
+                          &= (f  \circ \gamma)'(0)  \cdot g(\gamma(0)) + f(\gamma(0))  \cdot(g  \circ  \gamma)'(0)\\
+ &= (f_*)_p(X|_p) \cdot g(p)+f(p) \cdot (g_*)_p(X|_p).\end{align*}
+In the second-last equality we applied the product rule of calculus.
+\end{proof}
+\begin{remark}
+    $\Phi$ is an isomorphism. This can be showed using the material in \S\ref{sec:tangvectder}.
+\end{remark}
+
+\begin{definition}[Lie bracket of  vector fields]
+    The Lie bracket of two vector fields  $X, Y \in \mathfrak{X}(M)$ is 
+    $$[X, Y]:= X\circ Y-Y\circ X,$$
+    using the identification between $\mathfrak{X}(M)$ and the derivations of $C^{\infty}(M)$.
+\end{definition}
+\begin{definition}[Lie algebra]
+    A Lie algebra is a vector space $\mathfrak g$ with a bilinear map $[\cdot , \cdot ]: \mathfrak g \times \mathfrak g \to  \mathfrak g$ such that
+    \begin{itemize}
+        \item $[X, Y] = -[Y, X]$ \hfill \emph{Skew symmetric}
+        \item $[X, [Y, Z]]  + [Y, [Z, X]] + [Z, [X, Y]] = 0$ \hfill \emph{Jacobi Identity}
+    \end{itemize}
+\end{definition}
+\begin{eg}
+    $(\mathfrak{X}(M), [\cdot ,\cdot ])$ is a Lie algebra.
+\end{eg}
+%\begin{eg}
+%    $(\R^3 , \times )$ is a Lie algebra?
+%\end{eg}
+\begin{eg}
+  The square matrices  $(M(n, \R)$ with $[A,B]:=AB - BA$ is a Lie algebra.
+The Jacobi identity holds as a consequence of  the associativity of matrix multiplication.
+\end{eg}
+\begin{remark}
+    Let $(U, \phi)$ be a chart on $M$.
+    Then we get vector fields $\frac{\partial }{\partial x_i} $ on $U\subset M$.
+    \begin{itemize}
+        \item The vector field $\frac{\partial }{\partial x_i}$, seen as a derivation, maps $x_j \in C^{\infty}(U)$ to $\delta_{ij}$ 
+        \item If $X = \sum_i a_i \frac{\partial }{\partial x_i} $, $Y = \sum_i b_i \frac{\partial }{\partial x_i}$, with $a_i, b_i \in C^{\infty}(U)$,
+ then \[[X, Y] = \sum_j \left(\sum_i \left( a_{i} \frac{\partial b_{j}}{\partial x_i}  - b_{i} \frac{\partial a_{j}}{\partial x_i} \right)\right)  \frac{\partial }{\partial x_j}. \]
+This can be seen by applying $[X, Y]$ to the functions $x_{i}$.
+            In particular $\left[ \frac{\partial }{\partial x_i} , \frac{\partial }{\partial x_{j}}\right] = 0, $
+            because the $a_i$ and $b_i$ are constants here.
+    \end{itemize}
+\end{remark}
+\begin{definition}[$F$-related vector fields]
+    Let $F: M \to  N$ be a smooth map and $X \in \mathfrak{X}(M)$, $Y \in \mathfrak{X}(N)$.
+ We say that $X$ and $Y$ are $F$-related iff  $(F_*)_p (X_p) = Y_{F(p)}$ for all points $p\in M$.
+\end{definition} 
+
+\begin{remark}
+Equivalently: $X$ and $Y$ are $F$-related iff  $\forall  g \in C^{\infty}(N)$ we have $X(F^{*}g) = F^{*}(Y(g))$. Here $F^{*}$ is the pullback of functions, i.e. $F^*(g)=g\circ F$.
+\end{remark}
+\begin{prop}
+Suppose $X_i$ is $F$-related to $Y_i$ for $i = 1, 2$.
+    Then  $[X_1, X_2]$ is $F$-related to $[Y_1, Y_2]$.
+\end{prop}
+\begin{proof}
+Use $X_1(X_2(F^* (g))=  X_1(F^* (Y_2(g)))=F^* (Y_1(Y_2(g)))$.
+\end{proof}
+\begin{figure}[H]
+    \centering
+    \incfig{f-related}
+    \caption{Two $p$-related vector fields, where $p\colon \R^2\to \R$ is the first projection.}
+    \label{fig:f-related}
+\end{figure}
+
+
+
+
+
+\section{Interpretation of the Lie bracket}
+
+ 
+
+\begin{definition}[Pushforward of a vector field by a diffeomorphism] 
+    Given a diffeomorphism $\phi: M \to  N$ and $X \in \mathfrak{X}(M)$,
+ we denote by $\phi_*X$  the unique vector field on $N$ such that $X$ is $\phi$-related to $\phi_*X$.
+\end{definition}
+Explicitly, we have $(\phi_*X)_{\phi(p)}=(\phi_*)_p(X_p)$ for all $p\in M$.
+\begin{lemma}
+    Let $\phi: M \to  N$ be a diffeomorphism,
+let    $X \in \mathfrak{X}(M)$ and $Y \in \mathfrak{X}(N)$.
+    Then $Y = \phi_*(X)$ iff  $$F^{Y}_t  \circ \phi= \phi  \circ  F^{X}_t \;\;\;\; \text{ for all $t$ s.t. $F^{X}_t$ is defined}.$$
+ Here $F^{X}$ denotes the flow of $X$, and similarly for $Y$.
+\end{lemma}
+
+\begin{definition}[Lie derivative]
+    Let $X, Y \in \mathfrak{X}(M)$.
+    The Lie derivative of $Y$ in the direction of $X$ is the vector field
+    \[
+        \mathcal{L}_{X} Y = \frac{d}{dt}\Big|_{t=0} (F^{X}_{-t})_* Y
+    .\] 
+\end{definition}
+\begin{remark}
+    $(\mathcal{L}_{X} Y)_p = \frac{d}{dt}\Big|_{t=0} [(F^{X}_{-t})_* Y]_p = 
+    \frac{d}{dt}\Big|_{t=0} [(F^{X}_{-t})_* Y_{F_t(p)}]$.
+    These are all tangent vectors in $T_p M$.
+\end{remark}
+\begin{remark}
+    One can show that $\mathcal{L}_{X} Y = [X, Y]$.
+\end{remark}
+\begin{prop}
+    Let $X, Y \in \mathfrak{X}(M)$. The following are equivalent:
+    \begin{itemize}
+        \item[a)] $\mathcal{L}_{X} Y = 0$ 
+        \item[b)] $(F_t^{X})_* Y = Y$  for all $t$
+        \item[c)]  The flows of $X$ and $Y$ commute:  $F^{X}_t\circ F^{Y}_s = F^{Y}_s\circ F^{X}_t$ for all $t,s$.
+    \end{itemize}
+\end{prop}
+
+\begin{proof}[Sketch]
+    \begin{itemize}
+        \item $b) \implies a)$. $\mathcal{L}_{X} Y = \frac{d}{dt} (F_{-t}^{X})_* Y = \frac{d}{dt}Y = 0$.
+        \item $a) \implies b)$. Fix a point $p$. Consider $t \mapsto (F_{-t}^{X})_* Y_{F_t(p)}$. This is a curve in $T_pM$, which
+         at $t=0$  equals $Y_p$. We will show that this is a constant curve by taking the derivative.  For all $t_0$:
+  \begin{align*}
+ \frac{d}{dt}\Big|_{t_0} (F^X_{-t})_* (Y_{F_t(p)}) &= 
+            \frac{d}{ds} \Big|_{s=0} (F^X_{-t_0 -s})_* (Y_{F^X_{t_0+s}(p)})\\
+          &=  (F^X_{-t_0})_* \Big(\frac{d}{ds}\Big|_{s=0}(F^X_{-s})_* Y_{F_s(F_{t_0}(p))}\Big)\\
+  &=   (F^X_{-t_0})_*  \Big((\mathcal{L}_{X} Y)_{  F_{t_0}(p)}\Big)=0,
+\end{align*}                
+where in the first equality we set $t=t_0+s$.
+\item $b) \Leftrightarrow c)$. For all $t$, apply the last lemma to $F_t^X:M\to M$.
+             \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    $[X, Y] = 0$ iff the flows commute.
+\end{corollary}
+
+\begin{eg}
+    On $\R^2$, we know  $\left[\frac{\partial }{\partial x_1}, \frac{\partial }{\partial x_2} \right] = 0 $.
+    Indeed, the flows given by $(\mathbf{x}, t) \mapsto \mathbf{x} + (t, 0)$ and  $(\mathbf{x}, t) \mapsto \mathbf{x} + (0, t)$ commute.
+\end{eg}
+

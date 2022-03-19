@@ -1,0 +1,241 @@
+\setcounter{chapter}{8}
+\chapter{Lie groups and Lie algebras}
+%\lesson{12}{wo 04 dec 2019 16:13}{Lie groups}
+\section{Lie groups, Lie subgroups}
+\begin{definition}[Lie group]
+    A Lie group is a group which is a manifold, such that the multiplication 
+    $m: G \times G \to  G$  and the inversion \mbox{$i: G \to  G: g \mapsto g^{-1}$} are differentiable.
+\end{definition}
+
+\begin{definition}[Lie group morphism]
+    A Lie group morphism is a group morphism which is smooth.
+\end{definition}
+\begin{eg}
+    $(\R^n, +)$ is a Lie group. Check, for instance, that $(x, y) \mapsto  x + y$ is smooth.
+\end{eg}
+\begin{eg}  We check that
+    $$\GL(n, \R) = \{A \in \text{Mat}(n, \R): A \text{ invertible}\}$$ is a Lie group. Here $\text{Mat}(n, \R)$ denotes the real $n \times n$ matrices.
+    The set $\GL(n, \R)$ is open in the vector space $\Mat(n, \R)\cong \R^{n^2}$, so it's a manifold.
+    It is also a group, 
+    and the multiplication is smooth, because
+    \[
+        (AB)_{ij} = \sum_k A_{jk} B_{ki}
+   \] 
+   is a polynomial in the entries of $A$ and $B$.
+    The inversion is also smooth: for $n=2$, for instance,
+    \[
+    \begin{pmatrix}
+    	a & b \\
+    	c & d 
+    \end{pmatrix}^{-1}
+    =
+    \frac{1}{ad - bc}
+    \begin{pmatrix}
+    	d & -b \\
+    	-c & a 
+    \end{pmatrix}
+    ,\] 
+ and similarly for arbitrary $n$.
+    \end{eg}
+    
+    \begin{remark}
+ $\GL(n, \R)$ has 2 connected components: $\det > 0$ and $\det < 0$. 
+\end{remark}
+\begin{eg}    We check that
+    $$\SL (n, \R)= \{A \in \text{Mat}(n, \R): \det(A)=1\}$$ is a Lie group. 
+
+ The map $\det: \text{Mat}(n, \R)\to \R$ is smooth, because $\det(A)$ is a polynomial in the entries of $A$. We check that $1\in \R$ is a regular value of $\det$, i.e. for all $A\in \SL (n, \R)$, the derivative
+   $d_A \det\colon T_A \text{Mat}(n, \R)=\text{Mat}(n, \R) \to T_1\R=\R$ is surjective:
+   % Note that this set is a level set of $\det$, which is a polynomial map  from  $\Mat \to  \R$.
+    %If we can show that $1$ is a regular value, we have that $\SL$ is a submanifold of $\Mat$.
+    %To check this, we need to check that $ \forall A \in \SL$, 
+    %\[
+    %    (d_A \det): T_A \Mat \to  T_1 \R \cong \R
+    %,\] 
+    %is surjective.
+    \begin{align*}
+        (d_A \det) \left( \frac{d}{dt}\Big|_0 (t+1) A \right) &= \frac{d}{dt}\Big|_0 \det((t+1)A)\\
+          &= \frac{d}{dt}\Big|_0  (t+1)^{n } \det A \\
+          &= n \det (A) =n \neq 0.
+    \end{align*} 
+Hence  $\SL(n, \R)=\det^{-1}(\{1\})$ is a submanifold of $\Mat(n, \R)$, by
+the regular value theorem, and thus a  submanifold of its open set  $\GL(n, \R)$. 
+The multiplication and inversion of  $\SL(n, \R)$ are smooth, being the restrictions of those of $\GL(n, \R)$.\end{eg}
+
+
+\begin{eg} The following are all examples of Lie groups:
+    \begin{itemize}
+        \item $\text{O}(n)$, defined as matrices with $A^{-1} = A^{T}$, which has two components.
+        \item $\text{SO}(n)$, defined as  matrices with $A^{-1} = A^{T}$ and  $\det(A) = 1$. It is the connected component  of the identity of $\text{O}(n)$. 
+        \item $\text{U}(n)$, defined as matrices $A \in \Mat (n, \C)$ such that  $A \overline{A}^{T} = 1$.
+        \item $\text{SU}(n)$, defined as matrices $A \in \Mat (n, \C)$ such that   $A \overline{A}^{T} = 1$,  $\det A = 1$.
+    \end{itemize}
+\end{eg}
+
+
+
+\begin{definition}[Left translation, left invariant vector field]
+    Let $G$ be a Lie group.
+    For all $g \in G$, the diffeomorphism    \[
+        L_g: G \to  G: h \mapsto  gh   
+    \]
+    is called \emph{left translation}. 
+    A vector field $X \in \mathfrak{X}(G)$ is \emph{left invariant} iff
+    \[
+        \forall g \in G: (L_g)_* X = X
+    .\] 
+\end{definition}
+Notice that  $L_g$  is the restriction to  to $\{g\} \times G$ of the multiplication map  $m: G \times G \to  G$.
+
+\begin{remark}
+    There is a linear isomorphism 
+    \begin{align*}
+        T_e G &\longrightarrow \mathfrak{X}(G)^{L} := \{ \text{left-invariant vector fields}\} \\
+        v &\longmapsto  \overleftarrow v \text{ where } (\overleftarrow v)_g = ((L_g)_*)_e v
+    .\end{align*} 
+    The idea is that if you have a left invariant vector field, then it is determined by its value at any point, for example $e$, so that
+    $
+    X_g = [(L_g)_* X]_g = ((L_g)_*)_e (X_e) \in T_g G
+    .$
+    \filbreak
+    It follows that:
+    \begin{itemize}
+        \item  The tangent bundle $TG$ is a trivial vector bundle.
+            Indeed, 
+            \begin{align*}
+                G \times  T_e G &\longrightarrow TG\\
+                (g, v) & \longmapsto ((L_g)_*)_e v 
+            .\end{align*} 
+            is a vector bundle isomorphism.
+
+        \item $G$ admits a volume form, hence it's orientable.
+     %       It exists because the tangent bundle is trivial, indeed pick a non-vanishing form on $T_eG$, and use the vector bundle isomorphism.
+    \end{itemize}
+\end{remark}
+
+\begin{eg}
+Of all the spheres, only $S^0$, $S^1$, $S^3$ are Lie groups.
+($S^2$ is not a Lie group; for instance,  the Hairy ball theorem implies that the tangent bundle is not trivial.)
+\end{eg}
+
+%\begin{eg}
+%    $\R P^2$  and Mobius band not orientable, so not Lie groups.
+%\end{eg}
+
+\begin{prop}
+    A \emph{connected} Lie group is generated (as a group) by any neighbourhood $W$ of identity. 
+\end{prop}
+
+\begin{proof}
+    Let $H$ be the subgroup generated by $W$, i.e.\ finite products of elements of $W$ and $W^{-1}$.
+   
+    \begin{description}
+        \item[$H$ is open.] Indeed $W_1 = W \cup  W^{-1}$ is open. 
+        $W_2 := W_1 \cdot W_1 = \bigcup_{g \in W_1} g W_1$ is open as the left translation is smooth and any union of open subsets is open. Similarly, for all $k$ we get that  $W_k := W_1 \cdot W_{k-1} $ is open. Thus $H=\cup_{k\ge 1} W_k$ is open.
+
+    \item[$H$ is non-empty], as $e \in H$.
+
+    \item[$H^{c}$ is open.] Indeed,
+         \[
+        G - H = \bigcup_{g \not\in H}  gH
+        \] 
+     is also open, as the union of open sets.
+    \end{description}
+    Since $G$ is connected, it follows that $G -H$ is empty, i.e.\ $H=G$.
+\end{proof}
+
+\begin{definition}[Lie subgroup]
+    Let $G$ be a Lie group.
+    A Lie subgroup $H$ is an (abstract) subgroup of $G$ which is an immersed manifold, such that $H$  becomes a Lie group with the induced group and manifold structures.
+\end{definition}
+\begin{remark}
+    $H$ might not be a submanifold
+\end{remark}
+\begin{eg}
+    $G = S^1 \times S^1$ is a Lie group, since $S^{1} = U(1)$, and the product of two Lie groups is again a Lie group.
+  
+    Let $\lambda \in \R$, then
+    \[
+        H = \{ (e^{ 2 \pi i t}, e^{2 \pi i \lambda t}) : t \in \R \}
+    .\] 
+    is a subgroup of $G$.
+    It is also a immersed submanifold (as we saw earlier).
+    The multiplication and inversion are smooth.
+    (To check this: the   smooth structure on $H$ is obtained from the one on $\R$, and  he induced multiplication is the addition on $\R$.)
+ Conclusion: $H$ is a Lie subgroup.  \end{eg}
+\begin{prop}
+    Let $G$ be a Lie group, let $H$ be a subgroup and also a submanifold.
+    Then $H$ is a Lie subgroup.
+\end{prop}
+\begin{proof}
+    There is an obvious manifold structure on $H$.
+We have to check that with the manifold structure induced by $G$, the multiplication $m : H \times  H \to  H$   and the inversion $i: H \to  H$ are smooth. We just do the latter: the inversion of $G$ is smooth, so restricting it to a submanifold, we again get a smooth map.
+\end{proof}
+
+One can show:
+\begin{theorem}
+    Let $G$ be a Lie group, $H$ a subgroup.
+    If $H \subset G$ is closed in the topological sense, then $H$ is a submanifold, and therefore a Lie subgroup.
+\end{theorem}
+
+%\begin{remark}
+%    If $H$ is a finite (discrete) subgroup of a Lie group, it is a Lie subgroup.
+%\end{remark}
+
+\section{From Lie groups to Lie algebras}
+
+Recall: 
+\begin{definition}[Lie algebra]
+    A Lie algebra is a vector space $\mathfrak g$ equipped with a bilinear, skew symmetric map  $[\cdot , \cdot ]: \mathfrak g \times  \mathfrak g \to  \mathfrak g$, such that
+    \[
+        [x, [y, z]] + 
+        [z, [x, y]] + 
+        [y, [z, x]] = 0
+    .\] 
+\end{definition}
+%\begin{remark}
+ %   This Jacobi property correspond to the associativity of the Lie group.
+%\end{remark}
+We now define morphisms and the  ``subobjects'' of Lie algebras:
+
+\begin{definition}[Lie algebra morphism]
+    A map $\phi: (\mathfrak g, [\cdot , \cdot ]_{\mathfrak g} ) \to  (\mathfrak h, [\cdot , \cdot ]_{\mathfrak h} )$ is a Lie algebra morphism if 
+    it preserves all the structure:
+    \begin{itemize}
+        \item the map $\phi$ is linear
+         \item $\phi([x, y]_{\mathfrak g}) = [\phi(x), \phi(y)]_{\mathfrak h}$
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}[Lie subalgebra]
+    A Lie subalgebra of $\mathfrak g$ is a vector subspace $\mathfrak h$, such that
+    \[
+        [x, y] \in  \mathfrak h \quad \forall x, y \in \mathfrak h
+    .\] 
+\end{definition}
+
+\begin{prop}[A]
+    Let $G$ be a Lie group, then  $\mathfrak g := T_e G$ is a Lie algebra,
+    with the bracket
+    \[
+        [v, w] := [\overleftarrow v, \overleftarrow w]|_e
+    .\] 
+\end{prop}
+\begin{proof}
+    Recall the linear isomorphism $T_eG  \to  \mathfrak{X}(G)^{L}, v \mapsto  \overleftarrow v$.  The Lie bracket of two left invariant vector fields is again a left invariant vector field:
+    \begin{align*}
+        (L_g)_*[\overleftarrow v, \overleftarrow w] &= [ (L_g)_* \overleftarrow v, (L_g)_* \overleftarrow w]
+                                                    = [\overleftarrow v, \overleftarrow w]
+    .\end{align*}
+    So $\mathfrak{X}(G)^{L}$ is a Lie algebra. Now use the above linear isomorphism to transport this Lie algebra structure to $T_eG$.
+\end{proof}
+
+\begin{eg}
+    Consider $\GL(n, \R)$.
+    Then $T_e (\GL(n, \R))$ is all $n \times n$ matrices, i.e.\ $\Mat (n, \R)$. So $\Mat (n, \R)$ has an induced Lie algebra structure.  Its bracket is
+    \[
+        [A, B] = AB - BA
+    .\] 
+    (This is not at all obvious, it requires a bit of computation)
+\end{eg}

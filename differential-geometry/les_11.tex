@@ -1,0 +1,181 @@
+\setcounter{chapter}{7}
+\chapter{Foliations}
+%\lesson{11}{di 03 dec 2019 23:02}{Foliations}
+
+\section{Immersed submanifolds}
+\begin{definition}[Immersion]
+    An immersion is a smooth map $F: H \to  M$ such that $(F_*)_p$ is injective for all  $p \in H$.
+\end{definition}
+\begin{definition}[Immersed submanifold]
+    An immersed submanifold of $M$ is a subset $H \subset M$ with a topology (not necessarily the subspace topology) and a smooth manifold structure such that the inclusion $i\colon H\to M$ is an immersion.
+\end{definition}
+\begin{remark}
+   In that case, for all $p\in H$, the map $(i_*)_p$ is an isomorphism from $T_pH$ to $(i_*)_p(T_pH)\subset T_pM$.
+   \end{remark}
+\begin{remark}
+    All submanifolds are immersed submanifolds.
+    Immersed submanifolds are not necessarily submanifolds.
+\end{remark}
+\begin{remark}
+    If $H$ is an immersed submanifold, then for all $p \in H$, there exists an open neighbourhood $U$ in $H$ (``open'' w.r.t.\ the topology of $H$) such that $U$ is a submanifold of $M$.
+\end{remark}
+\begin{eg}
+    For all $\lambda \in \R$ consider $F: \R \to  S^{1} \times S^{1}: t \mapsto  (e^{2 \pi i t}, e^{2 \pi i \lambda t})$.
+    If $\lambda \in \Q$, then $F(\R)$ is a submanifold of $S^{1} \times S^{1}$.
+    If $\lambda \not\in \Q$, then $F(\R)$ is just an immersed submanifold with the smooth structure given by the bijection $\R \cong F(\R)$. The topology on 
+    $F(\R)$ differs from the subspace topology induced by $S^{1} \times S^{1}$.
+    \[
+        \begin{tikzcd}
+            & S^1 \times S^1\\
+            \R \arrow[ur, "F"] \arrow[r, ""] &H \arrow[u, "i"]
+        \end{tikzcd}
+    \]
+\end{eg}
+\filbreak
+\section{Distributions and involutivity}
+ \begin{definition}[Distribution]
+    A distribution $D$ on $M$ is a subbundle of $TM$.
+  \end{definition}
+    For all $p \in  M$, we get a subspace $D_p \subset T_pM$ of the same dimension varying smoothly with $p$.
+
+\begin{definition}[Involutive distribution]
+    A distribution is involutive iff for all $X, Y \in \Gamma(D)$, we have $[X, Y] \in \Gamma(D)$
+\end{definition}
+\begin{remark}
+    $D$ is involutive iff for all $p \in M$, there exists a $U \subset M$ and a frame $X_1, \ldots, X_k \in \Gamma(D|_U)$ such that $[X_i, X_j] \in \Gamma(D|_U)$.
+\end{remark}
+\begin{definition}[Integral manifold]
+    An integral manifold is a (non-empty) immersed submanifold $H$ of  $M$ such that  $T_p M = D_p$ for all  $p \in H$.
+    
+%    $D$ is called integrable if every point of $M$ is contained in an integrable manifold.
+\end{definition}
+
+\begin{eg}
+    Let $X$ be a nowhere vanishing vector field on $M$.
+    Then $D$ given by $D_p = \spann X_p$ is a rank 1 distribution, thus involutive.
+    The image of any integral curve of $X$ is an integral manifold of $D$.
+\end{eg}
+\begin{eg}
+On $\R^3$, $D = \spann \left\{\frac{\partial }{\partial x} , \frac{\partial }{\partial y}\right\}$ is an involutive rank-2 distribution. The planes $\{z = c\} \subset \R^3$ are integral manifolds.
+\end{eg}
+\begin{eg}
+    On $\R^3$, $D = \spann \left\{\frac{\partial }{\partial x} , \frac{\partial }{\partial y}  - x \frac{\partial }{\partial z} \right\} $ is not involutive. Indeed, 
+    \[\left[ \frac{\partial }{\partial x} , \frac{\partial }{\partial y}  - x \frac{\partial }{\partial z} \right] = - \frac{\partial }{\partial z}  \not\in D.\]
+   \end{eg}
+\begin{prop}\label{prop:intinv}
+    Let $D$ be a distribution. Suppose that every point of $M$ is contained in an integrable manifold of $D$.
+    Then $D$ is involutive.
+\end{prop}
+\begin{proof}
+    Let $X, Y \in \Gamma(D)$, $p \in M$.
+    Let $H$ be an integral manifold through $p$.
+    Then $X|_H, Y|_H$ are tangent to  $H$, so $[X, Y]|_H = [X|_H, Y|_H]$ is tangent to  $H$. (To see this equality, use that there is a neighborhood of $p$ in $H$ which is a submanifold of $M$.)
+    In particular, $[X, Y]_p \in T_pH = D_p$.
+\end{proof}
+\section{The Frobenius theorem}
+Let $D$ be a rank $k$ distribution on $M^{m}$.
+\begin{definition}[Flat chart for $D$]
+    A chart $(U, \phi)$ is flat for $D$ if $\phi(U) = I_1 \times \cdots \times I_n \subset \R^{n}$ and $D = \spann \left\{\frac{\partial }{\partial x^1}, \ldots, \frac{\partial }{\partial x^k}\right\}$ on $U$.
+    Here, $I_i$ are open intervals.
+\end{definition}
+\begin{definition}[Completely integrable distribution]
+    $D$ is completely integrable if for all $p \in M$, there exists a flat chart containing $p$.
+\end{definition}
+\begin{theorem}[Frobenius]
+    $D$ is completely integrable iff $D$ is involutive.
+\end{theorem}
+Notice that the condition on the left is a local one, while the condition on the right is an infinitesimal one (thus easier to check).
+
+
+\begin{proof}
+    .
+    \begin{description}
+        \item[$\boxed{\implies}$] At each $p \in M$, take a flat chart.
+            Then $D = \spann \left\{\frac{\partial }{\partial x^{1}}, \ldots, \frac{\partial }{\partial x^k}  \right\} $ and $\left[\frac{\partial }{\partial x^i}, \frac{\partial }{\partial x^j}\right] = 0 \in \Gamma(D)$.
+        \item[$\boxed{\impliedby}$]
+            Sketch:  Show that near every point $p \in M$, $D$ has a frame of vector fields s.t. $[X_i, X_j] = 0$. Then apply Prop.~\ref{prop:usedfol}.
+    \end{description}
+
+\end{proof}
+
+One can prove:
+\begin{prop}\label{prop:countable}
+    Let $D$ be an involutive rank-$k$ distribution, $H$ and integral manifold.
+    For any flat chart $(U, (x_1, \ldots, x_n))$ for $D$, $H \cap U$ is the union of countably many open subset of slices $\{x_i = \text{const}\}$ ($i>k$) of $U$.
+\end{prop}
+ 
+\begin{eg}
+    On the torus $S^{1} \times S^{1}$, let $D = \spann \{\frac{\partial }{\partial x_{1}}  + \lambda \frac{\partial }{\partial x_2} \} $, where $\lambda \in  \R \setminus \Q$.
+    Every line with slope $\lambda$ in $S^{1}\times S^{1}$ is an integral manifold, and the countable condition holds.
+\end{eg}
+\section{Foliations}
+Let $M^{n}$ be a smooth manifold.
+\begin{definition}[Foliation]
+A rank $k$ foliation is a collection $\{L_\alpha\} _{\alpha \in A}$ of connected immersed submanifolds of $M$ such that
+\begin{itemize}
+    \item $M = \bigsqcup_{\alpha \in  A} L_\alpha$  (disjoint union)
+    \item For all $p \in M$, there exists a chart such that $U \cap L_\alpha$ is a countable union of slices $\{x_{k+1} = \text{const}, \ldots, x_n = \text{const}\}$, or empty.
+        The $L_\alpha$ are called \emph{leaves}.
+\end{itemize}
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \incfig{definition-of-foliation}
+    \caption{Definition of a foliation}
+    \label{fig:definition-of-foliation}
+\end{figure}
+
+
+\begin{eg}
+    On $\R^2_0$, circles with radius $r > 0$ form a foliation.
+\end{eg}
+\begin{eg}
+    On $\R^2$, the following is not a foliation. (It's impossible to straighten all leaves nearby the $x$-axis.)
+
+\begin{figure}[H]
+    \centering
+    \incfig{not-a-foliation-example}
+    \caption{Not a foliation.}
+    \label{fig:not-a-foliation-example}
+\end{figure}
+\end{eg}
+
+\filbreak
+The following theorem (sometimes called ``Global Frobenius Theorem'') gives a bijection between global objects on $M$ and infinitesimal objects.
+
+\begin{theorem}
+    Let $M$ be a manifold. There is a bijection
+  \begin{align*}
+   \{\text{Foliations}\}  &\leftrightarrow \{\text{Involutive distributions}\}\\
+   \{L_{\alpha}\} &\mapsto D \text{ s.t. } D_p=T_p(\text{leaf through $p$})
+\end{align*}
+The inverse map reads
+$$D\mapsto \{\text{maximal connected   integral manifolds of $D$}\}.$$
+\end{theorem}
+\begin{proof}
+We show that both maps are well-defined. It is easy to see that they are inverses of each other.
+
+\begin{itemize}
+    \item[$\rightarrow:$]$D$, as defined above, is a distribution. Through every point of $M$ there passes an integral manifold, hence $D$ is involutive by Proposition \ref{prop:intinv}.
+        
+    \item[$\leftarrow:$] By the Frobenius theorem, for every point of $M$ there is an integral manifold through it.
+\end{itemize}
+        
+    One can show that through every $p\in M$ there passes a \emph{maximal} connected integral manifold, because the union of all integral manifolds through $p$ is again an integral manifold.
+ The decomposition of $M$ by the above maximal connected integral manifolds is a foliation, by Proposition \ref{prop:countable}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,559 @@
+\lesson{9}{di 10 dec 2019 10:31}{}
+
+Recap: 
+
+\[
+    0 \to H_1(S^1) = \Z \xrightarrow{inj} H_0(U \cap V)
+.\] 
+and $\left<c + d \right> \mapsto x-y$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{homology-of-circle}
+    \caption{homology of circle}
+    \label{fig:homology-of-circle}
+\end{figure}
+
+For $S^{n}$.
+Then we had
+\[
+    0 \to  H_n(S^{n}) = \Z \xrightarrow{\Delta, \cong}  H_{n-1}(U \cap  V) \xrightarrow{r_*} (S^{n-1}) = \Z
+.\] 
+
+
+\begin{corollary}
+    There is no retraction of $D^{n} = B^{n} = $ $n$-dimensional disc to $S^{n-1}$.
+\end{corollary}
+\begin{proof}
+    Suppose there is a retract.
+    Then
+    \[
+        \begin{tikzcd}
+            S^{n-1} \arrow[dr, "i"]  \arrow[r, "1_{S^{n-1}}"] &S^{n+1}\\
+                                    & D^{n} \arrow[u, "r"]
+        \end{tikzcd}
+    \]
+
+    \[
+        \begin{tikzcd}
+            \Z = H_{n-1}(S^{n-1}) \arrow[dr, "i*"] \arrow[r, "(1_{S^{n}})_* = 1_{H_{n-1}}"] & H_{n-1}(S^{n-1}) = \Z\\
+                                           & H_{n-1}(D^{n}) = 0 \arrow[u, "r_*"]
+        \end{tikzcd}
+    \]
+\end{proof}
+\begin{corollary}[Brouwers fixed point theorem]
+    Let $n\ge 1$.
+    Then any continuous map $f: D^{n} \to D^{n}$ has a fixed point. (Note: this time, for any dimension!)
+\end{corollary}
+
+\section*{Maps from spheres to spheres}
+
+Let $f: S^{n} \to  S^{n}$.
+Then $f$ induces a map $f_*: H_n(S^{n}) \to  H_n(S^{n})$, so $f_*: \Z \to  \Z$,
+or we can write $f_*: \left< \alpha\right> \mapsto m \left<\alpha \right>$, where $\alpha$ is the generator.
+\begin{definition}
+    The degree of $f$ is $m$. 
+    We write $d(f) = m$.
+\end{definition}
+\begin{prop} Few properties of the degree:
+    \begin{enumerate}
+        \item $d(\text{Id}) = 1$
+        \item  $d(f  \circ  g) = d(f) d(g)$ 
+        \item  $f$ constant, or if $f$ is not surjective, then $d(f) = 0$.
+        \item If $f \simeq g$, then $d(f) = d(g)$, because they induce the same map (Problem 8)
+            (Deep theorem:  $f \simeq g$ iff $d(f) = d(g)$.)
+        \item If $f$ is a homotopy equivalence, then $d(f) = \pm 1$.
+            (We have a homotopy inverse, and  $f_*  \circ  g_* = 1$?, so the only possibilities are both $1$ or $-1$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We prove 3.
+    Suppose $p \not\in  \im f$.
+    Then
+    \[
+        \begin{tikzcd}
+            S^{n} \arrow[dr, "f'"] \arrow[r, "f"] & S^{n}\\
+                                                 & S^{n} \setminus \{p\}  \arrow[u, "i"]
+        \end{tikzcd}
+    \]
+    Then
+    \[
+        \begin{tikzcd}
+            H_n(S^{n}) \arrow[dr, "f'_*"] \arrow[r, "f_*"] & H_n(S^{n})\\
+                                                           & H_n(S^{n} \setminus \{p\}) = 0  \arrow[u, "i_*"]
+        \end{tikzcd}
+    \]
+    where $f'$ is $f$ restricted to the image.
+    We see that $f_* = 0$.
+\end{proof}
+
+
+
+\begin{theorem}
+    Let $S^{n} = \{(x_1, \ldots, x_{n+1})\in \R^n  \mid  \sum x_i^2 = 1\}$ and $f: S^{n} \to  S^{n}$ 
+    \[
+        f: (x_1, x_2, \ldots, x_{n+1}) \mapsto 
+        (-x_1, x_2, \ldots, x_{n+1})
+    .\] 
+    Then $d(f) = -1$.
+\end{theorem}
+
+\begin{proof}
+    By induction on $n$.
+
+    Base case, $n=1$.
+    $S^1 = \{(x_1, x_2)  \mid  x_1^2 + x_2^2 = 1\}$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{base-case-of-theorem}
+    \caption{base case of theorem}
+    \label{fig:base-case-of-theorem}
+\end{figure}
+
+Note that $f(x) = y$,  $f(y) = x$.
+Denote  $U = S \setminus \{z'\} $, $V = S \setminus \{z\} $.
+And $f\left(U \right) \subset U $ and $f(V) \subset V$.
+
+Then
+
+\[
+    \begin{tikzcd}
+        0 \arrow[r, ""] & H_1(S) \arrow[r, "\Delta"] \arrow[d, "f_*"]& H_0(U \cap V) \arrow[d, "(f|_{U \cap V})_*"]\\
+        0 \arrow[r, ""] & H_1(S) \arrow[r, "\Delta"] & H_0(U \cap V)
+    \end{tikzcd}
+\]
+TODO: right arrows tails
+
+Then
+\[
+    (f|_{U \cap V})_* (x-y) = f(x) - f(y) = y - x =  - (x-y)
+.\] 
+So $\Delta$ is injective, we have that  $f_*(\left<\alpha \right>) = - \left<\alpha \right>$, so $d(f) = -1$.
+
+
+\hr
+
+Now, assume that the theorem holds for $S^{n-1}$.
+
+Define $U$, $V$ in a similar way.
+$f(U) \subset U$ and $f(V) \subset V$.
+Again, we have a commutative diagram.
+
+% \[
+%     \begin{tikzcd}
+%         H_n(S^{n}) \arrow[r, "\Delta, \cong"] & H_{n-1}(U \cap V) \arrow[r, "r_*"] & H_{n-1}(S^{n-1}) \arrow[l, "i_*"]\\
+%         H_n(S^{n}) \arrow[r, "\Delta, \cong"] & H_{n-1}(U \cap V) \arrow[r, "r_*"] & H_{n-1}(S^{n-1}) \arrow[l, "i_*"]
+%     \end{tikzcd}
+% \]
+
+Question: is it true that $f_*(\left<\alpha \right>)$ is just $- \left<\alpha \right>$?
+
+Now, we know that the $f_*$ on the right is simply $\cdot  (- 1)$.
+Then, going the whole way around,
+\[
+    f_*(\left<\alpha \right>) = \Delta ^{-1} (i_*(-1 (r_* (\Delta(\alpha))))
+.\] 
+This is 
+\[
+    - \Delta^{-1} ( i_* r_* \Delta (\left<\alpha \right>))
+.\] 
+As $i_*$ and $r_*$ are inverses, we have that $d(f) = -1$.
+\end{proof}
+
+
+
+Suppose $f: S^{n} \to  S^{n}$.
+Then there is a map $\Sigma f: S^{n+1} \to  S^{n+1}$ (the suspension of $f$), given by
+
+\begin{figure}[H]
+    \centering
+    \incfig{definition-of-suspension}
+    \caption{definition of suspension}
+    \label{fig:definition-of-suspension}
+\end{figure}
+
+Using formulas: 
+\[
+    S^{n+1} = \{(x, t) : x \in \R^{n+1}, t \in \R, \|x\|^2 + t^2 = 1\} 
+.\] 
+Then 
+\begin{align*}
+    \Sigma f: S^{n+1} &\longrightarrow S^{n+1} \\
+    (x, t) &\longmapsto \begin{cases}
+        (x, t) & \text{if $x = 0$, north and south pole}\\
+        \left(\|x\| f(\frac{x}{\|x\|}), t\right) & \text{if $x \neq 0$}
+    \end{cases}
+.\end{align*}
+
+Not too difficult to prove that $\Sigma f$ is continuous.
+Claim:  $d(f) = d(\Sigma f)$.
+\begin{proof}
+    Exactly the same technique as we used to prove the previous theorem.
+\end{proof}
+
+\begin{remark}
+    Suspension is a general technique.
+    Let $X$ be a topological space.
+    Then $\Sigma X$, the suspension of $X$ is defined as follows:
+
+\begin{figure}[H]
+    \centering
+    \incfig{definition-of-suspension-general}
+    \caption{definition of suspension general}
+    \label{fig:definition-of-suspension-general}
+\end{figure}
+
+$\Sigma X = X \times [-1, 1] / \sim $ with
+\[
+    (x, t) \sim  (x', t') \iff t = t' = 1 \text{ or } t = t' = -1
+.\] 
+
+Check for yourself: $\Sigma S^{n} = S^{n+1}$ (pointy sphere).
+\end{remark}
+
+\begin{corollary}
+    If $f_{i}(x_1, \ldots, x_{n+1}) = (x_1, \ldots, -x_i, \ldots, x_{n+1})$.
+    Then $d(f) = -1$.
+\end{corollary}
+\begin{proof}
+    Let $h: S^{n} \to  S^{n}$ be the map that exchanges the first coordinate and the $i$th coordinate.
+    Then $h$ is a homeomorphism: $h^{-1} = h$, so $h  \circ  h = 1_{S^{n}}$, so $d(h) = \pm 1$
+    Then $ f_i = h  \circ  f  \circ  h .$ 
+    So
+    \[
+        d(f_i) = d(h)^2 d(f) = (\pm 1)^2 (-1) = -1
+    .\] 
+\end{proof}
+
+There is a big difference between even and odd dimensional spheres:
+
+\begin{corollary}
+    Let $A: S^{n} \to  S^{n}$ defined by \[
+        A(x_1, \ldots,  x_{n+1}) = (-x_1, \ldots, -x_{n+1}).\footnote{Note the error in the book. $A$ should have $n+1$ inputs. TODO}
+\]
+    Then $d(A) = (-1)^{n+1}$.
+\end{corollary}
+\begin{proof}
+    \[
+        d(A) = d(f_1) d(f_2) \cdots  d(f_{n+1}) = (-1)^{n+1}
+    .\] 
+\end{proof}
+
+So for even dimensional spheres, $d(A) = -1$ and for odd dimensional sphere,  $d(A) = 1$.
+This is a \emph{big} difference.
+
+\begin{theorem}
+    Let $f: S^{n} \to  S^{n}$ and $g: S^{n} \to  S^{n}$.
+    When $f(x) \neq g(x)$ for all $x \in S^{n}$.
+    Then $f \simeq A  \circ g$.
+\end{theorem}
+\begin{proof}
+\begin{figure}[H]
+    \centering
+    \incfig{proof-prop-123}
+    \caption{proof prop 123}
+    \label{fig:proof-prop-123}
+\end{figure}
+
+The line does not go through the center, as $f(x) \neq g(x)$.
+Define a homotopy, 
+\[
+    (x, t) \mapsto  \frac{(1-t) f(x) + t A g(x)}{\|(1-t) f(x) + t Ag(x)\| \neq 0}
+.\] 
+This is a homotopy between $f$ and $Ag$
+\end{proof}
+
+Not in the text:
+\begin{corollary}
+    If $|d(f)| \neq |d(g)|$, then there is a point $x$ such that $f(x) = g(x)$.
+\end{corollary}
+\begin{proof}
+    The previous theorem says that $d(f) = d(A) d(g)$, so  $|d(f)| = |d(g)|$. 
+    You can even make this better by making a distinction between odd and even dimensional spheres.
+\end{proof}
+\begin{corollary}
+    If $|d(f)| \neq 1$, then $f$ has a fixed point, i.e.\ an $x$ such that $f(x) = x = \text{Id}(x)$.
+\end{corollary}
+\begin{proof}
+    If $|d(f)| \neq d(\text{Id}) = 1$, then \ldots
+\end{proof}
+
+\begin{theorem}
+    Let $f: S^{2n} \to S^{2n}$.
+    Then there exists an $x$ in  $S^{2n}$ such that $f(x) = x$ or  $f(x) = -x$.
+\end{theorem}
+\begin{proof}
+    Suppose there is no $x$ such that $f(x) = x$ and $f(x) = -x$.
+
+    \begin{itemize}
+        \item Since  $f(x) \neq x$ for all  $x \in X$, we have that $f \simeq A$.
+        \item Since  $f(x) \neq -x = A(x)$ for all  $x \in X$, we have that $f \simeq A  \circ A = 1$.
+    \end{itemize}
+   From this it follows that
+   \[
+       d(f) = (-1)^{2n + 1} = -1 \qquad 
+    d(f) = 1
+   ,\] 
+   which is a contradiction.
+\end{proof}
+\begin{remark}
+    This does not hold for odd dimensional spheres.
+    For example, consider $S_1$, and make a small rotation, then no point is mapped onto itself or onto its antipodal point.
+    Doing the same for $S_2$, we see that when we do a small rotation, the north and south pole are switched.
+\end{remark}
+\begin{remark}
+    It's harder to show that for odd dimensional spheres, there always exist such a map.
+\end{remark}
+
+Now, we prove the hairy ball theorem, which only holds in even dimensional spheres.
+
+\begin{corollary}
+    There is no continuous map $f: S^{2n}\to S^{2n}$ such that $x$ and $f(x)$ are orthogonal for all $x$.
+\end{corollary}
+\begin{proof}
+    By the previous theorem, there is a point for which $f(x) = \pm x$, and  $x \not \perp \pm x$.
+\end{proof}
+\begin{corollary}
+    There exists no nonzero vector field $\phi$ on $S^{2n}$.
+\end{corollary}
+\begin{proof}
+    Suppose $\phi$ does exists.
+    Then, map the tangent vector to a point on the sphere:
+    \[
+        \psi: S^{2n} \to  S^{2n} : x \mapsto \frac{\phi(x)}{\|\phi(x)\|}
+    .\] 
+\end{proof}
+
+\begin{figure}[H]
+    \centering
+    \incfig{hairy-ball-theorem}
+    \caption{hairy ball theorem}
+    \label{fig:hairy-ball-theorem}
+\end{figure}
+\begin{remark}
+    For odd dimensional spheres, there always exists a such a vector field.
+    We even know how many linearly independent vector fields exist!
+\end{remark}
+
+\hr
+
+
+\subsection*{Torus}
+Goal: $H_n(T^2)$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{homology-of-torus}
+    \caption{homology of torus}
+    \label{fig:homology-of-torus}
+\end{figure}
+
+ and , and $U \cap V = B^2 \setminus \{ p\} $.
+
+\begin{itemize}
+    \item Choose $U = T^2 \setminus \{p\} $
+        Then $U$ retracts to the figure eight space (boundary of square)
+        Last week, we saw that $H_0(U) = \Z$ and $H_1(U) = \Z \oplus \Z$, with generators $a$ and $b$, and $H_n(U) = 0$ for $n \ge 2$.
+    \item  $V = B^2$. As $B^2$ is path connected, $H_0(U) = \Z $ and $H_n(U) = 0$ for all  $n \ge  1$
+    \item $U \cap  V = B^2 \setminus \{ p\} $, which retracts to a circle, so $H_0(U \cap V) = H_1(U \cap  V) = \Z$.
+\end{itemize}
+
+\centerline{$
+            H_2(U) \oplus H_2(U) \to  H_2(T^2) \to  H_1(U \cap V) \to  H_1(U) \oplus H_1(U) \to  H_1(T^2) \to  H_0(U \cap  V) \to  H_0(U) \oplus H_0(U) \to  H_0(T^2)
+        $}
+    So we have
+    \[
+        \to  0 \oplus 0 \to  H_2(T^2) \to  \Z \to  \Z^2 \oplus 0 \to  H_1(T^2) \to  \Z \to  \Z \oplus \Z \to  \Z \to  0
+    .\] 
+
+    Now, $\Z \to \Z \oplus \Z$ is injective, as the kernel of $\Z\oplus \Z \to  \Z$ is non-trivial. ($1$ gets mapped to something non-trivial)
+    So we can shorten the sequence
+
+    \[
+        \to  0 \oplus 0 \to  H_2(T^2) \to  \Z \xrightarrow{g_*}   \Z^2 \oplus 0 \to  H_1(T^2) \to  0
+    .\] 
+    Now, we want to know how $g_*$ works.
+    We need a generator of $\Z$ and look at its embedding?
+    Then $\Z = \left<c_1 + c_2 + c_3 + c_4 \right>$.
+    Then
+
+    \[
+        \begin{tikzcd}
+            U \cap V \arrow[r, "i"] & U \arrow[r, "r"] & \text{figure 8}\\
+            H_1(U \cap V) \arrow[r, "i_r"] & H_1(U) \arrow[r, "r_*"] & H_1(\text{figure 8})\\
+            \left<c_1 + c_2 + c_3 + c_4 \right> \arrow[r, ""] & \left<c_1+ c_2 +c_3 +c_4 \right> \arrow[r, ""] & \left<r  \circ  c_1 + r  \circ  c_2 + r  \circ  c_3 + r  \circ  c_4 \right>\\
+                                  && \left< \overline{a} + \overline{b} + a + b \right>
+        \end{tikzcd}
+    \]
+    Now, as these are all cycles, we have that this is 
+    \[
+    \left<\overline{a} \right> + \left<\overline{b} \right> + \left<a \right> + \left<b \right>
+    .\] 
+    Now, using Problem 6, we find that this is
+    \[
+    - \left<a \right> - \left<b \right> + \left<a \right> + \left<b \right> = 0
+    .\] 
+    Therefore, $g_*$ is the zero map.
+    \[
+        \to  0 \oplus 0 \to  H_2(T^2) \to  \Z \xrightarrow{0}   \Z^2 \oplus 0 \to  H_1(T^2) \to  0
+    ,\] 
+    so the kernel of $\Z^2 \oplus 0 \to  H_1(T^2)$ is an injective map.
+    As $H_1(T^2) \to  0$, this implies that $\Z^2 \oplus 0 \to  H_1(T^2)$ is a surjective map.
+    Therefore, $H_1(T^2) = \Z^2$.
+    Now, $H_2(T^2) \to H_1(U \cap V)$ is surjective, and it is also injective, so $H_2(T^2) = \Z$.
+    
+
+    % (TODO: trick: if zero, then add > to arrow left or right same if a map is zero)
+
+Now, for $n \ge  3$.
+Then
+\[
+    H_n(U) \oplus H_n(V) \to  H_n(T^2) \to  H_{n-1}(U \cap V).
+.\] 
+This simplifies  to
+\[
+    0 \oplus 0 \to  H_n(T^2) \to 0.
+,\] 
+so $H_n(T^2) = 0$.
+Conclusion:
+\[
+    H_0(T^2) = \Z \quad 
+    H_1(T^2) = \Z^2 \quad 
+    H_2(T^2) = \Z \quad 
+    H_n(T^2) = 0 \text{ for all $ n > =3$}
+.\] 
+\begin{remark}
+    $H_2(S^1 \times S^1) \neq H_2(S^{1}) \times H_2(S^{1})$.
+\end{remark}
+
+
+\begin{remark}
+    $H_n(T^{k}) = \Z^{n \choose k}$, where ${n \choose k} = 0$ when  $k > n$.
+\end{remark}
+
+
+
+
+\subsection*{Klein bottle}
+
+\begin{figure}[H]
+    \centering
+    \incfig{klein-bottle-homology}
+    \caption{klein bottle homology}
+    \label{fig:klein-bottle-homology}
+\end{figure}
+
+\begin{itemize}
+    \item $U = K \setminus \{p\}$, which retracts to the figure eight space (boundary of the square)
+        So $H_0 = \Z$ and $H_1  = Z^2 = \operatorname{grp}(\left<a \right>, \left<b \right>)$, and $H_n =0$ for  $n \ge  2$.
+    \item $V = B^2$
+        So $H_0 = \Z$ and $H_n = 0$ for  $n \ge 1 $.
+    \item $U \cap V = B^2 \setminus \{p\}$, which retracts to a circle.
+        So $H_0 = \Z$ and $H_1 = \Z = \operatorname{grp}(\left<c_1 + c_2 + c_3 + c_4\right>$)
+\end{itemize}
+
+\centerline{$
+            \to  H_2(U) \oplus H_2(V) \to  H_2(K) \to  H_1(U \cap V) \xrightarrow{g_*}   H_1(U) \oplus H_1(V) \to  H_1(K) \to  H_0(U \cap  V) \to  H_0(U) \oplus H_0(V) \to  H_0(K) \to  0
+        $}
+
+        Klein bottle is path connected,  so
+
+        \[
+                    \to  0 \oplus 0 \to  H_2(K) \to  \Z \xrightarrow{g_*}   \Z^2\oplus 0 \to  H_1(K) \to  \Z \to  \Z  \oplus \Z \to  \Z \to  0
+        \]
+
+        We can cut of the sequence  because all spaces are path connected.
+
+        \[
+                    \to  0 \oplus 0 \to  H_2(K) \to  \Z \xrightarrow{g_*}   \Z^2\oplus 0 \to  H_1(K) \to  0
+        \]
+
+        Now, we have to understand what $g_*$ is
+
+        Then
+
+        \[
+            \begin{tikzcd}
+                U \cap V \arrow[r, "i"] & U \arrow[r, "r"] & \text{figure 8}\\
+                H_1(U \cap V) \arrow[r, "i_r"] & H_1(U) \arrow[r, "r_*"] & H_1(\text{figure 8})\\
+                \left<c_1 + c_2 + c_3 + c_4 \right> \arrow[r, ""] & \left<c_1+ c_2 +c_3 +c_4 \right> \arrow[r, ""] & \left<r  \circ  c_1 + r  \circ  c_2 + r  \circ  c_3 + r  \circ  c_4 \right>\\
+                                      && \left<\overline{a} + \overline{b} + a + \overline{b} \right>
+            \end{tikzcd}
+        \]
+        So we get
+        \[
+        - \left<a \right> - \left<b \right> + \left<a \right> - \left<b \right> = - 2 \left<b \right>
+        .\] 
+
+        So $g_*: \Z \to  \Z^2: 1 \mapsto (0, -2)$, or $z \to  (0, -2 z)$.
+        So, the image of $g_* = 0 \times 2 \Z \le  \Z\times \Z$.
+        The kernel of $g_*$ is $\{0\}$.
+        So $g_*$ is injective.
+        And $0 \times  2 \Z$ is the kernel of $h_*$
+        \[
+                    \to  0 \oplus 0 \to  H_2(K) \to  \Z \xrightarrow{g_*}   \Z^2 \xrightarrow{h_*}   H_1(K) \to  0
+        \]
+        Now, the zero on the right implies that $h_*$ is surjective.
+        so $(H_1(U) \oplus 0) / \operatorname{Ker} h_*$, which is $\frac{\Z^2}{0 \times 2 \Z}$, which is $\Z \oplus \Z_2$.
+
+        Now, on the left.
+        As $g_*$ is injective, so $H_2(K) \to  H_1(U \cap V) = \Z$ is the zero map.
+        On the other hand, we have zeros on the left, so $H_2(K) \to  H_1(U \cap V) = \Z$ is also injective.
+        The only way the zero map can be injective is when the spaces are zero.
+        Therefore, $H_2(K) = 0$.
+
+        Higher dimensional: trivial.
+
+        Let $n \ge  3$
+        \[
+            0 \oplus 0 = H_n(U) \oplus H_n(V) \to  H_n(K) \to H_{n-1}(U \cap V) = 0
+        ,\] 
+        so $H_n(K) = 0$ for all $n \ge  3$.
+
+        Conclusion:
+
+        \[
+            H_0(K) = \Z \quad 
+            H_1(K) = \Z \oplus \Z_2 \quad 
+            H_2(K) = 0 \quad 
+            H_{\ge 3}(K) = 0
+        .\] 
+
+        \begin{remark}
+            Fact: if $X$ is an $n$-dimensional manifold, which is non orientable, then $H_2$ is always zero.
+            If it's orientable, then  $H_2(X) = \Z$.
+        \end{remark}
+
+        \begin{remark}
+            Fact: The $H_1(X) = \frac{\pi_1(X)}{[\pi_1(X), \pi_1(X)]}$.
+            Abelianized version of fundamental group.
+            Remember, we did compute the fundamental group of the klein bottle!
+            $\pi_1(K) = \left<\alpha, \beta  \mid  \beta \alpha = \alpha^{-1} \beta \right>$.
+            Making this group commutative, we have
+            \[
+                H_1(K) = \left<\alpha, \beta  \mid  \beta\alpha = \alpha^{-1} \beta, \alpha\beta = \beta\alpha \right>
+            .\] 
+            From this is follows that $\alpha^{-1} \beta = \alpha \beta$, so $\alpha^{-1} = \alpha$, so $\alpha^2 = 1$.
+            Therefore, we can rewrite this as
+            \[
+                H_1(K) = \left<\alpha, \beta  \mid  \alpha\beta = \beta\alpha, \alpha^2 = 1 \right> = \Z_2 \oplus \Z
+            .\] 
+
+            Another way is to actually compute commutators.
+            \[
+                [\alpha, \beta] = \alpha^{-1}\beta^{-1} \alpha \beta = 
+                \alpha^{-1} \alpha^{-1} \beta^{-1} \beta^{-1} = \alpha^{-2}
+            .\] 
+            So, we mod out $\alpha^2$.
+        \end{remark}
+
+        \begin{remark}[Exam]
+            $H_n(\R P^2)$. The answer should be:
+            \begin{itemize}
+                \item $H_0 = \Z$ (path connected)
+                \item $H_1 = \Z_2$ (abelianized version)
+                \item $H_2 = 0$ (orientable)
+                \item $H_{n\ge 3} = 0$ 
+            \end{itemize}
+        \end{remark}

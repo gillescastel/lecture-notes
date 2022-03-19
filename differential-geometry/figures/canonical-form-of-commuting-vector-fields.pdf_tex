@@ -1,0 +1,75 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'canonical-form-of-commuting-vector-fields.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{446.26252903bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.50164115)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(-0.83154544,0.23963899){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$V_1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(-1.34440821,0.15629596){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Omega$\end{tabular}}}}%
+    \put(-1.26777886,0.33769819){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\R^3$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(-0.96465595,0.09403918){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(0, s_2, s_3)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(0.30200023,0.30188724){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(\theta_1)_{s_1}(0, 0)$\end{tabular}}}}%
+    \put(0.22501625,0.3879514){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(\theta_2)_{s_2} \circ (\theta_1)_{s_1}(0, 0)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(0.20046583,0.19327317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(0, 0)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{canonical-form-of-commuting-vector-fields.pdf}}%
+    \put(0.69136703,0.12443221){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(0, 0, 0)$\end{tabular}}}}%
+    \put(0.70925617,0.29294209){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(0, 0, s_3)$\end{tabular}}}}%
+    \put(0.83483549,0.3476181){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(\theta_1)_{s_1}(0, 0, s_3)$\end{tabular}}}}%
+    \put(0.79151289,0.43247062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(\theta_2)_{s_2} \circ (\theta_1)_{s_1}(0, 0, s_3)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{canonical-form-of-commuting-vector-fields.pdf}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,223 @@
+%\lesson{13}{wo 18 dec 2019 16:04}{Lie algebras}
+
+%\begin{remark}
+%    Exam.
+%    1 hour: thinking about the questions, and then 30 minutes oral exam.
+%    \begin{itemize}
+%        \item Preparation of 1 hour: you cannot use anything
+%            \begin{itemize}
+%                \item Two little problems inspired by the homework problems (oefenzittingen!)
+%                \item Two question: two little questions about theory
+%            \end{itemize}
+%        \item Book and notes allowed during the oral exam, if really necessary.
+%        \item Bring take home task. (Try to fix take home task)
+%        \item Points based on what you say orally and what you write down \emph{during} the oral exam. Notes taken during the preparation are ignored.
+%    \end{itemize}
+%\end{remark}
+
+%Recap:
+
+%\begin{prop}[A]
+%    Let $G$ be a Lie group, then  $\mathfrak g := T_e G$ is a Lie algebra,
+%    with the bracket
+%    \[
+%        [v, w] := [\overleftarrow v, \overleftarrow w]|_e
+%    .\] 
+%\end{prop}
+\begin{prop}[B]\label{prop:B}
+    Let $\Phi: G \to H$ be a Lie group morphism (i.e.\ a smooth group homomorphism).
+    Then $$ d_e \Phi := (\Phi_*)_e: T_e G \to  T_e H $$ is a Lie algebra morphism.
+\end{prop}
+\begin{proof}
+    For all $v \in T_eG$, the vector field $\overleftarrow v$ is  $\Phi$-related to 
+    $\overleftarrow{( d_e \Phi)(v)}$.
+    Indeed, 
+    \[
+        (d_g \Phi)(\overleftarrow v)_g = 
+        (d_g \Phi)(L_g)_*(v) = 
+        d_e (\Phi  \circ  L_g)(v) = 
+        d_e(L_{\Phi(g)}  \circ  \Phi) (v)
+    ,\] 
+    where the last equation is true because $\Phi$ is a homomorphism.
+    Now, pulling derivatives apart again, we see that the above equals
+    \[
+        (L_{\Phi(g)})_* ((d_e \Phi)v) = (\overleftarrow{d_e \Phi(v)})_{\Phi(g)}
+    \] 
+Take $v_1, v_2 \in T_e G$.
+    Applying the previous statement we obtain that $ [\overleftarrow{v_1}, \overleftarrow{v_2}] $   is $\Phi$-related to $[\overleftarrow{(d_e \Phi)v_1}, \overleftarrow{(d_e \Phi)v_2}]$ (naturality of the Lie bracket).
+    In particular, at  $g = e$,
+     \[
+         ( d_e \Phi)(\left[\overleftarrow{v_1}, \overleftarrow{v_2}\right]_e)
+         = \left( \left[\overleftarrow{(d_e \Phi) v_1}, \overleftarrow{(d_e \Phi) v_2}\right] \right)_e
+    .\] 
+\end{proof}
+\begin{prop}[C]
+    Let $H$ be a Lie subgroup of $G$.
+    Then $T_e H$ is a Lie subalgebra of $T_eG$.
+\end{prop}
+\begin{proof}
+    We know that the inclusion is Lie group morphism.
+    Therefore, its derivative $T_e H \to  T_eG$ is a Lie algebra morphism by the last proposition.
+\end{proof}
+\begin{eg}
+$\SL(n, \R)$ is a Lie subgroup of $\GL(n, \R)$, hence    the Lie algebra of $\SL(n, \R)$ is a Lie subalgebra of $\GL(n, \R)$.
+ It turns out that the Lie algebra of $\SL(n, \R)$ are exactly the traceless matrices.
+\end{eg}
+
+\section{The exponential map}
+
+Let $G$ be a Lie group, $\mathfrak g = T_e G$.
+
+\begin{lemma}    
+    For all $v \in T_e G$, there is a unique morphism of Lie groups $\gamma_v: (\R, +) \to  G$ with the property that $\gamma_v'(0) = v$.
+   \end{lemma}
+Notice:   there are lots of curves $\gamma$ that have $\gamma'(0) = v$, but by the lemma there exists \emph{only one} which is also a group homomorphism, i.e.
+    $
+        \gamma_v(s) \cdot \gamma_v(t) = \gamma_v(s + t)
+    .$ 
+
+\begin{proof}
+    Existence: The left invariant vector field $\overleftarrow{v}$ is complete, i.e.\ integral curves are defined for all times.  
+%    So we can take the integral curve that starts at the identity element.
+    Let $ \gamma: \R \to  G $ be the integral curve starting at $e$.
+    Clearly $\gamma_v'(0) = v$.   $\gamma$ is a group homomorphism, because for every fixed $s$, we have that  the curves $t \mapsto  L_{\gamma(s)} \gamma(t)$, and $t \mapsto  \gamma(s+t)$ agree.
+    (At $t = 0$, both of these go through $\gamma(s)$, and they are also integral curves\footnote{For $t \mapsto  \gamma(s+t)$, it's trivial. For $t \mapsto  L_{\gamma(s)} \gamma(t)$, we have that this is an integral curve of  $(L_{\gamma(s)})_*\overleftarrow{v}$, which is the same as $\overleftarrow{v}$.} of~$\overleftarrow{v}$.)
+ %   Therefore $L_{\gamma(s)} \gamma(t) = \gamma(s+t)$, which is what we wanted to prove.
+
+    Uniqueness: let  $ \gamma: \R \to  G $ be a Lie group morphism with $\gamma'(0) = v$. Since $\frac{\partial}{\partial t}$ is a left-invariant vector field on $\R$, by the proof of Proposition~\ref{prop:B} it is $\gamma$-related to $\overleftarrow{(d_0\gamma)(\frac{\partial}{\partial t}|_0)}=\overleftarrow{\gamma'(0)}=\overleftarrow{v}.$ Hence for every $t_0\in \R$:
+ $$(d_{t_0}\gamma)\Big(\frac{\partial}{\partial t}\Big|_{t_0}\Big)  =\overleftarrow{v}|_{\gamma(t_0)}.$$ The left hand side is just
+  $\gamma'(t_0)$. Hence $\gamma$ is  {the} integral curve of   $\overleftarrow{v}$ starting at $e$.
+\end{proof}
+\begin{definition}[Exponential map]
+    Let $G$ be a Lie group with Lie algebra~$\mathfrak g$.
+    The exponential map is
+    \[
+        \exp: \mathfrak g \to  G, v \mapsto \gamma_v(1)
+    .\] 
+\end{definition}
+\begin{prop}
+    \begin{itemize}
+        \item[a)] $\exp(tv) = \gamma_v(t)$ for all $t\in \R$ and $v\in \mathfrak g$.
+        \item[b)] There exists a neighborhood $U$ of $0 \in \mathfrak g$ such that 
+            \[
+                \exp|_U: U \to  \exp(U)             \] 
+            is a diffeomorphism onto an open subset of $G$. (This allows to study $G$ close to the identity element $e$ by studying the Lie algebra. This also defines a chart near $e$.)
+        \item[c)] If $H \subset G$ is a Lie subgroup.
+            Then $\exp^{H}: T_eH \to  H$ is the restriction of $\exp^{G}: T_eG \to G$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item[a)] The curves $s \mapsto  \gamma_{tv}(s)$ and $s \mapsto \gamma_v(st)$   agree, as they are both Lie group morphism\footnote{The first by definition, and the second is a composition of two group morphisms.}  $(\R, +) \to  G$ with the same velocity $vt$ at $s = 0$. Take $s = 1$.
+        \item[b)] Idea: check that $d_0 \exp: T_0 \mathfrak  g=\mathfrak  g \to  T_e G=\mathfrak  g$ is the identity on $\mathfrak  g$. Then apply the
+            inverse function theorem.
+    \end{itemize}
+\end{proof}
+\begin{eg}
+    For $\GL(n, \R)$, we have
+
+    \begin{align*}
+        \exp: T_e \GL(n, \R) = \Mat(n, \R)&\longrightarrow  \GL(n, \R)\\
+         A&\longmapsto  e^{A} := \sum_{n=0}^{\infty} \frac{A^{n}}{n!}
+    .\end{align*}
+\end{eg}
+\begin{explanation}
+    For all $A \in  \Mat(n, \R)$, the curve
+    \[
+        (\R, +) \to  \GL(n, \R), t \mapsto  e^{tA}
+    \] 
+  is a group morphism, since $e^{tA} \cdot e^{s A} = e^{(t + s) A}$.
+    Furthermore, 
+    \[
+        \frac{d}{dt}\Big|_0 e^{tA} = \frac{d}{dt}\Big|_0 (I + tA + O(t^2)) = A
+    .\] 
+    So this curve is $\gamma_A$.
+\end{explanation}
+
+\section{From Lie algebras to Lie groups}
+ Let $(\mathfrak g, [\cdot , \cdot ])$ be a (finite dimensional) Lie algebra.
+
+
+\begin{definition}[Lie group integrating a given Lie algebra]
+       A Lie group $G$ \emph{integrates} $\mathfrak g$ iff $T_eG$  is isomorphic to $\mathfrak g$ (as Lie algebras).
+\end{definition}
+We will show:
+\begin{theorem}[A]
+    Up to isomorphism, there exists a unique \emph{simply connected}
+    %\footnote{Note: not an unique group, also not a unique connected group}
+      Lie group $G_{SC}$ integrating $\mathfrak g$.
+\end{theorem}
+\begin{remark}
+    All other connected Lie groups integrating $\mathfrak g$ are quotients of $G_{SC}$ by discrete normal subgroups.
+\end{remark}
+\begin{eg}
+    Let $\mathfrak g = (\R, [\cdot ,\cdot ]=0)$.
+    Then $G_{SC} = (\R, +)$.
+    Note that $U(1) = S^{1} = \R /  \Z$ is also a Lie group that integrates $\mathfrak g$.
+\end{eg}
+
+
+\begin{eg}
+    Let $\mathfrak g = \{A\in \text{Mat}(n, \R): A+A^T=0\}$.
+    The Lie group $\text{SO}(n)$ integrates $\mathfrak g$.
+\end{eg}
+
+\begin{prop}[C]
+    Let $G$ be a Lie group and $\mathfrak h$ a Lie subalgebra of $\mathfrak g = T_eG$.
+    There exists a unique connected Lie subgroup $H$ whose Lie algebra is $\mathfrak h$.
+\end{prop}
+\begin{eg}
+    Let $G = U(1) \times U(1)$, $\mathfrak h = \operatorname{span}(1, \lambda) \subset  \R^2 = T_eG$, where $\lambda \in \R$.
+    Then $H = \{(e^{it}, e^{i \lambda t}) : t \in \R\}$.
+\end{eg}
+\vspace*{12pt}
+\begin{proof} Sketch:
+    Denote by $D$ the distribution on $G$ given by 
+    \[
+        D_g := (L_g)_* \mathfrak h
+    .\] 
+It is involutive because it is spanned by left-invariant vector fields and $\mathfrak h$ is a Lie subalgebra.
+%    (Consider $v, w \in \mathfrak h$. Then we can extend these vectors to left-invariant vector fields. As $[v, w] \in  \mathfrak h$, we have that $[v, w]$  is left invariant and lies again in $D$ everywhere.)
+
+ By the global  Frobenius theorem, there is a (unique) foliation of $G$ whose leaves are tangent to $D$. Notice that the foliation is invariant under left-translation: $(L_g)(S_{g'})=S_{gg'}$, where $S_{g'}$ denotes the leaf of $D$ through $g'$.
+ 
+ One can show that $S_e$, the leaf of the foliation through $e$, is a Lie subgroup with Lie algebra $ \mathfrak h$.
+ (Clearly $S_e$ is an immersed manifold with $T_eS_e=\mathfrak h$. To show that it is a subgroup, use   the left-invariance of the foliation. The multiplication and inversion are smooth.) Further, one can show uniqueness.
+\end{proof}
+
+ 
+\begin{corollary}
+    Given a Lie group $G$, there is a bijection 
+    $$ \{\text{Connected Lie subgroups of $G$}\}\leftrightarrow \{\text{Lie subalgebras of $T_eG$}\}.$$
+\end{corollary}
+\begin{remark}
+The nice bijection in this corollary justifies the (slightly involved) definition of Lie subgroup. 
+%    This is the reason why the definition of Lie subgroup is a bit involved.
+\end{remark}
+
+Once can show:
+\begin{prop}[B]
+    Let $G$ be a \emph{simply connected} Lie  group, $H$ a Lie group, and $ \Psi: T_eG \to  T_eH $ a Lie algebra morphism.
+    Then there is a unique Lie group morphism $\Phi: G \to  H$ such that $d_e \Phi = \Psi$.
+\end{prop}
+ 
+    This proposition allows us to easily prove the uniqueness in Theorem (A):
+    \begin{proof} Let $G_1,G_2$ be simply connected Lie  groups
+and $\Psi:T_eG_1\to T_eG_2$ a Lie algebra isomorphism. Then there exist 
+\begin{itemize}
+\item a Lie group morphism $\Phi\colon G_1\to G_2$ s.t. $   d_e \Phi = \Psi$,  
+ \item a Lie group morphism $\chi\colon G_2\to G_1$ s.t. $   d_e \chi = \Psi^{-1}$.
+\end{itemize}
+Since $\chi\circ  \Psi$ and $Id_{G_1}$ are both Lie group morphisms with derivative $\Id_{T_eG_1}$, they must agree. Similarly, $\Psi\circ \chi=\Id_{G_2}$.
+So $\Phi$ is an isomorphism. 
+    \end{proof}
+ 
+    \filbreak
+We sketch the proof of the existence in Theorem (A), i.e. given a Lie algebra~$ \mathfrak g$, there exists a simply connected Lie group integrating it.
+\begin{proof}
+    Idea of proof:
+    $\mathfrak g$ is isomorphic to a Lie subalgebra   $\mathfrak g_0$ of $\Mat(n, \R)$ for some $n$ (Ado's theorem).
+    
+    Let $G_0$ be the unique connected Lie subgroup of of $\GL(n, \R)$ with Lie algebra $\mathfrak g_0$.
+Take $G_{SC}$ to be the universal cover of $G_0$. (The universal cover is again a Lie group, and simply connected.)
+\end{proof}

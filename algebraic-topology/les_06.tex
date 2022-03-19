@@ -1,0 +1,340 @@
+\lesson{6}{di 12 nov 2019 10:27}{}
+
+Recap: $p: E \to  B$ and $C (E, p, B) = \{ h : E \to  E  \mid  \text{h homeo, $p  \circ  h = h$}\}$.
+$C(E, p, B) \cong \frac{N_{\pi(B,b_0) }(H_0)}{H_0}$, where $H_0 = p_* \pi(E,e_0) $.
+
+When $p : E \to  B$ is regular ($H_0$ is normal in $\pi(B,b_0)$), then
+\[
+    C(E, p, B) \cong \frac{\pi(B,b_0) }{H_0}
+.\]
+
+In particular when $E$ is simply connected,
+\[
+    C(E, p, B) \cong \pi_1(B, b_0)
+.\]
+
+$p: E \to  B$ is rigular iff (for all $e_1, e_2 \in E$ such that $p(e_1) = p(e_2) \implies \exists  h \in C(E, p, B): h(e_1) = e_2$)
+
+
+Now let's talk about group actions.
+Let $X$ be a space and $G \le \text{Homeo(X)}$.
+$G$ acts on $X$:  $g x = g(x)$.
+We can consider $X / G$, the quotient space consisting of all orbits of this action with the quotient topology.
+Let $\pi: X \to X / G$ denote the natural projection: $ x\mapsto  Gx$.
+So $O \subset  X /G$ is open iff  $\pi^{-1}(O)$ is open in $X$
+
+\begin{definition}
+    $G$ acts \emph{properly discontinuously (nice)} on $X$ iff for all $x \in X$, there exists neighborhood $U(x)$ open such that $g U \cap U \neq 0 \implies g = 1$, or in other words, $g_1U \cap  g_2 U \neq \O \implies g_1 = g_2$.
+\end{definition}
+\begin{remark}
+    In the literature: many definition of non-equivalent properly discontinuous.
+\end{remark}
+\begin{remark}
+    If $G$ acts properly discontinuously, then $G$ acts \emph{freely}, i.e. $gx = x \implies g = 1$, i.e. there are no fixed points.
+\end{remark}
+\begin{theorem}[76.5, important!]
+    Let $G \le  \text{Homeo}(X)$.
+    Then $\pi: X \to X / G$ is a covering map iff $G$ acts properly discontinuously.
+    Moreover, when $\pi$ is a covering, then it is a regular covering and $G$ \emph{is}\footnote{not isomorphic to, it \emph{is}} the group of covering transformations.
+\end{theorem}
+\begin{proof}
+    Remark that $\pi$ is an open map.
+    Indeed, let $U \subset X$ be open.
+    Then $\pi(U)$ is open, since $\pi^{-1}(\pi(U)) = \bigcup_{g \in G} g(U)$ is open, as $g$ is homeo.
+
+    \begin{description}
+        \item[Step 1.]
+            Assume $G$ acts properly discontinuously on $X$.
+            We have to show that $\pi$ is a covering map.
+            Let $\overline{x} = \pi(x)$ be an element of $X / G$.
+            Let $U(x)$ be an open such that $gU \cap U = \O$ if $g \neq 1$ (definition of properly discontinuous action)
+            $\pi$ is an open map, so  $V = \pi(U)$ is an open containing  $\overline{x}$, and $\pi^{-1}(V) = \bigcup_{g \in G} gU$.
+            We want to show that $V$ is evenly covered.
+            Take as slices $gU$, which are disjoint since $g_1 U \cap  g_2 U = \O$ if $g_1 \neq g_2$.
+            Consider $\pi : U \to V$
+            \begin{itemize}
+                \item Continuous
+                \item Bijective (surjective, injective)
+                \item Open,
+            \end{itemize}
+            which means it's an homeomorphism.
+            Of course, $\pi: gU \to  V$ is also a homomorphism, as it is a composition of $g^{-1}$ and $\pi$, both of which are homeo. So we have a covering map
+        \item[Step 3.]
+            Suppose $\pi$ is a covering.
+            \begin{itemize}
+                \item Certainly, $G$ is a subgroup of the group of covering transformations.
+                \item Let $h \in C( x, \pi, X /G)$ and $x_1 \in X$.
+                    Then $\pi h(x_1) = \pi(x_1)$, so the orbit of $h(x_1)$ is the orbit of $x_1$, so there exists a $g \in G$ such that $g(x_1) = h(x_1)$.
+                    Both of them are covering transformations, $g(x_1) = h(x_1)$.
+                    From previous results, we conclude that $g = h$.
+                    Therefore $G = C(X, \pi, X / G)$.
+                \item Let $x_1, x_2 \in X$ with $\pi(x_1) = \pi(x_2)$, then there exists a $g \in G$ such that $g(x_1) = x_2$, so $\pi$ a regular covering.
+            \end{itemize}
+
+
+        \item[Step 2. Reverse implication]
+            Suppose $X \to  X / G$ is a regular covering.
+            We have to show that the action is properly discontinuous.
+            Let $x \in X$.
+            Take $\overline{x} = \pi(x)$, and let $V$ be a path connected open containing $\overline{x}$, which is evenly covered.
+            $\pi^{-1}(V) = \bigsqcup_{\alpha \in I} U_\alpha$, and $\pi|_{U_\alpha}: U_\alpha \to  V$ is homeo.
+            Let $U$ be the slice $U_\alpha$ which contains $x$.
+            Then $U$ is an open containing $x$, and we claim this is `the good one' for the definition of properly discontinuous.
+            Suppose $u \in  g(U) \cap  U$, so $u$ is an element of $U$ and also an element of the form $gu'$ for some  $u' \in U$.
+            This implies $\pi(u') = \pi( g u') = \pi(u)$.
+            Since  $\pi|_U$ is a homeomorphism,  $u' = u$.
+            This shows that $g(u) = u$.
+            By Step 3, $g$ is a covering transformation.
+            Therefore $g$ is the identity map, because that's the only covering transformation that has a fixed point.
+    \end{description}
+\end{proof}
+
+\begin{corollary}
+    Let $X$ be simply connected and $G \le \text{Homeo}(X)$ acting properly discontiously.
+    Then $\pi: X \to  X / G$ is a regular covering and $\pi_1( X / G) = C(x, \pi, X / G) = G$.
+\end{corollary}
+
+\begin{remark}[Exercise, Thm 76.6]
+    If $p: X \to  B$ is a regular covering and $G = C(E, p, B)$,
+    then $B$ is homeomorphic to $X / G$.
+
+    If $B$ admits a universal covering space, then $B = E / G$ where $E$ is the universal covering space  space and $G \cong \pi(B,b_0)$.
+    So if a space has a universal covering space, it's always of the form $E / G$.
+\end{remark}
+
+\begin{eg}
+    Let $\alpha: \R^2 \to  \R^2: (x, y) \mapsto (x+1, y)$.
+    Let $\gamma: \R^2\to \R^2: (x, y) \mapsto  (x, y+1)$.
+    Let $G = \operatorname{grp} \{\alpha, \gamma\}$, an Abelian group.
+    Every element of $G$ is of the form $\alpha ^{k} \gamma ^{\ell}(x, y) = (x+k, y+\ell)$,
+    so $\alpha ^{k} \gamma^{\ell} = \alpha ^{k'} \gamma^{\ell'} \iff k = k', \ell = \ell'$, so $G \cong \Z^2$.
+
+    $G$ acts properly discontinuously on $\R^2$.
+    Therefore $\pi_1(\R^2 / \Z^2, x) \cong \Z^2$.
+    $\R^2 / \Z^2$ is the torus.
+\end{eg}
+
+\begin{eg}
+    Take $\alpha: \R^2 \to  \R^2: (x, y) \mapsto (x +1, y)$.
+    Take $\beta: \R^2 \to  \R^2: (x, y) \to  (-x, y+1)$.
+    Note that $\beta^2 = \gamma^2$.
+    Claim: $\alpha  \circ  \beta = \beta  \circ  \alpha ^{-1}$.
+    Note that $\alpha^{-1} \beta = \beta \alpha$, $\alpha \beta^{-1} = \beta^{-1} \alpha^{-1}$ and $\alpha^{-1} \beta^{-1} = \beta^{-1} \alpha$, so we can always move $\alpha$ to the front, which means that
+    \[
+        G = \operatorname{grp} \{\alpha, \beta\}  = \{\alpha ^{k} \beta^{l}  \mid  k, l \in \Z\} .\]
+        note
+        \[
+            \alpha ^{k} \beta^{\ell}(x, y) = ((-1)^{\ell} x + k, y + \ell)
+        .\]
+        Therefore $\alpha ^{k} \beta^{l} = \alpha ^{k'} \beta^{ l'} \iff k = k' \land l = l'$.
+        As a set $G = \Z_2$, but not isomorphic.
+
+        Claim: $G$ acts properly discontinuously on $\R^2$. Indeed consider $B(x, \frac{1}{4})$.
+        So \[
+            \pi_1 ( \R^2 / G) = G = \left<\alpha, \beta  \mid  \beta \alpha = \alpha^{-1} \beta \right>
+        .\]
+
+        \begin{figure}[H]
+            \centering
+            \incfig{example-covering-fundamental-group}
+            % \caption{example covering fundamental group}
+            \label{fig:example-covering-fundamental-group}
+        \end{figure}
+
+        This is the Klein bottle!
+\end{eg}
+\begin{remark}
+    These two spaces are the only possible spaces you can create using affine actions.
+    Projective plane? Not properly discontinuously?
+\end{remark}
+
+
+
+\chapter{Singular Homology}
+
+This is the most general homology.
+
+\begin{itemize}
+    \item A  point is a $0$-simplex
+    \item A line segment is a $1$-simplex
+    \item A triangle (including interior) is a $2$-simplex
+    \item A filled in tetrahedron is a $3$-simplex.
+\end{itemize}
+\begin{definition}[Simplex]
+    In general a $p$-simplex is the convex hull of $p + 1$ points in general position in $\R^n$ (affine independent)
+\end{definition}
+\begin{prop}[1.1]
+    Let $x_0, \ldots, x_p \in \R^{n}$, ($p \ge  1$) then the following are equivalent:
+    \begin{itemize}
+        \item The vectors $x_1 - x_0, \ldots, x_p - x_0$ are linearly independent
+        \item If $\sum_{i=0}^{p} s_i x_i = \sum_{i=0}^{p} r_i x_i$ and $\sum_{i=0}^{p} s_i = \sum r_i$, then $s_i = r_i $ for all $i=0, \ldots, p$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item Assume that $\sum_{i=0}^{p} s_i x_i = \sum_{i=0}^{p} r_i x_i$ and  $\sum_{i=0}^{p} s_i = \sum r_i$. Then we can multiply the last expression by $x_0$.
+            Then
+            \begin{align*}
+                \sum_{i=0}^{p} s_i (x_i - x_0) &= \sum_{0}^{p} r_i (x_i - x_0)\\
+                \sum_{i=1}^{p} s_i (x_i - x_0) &= \sum_{1}^{p} r_i (x_i - x_0)
+            .\end{align*}
+            Therefore for all $i = 1, \ldots, p \implies s_i = r_i$ and therefore also $s_0 = r_0$.
+
+        \item Assume $\sum_{i=1}^{p} r_i (x_i - x_0) = 0$.
+            Then $\sum_{i=1}^{p} r_i x_i = \sum_{i=1}^{p} r_i x_0$.
+            This implies that $r_0 = 0$, $r_1 = \ldots = r_p = 0$ and $s_1 = \ldots = s_p = 0$.
+    \end{itemize}
+\end{proof}
+
+
+\hr
+
+\begin{prop}
+    Let $x_0, \ldots, x_p$ satisfy the conditions of the proposition.
+    Then any point $x$ in the convex hull of these points has a unique representation of the form
+    \[
+    x = \sum t_i x_i \qquad  t_i \ge  0 \text{ and } \sum t_i = 1
+    .\]
+    This convex hull is the $p$-simplex spanned by $x_0, \ldots, x_p$.
+\end{prop}
+\begin{proof}
+    Exercise. Hint: consider $p = 0, p = 1$, and do the rest by induction.
+\end{proof}
+\begin{definition}
+    The standard $p$-simplex $\sigma_p$ is the (ordered) $p$-simplex in $\R^{p+1}$ spanned by
+    \begin{align*}
+        x_0 &= (1, 0, 0, \ldots, 0)\\
+        x_1 &= (0, 1, 0, \ldots, 0)\\
+        x_p &= (0, 0, \ldots, 0, 1)
+    .\end{align*}
+    \[
+        \sigma_p = \{(t_0, \ldots, t_p)  \mid  t_i>0 \text{ and }\sum t_i = 0 \}
+    .\]
+\end{definition}
+\begin{remark}
+    Any $p$-simplex is homeomorphic to the standard $p$-simplex.
+    \begin{align*}
+        h: \sigma_p &\longrightarrow \text{$p$-simplex} \\
+        (t_0, \ldots, t_p) &\longmapsto \sum t_i x_i
+    .\end{align*}
+    This is a homomorphism because this is a continuous map between Hausdorff, compact spaces.
+\end{remark}
+\begin{definition}
+    A singular $p$-simplex in a topological space $X$ is a continuous map
+    \begin{align*}
+        \phi: \sigma_p &\longrightarrow X
+    .\end{align*}
+\end{definition}
+In the case of $p=2$, we get the following:
+\begin{figure}[H]
+    \centering
+    \incfig{definition-singular-p-simplex}
+    % \caption{definition singular p simplex}
+    \label{fig:definition-singular-p-simplex}
+\end{figure}
+
+Note that in the case of $p=0$,  $\phi:\sigma_0 = \{x_0\} \to  X: x_0 \mapsto  \phi(x_0) \in X$.
+So zero-simplices are identified with points of $X$.
+
+In the case of $p=1$, we get $\sigma_1 = I$, so a singular 1-simplex is a path in $X$.
+
+For the moment, we don't assume spaces are connected, etc.
+\begin{definition}
+    Let $X$ be a topological space.
+    Then $S_n(X)$ is the free abelian group on all singular $n$-simplices.
+    This is a giant group.
+    By the definition of a free abelian group, elements of $S_n(X)$ are of the form $\sum n_\phi \phi$, where
+     \begin{itemize}
+         \item the sum is finite,
+         \item $n_\phi \in \Z$,
+         \item $\phi: \sigma_n \to X$.
+    \end{itemize}
+\end{definition}
+
+Let $\phi: \sigma_p \to  X$ be a singular $p$-simplex, and $i \in  \{0, \ldots, p\}$.
+Then the $i$-th boundary of $\phi$, denoted by $\partial_i \phi$ is the singular $p-1$ simplex.
+\[
+    \partial_i \phi: \sigma_{p-1} \to  X: (t_0, \ldots t_{p-1}) \mapsto \phi(t_0, t_1, \ldots, t_{i-1}, 0, t_i, \ldots, t_{p-1})
+.\]
+This is $\phi$ restricted to the face opposite to $x_i$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{boundary-operator}
+    \caption{Boundary operator}
+    \label{fig:boundary-operator}
+\end{figure}
+
+Now, define \[
+    \partial: S_n(X) \to  S_{n-1}(X): \sum n_\phi \phi \mapsto \sum n_\phi (\partial \phi),
+ \]
+ where
+ \[
+     \partial \phi = \sum (-1)^{i}  \partial_i \phi \in S_{n-1}(X)
+ .\] 
+ Then certainly, $\partial$ is a morphism of abelian groups.
+ In the case of the figure, we get
+ \[
+ \partial \phi = \partial_0 \phi - \partial _1 \phi + \partial _2 \phi
+ ,\] 
+ which really does goes around the simplex in the correct direction. The $(-1)^{i}$ fixes the direction of the simplices.
+
+ \begin{eg}
+     Let $\phi: \sigma_1 \to X$ be a $1$-simplex.
+     Then $\partial \phi = \phi(x_1)  - \phi(x_0)$.
+ \end{eg}
+
+ \begin{eg}
+    Let $\phi$ be a two simplex.
+    Then $\partial(\partial \phi) = 0$.
+ \end{eg}
+
+ \begin{remark}
+     We define $S_{-n} = 0$ for $n \ge 0$.
+     Then $\partial: S_0(X) \to  S_{-1}(X) = 0: \psi \mapsto 0$.
+ \end{remark}
+
+ \begin{prop}[1.3]
+     $\partial \circ \partial = 0$.
+ \end{prop}
+ \begin{proof}
+     Exactly the same thing as in the example.
+ \end{proof}
+
+ Let $X$ be a topological space.
+
+ \[
+     \xrightarrow{\partial} S_{n+1}(X)
+    \xrightarrow{\partial}  S_{n}(X)
+    \xrightarrow{\partial}  S_{n-1}(X)
+    \xrightarrow{\partial}  \cdots
+    \xrightarrow{\partial}  S_{1}(X)
+    \xrightarrow{\partial}  S_{0}(X)
+    \xrightarrow{\partial} 0 
+    \xrightarrow{\partial} 0 
+    \xrightarrow{\partial} \cdots
+ .\] 
+ We do know that $\partial  \circ \partial = 0$.
+ Suppose we start with $\alpha \in S_{n+1}$. Then $\partial \alpha$ belongs to the kernel of the ``next'' $\partial$.
+ This shows that  the image of $\partial$ is a subset of the kernel of the ``next''  $\partial$.
+ This holds at any spot.
+ We call this a chain complex of abelian groups.
+ Define
+ \begin{align*}
+     Z_n(X) &= \text{the $n$-cycles of $X = $ kernel of $\partial: S_n \to  S_{n-1}$}\\
+     B_n(X) &=  \text{the $n$-boundaries of $X = $ the image of $\partial S_{n+1} \to  S_n$}
+ .\end{align*}
+ We claimed that $B_n \subset Z_n$.
+ \begin{definition}
+     The $n$-th singular homology group of $X$ is  $H_n(X) = \frac{Z_n(X)}{B_n(X)}$.
+     Two cycles are the same if they differ with a boundary.
+ \end{definition}
+
+
+A cycle is more or less a loop.  Then two cycles are the same when they differ with a boundary, in this case the boundary of the triangles indicated with the dashed lines.
+\begin{figure}[H]
+    \centering
+    \incfig{intuition-homology}
+    \caption{Intuition Homology}
+    \label{fig:intuition-homology}
+\end{figure}

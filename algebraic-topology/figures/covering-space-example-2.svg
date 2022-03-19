@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="178.94641mm"
+   height="45.3741mm"
+   viewBox="0 0 178.94641 45.3741"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="covering-space-example-2.svg">
+  <defs
+     id="defs2">
+    <marker
+       markerWidth="0.91100001"
+       markerHeight="1.6900001"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       id="marker-arrow-0.5308">
+      <g
+         id="g48"
+         transform="scale(2.1535293)">
+        <path
+           id="path46"
+           inkscape:connector-curvature="0"
+           style="fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722" />
+      </g>
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.99437388"
+     inkscape:cx="284.27627"
+     inkscape:cy="182.72055"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2520"
+     inkscape:window-height="995"
+     inkscape:window-x="20"
+     inkscape:window-y="65"
+     inkscape:window-maximized="1"
+     inkscape:snap-center="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="-28.666458"
+       originy="-38.777515" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-28.666457,-212.84839)">
+    <circle
+       style="color:#000000;overflow:visible;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.14044084;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:none"
+       id="path24"
+       cx="159.37006"
+       cy="234.92157"
+       r="20.754267" />
+    <text
+       id="text28"
+       xml:space="preserve"
+       style="font-size:2.64583325px;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       y="221.38591"
+       x="180.15051"><tspan
+         id="tspan26"
+         sodipodi:role="line"
+         x="180.15051"
+         y="221.38591"
+         style="stroke-width:0.26458332">$S^{1}$</tspan></text>
+    <circle
+       id="path54"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+       cx="180.12431"
+       cy="235.32068"
+       r="1"
+       inkscape:transform-center-x="-20.754257"
+       inkscape:transform-center-y="0.39910889" />
+    <circle
+       r="20.754267"
+       cy="234.92157"
+       cx="70.188278"
+       id="circle28"
+       style="color:#000000;overflow:visible;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.14044084;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:none" />
+    <text
+       x="90.968735"
+       y="221.38591"
+       style="font-size:2.64583325px;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       id="text32"><tspan
+         style="stroke-width:0.26458332"
+         y="221.38591"
+         x="90.968735"
+         sodipodi:role="line"
+         id="tspan30">$S^{1}$</tspan></text>
+    <path
+       style="color:#000000;overflow:visible;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.14044084;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-0.5308)"
+       d="m 101.41134,234.34698 h 28.59838"
+       id="path44"
+       inkscape:connector-curvature="0" />
+    <text
+       id="text63"
+       xml:space="preserve"
+       style="font-size:2.64583325px;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       y="231.98589"
+       x="114.10246"><tspan
+         id="tspan61"
+         sodipodi:role="line"
+         x="114.10246"
+         y="231.98589"
+         style="stroke-width:0.26458332">$p$</tspan></text>
+    <g
+       id="g116">
+      <circle
+         inkscape:transform-center-y="0.39910889"
+         inkscape:transform-center-x="-20.754257"
+         id="circle34"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         cx="90.942535"
+         cy="235.32068"
+         r="1" />
+      <circle
+         transform="rotate(-120)"
+         r="1"
+         cy="-56.276848"
+         cx="-217.7879"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         id="circle91"
+         inkscape:transform-center-x="10.031506"
+         inkscape:transform-center-y="-18.173291" />
+      <circle
+         inkscape:transform-center-y="17.774183"
+         inkscape:transform-center-x="10.722794"
+         id="circle93"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         cx="189.1082"
+         cy="-177.8465"
+         r="1"
+         transform="rotate(120)" />
+    </g>
+    <circle
+       inkscape:transform-center-y="-9.2574762"
+       inkscape:transform-center-x="-18.579488"
+       r="1"
+       cy="282.41565"
+       cx="53.213947"
+       style="fill:#000000;fill-opacity:0.12000002;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+       id="circle103"
+       transform="rotate(-27.587076)" />
+    <g
+       id="g124"
+       inkscape:transform-center-x="-3.8022725"
+       inkscape:transform-center-y="1.5358799"
+       transform="rotate(-9.6114736,70.188278,234.92157)"
+       style="fill:#000000;fill-opacity:0.12000002;stroke:none;stroke-opacity:1;marker-start:none;marker-end:none">
+      <circle
+         r="1"
+         cy="235.32068"
+         cx="90.942535"
+         style="fill:#000000;fill-opacity:0.12000002;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         id="circle118"
+         inkscape:transform-center-x="-20.754257"
+         inkscape:transform-center-y="0.39910889" />
+      <circle
+         inkscape:transform-center-y="-18.173291"
+         inkscape:transform-center-x="10.031506"
+         id="circle120"
+         style="fill:#000000;fill-opacity:0.12000002;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         cx="-217.7879"
+         cy="-56.276848"
+         r="1"
+         transform="rotate(-120)" />
+      <circle
+         transform="rotate(120)"
+         r="1"
+         cy="-177.8465"
+         cx="189.1082"
+         style="fill:#000000;fill-opacity:0.12000002;stroke:none;stroke-width:1;stroke-opacity:1;marker-start:none;marker-end:none"
+         id="circle122"
+         inkscape:transform-center-x="10.722794"
+         inkscape:transform-center-y="17.774183" />
+    </g>
+  </g>
+</svg>

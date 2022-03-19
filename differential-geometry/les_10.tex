@@ -1,0 +1,252 @@
+%\lesson{10}{do 21 nov 2019 14:02}{De Rham Cohomology}
+
+\setcounter{chapter}{6}
+\chapter{De Rham Cohomology}
+\section{Basic definitions}
+
+Let $M$ be a manifold of dimension $m$.
+
+
+\begin{definition}[Closed  forms]
+    $\omega \in \Omega^{k}(M)$ is called closed iff $d \omega = 0$.
+\end{definition}
+\begin{definition}[Exact forms]
+    $\omega \in \Omega^{k}(M)$ is called exact iff $d \alpha = \omega$ for some $\alpha\in \Omega^{k-1}(M)$.
+\end{definition}
+
+We have
+\[
+    \begin{tikzcd}
+        0 \arrow[r, ""] 
+        &\Omega^{0}(M) \arrow[r, "d_0"] &
+        \Omega^{1}(M) \arrow[r, "d_1"]
+        &\cdots \arrow[r, "d_{m-1}"]
+        &\Omega ^{m}(M) \arrow[r, ""]
+        &0
+    \end{tikzcd}
+\]
+with $d_k  \circ  d_{k-1} = 0$,
+so in particular  the image of $d_{k-1}$ is included in the kernel of $d_k$.
+This is an example of a cochain complex.
+\emph{Co}chain because $d$ increases the degree.
+
+\begin{figure}[H]
+    \centering
+    \incfig{rham-cohomology}
+    \caption{
+        Visualization of the de Rham cochain complex.
+        Exact $k$-forms lay per definition in the image of $d_{k-1}$, and closed $k$-forms in the kernel of $d_k$.
+        As $d^2 = 0$, the exact $k$-forms form a subspace of the closed $k$-forms.
+    }
+    \label{fig:rham-cohomology}
+\end{figure}
+
+\begin{definition}[De Rham cohomology]
+    The $k$-th de Rham cohomology group of $M$ is 
+    \[
+        H^{k}(M) := H^{k}_{dR}(M) := \frac{\Ker d_k}{\im d_{k-1}} = \frac{\text{closed $k$-forms}}{\text{exact $k$-forms}}
+    .\] 
+    %as a quotient of vector spaces.
+    If $\omega \in \Omega^{k}(M)$ is closed, we denote by $[\omega] \in  H^{k}(M)$ its class.
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \incfig{rham-cohomology-definition}
+    \caption{Definition of the De Rham cohomology. }
+    \label{fig:rham-cohomology-definition}
+\end{figure}
+\begin{remark}
+    Each $H^{k}(M)$ is a vector space.
+    Only when $0 \le k \le m$, $H^{k}(M)$ can be different from zero.
+    If $M$ is compact, one can show that $H^{k}(M)$ is finite dimensional for all $k$.
+    This is not trivial, because the dimension of $\Ker d_k$ is normally $\infty$-dimensional.
+ \end{remark}
+
+\begin{prop}
+    If $M$ is connected, then $H^{0}(M) \cong \R$.
+\end{prop}
+\begin{proof}
+    For all $f \in \Omega^{0}(M)$, $f$ is closed if $df = 0$, so $f$ is constant ($M$ is connected and $f$ is smooth).
+    $f$ is exact  iff it is zero, since $\Omega^{-1}(M) = \{0\}$.
+\end{proof}
+\begin{remark}
+    If not connected, we get $\R^{k}$, with $k$ being the number of connected components.
+\end{remark}
+\begin{theorem}
+    If $M^{m}$ is \emph{compact}, connected and orientable, then $H^{m}(M)\cong \R$.
+\end{theorem}
+\begin{proof}
+    Forms of `top degree' are always closed.
+    The idea is that we construct a map from the   $m$-forms to $\R$ and then show that the kernel are exactly the exact $m$-forms.
+    Consider
+    \begin{align*}
+       I: \Omega^{m}(M)  &\longrightarrow \R \\
+       \omega & \longmapsto \int_M \omega
+    .\end{align*}
+    Then $I$ is surjective: since $M$ is oriented, there exists a volume form, $\Omega$, and $\int_M \Omega \neq 0$. We now argue that $\ker(I)=\{\text{exact $m$-forms}\}$.
+    
+    
+    
+    Consider an exact $m$-form $\omega=d \alpha$. Then by Stokes' theorem
+    \[
+     \int_M d \alpha =  \int_{\partial M} \alpha = 0
+    .\]
+   Idea for the other inclusion: Assume $\int_M \omega = 0$, then we need to show that  $\omega = d\alpha$ for some $\alpha$.
+    Reduce to forms with  support (necessarily compact) contained in a chart.
+    Then this reduces to the following:
+    if $f$ is a function on $\R$ with compact support and $\int_\R f(x) dx = 0$, then $F(x) = \int_{-\infty}^{x} f(t) dt $ is a primitive of $f$ with compact support  (because when $x$ is really small, this integral is zero, and when $x$ is large enough, $F(x) = \int_{\R} f(x) dx = 0$).
+
+This shows that 
+$$
+    \frac{\Omega^{m}(M) }{\Ker (I)} = H^{m}(M).$$ But this quotient is 
+isomorphic to the image of $I$, which is $\R$.\end{proof}
+%\begin{remark}
+%    Where did we use that fact that $M$ is connected?
+%    Look at $H^k(M_1 \sqcup M_2) = H^{k}(M_1) \oplus H^{k}(M_2)$.
+%
+%    Consider two copies of a manifold.
+%    Let $\omega \in \Omega^{m}(M \sqcup M) $ with $[\omega] \neq 0$.
+%    Then
+%    \[
+%        I(\omega|_{M_1} + (-\omega)|_{M_2}) = \int_M \omega - \int_M \omega = 0
+%    .\] 
+%\end{remark}
+
+\section{Homotopic maps and cohomology}
+\begin{lemma}
+    Let $f: N \to  M$ be a smooth map.
+    Then
+    \begin{itemize}
+        \item If $\omega \in \Omega(M) $ is closed, then $f^* \omega$ is also closed.
+        \item If $\omega \in \Omega(M) $ is exact, then $f^* \omega$ is also exact.
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+    We only prove the first part.
+    $d(f^* \omega) = f^* d \omega = f^* 0 = 0$.
+\end{proof}
+
+Given $f: N \to  M$, consider the pullback of differential forms $f^*: \Omega^{k}(M) \to \Omega^{k}(N)$.
+This restricts to a map between closed forms, and also between exact forms, so it induces a map on the level of cohomologies:
+\begin{align*}
+    H(f): H^{k}(M)  &\longrightarrow H^{k}(N)  \\
+    [\omega] &\longmapsto [f^* \omega].
+\end{align*}
+If $f$ is a diffeomorphism,
+then it's clear that $H(f)$ is an isomorphism.
+But there are more maps that induces an isomorphism  in cohomology!
+
+\begin{definition}[Smooth homotopy]
+    Let $f, g: N \to M$ smooth maps.
+    A \emph{smooth homotopy} between $f$ and $g$ is a smooth map $h: N \times [0, 1] \to  M$ such that $h|_{N\times \{0\}} = f$ and $h_{N\times \{1\}} = g$ .
+\end{definition}
+In other words,  $h$ is a smooth family of maps that interpolate between $f$ and $g$.
+%\begin{remark}
+%Smooth homotopy defines an equivalence relation.
+%\end{remark}
+\filbreak
+One can prove:
+\begin{prop}
+    If $f, g: N \to  M$ are smoothly homotopic, then
+    $f^*$ and $g^*$ are cochain homotopic, i.e. there exists a linear map \[K: \Omega^{\bullet}(M)  \to  \Omega^{\bullet - 1}(M),\]
+    such that $d  \circ  K + K  \circ  d = f^* - g^*$.
+    \[
+        \begin{tikzcd}
+            \Omega^{k-1}(M) \arrow[r, "d"] & \Omega^{k}(M) \arrow[d, "f^*- g^*"] \arrow[dl, "K"]\arrow[r, "d"] & \Omega^{k+1}(M) \arrow[dl, "K"]\\
+            \Omega^{k-1}(N) \arrow[r, "d"] & \Omega^{k}(N)  \arrow[r, "d"] & \Omega^{k+1}(N) \\
+        \end{tikzcd}
+    \]
+\end{prop}
+%\begin{proof}
+%    See Symplectic Geometry.
+%\end{proof}
+\begin{theorem}
+    If $f, g$ are smoothly homotopic, then $H(f) = H(g)$.
+\end{theorem}
+\begin{proof}
+    Let $K = \Omega^{\bullet}(M)  \to  \Omega^{\bullet - 1}(M) $ a cochain homotopy between $f^*$ and $g^*$.
+    Let $\omega \in \Omega^{k}(M) $ be closed.
+    Then     
+    $$        f^*\omega - g^*\omega = d ( K\omega)  + K  ( \underbrace{d \omega}_{=0})$$     is exact. Hence $ [f^*\omega] =[g^*\omega]$.
+\end{proof}
+
+\begin{corollary}
+    Let $M$ and $N$ be homotopy equivalent, i.e.\ $\exists \alpha:N \to  M$ and $\beta: M \to N$ such that $\alpha  \circ  \beta \simeq 1_{N}$ and $\beta  \circ  \alpha \simeq 1_{M}$, where $\simeq$ means smoothly homotopic.
+    Then $H(\alpha): H(M) \to  H(N)$ is an isomorphism with inverse $H(\beta)$.
+\end{corollary}
+\begin{proof}
+    $H(\alpha)  \circ  H(\beta)= H(\beta  \circ \alpha) = H(1_{N})$, because of the previous theorem, and $H(1_N) = 1_{H(N)}$.    You can do the same for the reverse order.
+\end{proof}
+
+
+\begin{remark}[Poincaré Lemma]
+    Let $U \subset \R^n$ be an open subset which is star shaped\footnote{$\exists p$ such that  for all $u \in U$ the line segment between $u$ and $p$ lies in $U$.}.
+
+    Then $U$ is homotopy equivalent to a point $\{p\}$,
+    via the inclusion  $ \alpha: \{p\}  \to U $  and the constant map
+    $ \beta: U \to \{p\}$. 
+    Hence, \[
+        H^{k}(U) \cong H^{k}(\{p\}) \cong
+        \begin{cases}
+            \R &\text{if $k = 0$}\\
+            0 &\text{if $k > 0$}
+        \end{cases}
+    \]
+    Notice that $\R^n$ is star-shaped, and every point of a manifold has a star-shaped neighborhood.
+\end{remark}
+
+\begin{eg}
+    If $E \to  M$ is a vector bundle, then it is homotopic equivalent to $M$,
+    as we can shrink the fibers (which are vector spaces) to the zero section. So the cohomology of $M$ is the same as that of $E$: $H(E) \cong H(M)$.   
+\end{eg}
+
+\begin{remark}
+    Given manifolds $M, N$, if $H(M) \neq H(N)$, then the manifold are not homotopic equivalent.
+\end{remark}
+
+\section{The Mayer--Vietoris theorem}
+
+\begin{theorem}
+    Suppose a manifold admits a cover by 2 open sets $U, V$, i.e $M = U \cup V$.
+    Then
+    \[
+        \begin{tikzcd}
+        & \cdots & H^{k-1}(U \cap V) \arrow[dll, in=70, out=-90, looseness=0.4]\\
+            H^{k}(M) \arrow[r, "A_k"] & H^{k}(U)  \oplus H^{k}(V)  \arrow[r, "B_k"] & H^{k}(U \cap V) \arrow[dll, "\delta_k", in=70, out=-90, looseness=0.4, swap]\\
+            H^{k+1}(M) \arrow[r, ""] &\cdots &\\
+ %           H^{k+1}(M) \arrow[r, ""] & H^{k+1}(U)  \oplus H^{k+1}(V)  \arrow[r, ""] & H^{k+1}(U \cap V)\\
+        \end{tikzcd}
+    \]
+    is a long exact sequence, i.e. the image of any arrow is the kernel of the next one. Here, 
+    \begin{align*}
+        A_k[\omega] &:= [\omega|_U] \oplus [\omega|_V]\\
+        B_k(\alpha \oplus \beta) &:= \beta|_{U \cap V} - \alpha|_{U \cap V}
+    .\end{align*}
+\end{theorem}
+\begin{remark}
+  The proof uses the smooth maps
+    \[
+    U \cap  V \xrightarrow[i_{U \cap  V, U}]{i_{U \cap  V, V}} U \sqcup V \to  M
+    .\] 
+
+\end{remark} 
+\begin{eg}
+    Let's consider the sphere $S^{m}$ with $m \ge 2$.
+    Write $$S^{m} = U \cup  V$$ where $U=S^{m}\setminus\{\text{North pole}\}$, $V=S^{m}\setminus\{\text{South pole}\}$.
+    Notice that
+    \begin{itemize}
+\item $U \simeq  \{p\}$,
+\item $V \simeq  \{p\}$,
+\item $U\cap V \simeq  S^{m-1}$.
+\end{itemize}
+    Applying the theorem and doing some diagram-chasing, we get
+    \[
+        H^{k}(S^{m}) \cong 
+        \begin{cases}
+            \R & \text{if $k = 0, m$}\\
+            0 & \text{otherwise}.
+        \end{cases}
+    \] 
+ %   This implies that all $k$-forms on the sphere are exact.
+\end{eg}

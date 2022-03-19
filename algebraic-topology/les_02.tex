@@ -1,0 +1,351 @@
+\lesson{2}{di 08 okt 2019 10:28}{Covering spaces}
+\begin{definition}
+    Let $X$ be a topological space, then $X$ is simply connected iff $X$ is path connected and $\pi_1(X, x_0) = 1$ for some $x_0 \in X$
+\end{definition}
+
+\begin{remark}
+    If trivial for one base point, it's trivial for all base points.
+\end{remark}
+
+\begin{eg}
+    Any convex subset $C \subset \R^n$ is simply connected.
+\end{eg}
+\begin{eg}[Wrong proof of $\pi(S^2)$ being trivial]
+    Let $f$ be a path from  $[0, 1] \to  S^2$.
+    Then pick $y_0 \not\in \operatorname{Im}(f)$. Then $S^2 \setminus \{ y_0\} \approx \R^2$.
+    Then use $\R^2$.
+
+    This is wrong because we cannot always find $y_0 \not\in  \operatorname{Im}(f)$. Space filling loops! We'll see the correct proof later on.
+\end{eg}
+
+\begin{lemma}
+    Suppose $X$ is \emph{simply connected} and $\alpha, \beta: I \to  X$ two paths with same start and end points.
+    Then $\alpha \simeq_p \beta$.
+\end{lemma}
+\begin{proof}
+    Simply connected implies loops are homotopic?
+    Consider $\alpha * \overline{\beta} \simeq_p  e_{x_0}$, since the space is simply connected.
+    \begin{align*}
+        ([\alpha] * [\overline{ \beta}]) * [\beta] &= [e_{x_0}] * [\beta] = [\beta]\\
+        [\alpha] * ([\overline{ \beta}] * [\beta]) &= [\alpha] * [e_{x_0}] = [\alpha]
+    .\end{align*}
+    And therefore $\alpha \simeq_p  \beta$.
+    (Note: make sure end and start point matchs when using $*$)
+\end{proof}
+
+\section{Covering Spaces}
+\begin{definition}[Evenly covered]
+    Let $p : E \to  B$, surjective map (so continuous).
+    Let $U \subset B$ open.
+    Then $U$ is \emph{evenly covered} iff $ p^{-1}(U) = \bigcup_{\alpha \in I} V_\alpha .$ 
+    with
+    \begin{itemize}
+        \item $V_\alpha$ open in $E$ 
+        \item $V_\alpha \cap V_\beta = \O$ if $\alpha \neq \beta$
+        \item  $p|_{V_\alpha} : V_\alpha \to  U$ is a homeomorphism.
+    \end{itemize}
+\end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{evenly-covered}
+    \caption{Evenly covered}
+    \label{fig:evenly-covered}
+\end{figure}
+
+\begin{remark}
+    If $U' \subset U$, also open and $U$ is evenly covered, then also $U'$.
+\end{remark}
+\begin{definition}
+    Let $p: E \to  B$ be a surjective map.
+    Then $p$ is a covering projection iff $\forall b \in B, \exists  U \subset B$ open, containing $b$ such that $U$ is evenly covered by $p$. 
+    Then $(E, p)$ is called a covering space.
+\end{definition}
+\begin{eg}
+    Let $S^{1} = \{ z \in \C  \mid  |z| = 1\}$.
+    Take $p: \R \to  S^{1}: t \mapsto  e^{2 \pi i t}$.
+    Note that $\R$ is an easier space than $S^{1}$, and so will be $\pi_1$ ($1$ vs  $\Z$).
+    \begin{figure}[H]
+        \centering
+        \incfig{covering-space-example}
+        \caption{Example of a covering space}
+        \label{fig:covering-space-example}
+    \end{figure}
+    There are also other covering spaces of $p$.
+    For example, $p' : S^{1} \to  S^{1} : z \mapsto z^3$.
+    \begin{figure}[H]
+        \centering
+        \incfig{covering-space-example-2}
+        \caption{Second example of a covering space}
+        \label{fig:covering-space-example-2}
+    \end{figure}
+    Here we have three copies for each point. We say that the covering has $3$ sheets.
+    Note that this is independent of which point we take. This is always the case!
+    We can show that these are the only coverings of $S^{1}$: $\R$ and  $z \mapsto  z^{n}$.
+\end{eg}
+
+\begin{prop}
+    A covering map is always a open map.
+\end{prop}
+\begin{proof}
+    Exercise.
+\end{proof}
+\begin{prop}
+    For any $b \in B$, $p^{-1}(b)$ is a discrete subset of $E$. (No accumulation point)
+\end{prop}
+\begin{proof}
+    Indeed for any $\alpha \in I$, $V_\alpha \cap p^{-1}(b)$ is exactly one point.
+\end{proof}
+
+\begin{remark}
+A covering is always local homeomorphism.
+But: there are surjective local homeomorphism which are not covering maps.
+\emph{A covering map is more than a surjective local homeomorphism}.
+
+For example, $p: \R_0^{+} \to  S^{1}: t \mapsto  e^{2\pi i t}$. Consider the inverse image of a neighbourhood around $1$. When we restrict $p$ to the part around $0$, it is no longer a homeomorphism (we don't get the whole neighbourhood around one.)
+\end{remark}
+
+\subsection*{Creating new covering spaces out of old ones.}
+
+\begin{itemize}
+    \item Suppose $p: E \to  B$ is a covering and $B_0 \subset B$ is a subspace with the subspace topology.
+        Let $E_0 = p^{-1}(B_0)$ and $p_0 = p|_{E_0}$.
+        Then $(E_0, p_0)$ is a covering of $B_0$.
+
+    \item Suppose that $(E, p)$ is a covering of $B$ and $(E', p')$ is a covering of $B'$, then $(E\times E', p\times p')$ is a covering of $B \times B'$.
+\end{itemize}
+
+\begin{eg}
+    Let $T^{2} = S^{1} \times S^{1}$.
+
+    \begin{itemize}
+        \item $p: \R^2 \to  S^{1} \times S^{1}: (t, s) \mapsto  (e^{a i t}, e^{b i s})$.
+        \item $p': \R \times S^{1} \to  T^{2}: (t, z) \mapsto (e^{a i t}, z^{n})$
+        \item $p': S^{1} \times S^{1} \to  T^{2}: (z_1, z_2) \mapsto (z_1^{n}, z_2^{m})$
+    \end{itemize}
+    These are the only types of coverings of the torus. We'll prove this later on.
+\end{eg}
+
+\begin{figure}[H]
+    \centering
+    \incfig{torus-covering}
+    \caption{Covering of the torus. $B_0$ is the figure $8$ space: two connected circles.}
+    \label{fig:torus-covering}
+\end{figure}
+
+\section{Fundamental group of the circle \emph{(and more)}}
+
+Given $f$, when can $f$ be `lifted' to $E$?
+I.e. when does there exist an $\tilde f : X \to  E$ such that $p \circ \tilde f = f$?
+In this section, we'll only consider $X = [0, 1], X = [0, 1]^2$.
+
+\begin{center}
+    \begin{tikzcd}
+        &E \arrow[d] \\
+        X \arrow[r, "f"] \arrow[ur, "\tilde f"]& B
+    \end{tikzcd}
+\end{center}
+
+
+\begin{lemma}[Important result]
+    Suppose $(E, p)$ is a covering of $B$, $b_0 \in B$ $e_0 \in p ^{-1}(b_0)$.
+    Suppose that $f: I \to B$ is a path starting at $b_0$.
+    Then there exists a unique lift $\tilde f: I \to  E$ of $f$ with $\tilde f(0) =e_0$.
+\end{lemma}
+
+
+\begin{proof}
+    For any $b$ of $B$, we choose an open $U_b$ such that $U_b$ is evenly covered by $p$.
+    Then $\{ f^{-1}(U_b)  \mid  b \in B\}$ is an open cover of $I$, which is compact.
+    There is a number $\delta > 0$ such that any subset of $I$ of diameter $\le  \delta$ is contained entirely in one of these opens $f^{-1}(U_b)$. (Lebesgue number lemma).
+    Now, we divide the interval into pieces $0 = s_0 < s_1 < \ldots < s_n = 1$ such that $|s_{i+1} - s_i| \le \delta$.
+    For any $i$, we have that $f([s_i, s_{i+1}]) \subset U_b$ for some $b$.
+
+    \begin{figure}[H]
+        \centering
+        \incfig{fundamental-group-of-circle-lemma}
+        \label{fig:fundamental-group-of-circle-lemma}
+    \end{figure}
+
+    We now construct $\tilde f$ by induction on $[0, s_i]$
+    \begin{itemize}
+        \item $\tilde f (0) = e_0$ 
+        \item Assume $\tilde f$ has been defined on  $[0, s_i]$.
+            Let  $U$ be an open such that $f[s_i, s_{i+1}] \subset U_b$.
+
+            There is exactly one slice $V_\alpha$ in $p^{-1}(U_b)$ containing $\tilde f(s_i)$.
+            We define  $\forall  s \in [s_i, s_{i+1}]: \tilde f(s) = (p|_{V_\alpha})^{-1} \circ f(s)$.
+            By the pasting lemma, $\tilde f$ is continuous.
+        \item In this way, we can construct $\tilde f$ on the whole of  $I$.
+    \end{itemize}
+
+    Uniqueness works in exactly the same way, by induction.
+\end{proof}
+
+
+\begin{lemma}[54.2]
+    $(E, p)$ is a covering of  $B$, $b_0 \in B$, $e_0 \in E$, with $p(e_0) = b_0$.
+    Suppose $F: I \times I \to  B$ is a continuous map with $f(0, 0) = b_0$, then there is a unique $\tilde F: I \times I \to E.$
+    Moreover, if $F$ is a path homotopy, then also $\tilde F$ is a path homotopy.
+\end{lemma}
+\begin{proof}
+    Same as in the one dimensional case.
+    \begin{figure}[H]
+        \centering
+        \incfig{lift-of-a-path-homotopy}
+        \label{fig:lift-of-a-path-homotopy}
+    \end{figure}
+
+    `Moreover, if $F$ is a path homotopy, then also $\tilde F$ is a path homotopy': Easy explanation in the book. Another explanation:
+
+\begin{figure}[H]
+    \centering
+    \incfig{lift-of-path-homotopy-2}
+    \label{fig:lift-of-path-homotopy-2}
+\end{figure}
+\begin{itemize}
+    \item $F(0, t) = b_0, F(1, t) = b_1$
+    \item $\tilde F (0, \cdot ) : I \to  E: t \mapsto  \tilde F(0, t)$ is a path starting at $e_0$,
+        and is a lift of $F(0, \cdot )$ (the constant path at $b_0$).
+
+        The path $k: I \to  E: t \mapsto  e_0$ is also a lift of the constant path at $b_0$ starting at $e_0$.
+        Then $k = \tilde F(0, \cdot )$, as the lift is unique.
+\end{itemize}
+\end{proof}
+
+
+\begin{theorem}[54.3]
+    Let $(E, p)$ be a covering of $B$, $b_0 \in B$, $e_0 \in E$ with $p(e_0) = b_0$.
+    Let $f, g$ be two paths in $B$ starting in $b_0$ s.t. $f \simeq_p  g$ (so $f$ and $g$ end at the same point).
+    Let $\tilde f, \tilde g$ be the unique lifts of $f, g$ starting at $e_0$.
+    Then $\tilde f \simeq_p  \tilde g$, and so $\tilde f(1) = \tilde g(1)$.
+\end{theorem}
+\begin{proof}
+    $F: I\times I \to  B$ is a path homotopy between $f$ and $g$.
+    Then $\tilde F: I \times I \to  E$ with $\tilde F( 0, 0) = e_0$.
+    Then $\tilde F$ is a path homotopy, by the previous result, between $\tilde F(\cdot , 0)$ and $\tilde F(\cdot , 1)$.
+    Note that $p  \circ  \tilde F(t, 0) = F(t, 0) = f(t)$ and $p  \circ  \tilde F (t, 1) = F(t, 1) = g(t)$.
+    By uniqueness $\tilde F(\cdot, 0) = \tilde f$, $\tilde F(\cdot , 1) = \tilde g$.
+
+\end{proof}
+
+
+We've shown that homotopy from below lifts to above.  The converse is easy.
+Now we're ready to discuss the relation between groups and covering spaces.
+
+\begin{definition}
+    Let $(E, p)$ be a covering of $B$. $b_0 \in B$, $e_0 \in E$ and $p(e_0) = b_0$.
+    Then the lifting correspondence is the map  
+    \begin{align*}
+        \phi: \pi(B, b_0) &\longrightarrow p^{-1}(b_0) \\
+        [f]&\longmapsto \tilde f(1), \text{where $\tilde f$ is the unique lift of $f$, starting at $e_0$}
+    .\end{align*}
+    This is well-defined because $[f] = [g] \implies \tilde f \simeq_p  \tilde g \implies \tilde f(1) = \tilde g(1)$.
+    This $\phi$ depends on the choice of $e_0$.
+\end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{lifting-correspondence}
+    \caption{Lifting Correspondence}
+    \label{fig:lifting-correspondence}
+\end{figure}
+
+\begin{theorem}[54.4]
+    If $E$ is path connected, then $\phi$ is a surjective map.
+    If $E$ is simply connected, then $\phi$ is a bijective map.
+\end{theorem}
+\begin{proof}
+    Suppose $E$ is path connected, and let $e_0, e_1 \in p ^{-1} (b_0)$.
+    Consider a path $\tilde f: I \to  E$ with $\tilde f(0) = e_0$ and $\tilde f(1) = e_1$. This is possible because $E$ is path connected.
+    Let $f = p  \circ \tilde f: I \to B$ with $f(0) = p(e_0) = b_0$ and $f(1) = p(e_1) = b_0$, so $f$ is a loop based at  $b_0$.
+    So $f$ is a loop at $b_0$ and its unique lift to $E$ starting at $e_0$ is $\tilde f$.
+    Hence  $\phi[f] = \tilde f(1) = e_1$,
+    which shows that $\phi$ is surjective.
+
+    Now assume that $E$ is simply connected (group is trivial).
+    Consider $[f], [g] \in \pi(B_0)$ with $\phi[f] = \phi[g]$.
+    This implies  $\tilde f(1) = \tilde g(1)$.
+    These start at $e_0$.
+    It follows from Lemma 52.3 that $\tilde f \simeq_p \tilde g$.
+\end{proof}
+
+\begin{eg}
+    Take the circle and the real line as covering space. Then $p ^{-1}(1) = \Z$.
+    So we know that as a set $\pi(S^{1})$ is countable.
+    Therefore, $p  \circ  \tilde f \simeq_p p  \circ  \tilde g $.
+    This implies that $f \simeq_p  g$, and therefore $[f] = [g]$.
+\end{eg}
+
+% Make inline math better, non recursive.
+
+
+\begin{theorem}
+    $\pi_1(S^{1}, 1) \cong (\Z, +)$.
+\end{theorem}
+\begin{proof}
+    Take $b_0 = 1$ and $e_0=0$ and $p: \R \to S^{1}: t \mapsto e^{2 \pi i t}$.
+    Then $p ^{-1}(b_0) = \Z$.
+    And since, $\R$ is simply connected, we have that $\phi: \pi(S, 1) \to  \Z: [f] \mapsto  \tilde f(1)$ is a bijection.
+
+    Now we'll show that it's a morphism.
+    Let $[f]$ and $[g]$ elements of the fundamental group of $S^1$ and assume that $\phi[f] = \tilde f(1) = m$ and $\phi[g] = \tilde g(1) = n$.
+
+    We're going to prove that $\phi([f]*[g]) = \phi([f]) + \phi([g]) = m + n$. 
+    Define $\tilde{\tilde g}: I \to  \R: t \mapsto  \tilde g(t) + m$.
+    Then $p \circ \tilde{\tilde g} = p  \circ  \tilde g = g$, as $p(s+m) = p(s)$ for all  $m$.
+    Now, look at $\tilde f * \tilde{\tilde g}$.
+    This is a lift of $p  \circ (\tilde f * \tilde{\tilde g}) = (p  \circ  \tilde f) * (p  \circ  \tilde{\tilde{g}}) = f*g$, which starts at $0$.
+    Hence, $\phi([f]*[g]) = \phi([f*g]) = $ the end point of  $\tilde f * \tilde{\tilde g}$, so  $\tilde{\tilde{g}}(1) = \tilde g(1) + m = n + m$.
+\end{proof}
+
+The following lemma makes the fact that the covering space is simpler than the space itself exact.
+
+\begin{lemma}[54.6]
+    Let $(E, p)$ be a covering of $B$. $b_0 \in B$, $e_0 \in E$ and $p(e_0) = b_0$. Then
+    \begin{enumerate}
+        \item $p_*: \pi(E, e_0) \to  \pi(B, b_0)$ is a monomorphism (injective).
+            
+        \item[2!] Let $H = p_*(\pi_1(E, e_0))$. The lifting correspondence induces a well defined map\footnote{different notation than the book}
+            \begin{align*}
+                \Phi: \mfaktor{H}{\pi_1(B, b_0)} &\longrightarrow  p ^{-1}(b_0) \\
+                H * [f]& \longmapsto \phi[f]
+            ,\end{align*}
+            so $\phi$ is constant on right cosets.
+            Dividing by $H$ makes $\Phi$ always bijective, even when $E$ is not simply connected.
+        \item[3.] Let $f$ be a loop based at $b_0$, then $\tilde f$ is a loop at $e_0$ iff $[f] \in H$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item Let $\tilde f: I \to  E$ be a loop at $e_0$ and assume that $p_*[\tilde f] = 1$. (Then we'd like to show that $f$ itself is trivial.)
+            This implies $p  \circ  \tilde f \simeq_p  e_{b_0}$.
+            This implies that $\tilde f \simeq_p \tilde e_{b_0} = e_{e_0}$, or $[\tilde f] = 1$.
+        \item We have to prove two things: 
+            \begin{description}
+                \item [Well defined] $H*[f] = H*[g] \implies \phi(f) = \phi(g)$.
+
+                    Assume $[f] \in H * [g]$, or $H*[f] = H*[g]$.
+                    This means that  $[f] = [h] * [g]$, were  $h = p  \circ  \tilde h$ for some loop $\tilde h$ at $e_0$.
+                    In other words $[f] = [h*g]$, or  $f \simeq_p  h*g$.
+                    Let $\tilde f$ be the unique lift of $f$ starting at $e_0$.
+                    Let $\tilde g$ be the unique lift of  $g$ starting at $e_0.$
+                    Then $\tilde h * \tilde g$ (which is allowed, $\tilde h$ is a loop) the unique lift of $h * g$ starting at $e_0$.
+
+
+                    $\tilde f(1) = \phi(f) = \phi(h * g) = (\tilde h * \tilde g)(1) = \tilde g(1) = \phi(g)$.
+                    If the cosets are the same, then the end points of the lifts are also the same.
+                \item [Injective]$H*[f] = H*[g] \impliedby \phi(f) = \phi(g)$.
+                    The end points of $f$ and $g$ are the same
+
+                    Now consider $\tilde h = \tilde f * \overline{\tilde g}$.
+                    Then $[ \tilde h]*[\tilde g] = [\tilde f] * [\overline{\tilde g}] * [\tilde g] = [\tilde f]$.
+                    By applying $p_*$,  $[h]*[g] = [f]$.
+            \end{description}
+        \item Trivial. Exercise. Apply $2.$ with the constant path.
+    \end{enumerate}
+\end{proof}
+\begin{remark}
+    $k: X \to  Y$ induces a morphism $k_*$, we've proved that earlier. Here we only showed injectiveness.
+\end{remark}
+

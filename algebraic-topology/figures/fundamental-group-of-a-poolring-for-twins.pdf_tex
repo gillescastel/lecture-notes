@@ -1,0 +1,92 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'fundamental-group-of-a-poolring-for-twins.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{685.99091297bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.32827427)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.26319739,0.27911964){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b$\end{tabular}}}}%
+    \put(0.1859869,0.21038028){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.42335125,0.14623737){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b$\end{tabular}}}}%
+    \put(0.39341906,0.04983227){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a$\end{tabular}}}}%
+    \put(0.47388623,0.02028889){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b$\end{tabular}}}}%
+    \put(0.47676598,0.13094115){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.52247746,0.13127129){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c$\end{tabular}}}}%
+    \put(0.57223501,0.14682041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$d$\end{tabular}}}}%
+    \put(0.59847426,0.05741253){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c$\end{tabular}}}}%
+    \put(0.51936763,0.0232043){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.25933952,0.14107144){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$d$\end{tabular}}}}%
+    \put(0.18975684,0.07148869){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.32288022,0.21607787){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.90654002,0.2846237){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}c\end{tabular}}}}%
+    \put(0.98277486,0.21418418){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}d\end{tabular}}}}%
+    \put(0.98237519,0.10925622){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}c\end{tabular}}}}%
+    \put(0.91322726,0.02827743){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}d\end{tabular}}}}%
+    \put(0.79816015,0.02740769){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}a\end{tabular}}}}%
+    \put(0.7264515,0.09846417){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}b\end{tabular}}}}%
+    \put(0.73013216,0.22236939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}a\end{tabular}}}}%
+    \put(0.80578522,0.28105715){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.24999988}\smash{\begin{tabular}[t]{l}b\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.86465633,0.20535779){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$U$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.86050554,0.17846545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$q$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{fundamental-group-of-a-poolring-for-twins.pdf}}%
+    \put(0.26319739,0.17532872){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b$\end{tabular}}}}%
+    \put(0.25933952,0.03261573){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$d$\end{tabular}}}}%
+    \put(0.32464619,0.07148869){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c$\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

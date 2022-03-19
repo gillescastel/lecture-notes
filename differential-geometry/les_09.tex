@@ -1,0 +1,197 @@
+\setcounter{chapter}{5}
+\chapter{Exterior derivative and Stokes theorem}
+%\lesson{9}{wo 20 nov 2019 16:11}{Exterior derivative and Stokes theorem}
+
+\section{The exterior derivative in $\R^m$}
+
+Let $U \subset \R^m$ open. Denote by $x_1,\dots,x_m$ the  standard coordinates on $\R^m$.
+
+\begin{remark}
+    If $f \in C^{\infty}(U)$, then $df = f_*$ lies in $\Omega^{1}(U)$,  because for all $p \in U$ we have $(f_*)_p \in T_p^{*} M$. 
+    Expressing $df$ in terms of $dx_i$, we can write
+    We have $$df = \sum_i \frac{\partial f}{\partial x_i}  dx_{i},$$ since
+ $       (f_*)_p\Big( \frac{\partial }{\partial x_i}\Big|_p \Big)  = (D_pf)(e_i)=\frac{\partial f}{\partial x_i} (p)$.
+\end{remark}
+\begin{eg} On $\R^2$, we have
+    $d(xy) = ydx + xdy$.
+\end{eg}
+\begin{definition}[Exterior derivative on $\R^m$]
+The exterior derivative (or de Rham differential)       
+       $$ d: \Omega^{k}(U) \longrightarrow \Omega^{k+1}(U) $$
+is defined as follows: for $k=0$,  as above. For $k>0$ 
+$$d\left( \sum_{1 \le i_1 <  \ldots < i_k\le m } a_{i_1 \ldots  i_k}dx_{i_1} \wedge \cdots \wedge dx_{i_k}\right):=\sum (d a_{i_1 \ldots  i_k}) \wedge dx_{i_1} \wedge \cdots \wedge dx_{i_k}
+$$
+\end{definition}
+Notice that above $a_{i_1 \ldots  i_k}\in  C^{\infty}(U)$.
+\begin{eg} On $\R^3$
+    consider $(x_1)^3 dx_{2} \wedge dx_{3}$, then
+    \[
+        d\omega = 3 (x_{1})^2 dx_1 \wedge dx_2 \wedge dx_3
+    .\] 
+\end{eg}
+\begin{eg}
+    \[
+        d((x_{1})^2 dx_1 \wedge dx_2)= 0
+    \] \end{eg}
+
+\begin{prop}
+    The exterior derivative satisfies the following:
+    \begin{itemize}
+        \item[i)] $d$ is $\R$-linear
+        \item[ii)] $d(\alpha \wedge \beta) = d \alpha \wedge \beta + (-1)^{k} \alpha \wedge d \beta$, where $\alpha \in  \Omega^{k}(U)$.
+        \item[iii)] $d^2 = 0$.
+        \item[iv)] If $F: U \to  V$ smooth, then 
+            $d(F^* \omega) = F^*(d \omega)$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item[iii)] We prove it only for $g \in C^{\infty}(U)$.
+            \begin{align*}
+                d(dg) &= d\Big(\sum_j \frac{\partial g}{\partial x_{j}} dx_{j}\Big)\\
+                      &= \sum_j d\Big(\frac{\partial g}{\partial x_{j}}\Big) \wedge dx_{j}\\
+                      &= \sum_{j,i}  \frac{\partial^2 g}{\partial x_{i}\partial x_{j}}  dx_{i} \wedge dx_{j}.
+           \end{align*}
+ Now $dx_{i}\wedge dx_{j}$ is anti-symmetric in $i$ and $j$, while $\frac{\partial^2 g}{\partial x_{i}\partial x_{j}}$ is symmetric in $i$ and $j$ (partial derivatives commute!), so $d^2 = 0$.
+       \item[iv)]  We prove it only for $g \in C^{\infty}(U)$.           Let $p \in U$, $v \in  T_p U = \R^{m}$. Then
+           \[
+               (F^*(dg))v = dg((F_*)_p v) = ((g  \circ  F)_*)_p v = 
+               (F^* g)_* v = d (F^* g) v
+           ,\] 
+  using the chain rule in the second equality.         
+    \end{itemize}
+\end{proof}
+
+\section{The exterior derivative on manifolds}
+Let $M$ be a manifold.
+\begin{definition}[Exterior derivative on manifolds]
+    Let $\omega \in \Omega^{k}(M)$, then $d\omega \in \Omega^{k+1}(M)$ is defined as follows: for all charts $(U, \phi)$,
+     \[
+         (d\omega)|_U =  \phi^*\Big(d\Big((\phi ^{-1})^*\omega\Big)\Big)
+    .\]
+\end{definition}
+Notice that $(\phi ^{-1})^*\omega$ is a $k$-form on an open subset of $\R^m$.
+\begin{remark}
+    The above is well defined because if $(V, \psi)$ is another chart, then the map 
+$(\psi  \circ  \phi^{-1})^*$
+    commutes with $d$ by part~iv) of the previous proposition.
+\end{remark}
+
+\filbreak
+\section{Manifolds with boundary}
+\begin{definition}
+    $\mathbb{H}^{m} = \{(x_1, \ldots, x_m) \in  \R^m  \mid  x_1 \le  0\} $
+\end{definition}
+\begin{definition}[Differentiable map on a open subset of $\mathbb{H}^{m}$]
+    Let $U \subset \mathbb{H}^{m}$ be open.
+    Then $f: U \to  \R^{k}$ is differentiable iff there exists an open $\tilde{U} \subset \R^m$ such that $U = \tilde{U} \cap \mathbb{H}^{m}$, and there exists $\tilde{f}: \tilde{U} \to  \R^{m}$ differentiable such that $\tilde{f}|_U = f$.
+    In that case, for all $p \in U$, $D_pf = D_p \tilde{f}$.
+\end{definition}
+
+\begin{definition}[Manifold with boundary]
+    A manifold with boundary of dimension $m$ consists of
+    topological space $M$ that is second countable and Hausdorff, together with a maximal smooth atlas.
+    
+    A smooth atlas consists of an open cover $U_\alpha$ and homeomorphisms  
+    $\phi_\alpha$ from $U_\alpha$ to open subsets of $\mathbb{H}^{m}$,
+    such that $\phi_\beta  \circ  \phi_\alpha ^{-1}$ is differentiable for all~$\alpha,\beta$.
+\end{definition}
+\begin{remark}
+    In particular, all manifolds are manifolds with boundary.
+\end{remark}
+
+
+\begin{definition}[Boundary]
+    The boundary of $M$ is 
+    \[
+        \partial M = \{ p \in M: \exists \text{ chart }(U, \phi): \phi(p) \in \partial\mathbb{H}^{m}\} 
+    ,\] 
+    where $\partial \mathbb{H}^{m} = \{0\} \times \R^{m-1}$.
+\end{definition}
+\begin{remark}
+    If one charts satisfies this property, all charts satisfy this property.
+\end{remark}
+\begin{eg}
+    Consider. $M = \{v \in \R^m: \|v\| \le  1\}$.
+Then the boundary of $M$ is $\partial M = \{v \in \R^{m} : \|v\| = 1\}$.
+\end{eg}
+
+One can show the following
+\begin{prop}
+    $\partial M$ is a manifold, of one dimension less than $M$.
+\end{prop}
+\begin{prop}
+    An orientation on $M$ induces an orientation on $\partial M$, as follows:
+    \begin{align*}
+        \forall  p \in  \partial M: \qquad 
+        &(v_1, \ldots, v_{m-1}) \text{ is a positive basis of $T_p \partial M$}\\
+        &\quad \iff \quad 
+        (e, v_1, \ldots, v_{m-1})\text{ is a positive basis of $T_pM$}
+        ,
+    \end{align*}
+    where $e\in T_pM$ is ``outward pointing''.
+\end{prop}
+
+\begin{eg}
+    Note that $\R^2$ has a standard ordered basis, hence the
+ unit disk $D\subset \R^2$ too. The induced orientation on the circle $\partial D$ is the ``anticlockwise'' one. To see this: $(e, v_1)$ as in the figure is a positive basis of $\R^2$. Hence the orientation that $D$ induces on $\partial D$ 
+is the one for which $v_1$ is a positive basis. 
+ 
+    \begin{figure}[H]
+        \centering
+        \incfig{orientation-of-boundary}
+        \caption{Orientation of the boundary of a disk}
+        \label{fig:orientation-of-boundary}
+    \end{figure}
+\end{eg}
+
+\section{Stokes' theorem}
+
+We generalize the fundamental theorem of calculus: $\int_a^b df = \int_a^b f'(x)dx=f|_a^b$.
+
+\begin{theorem}[Stokes]
+    Let $M^m$ be an oriented manifold with boundary and $\omega \in \Omega^{m-1}(M)$ with compact support. Then
+    \[
+    \int_M d \omega= \int_{\partial M} i^*\omega  
+    ,\] 
+    where $i: \partial M\to M$ is the inclusion and $\partial M$ has the induced orientation of $M$.
+\end{theorem}
+\begin{remark}
+    Note that since $\omega$ has compact support, so does $d\omega$.
+\end{remark}
+The idea of the proof is to use a partition of unity to reduce this to the case where $\supp(\omega)$ is contained in a chart, i.e.\ to reduce to $M=\mathbb{H}^{m}$. There one can apply suitably the fundamental theorem of calculus.
+
+
+\begin{eg}
+    Let $D = \{v \in \R^2 : \|v\| \le  1\}$.
+We have
+$$
+        \int_{S^{1}} i^*(x dy - ydx) = \int_{D} d(x dy - y dx)  
+            = 2 \int_D dx \wedge dy                                      = 2\pi.
+$$
+\end{eg}
+\begin{corollary}
+    Let $M$ be a manifold (without boundary)
+    and $\omega \in \Omega^{m-1}(M)$ with compact support.
+    Then
+    \[
+    \int_M d\omega = 0
+    .\] 
+\end{corollary}
+\begin{corollary}
+    If $M$ is compact, orientable manifold with boundary, then there is no smooth $f: M \to \partial M$ such that $f|_{\partial M} = \text{Id}_{\partial M}$.
+\end{corollary}
+\begin{proof}
+    Since $M$ is orientable, $\partial M$ is too.
+    Therefore, there exists volume form on the boundary, call it $\omega$.
+    Suppose  $f$ exists.
+    Then $d(f^* \omega) = f^* d \omega = 0$, because $d \omega = 0$ by degree reasons. So
+     \[
+ 0= \int_{M} d(f^*\omega) = 
+         \int_{\partial M} i^*f^*\omega =
+         \int_{\partial M} (f  \circ  i)^*\omega =
+         \int_{\partial M} \omega \neq 0
+    ,\] 
+    because  $\omega$ is a volume form.
+    % (integral defined by partition of unity, and all contributions have the same sign by orientability)
+\end{proof}

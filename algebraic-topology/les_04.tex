@@ -1,0 +1,339 @@
+\lesson{4}{di 22 okt 2019 10:26}{Seifert-Van Kampen theorem}
+
+\setcounter{chapter}{10}
+\chapter{Seifert-Van Kampen theorem}
+% Goal: compute $\pi(T \#T)$.
+\begin{note}
+    This doesn't follow the book very well.
+\end{note}
+
+
+\begin{definition}
+    A free group on a set $X$ consists of a group $F_x$ and a map: $i: X \to F_X$ such that the following holds:
+For any group $G$ and any map $f: X \to G$, there exists a unique morphism of groups $\phi: F_X \to G$ such that 
+\[
+\begin{tikzcd}
+    X \arrow[r, "i"] \arrow[dr, "f"] & F_x \arrow[d, "\exists !\phi"]\\
+                                     & G
+\end{tikzcd}
+.\] 
+    
+\end{definition}
+\begin{note}
+    The free group of a set is unique.
+    Suppose $i: X \to  F_X$ and $j : X \to  F_X'$ are free groups.
+    \[
+    \begin{tikzcd}
+        X \arrow[r, "i"] \arrow[dr, "j"]& F_X \arrow[d, "\exists \phi"]\\
+                                        & F_X'
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+        X \arrow[r, "j"] \arrow[dr, "i"]& F_X' \arrow[d, "\exists \psi"]\\
+                                        & F_X
+    \end{tikzcd}
+    .\] 
+    Then 
+    \[
+    \begin{tikzcd}
+        X \arrow[r, "i"] \arrow[dr, "i"]& F_X \arrow[d, "\psi  \circ  \phi"]\\
+        &F_X
+    \end{tikzcd}
+    .\] 
+    Then by uniqueness, $\psi  \circ  \phi$ is $1_{F_X}$, and likewise for $\phi  \circ  \psi$.
+\end{note}
+\begin{note}
+    The free group on a set always exists. You can construct it using ``irreducible words"
+\end{note}
+\begin{eg}
+    Consider $X = \{a, b\}$.
+    An example of a word is $a a b a^{-1} b a a^{-1} b b b^{-1} a$.
+    This is not a irreducible word. The reduced form is $a a b a^{-1} b b a = a^2 b a^{-1} b^2 a$.
+    Then $F_X$ is the set of irreducible words.
+\end{eg}
+\begin{eg}
+    If $X = \{a\}$, then $F_x = \{a^{z}  \mid z \in \Z\} \cong (\Z, +)$.
+    Exercise: check that $\Z$ satisfies the universal property.
+\end{eg}
+\begin{eg}
+    If $X = \O$, then  $F_X = 1$.
+\end{eg}
+
+\begin{definition}[Free product of a collection of groups]
+    Let $G_i$ with  $i \in I$, be a set of groups.
+    Then the free product of  these groups denoted by $*_{i \in I}G_i$ is a group $G$ together with morphisms $j_i: G_i \to  G$ such that the following universal property holds:
+    Given any group $H$ and a collection of morphisms $f_i: G_i \to H$, then there exists a unique morphism $f: G \to  H$, such that for all $i \in I$, the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        G_i \arrow[r, "j_i"] \arrow[dr, "f_i"] & G \arrow[d, "\exists! f"]\\
+                                               & H
+    \end{tikzcd}
+    .\] 
+\end{definition}
+\begin{note}
+    Again, $*_{i \in I} G_i$ is unique.
+\end{note}
+\begin{eg}
+    Construction is similar to the construction of a free group.
+    Let $I = \{1, 2\}$ and $G_1 =G, G_2 = H$.
+    Then $G*H$.
+    Elements of $G*H$ are ``words'' of the form $g_1h_1g_2h_2g_3$, $g_1 h_1g_2h_2$, or $h_1 g_1h_2g_2h_3g_3$ or $h_1g_1h_2$, \ldots with $g_j\in G, h_j \in H$.
+\end{eg}
+\begin{note}
+    $G*H$ is always infinite and nonabelian if $G \neq 1 \neq H$.
+    Even if $G, H$ are very small, for example $\Z_2 * \Z_2 = \{1, t\} * \{1, s\}$. Then $ts \neq st$ and the order of $ts$ is infinite.
+\end{note}
+
+\begin{note}
+    $\Z * \Z = F_{a, b}$. In general: $F_X = *_{x \in X} \Z$
+\end{note}
+
+\setcounter{section}{69}
+\section{The Seifert-Van Kampen theorem}
+\begin{theorem}[70.1]
+    Let $X = U \cup V$ where $U, V, U \cap V$ are open and path connected.\footnote{Note that $U, V$ should also be path connected!}
+    Let $x_0 \in  U \cap V$.
+    For any group $H$ and $2$ morphisms  $\Phi_1: \pi(U, x_0) \to  H$ and $\Phi_2: \pi(V, x_0) \to  H$ such that that $\Phi_1  \circ i_1$ and $\Phi_2  \circ i_2$, there exists exactly one $\Phi: \pi(X, x_0) \to H$ making the diagram commute
+    \[
+    \begin{tikzcd}
+        & \pi(U, x_0) \arrow[d, "j_1"] \arrow[dr, "\Phi_1"] &\\
+        \pi(U \cap V, x_0) \arrow[u r, "i_1"] \arrow[r, "i"] \arrow[dr, "i_2"]& \pi(x, x_0) \arrow[r, dashed, "\Phi"]& H\\
+                                                                                   & \pi(V, x_0) \arrow[u, "j_2"] \arrow[u r, "\Phi_2"] &
+    \end{tikzcd}
+    .\] 
+    $i_1, i_2, i, j_1, j_2$ are induced by inclusions.
+\end{theorem}
+\begin{proof}
+    Not covered in this class.
+    You can have a look in the book, but not insightful.
+\end{proof}
+\begin{theorem}[70.2, Seifert-Van Kampen (classical version)]
+    Let $X = U \cup V$ as before ($U, V, U \cap V$, path connected) and $x_0 \in  U \cap V$.
+    Let $j: \pi(U, x_0) * \pi(V, x_0) \to \pi(X, x_0)$ (induced by $j_1$ and $j_2$). On elements of $\pi(U, x_0)$ it acts like $j_1$, on elements of $\pi(V, x_0)$ it acts like $j_2$.
+    \[
+    \begin{tikzcd}
+        G_1 \arrow[d] \arrow[dr, "f_1"]&\\
+        G_1 * G_2 \arrow[r, dashed, "f"]& H\\
+        G_2 \arrow[u] \arrow[ur, "f_2"] &
+    \end{tikzcd}
+    .\] 
+    Then $j$ is surjective\footnote{This is the only place where algebraic topology is used. We've proved this last week. The groups $U$ and $V$ generate the whole group. The rest of this theorem follows from the previous theorem.} and the kernel of $j$ is the normal subgroup of $\pi(U, x_0) * \pi(U, x_0)$ generated by all elements of the form $i_1(g)^{-1} i_2(g)$, were $g\in \pi(U \cap V, x_0)$.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item $j$ is surjective (last week)
+        \item Let $N$ be the normal subgroup generated by $i_1(g)^{-1} i_2(g)$.
+            Then we claim that $N \subset \ker (j)$
+            This means we have to show that $i_1(g)^{-1} i_2(g) \in \ker j$.
+            $j(i_1(g)) = j_1(i_1(g))$ by definition of $j$.
+            Looking at the diagram, we find that $j_1(i_1(g)) = j_2(i_2(g)) = i(g) = j(i_2(g))$.
+            Therefore $j(i_1(g)^{-1} i_2(g)) = 1$, which proves that elements of the form $i_1(g)^{-1} i_2(g)$ are in the kernel.
+        \item Since $N \subset \ker j$, there is an induced morphism
+            \begin{align*}
+                k: (\pi_1(U, x_0) * \pi_1(V, x_0))  / N &\longrightarrow \pi_1(X, x_0) \\
+                g N &\longmapsto j(g)
+            .\end{align*}
+
+            To prove that $N = \ker j$, we have to show that $k$ is injective. Because this would mean that we've divided out the whole kernel of $j$.
+
+            Now we're ready to use the previous theorem.
+            Let $H = (\pi(U) * \pi(V)) / N$
+            Repeating the diagram:
+            \[
+            \begin{tikzcd}
+                & \pi(U, x_0) \arrow[d, "j_1"] \arrow[dr, "\Phi_1"] &\\
+                \pi(U \cap V, x_0) \arrow[u r, "i_1"] \arrow[r, "i"] \arrow[dr, "i_2"]& \pi(X, x_0) \arrow[r, dashed, "\Phi"]& H \arrow[l, shift left=1, "k"]\\
+                                                                                           & \pi(V, x_0) \arrow[u, "j_2"] \arrow[u r, "\Phi_2"] &
+            \end{tikzcd}
+            .\] 
+
+
+            Now, we define $\Phi_1: \pi(U, x_0) \to  H : g \mapsto  gN$, and $\Phi_2: \pi(V, x_0) \to  H: g \mapsto  gN$.
+            For the theorem to work, we needed that $\Phi_1  \circ  i_1 = \Phi_2  \circ  i_2$.
+            This is indeed the case: let $g \in \pi(U \cap V)$. Then $\Phi_1(i_1(g)) = i_1(g) N$ and $\Phi_2(i_2(g)) = i_2(g) N$ and $i_1(g) N = i_2(g) N$ because $i_1(g)^{-1} i_2(g) \in N$.
+
+            The conditions of the previous theorem are satisfied, so there exists a $\Phi$ such that the diagram commutes.
+
+            Note that we also have $k: H \to  \pi(X)$.
+            We claim that $\Phi  \circ  k = 1_H$, which would mean that $k$ is injective, concluding the proof.
+            It's enough to prove that $\Phi  \circ  k(gN) = gN$ for all $g \in \pi(U)$ and $\forall g \in \pi(V)$, as these $g$'s generate the product of the groups. If a map is the identity on the generators, it is the identity on the whole group.
+
+            Let $g \in \pi(U)$. Then $(\Phi  \circ  k) (gN) = \Phi(k(gN)) = \Phi(j(g))$, per definition of $k$.
+            On elements of $\pi(U)$, $j \equiv j_1$, so $\Phi(j(g)) = \Phi(j_1(g)) = \Phi_1(g)$ by looking at the diagram, and per definition of $\Phi_1$, we find that $\Phi(g) = gN$. So we've proven that $(\Phi  \circ  k) (gN) = gN$.
+            This means that $N$ is the kernel, so we've proved that $k$ is an isomorphism.
+    \end{itemize}
+\end{proof}
+\begin{corollary}
+    Suppose $ U \cap  V$ is simply connected, so $\pi_1(U \cap V, x_0)$ is the trivial group.
+    In this case $N = \ker j = 1$, hence $\pi(U, x_0) * \pi(V, x_0) \to \pi(X, x_0)$ is an isomorphism.
+\end{corollary}
+
+\begin{corollary}
+    Suppose $U$ is simply connected.
+    Then $\pi(X, x_0) \cong \pi(V, x_0) / N$ where $N$ is the normal subgroup generated by the image of $i_2: \pi(U \cap V) \to  \pi(V, x_0)$.
+\end{corollary}
+\begin{eg}
+    Let $X$ be the figure $8$ space.
+
+\begin{figure}[H]
+    \centering
+    \incfig{figure-eight-free-product-group}
+    \caption{figure eight free product group}
+    \label{fig:figure-eight-free-product-group}
+\end{figure}
+Conclusion: $\pi_1(X, p) \cong \Z * \Z = F_{\{[a], [b]\} }$
+\end{eg}
+
+\begin{eg}
+    By induction. Let $W_n$ be the wedge of $n$ circles.
+    Then $\pi(W_n, p) = F_n$.
+    This also holds for a wedge of infinite circles. (But be careful when choosing topology)
+\begin{figure}[H]
+    \centering
+    \incfig{wedge-circles}
+    \caption{Wedge of circles}
+    \label{fig:wedge-circles}
+\end{figure}
+\end{eg}
+
+\begin{eg}
+    Fundamental group of the torus.
+
+    \begin{figure}[H]
+        \centering
+        \incfig{fundamental-group-of-the-torus-using-van-kampen}
+        \label{fig:fundamental-group-of-the-torus-using-van-kampen}
+    \end{figure}
+    Define $V, U$ as in the figure above.
+
+    \begin{align*}
+        \pi(T^2 \setminus \{q\}, x_0) &\longrightarrow  \pi(T^2 \setminus \{q\} , p) \\
+        [f] &\longmapsto [ \overline{\gamma_1}] * [f] * [\gamma_1]
+    .\end{align*}
+    Then $\pi(X, x_0) = \frac{\pi(V, x_0)}{N} \cong \frac{\pi(V, p)}{\hat{\gamma}(N)}$.
+    With $N$ the normal subgroup generated by the image of  $i_2: \pi(U \cap V, x_0) \to  \pi(T^2 \setminus \{ q\} , x_0)$.
+\begin{align*}
+    i_2  :  \pi(U \cap V, x_0) \cong \Z &\longrightarrow  \pi(T^2 \setminus \{ q\} , 0)\\
+    \left<[f_1] * [f_2] * [f_3] * [f_4] \right>&\longmapsto \left<[f_1] * [f_2] * [f_3] * [f_4] \right>
+.\end{align*}
+
+\begin{figure}[H]
+    \centering
+    \incfig{fundamental-group-of-the-torus-using-van-kampen-2}
+    \label{fig:fundamental-group-of-the-torus-using-van-kampen-2}
+\end{figure}
+
+Now, defining  $\gamma_i$ as in the picture, we get
+\begin{align*}
+    \hat{\gamma}([f_1] *[f_2] * [f_3] * [f_4]) &= 
+    \underbrace{[\overline{\gamma_1}]
+    * [f_1] * [\gamma_2]}_{[a]} *
+    \underbrace{[\overline{\gamma_2}] * [f_2] * [\gamma_3]}_{[b]}\\
+                                               & \quad * \underbrace{[\overline{\gamma_3}] * [f_3] * [\gamma_4]}_{[a]^{-1}} *
+    \underbrace{[\overline{\gamma_4}] * [f_4] * [\gamma_1]}_{[b]^{-1}}
+.\end{align*} 
+
+Therefore,
+\begin{align*}
+    \pi(X, p) &= \frac{\pi(V, p)}{\left<\left<[a][b][a^{-1}][b^{-1}] \right> \right>}\\ &= \frac{F_{\{[a], [b]\} }}{\left<\left<[a] * [b] * [a]^{-1} * [b] ^{-1} \right> \right>} \\&= \left<\alpha, \beta  \mid  \alpha\beta = \beta\alpha \right>
+.\end{align*} 
+\end{eg}
+\begin{eg}
+    Fundamental group of a poolring for twins.
+\begin{figure}[H]
+    \centering
+    \incfig{fundamental-group-of-a-poolring-for-twins}
+    \caption{Fundamental group of a poolring for twins}
+    \label{fig:fundamental-group-of-a-poolring-for-twins}
+\end{figure}
+
+Same idea. (Note, we've renamed the edges in the figure on the right.)
+$V = X \setminus \{ a\} $. $\pi_1(V, x_0) = F_{\{[a], [b], [c], [d]\}}$, $\pi(U \cap V, x_0) = \Z$.
+Conclusion $\pi(X, x_0) = \left<\alpha, \beta, \gamma, \delta  \mid  [\alpha, \beta] [\gamma, \delta] = 1 \right>$
+
+In this way, we can calculate the fundamental group of any surface,  e.g. projective space ($\Z_2$), klein bottle ($\left<\alpha, \beta  \mid \alpha\beta\alpha^{-1}\beta = 1 \right>$, `just read the boundary'), \ldots
+
+\end{eg}
+
+End of Chapter 11.
+
+
+
+
+\setcounter{chapter}{11}
+\chapter{Classification of covering spaces}
+
+\begin{note}
+    This can be chapter 13 in some books
+\end{note}
+
+\setcounter{section}{73}
+
+\begin{lemma}[74.1! (General Lifting lemma)]
+    Let $p: E \to B $ be a covering, $Y$ a space.
+    Assume $B, E, Y$ are path connected, and locally path connected.\footnote{From now on, all spaces are locally path connected: Every neighbourhood contains an open that is path connected}
+
+    Let $f: Y \to  B$, $y_0 \in Y, b_0  = f(y_0)$.
+    Let $e_0 \in E$ such that $p(e_0) = b_0$.
+    Then $\exists  \tilde{f}: Y \to  E$ with $\tilde{f}(y_0) = e_0$ and $p  \circ  \tilde{f} = f$
+    \[
+    \begin{tikzcd}
+        & (E, e_0) \arrow[d, "p"]\\
+        (Y, y_0) \arrow[r, "f"] \arrow[ur, "\tilde{f}"]&(B, b_0)
+    \end{tikzcd}
+    .\] 
+    iff $f_*(\pi(Y, y_0) \subset p_* \pi(E, e_0)$.
+    If $\tilde{f}$ exists then it is unique.
+\end{lemma}
+\begin{eg}
+    Take $Y = [0, 1]$.
+    Then $f$ is a path, then we showed that every map can be lifted. And indeed, the condition holds: $f_*(\pi(Y, y_0)) = 1$, the trivial group, which is a subgroup of all groups.
+\end{eg}
+
+\begin{proof}
+    \begin{itemize}
+        \item[$\implies$] Suppose $\tilde{f}$ exists.
+            Then $p  \circ  \tilde{f} = f$, so $(p  \circ  \tilde{f})_* \pi(Y, y_0) = \pi(Y, y_0)$.
+            The left hand side is of course $p_*(\tilde{f}_*(\pi(Y, y_0)) \subset p_*(\pi(E, e_0))$, so $p_*(\pi(E, e_0)) \subset f_*(\pi(Y, y_0))$.
+        \item[$\impliedby$]
+            First, we'll show the uniqueness.
+            Suppose $\tilde{f}$ exists.
+    \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \incfig{general-lifting-lemma}
+    \caption{general lifting lemma}
+    \label{fig:general-lifting-lemma}
+\end{figure}
+
+$p  \circ  (\tilde{f}  \circ  \alpha) = f  \circ  \alpha$, so $\tilde{f}  \circ  \alpha$ is the unique lift of $f  \circ \alpha$ starting at $e_0$.
+Hence $\tilde{f}(y)$ the endpoint of the unique lift of $f  \circ \alpha$ to $E$ starting at $e_0$.
+
+This also shows how you can define $\tilde{f}$: choose a path $\alpha$ from $y_0$ to $y$. Lift $f  \circ \alpha$ to a path starting at $e_0$. Define $\tilde{f}(y) = $ the end point of this lift.
+
+Problem: is this well defined?  A second problem: is $\tilde{f}$ continuous?
+\begin{itemize}
+    \item Well defined:
+
+\begin{figure}[H]
+    \centering
+    \incfig{well-defined-general-lifting-lemma}
+    \caption{well defined general lifting lemma}
+    \label{fig:well-defined-general-lifting-lemma}
+\end{figure}
+As $[\alpha] * [\overline{\beta}] \in \pi(Y, y_0)$
+\[
+    f_*([\alpha] * [\overline{\beta}]) = ([f  \circ \alpha] * [f  \circ  \overline{\beta}]) \in f_*(\pi_1(Y, y_0))
+,\] 
+which is by assumption a subgroup of $p_*(\pi(E, e_0)) = H$.
+
+And now, by Lemma 54.6 (c), a loop in the base space lifts to a loop in $E$ if the loop is in $H$.
+This lift is of course just $\gamma*\delta$, so the end points in the drawing should be connected!
+This means that $\overline{\delta}$ is \emph{the} lift of $f  \circ  \beta$ starting at $e_0$, so the endpoint of the lift of $f  \circ \beta$ is the endpoint of the lift of $f  \circ  \alpha$.
+Therefore $\tilde{f}(y)$ is well defined.
+
+\item Note that we didn't use the locally path connectedness yet. We'll need this for continuity.
+    To be continued \ldots
+\end{itemize}
+\end{proof}

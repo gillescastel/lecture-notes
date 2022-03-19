@@ -1,0 +1,473 @@
+\lesson{5}{di 05 nov 2019 10:22}{The general lifting Lemma}
+
+
+Recap:
+
+\begin{lemma}[74.1! (General Lifting lemma)]
+    Let $p: E \to B $ be a covering, $Y$ a space.
+    Assume $B, E, Y$ are path connected, and locally path connected.\footnote{From now on, all spaces are locally path connected: Every neighbourhood contains an open that is path connected}
+
+    Let $f: Y \to  B$, $y_0 \in Y, b_0  = f(y_0)$.
+    Let $e_0 \in E$ such that $p(e_0) = b_0$.
+    Then $\exists  \tilde{f}: Y \to  E$ with $\tilde{f}(y_0) = e_0$ and $p  \circ  \tilde{f} = f$
+    \[
+    \begin{tikzcd}
+        & (E, e_0) \arrow[d, "p"]\\
+        (Y, y_0) \arrow[r, "f"] \arrow[ur, "\tilde{f}"]&(B, b_0)
+    \end{tikzcd}
+    .\] 
+    iff $f_*(\pi(Y, y_0) \subset p_* \pi(E, e_0)$.
+    If $\tilde{f}$ exists then it is unique.
+\end{lemma}
+\begin{proof}
+    We prove that $\tilde{f}$ is continuous.
+
+    \begin{itemize}
+        \item Choose a neighborhood of $\tilde{f}(y_1)$, say $N$.
+        \item Take $U$, a path connected open neighbourhood of $f(y_1)$ which is evenly covered, such that the slice $p^{-1}(U)$ containing $\tilde{f}(y_1)$ is completely contained in $N$.
+
+
+            Can we do this?
+            The inverse image of $U$ is a pile of pancakes. One of these pancakes contains $\tilde{f}(y_1)$. Then, because $N$ is a neighborhood of $\tilde{f}(y_1)$, we can shrink the pancake such that it is contained in $N$
+        \item Choose a path connected open which contains $y_1$ such that $f(W) \subset U$.
+            We can do this because of continuity of $f$.
+        \item Take $y \in W$. Take a path $\beta$ in $W$ from $y_1$ to $y$. (Here we use that $W$ is path connected)
+            Now consider $p|_V$ and defined 
+            Then $\alpha * \beta$ is path from  $y_0$ to $y$, $f  \circ (\alpha * \beta) = (f  \circ  \alpha) * (f  \circ \beta)$.
+            Then $\widetilde{f  \circ \alpha} * (p^{-1}|_V  \circ  f  \circ  \beta)$ is the lift of $f  \circ  (\alpha * \beta)$ starting at $y_0$.
+            So by definitie of $\tilde{f}$, we have that $\tilde{f}(y)$ is the endpoint of that lift, which belongs to $V \subset N$.
+            This means that $\tilde{f}(W) \subset N$, which proves continuity.
+    \end{itemize}
+\begin{figure}[H]
+    \centering
+    \incfig{general-lifting-lemma-continuous}
+    \caption{Proof of the continuity of the general lifting lemma}
+    \label{fig:general-lifting-lemma-continuous}
+\end{figure}
+\end{proof}
+
+This is a powerful lemma: `There exists a lift $\tilde{f}$ such that \ldots' is pure topology, and $f_* \pi(Y,y_0) \subset p_* \pi(E,e_0) $ is pure algebra.
+It's very unusual that two statements like this are completely equivalent.
+
+
+
+Recap:
+\begin{lemma}[General lifting lemma, short statement]
+    Short statement:
+    \[
+        \begin{tikzcd}
+            & (E, e_0) \arrow[d, "p"]\\
+            (Y, y_0) \arrow[r, "f"] \arrow[ur, "\tilde{f}"]&(B, b_0)
+        \end{tikzcd}
+    \] 
+    $\exists ! \tilde{f} \iff f_* \pi(Y,y_0)  \subset p_* \pi(E,e_0) $.
+\end{lemma}
+
+\begin{definition}
+    Let $(E, p)$ and $(E', p')$ be two coverings of a space $B$.
+    An equivalence between $(E, p)$ and $(E', p')$ is a homeomorphism $h: E \to  E'$ such that
+    \[
+        \begin{tikzcd}
+            E \arrow[r, "h"] \arrow[dr, "p"]& E' \arrow[d, "p'"]\\
+                                            & B
+        \end{tikzcd}
+    \]
+    is commutative. $p'  \circ  h = p$.
+\end{definition}
+
+\begin{theorem}[74.2]
+    Let $p: (E, e_0) \to  (B, b_0)$ and $p': (E', e_0') \to (B, b_0)$ be coverings,
+    and let $H_0 = p_* \pi(E,e_0) $ and $H_0' = p'_* \pi(E',e_0') \le \pi(B,b_0)$.
+    Then there exists an equivalence $h: (E, p) \to  (E', p')$ with $h(e_0) = e_0'$ iff $H_0 = H_0'$.
+    Not isomorphic, but really the same as a subgroup of $\pi(B,b_0) $.
+    in that case, $h$ is unique.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[$\boxed{\implies}$] Suppose $h$ exists.
+            Then 
+            \[
+                \begin{tikzcd}
+                    (E, e_0) \arrow[r, "h"] \arrow[dr, "p"]& (E', e_0') \arrow[d, "p'"]\\
+                                                           & (B, b_0)
+                \end{tikzcd}
+            \]
+            Therefore $p_* \pi(E,e_0)  = p_*' ( h_*\pi(E,e_0) )$.
+            Since $h$ is a homeomorphism, it induces an isomorphism, so $p_*' ( h_* \pi(E,e_0))  = p*'(\pi(E',e_0') $
+        \item[$\boxed{\impliedby}$]
+
+            \[
+                \begin{tikzcd}
+                    & (E', e'_0) \arrow[d, "p'"]\\
+                    (E, e_0) \arrow[ur, dashed, "k"]\arrow[r, "p"] & (B, b_0)
+                \end{tikzcd}
+            \]
+            By the previous lemma, there exists a unique $k$ iff $p_* \pi(E,e_0)  \subset p'_* \pi(E',e_0')$ or equivalently $H_0 \subset H_0'$, which is the case.
+            Reversing the roles, we get
+            \[
+                \begin{tikzcd}
+                    & (E, e_0) \arrow[d, "p"]\\
+                    (E', e'_0) \arrow[ur, "l"] \arrow[r, "p'"] & (B, b_0)
+                \end{tikzcd}
+            \]
+            for the same reasoning, $l$ exists.
+            Now, composing the diagrams
+            \[
+                \begin{tikzcd}
+                & (E, e_0) \arrow[d, "p"] \\
+                    (E, e_0) \arrow[ur, "l  \circ  k"] \arrow[r, "p"] &(B, b_0)
+            \end{tikzcd}\qquad
+                \begin{tikzcd}
+                    & (E', e_0') \arrow[d, "p'"]\\
+                    (E', e'_0) \arrow[ur, "k  \circ  l"] \arrow[r, " p' "] &(B, b_0)
+                \end{tikzcd}
+            \] 
+            But placing the identity in place of $l  \circ  k$ or $k  \circ  l$, this diagram also commutes! By unicity, we have that $ l \circ k = 1_E$ and $ k  \circ l = 1_{E'}$.
+            Therefore, $k$ and $l$ are homeomorphism $k(e_0) = e_0'$.
+
+            Uniqueness is trivial, because of the general lifting theorem.
+    \end{itemize}
+\end{proof}
+
+Note that this doesn't answer the question `is there a equivalence between two coverings', it only answers the question `is there an equivalence between two coverings mapping $e_0 \to  e_0'$'.
+So now, we seek to understand the dependence of $H_0$ on the base point.
+
+\begin{lemma}
+    Let $(E, p)$ be a covering of $B$.
+    Let $e_0, e_1 \in p^{-1}(b_0)$.
+    Let $H_0 = p_* \pi(E,e_0), H_1 = p_* \pi(E,e_1)$.
+    \begin{itemize}
+        \item Let $\gamma$ be a path from $e_0$ to $e_1$ and let $p  \circ  \gamma = \alpha$ be the induced \emph{loop} at $b_0.$ 
+        Then $H_0 = [\alpha] * H_1 * [\alpha]^{-1}$, so $H_0$ and $H_1$ are conjugate inside $\pi(B,b_0)$.
+        \item Let $H$ be a subgroup of $\pi(B,b_0)$ which is conjugate to $H_0$, then there is a point $e \in p^{-1}(b_0)$ such that $H = p_* \pi(E, e)$.
+    \end{itemize}
+
+    So a covering space induces a conjugacy class of a subgroup of $\pi(B,b_0)$.
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item Let $[h] \in H_1$, so this means that $h = p  \circ \tilde{h}$, where $\tilde{h}$ is a loop based at $e_1$.
+            Then $(\gamma*\tilde{h})* \overline{\gamma}$ is a loop based at $e_0$.
+            This means that the path class $[p((\gamma  * \tilde{h} )*\overline{\gamma})] \in H_0$.
+            This means that $[p  \circ  \gamma] * [h] * [p  \circ  \overline{\gamma}] \in H_0$, or $[\alpha] * [h] * [\alpha]^{-1} \in H_0$.
+            So we showed that if we take any element of $H_1$ and we conjugate it with $\alpha$, we end up in $H_0$, so $[\alpha] * H_1 * [\alpha]^{-1} \subset H_0$
+
+            For the other inclusion, consider $\overline{\gamma}$ going from $e_1 \to  e_0$.
+            The same argument shows that $[\alpha] ^{-1} * H_0 * [\alpha] \subset H_1$,
+            or $H_0 \subset [\alpha] * H_1 * [\alpha]^{-1}$.
+            This proves that $H_0 = [\alpha] * H_1 * [\alpha]^{-1}$.
+        \item Take $H = [\beta] * H_0 * [\beta]^{-1}$ for some $[\beta] \in  \pi(B,b_0)$.
+            So $H_0 = [\beta]^{-1} * H * [\beta]$. Take $\alpha = \overline{\beta}$.
+            Then $H_0 = [\alpha] * H * [\alpha]^{-1}$, where $\alpha, \beta$ are loops based at $b_0$.
+            Let $\gamma$ be the unique lift of $\alpha$ starting at $e_0$.
+            Take $e = \gamma(1)$, the end point of $\gamma$. (So $p(e) = b_0$)
+            From  the first bullet point, it follows that $p_* \pi(E,e) = H'$ satisfies $H_0 = [\alpha] * H' * [\alpha]^{-1}$.
+            So we have both $H_0 = [\alpha] * H * [\alpha]^{-1} = H_0 = [\alpha] * H' [\alpha]^{-1}$. This implies that $H' = H$.
+    \end{itemize}
+\end{proof}
+
+This completely answers the question: `When are two covering spaces equivalent':
+
+\begin{corollary}[Theorem 74.4]
+    Let $(E, p)$ and $(E', p')$ be two coverings, $e_0 \in E, e_0' \in E'$ with $p(e_0) = p(e'_0) = b_0$.
+    Let $H_0 = p_* \pi(E,e_0)$, $H'_0 = p'_* \pi(E',e_0') $.
+    Then $(E, p)$ and $(E', p')$ are equivalent \emph{iff} $H_0$ and $H_0'$ are conjugate inside $\pi(B,b_0) $.
+\end{corollary}
+
+
+Question: can we reach every possible subgroup? Answer: yes, in some conditions.
+
+\setcounter{section}{74}
+\section{Universal covering space}
+
+\begin{definition}
+    Let $B$ be a path connected and locally path connected space.
+    A covering space $(E, p)$ of $B$ is called \emph{the}\footnote{upto equivalence } universal covering space \emph{iff} $E$ is simply connected, so $\pi(E, e_0) = 1$.
+\end{definition}
+\begin{remark}
+    Any two universal coverings are equivalent.
+    Even more, we can choose any base point we want.
+    \[
+        \begin{tikzcd}
+            (E, e_0) \arrow[dr, "p"] \arrow[r, dashed, "h(e_0) = e_0'"]& (E', e_0') \arrow[d, "p'"]\\
+                                    & (B, b_0)
+        \end{tikzcd}
+    \]
+    $h$ exists because the groups of $(E, e_0)$ and $(E', e'_0)$ are trivial.
+\end{remark}
+
+\begin{remark}
+    We don't cover Lemma 75.1, and we only cover point (a) from 75.2
+\end{remark}
+
+\begin{lemma}[75.2] Suppose 
+    \[
+        \begin{tikzcd}
+            X \arrow[dd, "p"]\arrow[dr, "q"]\\
+            & Y \arrow[dl, "r"]\\
+            Z
+        \end{tikzcd}
+    \]
+    If $p$ and $r$ are covering maps, then also $q$ is a covering map.
+    (Also: if $q$ and $p$ are covering maps, then so is $r$. Not the case for $q, r \implies p$!)
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item $q$ is a surjective map. Choose a base point in $x_0$, and call $y_0 = q(x_0)$, $z_0 = r(y_0)$.
+            Certainly, $y_0$ lies in the image of $q$.
+            Now, take $y \in Y$, and choose a path $\tilde{\alpha}$ from $y_0$ to $y$.
+            Now, denote by $\alpha$ the projection of  $\tilde{\alpha}$, a path from $z_0$ to $r(y)$.
+            Let $\tilde{\tilde{\alpha}}$ be the unique lift of $\alpha$ to $X$ starting at $x_0$. This is defined as we assume that $p$ is a covering map.
+            Then $q  \circ  \tilde{\tilde{\alpha}}$ is a path starting at $q (\tilde{\tilde{\alpha}}(0)) = q(x_0) = y_0$.
+            Moreover, $q  \circ  \tilde{\tilde{\alpha}}$ is a lift of $\alpha = r  \circ \tilde{\alpha}$ to $Y$.
+            Indeed consider the projection, $r  \circ  q  \circ  \tilde{\tilde{\alpha}} = p  \circ \tilde{\tilde{\alpha}} = \alpha$.
+            Of course, $\tilde{\alpha}$ is also a lift from $\alpha$ starting at $y_0$.
+            Since $r$ is assumed to be a covering, and lifts of paths are unique, we get that $q  \circ  \tilde{\tilde{\alpha}} = \tilde{\alpha}$, so the end points are the same: $q (\tilde{\tilde{\alpha}}(1)) = \tilde{\alpha}(1) = y$, so $y$ lies in the image of  $q$.
+
+            The only fact we've used is that $q$ is a continuous map, so that $q  \circ \tilde{\tilde{\alpha}}$ is again a path.
+
+        \item Now we show that every point of $y$ has a neighbourhood that is evenly covered.
+            Choose $ y \in Y$ and project it down to $Z$. $r(y)$ has a neighbourhood $U$ that is evenly covered by $p$, and also by $r$. Now we can shrink it so that is is evenly covered by both covering maps. We can also choose it to be path connected.
+
+            So $p ^{-1}(U) = \bigcup_{\alpha \in I} U_\alpha$, and $r^{-1}(U) = \bigcup_{\beta \in J} V_\beta$.
+            Let $V$ be the slice containing $Y$.
+            Then we claim that $V$ will be evenly covered by $U$.
+
+            Consider a $U_\alpha$. Then $q(U_\alpha)$ is connected and contained in $\bigcup_{\beta \in J} V_\beta$, but all these $V_\beta$ are disjoint, so there is exactly one $V_\beta$ such that $q(U_\alpha) \subset V_\beta$.
+
+            Now, let $I' = \{\alpha  \mid q(U_\alpha) \subset V\} $.
+            For any $\alpha \in I'$, we have the diagram
+            \[
+                \begin{tikzcd}
+                    U_\alpha \arrow[dd, "p"] \arrow[dr, "q"]\\
+                    & V \arrow[dl, "r"]\\
+                    U 
+                \end{tikzcd}
+            \]
+            As $r$ and $p$ is a homeomorphism, $q$ is also a homeomorphism.
+            Hence $q^{-1}(V) = \bigcup_{\alpha \in I'} U_\alpha$,
+            and $q|_{U_\alpha}: U_\alpha \to  V$is a homeomorphism.
+
+            This means that $q$ is a covering projection.
+    \end{itemize}
+\end{proof}
+
+
+Why is this useful? Because now we can say why the universal covering space is a universal covering space.
+
+\begin{theorem}[57.3]
+    Let $(E, p)$ be a universal covering of $B$.
+    Let $(X, r)$ be a another covering of $B$.
+    Then there exists a map $q: E \to  X$ such that $r  \circ  q = p$ and $q$ is a covering map.
+    \[
+        \begin{tikzcd}
+            E \arrow[dd, "p"] \arrow[dr, dashed, "q"]\\
+            & X \arrow[dl, "r"]\\
+            B &
+        \end{tikzcd}
+    \]
+    Every covering space is itself covered by the universal covering space, \emph{if} it exists.
+\end{theorem}
+\begin{proof}
+    Drawing the diagram differently,
+    \[
+        \begin{tikzcd}
+            & X \arrow[d, "r"]\\
+            E \arrow[ur, dashed, "q"]\arrow[r, "p"] & B
+        \end{tikzcd}
+    \]
+
+    Choose $e_0$, $x_0$ mapped to $b_0 \in B$.
+    Then $\pi(E, e_0) = 1 \subset r_* \pi(X,x_0)$.
+    Then there exists a map $q$ by the general lifting lemma.
+    So $q$ makes the diagram commutative.
+    By the previous result, $q$ is a covering map.
+\end{proof}
+
+
+\setcounter{section}{75}
+Covering transformations
+
+\begin{definition}[Group of covering transformation]
+    Let $(E, p)$ be a covering of $B$.
+    % TODO: mathal C
+    We define \[
+        C(E, p, B) = \{ h: E \to  E  \mid  \text{$h$ is an equivalence of covering spaces}\}
+    \]
+    Elements of this set are homeomorphism $h$ such that $p  \circ  h = p$.
+    The composition of two such elements is again such an elements, same for inverse.
+    This means that $C$ is a group, the group of covering transformations, also called Deck-transformations.
+\end{definition}
+
+\begin{eg}
+    Consider the covering space $\R \to  S^1: t \mapsto e^{ 2\pi i t}$.
+    For any $z \in \Z$, there is a map $h_z: \R \to \R: r \mapsto r + z$, which is a covering transformation. Indeed $e^{2 \pi it} = e^{2 \pi i (t + z)}$.
+    Claim: these are the only covering transformations.
+    Conclusion: $C(\R, p, S^{1}) = (\Z, +)$
+\end{eg}
+\begin{explanation}
+    Suppose $h: \R \to \R$ is another covering transformation.
+    We certainly have $h(0) = z$ for some $z \in \Z$.
+    Therefore, $h(0) = h_z(0)$, from this follows immediately that $ h \equiv h_z$.
+
+    Why?  `If two covering transformations agree in one point, the agree everywhere.'
+    Indeed, $h_1, h_2 \in C(E, p, B)$ and $h_1(e) = h_2(e) \implies h_1 \equiv h_2$, because 
+    \[
+        \begin{tikzcd}
+            & E \arrow[d, ""]\\
+            E \arrow[ur, "h_1 \text{and} h_2"]\arrow[r, "p"] & B
+        \end{tikzcd}
+    \]
+
+    and, $h_1$ and $h_2$ are both lifts of $p$ and there is a unique lift when fixing the base point, so $h_1$ and $h_2$ agree.
+\end{explanation}
+
+Goal: what is the structure of the group $C(E, p, B)$ in terms of fundamental groups?
+Let $(E, p)$ be a covering of $B$. $p(e_0) = b_0$, $H_0 = p_*\pi(E,e_0)$.
+Remember:
+\begin{align*}
+    \Phi: \pi(B,b_0) / H_0 &\longrightarrow p^{-1}(b_0) \\
+    H_0 * [\alpha] &\longmapsto \tilde{\alpha}(t)
+\end{align*}
+is a bijection, where $\tilde{\alpha}$ is the unique lift of $\alpha$ starting at $e_0$.
+
+Now consider $\psi: C(E, p, B) \to  p^{-1}(b_0): h \mapsto h(e_0)$.
+$\psi$ is injective. Reason: same as before, if they agree on one point, these are the same.
+In general $\psi$ will not be surjective.
+
+\begin{lemma}
+    $\im \psi = \Phi\left( \dfrac{N_{\pi(B,b_0)} (H_0)}{H_0} \right) $, where
+    \[
+        N_{\pi(B,b_0) }(H_0) = \{[\alpha] \in \pi(B,b_0)  \mid [\alpha] * H_0 * [\alpha]^{-1} = H_0\},
+    \] 
+    which is the largest subgrouop of $\pi(B,b_0) $ in which $H_0$ is normal. `Normaliser'.
+\end{lemma}
+
+We'll later show that this group has the same structure as $C(E, p, B)$.
+
+\begin{proof}
+    Consider $H_0 * [\alpha]$.\footnote{In the book, they use $[\alpha] * H_0$. This is not wrong, as for elements in the normalizer, left and right cosets are the same, so writing $[\alpha] * H_0$ is allowed. But in general, we write $H_0 * [\alpha]$.}
+    Then $\Phi(H_0 * [\alpha]) = \tilde{\alpha}(1)$, where $\tilde{\alpha}$ is the lift of $\alpha$ starting at $e_0$. Let's denote $\tilde{\alpha}(1) = e_1$.
+    Question: which of these elements lie in the image of $\psi$.
+
+    $e_1$ lies in the image of $\psi$ iff there exists a covering transformation $h$ sending $e_0$ to $e_1$, which is equivalent to $H_0 = H_1 = p_* \pi(E,e_1)$.
+    On the other hand, we also know that $H_0 = [\alpha] * H_1 * [\alpha]^{-1}$.
+    Conclusion: $e_1$ lies in the image of $\psi$ iff $H_0 = [\alpha] * H_0 * [\alpha]^{-1}$, iff $[\alpha] \in N_{\pi(B,b_0) }(H_0)$.
+\end{proof}
+
+This means we have the following situation:
+
+\[
+    \begin{tikzcd}[row sep=0em]
+        C(E, p, B) \arrow[r, twoheadrightarrow, tail, "\psi"] &\im \psi \subset p^{-1}(b_0) \arrow[r, twoheadrightarrow, tail, "\Psi^{-1}"] &\dfrac{N_{\pi(B,b_0) }(H_0)}{H_0}\\
+        h \arrow[r, mapsto, ""] & h(e_0) = e_1\arrow[r, mapsto, ""] &H_0 * [\alpha], \ \alpha = p  \circ  \gamma
+    \end{tikzcd}
+\]
+
+\begin{theorem}
+    The map $\Phi^{-1}  \circ  \psi: C(E, p, B) \to  N_{\pi(B,b_0) }(H_0) / H_0$ is an isomorphism of groups.
+\end{theorem}
+\begin{proof}
+    Let $h, k \in C(E, p, B)$ with $h(e_0) = e_1$ and $k(e_0) = e_2$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{isomorphism-of-groups}
+    \label{fig:isomorphism-of-groups}
+\end{figure}
+
+Then 
+\begin{align*}
+    (\Phi^{-1}  \circ  \psi)(h) = H_0 * [\alpha] \quad \alpha = p  \circ  \gamma\\
+    (\Phi^{-1}  \circ  \psi)(k) = H_0 * [\beta] \quad \beta = p  \circ  \delta
+.\end{align*}
+
+Then call $h(k(e_0)) = h(e_2) = e_3$.
+Claim: $(h  \circ  \delta)(0) = h(e_1) = e_1$.
+$(h  \circ  \delta)(1) = h(e_2) = e_4$.
+Then $\epsilon:= \gamma * (h  \circ  \delta)$ is a path from $e_0$ to $e_3$.
+This implies that $(\Phi^{-1}  \circ  \psi)(h  \circ  k) = H_0 * [p  \circ  \epsilon]$.
+Then $p  \circ  \epsilon = (p  \circ  \gamma) * (p  \circ  h  \circ  \delta) = \alpha * (p  \circ  \delta) = \alpha * \beta$.
+This means that $(\Phi^{-1}  \circ  \psi)(h  \circ  k) = H_0 * [\alpha * \beta]$.
+
+This shows that this is indeed a morphism.
+\end{proof}
+
+
+What can we do with this?
+Some covering spaces are nice: e.g. when the normalizer is the entire group. (Which is the case when abelian)
+
+\begin{definition}
+    A covering space $(E, p)$ of $B$ is called regular if $H_0$ is normal in $\pi(B,b_0)$,
+    where $b_0 \in B, p(e_0) = b_0, H_0 = p_* \pi(E,e_0) $.
+\end{definition}
+This is the case \emph{iff} for every $e_1, e_2 \in p^{-1}(b_0)$, there exists an $h \in C(E, p, B)$ such that $h(e_1) = e_2$.
+
+\[
+    \begin{tikzcd}
+        (E, e_1) \arrow[dr, "p"] \arrow[r, "h"] &(E, e_2) \arrow[d, "p"]\\
+                                                & B
+    \end{tikzcd}
+\]
+This $h$ exists iff $H_1 = H_2$. $H_1 = p_* \pi(E,e_1)$ and $H_2 = p_* \pi(E,e_2)$.
+If $H_0$ is normal. Then $H_1$ and $H_2$ are the same as $H_0$, because they are conjugate to $H_0$. So for $H_1$, $H_2$ the $h$ exists.
+Conversely: exercise.
+
+In this case, $(\Phi^{-1}  \circ  \psi): C(E, p, B) \to  \frac{\pi(B,b_0) }{H_0}$ is an isomorphism.
+Special case: Let $(E, p)$ be the universal covering space, so $\pi(E,e_0)  = 1$, or $H_0 = 1$.
+In this case, $\Phi^{-1}  \circ  \psi: C(E, p, B) \to  \pi(B,b_0) $ is an isomorphism.
+
+\begin{eg}
+    $C(\R, p, S^1) \cong \Z \cong \pi(S^{1}, b_0)$.
+\end{eg}
+\begin{eg}
+    Consider $S^2 \xrightarrow{p} \R P^2$.
+    $C(S^2, p, \R P^2) = \{1_{S^2}, -1_{S^2}\}$,
+    because take a point $e_0 \in S^2$, then under a covering transformations, it can only be mapped to $e_0$ or to $-e_0$.
+    So these are the only covering transformations.
+    And indeed, $\pi(\R P^2) = \Z_2$
+
+    Note that $\R P^2 \cong \frac{S^2}{\sim}$, where $\sim $ is in a sense defined by the groupactions of $1_{S^2}$ and $-1_{S^2}$. More on this next week.
+\end{eg}
+
+\begin{lemma}[75.4]
+    If $B$ admits a universal covering space $(E, p)$, then any element $b$ of $B$ has a neighbourhood $U$ such that
+    \begin{align*}
+        i_8: \pi_1(U, b) &\longrightarrow \pi_1(B, b) \\
+        [\alpha] &\longmapsto [1]
+    .\end{align*}
+    is trivial. So the loop doesn't have to be trivial in $E$, but is is in $B$.
+\end{lemma}
+\begin{proof}
+
+    Take $U$ evenly covered.
+    $\tilde{\alpha} \simeq_p e_E$ in $E$, so  $p  \circ  \tilde{\alpha} \simeq_p  p  \circ  e_e$ in $B$ so $\alpha \simeq_p e_b$, so $i_*[\alpha] = [e_b]$.
+
+    So this condition is needed for a universal covering spaces.
+    And fun fact: this is sufficient.
+    This is proved in section 77, but we don't need to know this.
+\begin{figure}[H]
+    \centering
+    \incfig{lemma-universal-covering-space}
+    \caption{lemma universal covering space}
+    \label{fig:lemma-universal-covering-space}
+\end{figure}
+\end{proof}
+
+We call this property semi-locally simply connected.
+The loops themself don't have to be simply connected, but in the bigger space they are.
+
+
+% \begin{eg}
+%     Consider the cone with an infinite earring as a base.
+%     The 
+%     It's semi-locally simply connected.
+% \begin{figure}[H]
+%     \centering
+%     \incfig{infinite-earring}
+%     \caption{Infinite earring}
+%     \label{fig:infinite-earring}
+% \end{figure}
+% \end{eg}
+
+% % TODO snippet star lower and upper (functional analysis  and alg geom.

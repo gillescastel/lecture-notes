@@ -1,0 +1,358 @@
+\lesson{3}{di 15 okt 2019 10:30}{Retractions}
+
+\setcounter{section}{54}
+\section{Retractions and Fixed points}
+
+\begin{definition}[Retract, retraction]
+    Let $A \subset X$, then $A$ is a \emph{retract} of $X$ iff there exists a map $r : X \to A$ such that $r|_A = 1|_A$, i.e.  $r(a) = a$ for all $a \in A$.
+    The map $r$ is called a \emph{retraction}
+\end{definition}
+\begin{eg}
+    Let $X$ be the figure $8$ space, and denote the right circle by $A$.
+    Then it's easy to see that there exists a retract from the whole space to $A$ by mapping the left circle onto the right.
+    \begin{figure}[H]
+        \centering
+        \incfig{figure-8-space}
+        \caption{Figure 8 space}
+        \label{fig:figure-8-space}
+    \end{figure}
+\end{eg}
+
+
+\begin{lemma}[55.1]
+    If $A$ is a retract of $X$, then $i: A \to X: a \mapsto a$ induces a monomorphism $i_*: \pi(A, a_0) \to \pi(X, a_0)$ with $a_0 \in A$.
+\end{lemma}
+\begin{proof}
+    Let $r: X \to A$ be a retraction. Then $r \circ i = 1_A$.
+
+    \[
+        (A, a_0) \xrightarrow{i}  (X, x_0) \xrightarrow{r}  (A, a_0)
+    .\] 
+    \[
+        \pi(A, a_0) \xrightarrow{i_*}  \pi(X, x_0) \xrightarrow{r_*}  \pi(A, a_0)
+    .\] 
+    As $r  \circ  i = 1_A$, we get that $r_*  \circ  i_* = (r  \circ  i)_* = (1_A)_* = 1_{\pi(A, a_0)}$.
+    So $i_*$ is injective, $r_*$ is surjective, which completes the proof.
+\end{proof}
+\begin{eg}[Theorem 55.2]
+    Let $S^1$ be the boundary of $B^2$.
+    Then $S^1$ is \emph{not} a retract of $B^2$.
+    There is a surjective map from $B^2$ to $S^1$, but not one that is the identity on $S^1$.
+\end{eg}
+\begin{explanation}
+    Suppose $S^1$ is a retract. Then $i_*:\pi(S^1, x_0) \to \pi(B^2, x_0)$ is injective, but $i_*:\Z \to 1$. \hfill\contra
+\end{explanation}
+
+\begin{theorem}[55.6, Brouwer fixed point theorem]
+    For any map $f: B^2 \to B^2$, there exists at least one fixed point.
+\end{theorem}
+\begin{proof}
+    Look at the proof of the first lecture. Now that we've actually proven that $\pi(S_1) = \Z$ and $\pi(B_2) = 1$, the proof is complete.
+\end{proof}
+
+\begin{eg}
+    Let $A$ be a $3\times 3$ matrix with strict positive real entries.
+    Then $A$ has a positive real eigenvalue.
+\end{eg}
+\begin{explanation}
+    Let $B = \{(x_1, x_2, x_3)^{T} \in \R^3  \mid 0 \le  x_1, x_2, x_3 \le  1 \land x_1^2 + x_2^2 + x_3^2 = 1\} $, an octant of a 2-sphere.
+    Note that $B \approx B^2$, a disk.
+    Now, define $f: B \to B: x \mapsto  \frac{Ax}{\|Ax\|}$.
+    Note that this maps vectors from $B$ to vectors of $B$, as $A$ has positive entries.
+    Note that $f$ is continuous.
+    By Brouwer fixed point theorem, there exists $x_0\in B$, such that $f(x_{0}) = x_0$, or 
+    $Ax_0 = \|Ax_0\| x_0$.
+\end{explanation}
+
+\begin{remark}
+    Section 56 gives a proof of the theorem of algebra using fundamental proofs.
+    Interesting, but not part of this course.
+\end{remark}
+\begin{remark}
+    We'll skip the Borsak-Ulam theorem for now.
+\end{remark}
+
+\setcounter{section}{57}
+\setcounter{chapter}{9}
+\section{Deformation retracts and homotopy type}
+\begin{lemma}
+    Suppose $h, k: (X, x_0) \to (Y, y_0)$ and assume $H: X \times I: Y$ is a homotopy with
+    \begin{itemize}
+        \item $H(x, 0) = h(x)$, $H(x, 1) = k(x)$ (definition of homotopy)
+        \item $H(x_0, t) = y_0$, for all $t \in I$
+    \end{itemize}
+    Then $h_* = k_*: \pi(X,x_0) \to \pi_1(Y, y_0)$.
+\end{lemma}
+\begin{proof}
+    We have to show that for all $f: I \to X$ with $f(0) = f(1) = x_0$ that $h  \circ  f \simeq_p  k  \circ  f$, i.e. $h_*[f] = k_*[f]$.
+    \[
+        \begin{tikzcd}[row sep=0em]
+        G: I \times I \arrow[r]  & X \times I \arrow[r, "H"] &Y\\
+        (s, t) \arrow[r, mapsto] & (f(s), t)  \arrow[r, mapsto] & H(f(s), t)
+    \end{tikzcd}
+    .\] 
+    \begin{itemize}
+        \item Then $G$ is continuous.
+        \item $G(s, 0) = H(f(s), 0) = (h  \circ  f)(s)$
+        \item $G(s, 1) = H(f(s), 1) = (k  \circ  f)(s)$
+        \item $G(0, t) = H(f(0), t) = H(x_0, t) = y_0$
+        \item $G(1, t) = H(f(1), t) = H(x_0, t) = y_0$
+    \end{itemize}
+    So $G$ is a homotopy, and a path homotopy between the two loops.
+\end{proof}
+\begin{definition}[Deformation retract]
+    Let $A \subset X$, then $A$ is a deformation retract of $X$, iff there exists 
+    \begin{itemize}
+        \item $r: X \to A$, such that $r(a) = a$ for all  $a \in A$. (normal retract)
+        \item homotopy $H: X \times I \to X$ such that
+            \begin{itemize}
+                \item $H(x, 0) = x$
+                \item  $H(x, 1) = r(x)$
+                \item $H(a, t) = a$ for all $a \in A$
+            \end{itemize}
+    \end{itemize}
+    This means that $1_X$ is homotopic to $i \circ r$ via a homotopy leaving $A$ invariant.
+\end{definition}
+\begin{eg}
+    Let $S^1 \subset \R^2 \setminus \{(0, 0)\}$.
+    Then $S^1$ is a deformation retract of $\R^2 \setminus \{ (0, 0)\} $.
+    Using homotopy $H: \R^2_0 \times I \to \R^2_0: x \mapsto (1-t)x + t \frac{x}{\|x\|}$.
+    (The same for $S^n$ and $\R^n_0$)
+    \begin{figure}[H]
+        \centering
+        \incfig{deformation-retract-example}
+        \caption{Example of a deformation retract}
+        \label{fig:deformation-retract-example}
+    \end{figure}
+\end{eg}
+\begin{eg}
+    Consider the figure $8$ space.
+    Claim: $A$ is not a deformation retract of $X$.
+    We'll prove this later on.
+\begin{figure}[H]
+    \centering
+    \incfig{deformation-rectract-example-2}
+    \caption{Example of a deformation rectract}
+    \label{fig:deformation-rectract-example-2}
+\end{figure}
+\end{eg}
+
+\begin{eg}
+    Consider the torus and a circle on the torus.
+    Then it is a retract, but not a deformation retract.
+\end{eg}
+
+\begin{theorem}
+    If $A$ is a deformation retract of $X$, then $i : A \to X$ induces an \emph{isomorphism} $i_*$.
+    I.e. If you have a deformation retract, it's not only injective but also surjective.
+\end{theorem}
+\begin{proof}
+    Let $i:  A \to X$ be the inclusion and $r: X \to A$ be the deformation retraction using $H$.
+    Then $r  \circ  i = 1_A$, which gives $r_*  \circ  i_* = 1_{\pi(A, a_0)}$.
+
+    Now, $i  \circ  r \simeq_p  1_X$ using the homotopy of the previous lemma, i.e. $H$ with $H(a_0, t) = a_0$.
+    Call $h = i  \circ  r$, $k = 1_X$, and using the previous lemma, $(i  \circ  r)_* = (1_X)_*: \pi(X, x_0) \to \pi(X, x_0)$, which shows that $i_*  \circ r_* = 1_{\pi(X, x_0)}$.
+
+    We conclude that both $i_*$ and $r_*$ are isomorphisms.
+\end{proof}
+
+\begin{remark}
+    This means that the fundamental group of $\R^2_0$ is the same as the one of $S^1$, which is $\Z$.
+\end{remark}
+\begin{eg}
+    The fundamental group of the figure $8$ space and the $\theta$-space are isomorphic.
+    These spaces are not deformations of each other, but we can show that they are deformation retracts of $\R^2 \setminus \{p, q\}$.
+    We say that these spaces are of the same homotopy type.
+\begin{figure}[H]
+    \centering
+    \incfig{figure-eight-theta-space}
+    \caption{The figure eight and theta space seen as a deformation retract of $\R^2 \setminus \{ p, q\} $}
+    \label{fig:figure-eight-theta-space}
+\end{figure}
+\end{eg}
+\begin{definition}
+    Let $X, Y$ be two spaces, then $X$ and $Y$ are said to be of the same homotopy type iff there exists $f: X \to Y$ and $g: Y \to X$ such that $g  \circ f \simeq 1_X $ and $f  \circ  g \simeq 1_Y$.
+    We say that $f, g$ are homotopy equivalences and are homotopy inverses of each other.
+\end{definition}
+\begin{remark}
+    This is an equivalence relation.
+\end{remark}
+
+We'll prove that spaces of the same homotopy type have the same fundamental group.
+For that, we'll prove the previous lemma in a more general form, not preserving the base point.
+\begin{lemma}[58.4]
+    Suppose $h, k: X \to Y$ with $h(x_0) = y_0$ and $k(x_0) = y_1$.
+    Assume that $h \simeq k$ via a homotopy $H: X \times I \to X$, ($H(x, 0) = h(x)$,  $H(x, 1) = k(x)$).
+    Then $\alpha: I \to X: s \mapsto H(x_0, s)$ is a path starting in $y_0$ and ending in $y_1$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+        & \pi(Y, y_0) \arrow[dd, "\hat{\alpha}"] &[-1cm]\ni [g] \arrow[dd, mapsto]\\
+        \pi(X, x_0) \arrow[ur, "h_*"] \arrow[dr, "k_*"]  &&\\
+                                                         & \pi(Y, y_1) &\ni [\overline{\alpha}] * [g] * [\alpha]
+    \end{tikzcd}
+    \] 
+\end{lemma}
+\begin{proof}
+    We need to show that $\hat{\alpha} (h_*[f]) = k_*[f]$, or $[\overline{\alpha}] * [h  \circ  f] * [\alpha] = [ k  \circ  f]$, or $[ h  \circ  f] * [\alpha] = [\alpha] * [k  \circ f]$.
+    We'll prove that these paths are homotopic.
+    Using the picture, we see that $\beta_0 * \gamma_2 \simeq_p \gamma_1 * \beta_1$, because they are loops in a path connected space, $I \times I$.
+    Therefore, $F  \circ (\beta_0 * \gamma_2) \simeq_p F  \circ  (\gamma_1* \beta_1)$.
+    This is $f_0 * c \simeq_p c * f_1$.
+    Now, if we apply $H$, we get $ H  \circ (f_0 * c) \simeq_p H  \circ (c * f_1)$, so $(h  \circ  f) * \alpha \simeq_p  \alpha * (k  \circ  f)$, which implies that $[h  \circ f] * [\alpha] = [\alpha] * [k  \circ  f]$.
+
+\begin{figure}[H]
+    \centering
+    \incfig{proof-lemma-7}
+    \caption{Proof of the Lemma}
+    \label{fig:proof-lemma-7}
+\end{figure}
+\end{proof}
+
+
+\begin{theorem}
+    Let $: X \to Y$ be a homotopy equivalence, with $f(x_0) = y_0$.
+    Then $f_*: \pi(X, x_0) \to \pi(Y, y_0)$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+    Let $g$ be a homotopy inverse of $f$.
+    \[
+     \begin{tikzcd}
+         (X, x_0) \arrow[r, "f"]                             
+         & (Y, y_0) \arrow[r, "g"] & (X, x_1) \arrow[r, "f"] & (Y, y_1) \cdots\\
+         \pi(X, x_0) \arrow[drr, swap, "1_{\pi(X, x_0)} = (1_X)_*"] \arrow[r, "f_{*, x_0}"]
+         & \pi(Y, y_0) \arrow[r, "g_{*, x_0}"] & \pi(X, x_1)\arrow[d, "\hat{\alpha}"]&& \\
+         & & \pi(X, x_0) &&\\
+         &\pi(Y, y_0) \arrow[drr, swap, "1_{\pi(Y, y_0)} = (1_Y)_*"] \arrow[r, "g_{*, x_0}"]
+        & \pi(X, x_1) \arrow[r, "f_{*, x_1}"] & \pi(Y, y_1)\arrow[d, "\hat{\beta}"]& \\
+        && & \pi(Y, x_0) &\\
+     \end{tikzcd}
+     .\] 
+     From the first diagram, $g_{y_0, *}  \circ  f_{x_0, *}$ is an isomorphism, $g_{y_0, *}$ is surjective.
+    The second diagram gives that $f_{x_1, x}  \circ  g_{y_0,*}$ is an isomorphism, so $g_{y_0, *}$ is injective, so $g_{y_0, *}$ is an isomorphism.
+    Now composing, we find that $g_{y_0, *} ^{-1}  \circ  (g_{y_0, *}  \circ  f_{x_0, *}) = f_{x_0, *}$ is an isomorphism.
+\end{proof}
+
+\setcounter{section}{58}
+\section{The fundamental group of $S^n$ (and more)}
+\begin{theorem}[59.1]
+    Let $X = U \cup V$, where $U, V$ are open subsets of $X$, such that $U \cap  V$ is path connected.
+    Let $i : U \to X$ and $j: V \to X$ denote the natural inclusions and consider $x_0 \in  U \cap V$.
+    Then the images of $i_*$ and $j_*$ generate the whole group $\pi(X, x_0)$.
+    In other words: any loop based at $x_0$ can be written as a product of loops inside $U$ and $V$.
+\end{theorem}
+\begin{proof}
+    Let $[f] \in \pi(X, x_0)$ denote $f: I \to X$ is a loop based at $x_0$.
+
+    Claim: there exists a subdevision of $[0, 1]$ such that  $f[a_i, a_{i+1}]$ lies entirely inside $U$ or $V$ and $f(a_i) \in  U \cap V$.
+    Proof of the claim: Lebesgue number lemma says that such a subdivision $b_i$ exists.
+    Now assume $b_j$ is such that $f(b_j) \not\in U\cap V$, for $0 < j < m$.
+    Then either $f(b_j) \in U \setminus V$, or $f(b_j) \in V \setminus U$.
+    The first one would imply that $f([b_{j-1}, b_j]) \subset U$ and $f([b_j, b_{j+1}]) \subset U$.
+    So $f[b_{j-1}, b_{j+1}] \subset U$, so we can discard $b_j$.
+    Same for the second possibility.
+
+    Let $\alpha_i$ be a path from $x_0$ to $f(a_i)$ and $\alpha_0$ the constant path  $t \mapsto  x_0$, inside $U \cap V$ (which is possible, as it is path connected).
+    Now define
+    \[
+        f_i: I \to X : I \xrightarrow{\text{p.l.m.}} [a_{i-1}, a_i] \xrightarrow{f} X 
+    .\]
+    Then $[f] = [f_1] * [f_2] * \cdots * [f_n]$.
+    Note that all $f_i$ have images inside $U$ or $V$.
+    Now,
+    \begin{align*}
+        [f] &= [a_0] * [f_1] * [\overline{\alpha_1}] * [\alpha_1] * [f_2] * [\overline{\alpha_2}] * [\alpha_2] * [f_3] * \cdots * [\alpha_{n-1}] * [f_n] * [\overline{\alpha_n}]\\
+            &= [\alpha_0 * (f_1 * \overline{\alpha_1})] * [\alpha_1 * (f_2 * \overline{\alpha_2})] * \cdots
+    .\end{align*}
+    Every path of the form $\alpha_{i-1} * (f_i * \overline{\alpha_i})$ is a loop based at $x_0$ lying entirely inside $U$ or $V$.
+    This means that
+    \[
+        [f] \in  \operatorname{grp} \{i_*(\pi(U, x_0)), j_*(\pi(V, x_0))\} 
+    .\] 
+\begin{figure}[H]
+    \centering
+    \incfig{theorem-59-1}
+    \caption{Proof of Theorem 59.1}
+    \label{fig:theorem-59-1}
+\end{figure}
+\end{proof}
+\begin{corollary}
+    Let $n \ge  2$, then $\pi(S^n, x_0) = 1$
+\end{corollary}
+\begin{proof}
+    Consider $S^n$ and $N, S$ the north and south pole.
+    Let $U = S^n \setminus \{N\} $ and $V = S^n \setminus \{S\}$.
+    Then $U, V \approx \R^n$ and $U \cap V$ is path connected, which is easy to prove as it is simply homeo to $\R^n$ with points removed.
+    Then $\pi(S^n, x_0)$ is generated by $i_*(\pi(U, x_0))$ and $j_*(\pi(V, x_0))$, which both are trivial.
+    This proof doesn't work for $S^1$ because then the intersection is not path connected anymore!
+\end{proof}
+
+\section{Fundamental group of some surfaces}
+
+\begin{definition}[Surface]
+    Surface: compact two-dimensional topological manifold.
+\end{definition}
+\begin{theorem}
+    Let $X$ be a space and $x_0 \in X$.
+    Let $Y$ be a space and $y_0 \in Y$.
+    Then $\pi(X\times Y, (x_0, y_0)) \cong \pi(X, x_0) \times  \pi(Y, y_0)$.
+\end{theorem}
+\begin{proof}
+    Exercise. Idea:
+    Let $f: I \to X \times Y$ be a loop based at $(x_0, y_0)$. 
+    Then $f(s) = (g(s), h(s))$ where  $g$ is a loop in $X$ based at $x_0$, similar for $h$,
+    and conversely.
+\end{proof}
+\begin{eg}
+    $\pi_1(T^2, x_0) = \pi_1(S^1) \times \pi_1(S^1) = \Z^2$.
+    We know that $\pi(S^2, x_0) = 1$, so the torus and the two sphere are not homeomorphic to each other, they aren't even homotopically equivalent.
+\end{eg}
+\begin{eg}
+    $\R\text{P}^2 = \frac{S^2}{\sim }$ 
+    Then $p: S^2 \to \R\text{P}^2$, which is by definition continuous by definition of the topology on the projective plane.
+
+\begin{figure}[H]
+    \centering
+    \incfig{projective-plane-example}
+    \caption{Example: projective plane.}
+    \label{fig:projective-plane-example}
+\end{figure}
+This means that $(S, p)$ is a covering of the projective plane.
+The lifting correspondence says that
+\[
+    \Phi: \pi(\R \mathrm P^2, x_0) \to p^{-1}(x_0) = \{ \tilde{x_0}, -\tilde{x_0}\} 
+\] 
+is a isomorphism.
+Therefore, $\pi_1(\R \mathrm P^2, x_0)$ is a group with 2 elements, so $\Z_2$.
+
+This means, there exist loops which we cannot deform to the trivial loop, but when going around twice, they \emph{do} deform to the trivial loop.
+E.g. consider the loop $a$. This is not homotopic equivalent with the trivial loop, as $e_1 \neq e_0$. (Or also you can see it because $\alpha = \overline{\alpha}$.)
+But pasting the loop it twice, we see that \emph{is} possible.
+This means that the fundamental group of the projective space is different from all the one we've seen before.
+\end{eg}
+
+\begin{eg}
+    $T^2$ is the torus.
+    $T^2 \# T^2$ is the connected sum of two tori (Remove small disc of both tori and glue together), in Dutch: 'tweeling zwemband'. 
+    This space has yet another fundamental group.
+\end{eg}
+
+\begin{eg}
+    Figure eight space: fundamental group is not abelian.
+    Indeed, $[b * a] \neq  [a * b]$.
+\begin{figure}[H]
+    \centering
+    \incfig{figure-8-not-abelian}
+    \caption{Figure 8 space is not Abelian}
+    \label{fig:figure-8-not-abelian}
+\end{figure}
+\end{eg}
+\begin{eg}
+    Tweeling zwemband.
+    The space retracts to the figure $8$ situation, which shows that the group of the tweeling zwemband has a nonabelian component.
+    \begin{figure}[H]
+        \centering
+        \incfig{tweeling-zwemband}
+        \caption{Tweeling zwemband: $T \# T$}
+        \label{fig:tweeling-zwemband}
+    \end{figure}
+\end{eg}

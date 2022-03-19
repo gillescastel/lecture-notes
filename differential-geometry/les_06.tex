@@ -1,0 +1,195 @@
+%\lesson{6}{wo 30 okt 2019 16:10}{}
+\begin{prop}\label{prop:usedfol}
+    Let $V_1, \ldots, V_k$ linearly independent vector fields on $M$ such that $ [V_i, V_j] = 0$. Then for every  $p \in M$ there is a chart $(U, (s_{1}, \ldots, s_{n}))$ centered at $p$ such that $V_i = \frac{\partial }{\partial s_i} $ for $i = 1, \ldots, k$.
+\end{prop}
+\begin{proof}
+    Since this is a local statement, let's assume that we're working in $\R^{n}$, and $p = 0$.
+    Assume that $\spann_i \{V_i|_0\} \oplus (\{0\} \times \R^{n-k}) = \R^n$.
+    Denote by $\theta_i$ the flow of $V_i$ and let $\Omega$ be a small neighborhood of the origin in $\{0\} \times \R^{n-k}$.
+    Define  
+    \begin{align*}
+        \Phi: (-\epsilon, \epsilon)^{k} \times \Omega &\longrightarrow  \R^n\\
+        (s_1, \ldots, s_k, s_{k+1}, \ldots, s_n)&\longmapsto
+        (\theta_1)_{s_1}  \circ  \cdots  \circ 
+        (\theta_k)_{s_k}
+        (0, \ldots, 0, s_{k+1},\ldots, s_n)^{T}
+    .\end{align*}
+ %   Remember: the only thing we know is that $V_i$ is independent and they commute.
+    Then $\frac{\partial }{\partial x_i} $ is $\Phi$-related to $V_i$ for $i \le  k$.
+   Indeed for for $i \le  k$ you can compute that
+$$(D_{(s_1,\dots,s_n)}\Phi)\Big(  \frac{\partial }{\partial s_i}\Big)=V_i|_{\Phi(s_1,\dots,s_n)}$$
+   by using the curve $\epsilon\mapsto (s_1,\dots,s_i+\epsilon,\dots,s_n)$ and using the fact that the flows $\theta_i$ commute by the last corollary. At the point $p=0$ we clearly have
+$(D_{0}\Phi)(  \frac{\partial }{\partial s_i}) =  \frac{\partial }{\partial x_i}|_0$
+for $i>k$, hence $d_0 \Phi$ is an isomorphism.
+    By the inverse function theorem, there exists a neighbourhood $V$ of $0$ such that $\Phi|_V: V \to  \Phi(V)=:U$ is a diffeomorphism. The desired chart is the inverse of this diffeomorphism.
+\end{proof}
+\begin{figure}[H]
+    \centering
+    \incfig{canonical-form-of-commuting-vector-fields}
+    \caption{
+        Two examples illustrating the proof.
+        On the left, $n = k = 2$.
+        On the right, $n = 3$ and  $k = 2$.
+    }
+    \label{fig:canonical-form-of-commuting-vector-fields}
+\end{figure}
+
+
+
+\setcounter{chapter}{3}
+\chapter{Bundles}
+
+\section{Fiber bundles}
+
+\begin{definition}[Fiber bundle]
+    Let $F$ be a manifold.
+    A fiber bundle with fiber $F$ is a smooth surjective map $$\pi: E \to  B$$ between manifolds s.t.\ for all $x \in B$, there exists an open neighbourhood $U$ and a diffeomorphism $\psi: \pi^{-1}(U) \to  U \times F$ making this diagram commute:
+    \[
+        \begin{tikzcd}[ column sep=1em ]
+          \pi^{-1}(U) \arrow[rr, "\psi"] \arrow[dr, "\pi"]& &U \times F \arrow[dl, "\pi_1"]\\
+                                                     & U &
+        \end{tikzcd}
+    \]
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \incfig{example-of-fiber-bundle}
+    \caption{Example of a product fiber bundle}
+    \label{fig:example-of-fiber-bundle}
+\end{figure}
+
+
+
+\begin{remark}
+    The map $\pi: E \to  B$ is a submersion, i.e.\ $(\pi_*)_e$ is surjective in all points $e$ of $E$.
+    Indeed: locally, the map $\pi$ looks like the projection onto the first factor $\pi$, as $\psi$ is a diffeomorphism.
+    So we can work with $\pi_1$, which is a submersion.
+\end{remark}
+\begin{remark}
+    For all $x \in B$, the \emph{fiber}  $\pi^{-1}(x)$ is diffeomorphic to $F$.
+    Indeed, $\pi^{-1}(x) \approx \pi_1^{-1}(x) = \{x\} \times F \approx F$.
+    So we have a family of manifolds (the fibers) which all are diffeomorphic to $F$, and this family is parametrized by $B$.
+
+$E$ is called the \emph{total space}, $B$ the \emph{base space} and $\psi$ a \emph{local trivilization}.
+A \emph{section} is a smooth  $f: B \to  E$ such that $\pi  \circ  f = Id_B$.
+%Locally, it looks like the graph of a function.
+\end{remark}
+
+\begin{figure}[H]
+    \centering
+    \incfig{definition-of-a-section}
+    \caption{Definition of a section}
+    \label{fig:definition-of-a-section}
+\end{figure}
+
+\begin{eg}
+    Given $F, B$ the product bundle is $B \times F \xrightarrow{\pi_1}   B$.
+\end{eg}
+\begin{eg}
+    Let $F$ be a manifold, $\phi: F \to F$ diffeomorphism.
+    Define the manifold $E := ([0, 1] \times F) / \sim$ and  $B = S^{1}$, where $\sim$ is given by
+    \[
+        (0, p) \sim (1, \phi(p))
+    .\] 
+Then $\pi:E\to B$ is a fiber bundle with typical fiber $F$.
+    For instance, take $F = (-\epsilon, \epsilon)$, $\phi = -\Id$. Then $E$ is the M\"obius strip.
+\begin{figure}[H]
+    \centering
+    \incfig{mobius-strip}
+    \caption{M\"obius strip}
+    \label{fig:mobius-strip}
+\end{figure}
+\end{eg}
+
+\begin{eg}
+The first projection    $\pi_1:\R^2\setminus\{0\}\to \R, (x,y)\mapsto x$ is \emph{not} a fiber bundle.
+For instance, not all fibers are diffeomorphic.
+\end{eg}
+
+\filbreak
+\section{Vector bundles}
+\begin{definition}[Vector bundle]
+    Fix $n \in  \N_{\ge 0}$. A vector bundle of rank $n$ is a smooth surjective map $\pi: E \to  B$ between manifolds $E, B$ such that 
+    \begin{itemize}
+        \item $E_p = \pi^{-1}(p)$ is a $n$-dimensional vector space for all $p \in B$ 
+        \item For all $p \in B$, there exist a neighborhood $U$ of $p$ and a diffeomorphism $\psi: E|_U:=\pi^{-1}(U) \to  U \times \R^n$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}[ column sep=1em ]
+            \pi^{-1}(U)\arrow[rr, "\psi"] \arrow[dr, "\pi"]& &U \times \R^n \arrow[dl, "\pi_1"]\\
+                                                     & U &
+        \end{tikzcd}
+    \]
+    and $\psi|_{E_q}: E_q \to  \{q\} \times \R^n$ is a linear isomorphism, for all $q\in U$.
+    \end{itemize}
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \incfig{vector-bundle-definition}
+    \caption{Definition of a vector bundle}
+    \label{fig:vector-bundle-definition}
+\end{figure}
+
+
+\begin{remark}
+ Equivalently, a  vector bundle of rank $n$ is a fiber bundle s.t.\ each fiber as an $n$-dimensional vector space and trivializations are linear in each fiber.
+\end{remark}
+
+\begin{remark}
+    \begin{itemize}
+        \item There exists a canonical section $B \to  E, q \mapsto (\text{zero vector in $E_q$})$. It is called zero section.
+        \item Denote by $\Gamma(E)$ the set of all sections of $E$, it is a vector space.
+            Note that we can also multiply a function $B \to  \R$ with a section $B \to  E$.
+         Hence  $\Gamma(E)$ is a module over the algebra $C^{\infty}(B)$.
+      %      Even more, it's a projective module!
+    \end{itemize}
+\end{remark}
+\begin{eg}
+    Given a manifold, take $B \times \R^n \xrightarrow{\pi_1} B$.
+    Notice $\Gamma(B \times \R^n) =
+    C^{\infty}(B, \R^n)$.
+\end{eg}
+\begin{prop}
+    Let $B$ be a manifold of dimension $n$.
+    Then 
+    \[
+    TB := \bigsqcup_{p \in B} T_p B
+    \] 
+    is naturally a vector bundle of rank $n$, called the \emph{tangent bundle of $B$}
+\end{prop}
+\begin{proof}
+    Define $\pi: TB \to  B, v \in T_p B \mapsto p$.
+    Notice that $\pi^{-1}(p) = T_pB$ is a vector space.
+    
+  We show that $TB$ is a manifold.
+    Consider a chart $\phi: U \to  \phi(U)$ of $B$, denote its components by $(x_1,\dots,x_n)$.
+    It induces a   bijection
+    \begin{align*}
+        \psi: (TB)|_U &\longrightarrow U\times \R^n \\
+        a_{i} \frac{\partial }{\partial x_i}\Big|_p
+                      &\longmapsto (p, a_{i})
+    .\end{align*}
+    Now take a cover of $B$ by charts $(U_\alpha, \phi_\alpha)_{\alpha \in A}$.
+    Notice that $\psi_\beta  \circ  \psi_\alpha^{-1}$ is a smooth map from $(U_\alpha\cap U_\beta)\times \R^n$ to itself.
+    Consider the topology on $TB$ with basis  $\psi_\alpha^{-1}(\sigma)$ for $\sigma \subset U_\alpha \times \R^n$ open and $\alpha \in A$.
+    Then $\{((TB)|_{U_\alpha}), \psi_a\} $ is a\footnote{Strictly speaking, $\psi_{\alpha}$ is not a chart, because $U_\alpha \times \R^n$ is not an open subset of $\R^n\times \R^n$. But we can identify  $U_\alpha$ with $\phi_{\alpha}(U_\alpha)$, which is an open subset of $\R^n$.}    
+     smooth atlas.
+    Hence $TB$ is a smooth manifold.
+    For all $\alpha \in A$, the chart $\psi_\alpha: (TB)|_{U_\alpha} \to  U_\alpha \times \R^n$ is a diffeomorphism and linear on every fiber.
+\end{proof}
+ 
+
+ 
+%\begin{remark}
+%    Note that we've \emph{used} the charts to define a topology on $TB$!
+%\end{remark}
+%\begin{remark}
+%    $\psi$ is a bijection, homeomorphism after adding the topology.
+%    But also smooth structure!
+%    And even more: vector bundle structure!
+%\end{remark}
+
+\begin{remark}
+    $\Gamma(TM) = \mathfrak{X}(M)$
+\end{remark}

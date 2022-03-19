@@ -1,0 +1,82 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'fundamental-group-of-circle-lemma.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{650.76649583bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.44212661)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.4856811,0.35875558){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$e_0$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.62476471,0.12841453){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b_0$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.23814016,0.10513114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$I$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.38686734,0.15895431){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.60671026,0.21539541){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p$\end{tabular}}}}%
+    \put(0.18736174,0.0621992){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$s_0$\end{tabular}}}}%
+    \put(0.35235504,0.0621992){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$s_n$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.28425187,0.01675914){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$s_i$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.31021686,0.03781422){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$s_{i+1}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.71867445,0.15639487){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$U_b$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.81991362,0.197372){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\end{tabular}}}}%
+    \put(0.76582379,0.38258857){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$E$\end{tabular}}}}%
+    \put(0.60862625,0.33461333){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\tilde f(s_i)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{fundamental-group-of-circle-lemma.pdf}}%
+    \put(0.29686904,0.26873977){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\tilde f$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{fundamental-group-of-circle-lemma.pdf}}%
+  \end{picture}%
+\endgroup%

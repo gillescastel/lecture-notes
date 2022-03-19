@@ -1,0 +1,197 @@
+%\lesson{3}{wo 09 okt 2019 16:07}{Derivative of a map, submersion}
+
+\section{The derivative of a map}
+
+
+\begin{definition}[Derivative of a smooth map]
+    If $f: M \to  N$ is differentiable, then its derivative at $p$ is
+    \[
+        (f_{*})_p: T_pM \to  T_{f(p)}N: [\gamma] \mapsto [f  \circ \gamma]
+    .\] 
+\end{definition}
+\begin{prop}
+    $(f_*)_p$ is well defined and linear.
+
+\end{prop}
+\begin{proof}
+    Let  $\phi_M$ be a chart for $M$ near $p$.
+    Let  $\phi_N$ be a chart for $N$ near $f(p)$.
+    Consider the commutative diagram
+    \[
+        \begin{tikzcd}[column sep=3cm]
+            {[\gamma]}\in   T_p M \arrow[r, "(f_*)_p"] \arrow[d, "~"]& T_{f(p)} N \ni [f \circ \gamma] \arrow[d]\\
+            (\phi_M  \circ  \gamma)'(0) \in  \R^m  \arrow[r, dashed, "D_{\phi_M(p)}(\phi_N  \circ  f  \circ  \phi_M ^{-1})"]&  \R^{n} \ni (\phi_N  \circ (f  \circ  \gamma))'(0)
+        \end{tikzcd}
+    \] 
+    As the two vertical maps are linear isomorphisms (as we saw in the proof of Proposition~\ref{prop:tangspace}) and the horizontal map is linear (being the derivative of a smooth map between open subsets of Euclidean space), the composition $(f_*)_p$ is also linear.
+\end{proof}
+
+\begin{prop}[Chain rule] If $\smash{M\overset{f}{\to}N\overset{g}{\to}L}$ are smooth maps,
+then $\forall p\in M$ we have ${(g\circ f)_*}_p=(g_*)_{f(p)} \circ (f_*)_p \colon T_pM\to T_{(g\circ f)(p)}L$.
+%    $\phi:U \to  \phi(U)$ is a diffeomorphism of manifolds, as $U$ is an open set of $M$ and $\phi(U)$ is an open set of $\R^n$.
+\end{prop}
+
+%\begin{prop}
+%    $\phi:U \to  \phi(U)$ is a diffeomorphism of manifolds, as $U$ is an open set of $M$ and $\phi(U)$ is an open set of $\R^n$.
+%\end{prop}
+
+\begin{remark}
+Let $p\in M$ and $(U,\phi)$ a chart around $p$. One can show:    $\phi:U \to  \phi(U)$ is a diffeomorphism of manifolds (Notice that since $U$ is an open set of $M$ and $\phi(U)$ is an open set of $\R^n$, both carry manifold structures).
+We have a commutative diagram of isomorphisms.
+\[
+    \begin{tikzcd}[column sep=-1em]
+    & {[\gamma] \in T_pM} \arrow[dl] \arrow[dr, "{(\phi_*)_p}"]&\\
+    {(\phi \circ  \gamma)'(0) \in  \R^{m}} &\cong& T_{\phi(p)} (\phi(U))
+\end{tikzcd}
+\] 
+In other words, the map $T_p M \to  \R^{m}$ from the proof of Proposition \ref{prop:tangspace}, under the identification given in the previous remark, is $(\phi_*)_p$.
+In particular
+\[
+\left.\frac{\partial}{\partial x^i} \right|_p \in T_pM
+\] 
+and $i$-th  standard basis vector of  $T_{\phi(p)} \phi(U) \cong \R^m$ correspond under $(\phi_*)_p$.
+
+
+\begin{figure}[H]
+    \centering
+    \incfig{figure-1}
+    \caption{The $i$-th  standard basis vector and $\left.\frac{\partial}{\partial x^i}\right|_p$ correspond under $(\phi_*)_p$.}
+    \label{fig:figure-1}
+\end{figure}
+\end{remark}
+
+\section{The regular level set theorem}
+\begin{remark}
+    Let $f: U \to  V$ be a diffeomorphism between open subsets of $\R^n$.
+    Then $\forall q \in U$, $ D_q f: \R^n \to  \R^n $ is an isomorphism, because its inverse is $D_{f(q)} f^{-1}$.
+\end{remark}
+Conversely,
+\begin{lemma}[Inverse function theorem in $\R^n$]
+    Let $U \subset \R^n$ open, $f: U \to  \R^n$ smooth s.t.\ $D_qf:\R^n \to  \R^n$ is an isomorphism for some $q \in U$.
+    Then there exists a neighbourhood $V \subset U$ of $q$ such that $ f|_V : V \to  f(V) $ is a diffeomorphism.
+\end{lemma}
+\begin{corollary}[Inverse function theorem for manifolds]
+    Let $f: M \to  N$ be a smooth map $p \in M$, such that $f_*(p): T_pM \to  T_{f(p)}N$ is an isomorphism.
+    Then there exists a neighbourhood $W$ of $p$ s.t.\ the map $f|_W: W \to  f(W)$ is a diffeomorphism.
+\end{corollary}
+Idea of the proof: this is a local statement, and by means of charts, locally every manifolds can be identified with an open subset of $\R^n$.
+
+\begin{eg}
+ Consider   $f\colon \R \to S^1\subset \mathbb C, t \mapsto e^{2 \pi it}$.
+    This is not a diffeomorphism.
+    But $f_*(t)$ is an isomorphism for all $t\in \R$. So locally $f$ restricts to a diffeomorphism onto it image. 
+\end{eg}
+
+\filbreak
+Given $k \ge  n$, we denote
+\[
+    \pi: \R^n \times \R^{k-n} \to  \R^n, (v, w) \mapsto  v
+.\] 
+\begin{lemma}[Submersion theorem in $\R^n$]
+    Let $U$ be a neighbourhood of the origin $0$ in $\R^n \times \R^{k-n}$ and $f: U \to \R^n$ smooth such that
+    \[
+        (D_0  f)|_{\R^n \times \{0\} }: \R^{n}\times \{0\}  \to  \R^n
+    \] 
+    is an isomorphism.
+  %  This map is in particular surjective.
+    Then there exists a diffeomorphism $\tau$ between neighbourhoods in $\R^n \times \R^{k-n}$ such that $f  \circ \tau^{-1} = \pi$.
+\end{lemma}
+
+This theorem states that precomposing $f$ with a diffeomorphism, we can arrange that it becomes the projection on the first components.
+\begin{figure}[ht]
+    \centering
+    \incfig{submersion-theorem}
+    \caption{The submersion theorem. The dotted lines denote the preimages of points of $\R^n$ under $f$ and $\pi$.}
+    \label{fig:submersion-theorem}
+\end{figure}
+
+\filbreak
+
+\begin{proof}
+    Consider $\tau:= (f_1, \ldots f_n, x_{n+1}, \ldots, x_k): U \to  \R^n \times \R^{k-m}$, which we can write concisely as $(f, \text{Id}_{\R^{k-n}})$. Consider its derivative at the origin
+    \[
+    D_0 \tau = \begin{pmatrix}
+        (D_0 f)|_{\R^n \times \{0\} } & * \\
+    	 0 & \text{Id}_{\R^{k-n}}
+    \end{pmatrix}
+    .\] 
+    This matrix is invertible, because it is an upper block matrix, $(D_0 f)|_{\R^n \times \{0\} } $ is invertible, and $\text{Id}_{\R^{k-n}}$ is invertible.
+        This means that $\tau$ is a diffeomorphism near $0$, by the inverse function theorem.
+    We have $ \pi  \circ \tau = f$.
+\end{proof}
+\begin{definition}[Regular value]
+    Given a smooth map $f: M \to  N$, a point $c\in N$ is a regular value iff $\forall p \in f^{-1}(c)$, $(f_*)_p : T_p M \to  T_c N$ is \emph{surjective}.
+\end{definition}
+
+\begin{theorem}
+    Let $f: M^{k} \to  N^{n}$ be a smooth, and let $c \in N$ be a regular value s.t.\ $f^{-1}(c) \neq \O$.
+    Then 
+    \begin{itemize}
+        \item $f^{-1}(c)$ is a submanifold of $M$ with dimension $k - n$
+        \item $\forall  p \in  f^{-1}(c): T_p(f^{-1}(c)) = \text{Ker}(f_*(p))$
+    \end{itemize}
+    \end{theorem}
+    
+The first item states that the codimension is preserved when taking inverse images.    
+\begin{eg}
+Consider the ``height function'' $f: S^2 \to \R: (x, y, z) \mapsto z$.
+    Note that $-1$ and $1$ are not regular values. 
+    %Indeed, the derivative of $f$ vanishes at the Northpole and Southpole.
+\end{eg}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{example-submersion}
+    \caption{The ``height function'' $f: S^2 \to \R$. The derivative of $f$ vanishes at the Northpole and Southpole.}
+    \label{fig:example-submersion}
+\end{figure}
+
+
+
+
+
+\begin{proof}
+    Fix $p \in f ^{-1}(c)$.
+    Take charts $(U, \phi_M)$ near $p$,
+    and  $(V, \phi_N)$ near  $f(p)=c$, chosen so that  $\phi_N(c)=0$.
+    We know that $D_{\phi(p)}(\phi_N  \circ  f  \circ  \phi_M^{-1}) : \R^k \to  \R^n$. is surjective (because $c$ is a regular value). We can assume that
+    \[
+        D_{\phi(p)}(\phi_N  \circ  f  \circ  \phi_M^{-1})\Big|_{\R^{n} \times \{0\} }
+    \] 
+    is an isomorphism. (When we restrict a surjective linear map to a subspace
+     transverse to the kernel, it becomes an isomorphism. If $\R^{n} \times \{0\}$ is not transverse to the kernel of $D_{\phi(p)}(\phi_N  \circ  f  \circ  \phi_M^{-1}) $, we can change the chart $\phi_N$ by composing it with e.g.\ a rotation in $\R^n$.)
+
+    By the last lemma, there exists a diffeomorphism $\tau$ such that $ (\phi_N  \circ  f  \circ  \phi_M^{-1})\circ  \tau^{-1} = \pi$, which can be rewritten as
+    \[
+        \phi_N  \circ  f  \circ  (\tau  \circ  \phi_M)^{-1} = \pi
+    .\] 
+
+The situation is summarized by the following diagram:
+    \[
+        \begin{tikzcd}
+            U \arrow[r, "f"] \arrow[d, "\tau  \circ  \phi_M"]& V \ni c \arrow[d, "\phi_N"] \\
+            \text{open $\subset \R^k$} \arrow[r, dashed, "\pi"]& \text{open $\subset \R^n \ni 0$}
+        \end{tikzcd}
+    .\] 
+%    Note that we chose the chart such that $c\mapsto 0$.
+
+    Hence $\tau  \circ  \phi_M$ is a chart of $M$ adapted to $f^{-1}(c)$.
+
+    \hr
+
+    For the second part,
+    % we have to show that 
+    %$T_p(f^{-1}(c)) = \text{Ker}((f_*)_p)$.
+    let $p \in  f^{-1}(c)$, and take a path $\gamma: (-\epsilon, \epsilon) \to  f^{-1}(c)$ with $\phi(0) = p$.
+    Then $$(f_*)_p [\gamma] = [f  \circ  \gamma] = 0 \in T_c N$$ as $f  \circ  \gamma \equiv c$.
+    This shows that $T_p (f^{-1}(c)) \subset \text{Ker}(f_*)_p$.
+    Both vector spaces have the same dimension, which gives the equality.
+\end{proof}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{proofsubmersion}
+    \caption{The chart $\tau  \circ  \phi_M$  straightens out
+  $f^{-1}(c)$ (intersected with the domain of the chart).}
+    \label{fig:example-submersion}
+\end{figure}

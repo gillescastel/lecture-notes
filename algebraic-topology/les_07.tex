@@ -1,0 +1,387 @@
+\lesson{7}{di 19 nov 2019 10:27}{}
+
+Consider the more general situation.
+\begin{definition}
+    Chain complex:
+    \[
+    C_*: \qquad \cdots \to  C_{n+1} \xrightarrow{\partial _{n+1}}   C_n \xrightarrow{\partial _n}   C_{n-1} \to  \ldots
+    ,\] 
+    where $C_n$ abelian group, $\partial_n$ group morphism and $\partial _n  \circ  \partial _{n+1} = 0$
+\end{definition}
+
+\begin{definition}
+    A chain map, $\Phi = \{ \phi_i\}_{i \in \Z}: C_* \to  D_*$ and each $\phi_n: C_n \to  D_n$.
+
+    \begin{align*}
+        C_*: \qquad \cdots \to  &C_{n+1} \xrightarrow{\partial _{n+1}}   C_n \xrightarrow{\partial _n}   C_{n-1} \to  \ldots\\
+        &\downarrow \phi_{n+1} \qquad \downarrow \phi_{n}\\
+        D_*: \qquad \cdots \to  &D_{n+1} \xrightarrow{\partial_{n+1}'}   D_n \xrightarrow{\partial _n'}   D_{n-1} \to  \ldots\\
+    .\end{align*}
+    where $\phi_n  \circ  \partial_n = \partial_n'  \circ  \phi_n$
+
+    Define $Z_n = \operatorname{Ker} \partial_n \le  C_n$ and $B_n = \im \partial_{n+1} \le  C_n$ and $B_n \le  Z_n$.
+    Then we define
+    \[
+        H_n(C_*) = \frac{Z_n(C_*)}{B_n(C_*)}
+    .\] 
+\end{definition}
+\begin{definition}
+    A sequence is exact if not only $B_n \le  Z_n$, but $B_n = Z_n$.
+    In other words: the homology group at $n$ is  the trivial group.
+    The homology group measures the `exactness' of a chain complex.
+\end{definition}
+
+Given a chain map $\Phi$, it wil induce
+\begin{align*}
+    \Phi_*: H_n(C_*) &\longrightarrow H_n(D_*) \\
+    z + B_n(C_*) &\longmapsto \phi_n(z) + B_n(D_*)
+.\end{align*}
+We claim that this is well-defined.
+Indeed, first we check that $\phi_n(z)$ is a cycle. Indeed, using the commutativity of the diagram, $z \xrightarrow{\partial_n}  0 \xrightarrow{\phi_{n-1}} 0$ implies that $\phi_n(z) \xrightarrow{\partial_n'} 0$.
+Also, a boundary stays a boundary by the same reasoning.
+
+We apply this in connection with a continuous map $f: X \to Y$.
+Consider the following:
+
+\begin{figure}[H]
+    \centering
+    \incfig{homology-connection-with-continuous-map}
+    % \caption{homology connection with continuous map}
+    \label{fig:homology-connection-with-continuous-map}
+\end{figure}
+
+Then we can extend $f_\#$ to a map from  $S_n(X) \to  S_n(Y)$.
+Then
+\[
+    \begin{tikzcd}
+        S_{n+1}(X) \arrow[r, "\partial"]  \arrow[d, "f_\#"]& \phi \in S_n(X) \arrow[d, "f_\#"]\arrow[r, "\partial"] &\partial\phi \in S_{n-1}\arrow[d, "f_\#"]\\
+        S_{n+1}(Y) \arrow[r, "\partial"] & f_\#(\phi) \in S_n(Y) \arrow[r, "\partial"] &S_{n-1}
+    \end{tikzcd}
+\]
+Now, the question is, is $\partial f_\#(\phi) = f_\# ( \partial\phi)$.
+It's enough to check this for $\partial_i$:
+\begin{align*}
+    (f_\#(\partial_i \phi))(t_0, \ldots, t_{n-1}) &= f(\phi(t_0, \ldots, t_{i-1}, 0, t_i, \ldots, t_{n-1}))\\
+    \partial_i (f_\# \phi)(t_0, \ldots, t_{n-1}) &= f(\phi(t_0, \ldots, t_{i-1}, 0, t_i, \ldots, t_{n-1}))
+,\end{align*}
+which proves that we can interchange $f_\#$ and $\delta$.
+
+So $f$ induces a map on Homology:
+\begin{align*}
+    f_*: H_n(X) &\longrightarrow H_n(Y) \\
+    z+B_n(x) &\longmapsto f_\#(z) + B_n(Y)
+,\end{align*}
+or, using different notation:
+\begin{align*}
+    f_*: H_n(X) &\longrightarrow H_n(Y) \\
+    \left<z \right> &\longmapsto \left<f_\#(z) \right>
+.\end{align*}
+It's clear that
+\[
+    (f  \circ  g)_* = f_*  \circ  g_* \qquad (1_X)_* = 1_{H_n(X)} \qquad \forall n \in \N
+,\] 
+so this is a functor.
+\begin{theorem}
+    If $f: X \to  Y$ is a homeomorphism, then $f_*$ is an isomorphism for all $n$
+\end{theorem}
+
+\begin{eg}
+    What are the homology groups of the space consisting of one point, $X = \{x_0\}$.
+    Note that $\forall n \in \N$, there is exactly one singular $n$-simplex, $\phi_n: \sigma_n \to  X: (t_0, \ldots, t_n) \mapsto x_0$.
+    $S_n$ is the free abelian group on $\phi_n \cong \Z$ for all $n$.
+    \[
+        \partial: S_0(X) \to  S_{-1}(X): \phi_0 \mapsto 0
+    .\] 
+    for $n >0$, we have
+     \begin{align*}
+         \partial: S_n(X) &\to  S_{n-1}(X)\\
+         \phi_n &\mapsto \sum (-1)^{i} \partial_i \phi_n = \sum (-1)^{i} \phi_{n-1} = 
+         \begin{cases}
+             \phi_{n-1} &\text{$n$ even}\\
+             0 &\text{$n$ odd.}
+         \end{cases}
+    \end{align*} 
+
+    So all odd maps are $0$ and if odd, then it maps the generator of $S_n$ to the generator of $S_{n-1}$:
+    \[
+        \begin{tikzcd}
+            S_{2n + 3} \arrow[r, "0"] &
+            S_{2n + 2} \arrow[r, "1_{\Z}"] &
+            S_{2n + 1} \arrow[r, "0"] &
+            S_{2n} \arrow[r, "1_{\Z}"] &
+            S_{2n - 1} \arrow[r, "0"] &
+            S_{1} \arrow[r, "0"] &
+            S_{0} \arrow[r, "0"] &
+            0\\
+            \Z & \Z & \Z & \Z & \Z & \Z & \Z & 0
+        \end{tikzcd}
+    \]
+    Now, 
+    \begin{align*}
+        H_0(X) &= \frac{Z_0(X)}{B_0(X)} = \frac{\Z}{\left<0 \right>} \cong \Z\\
+        H_{2n+1}(X) &= \frac{\Z}{\Z} \cong  0\\
+        H_{2n}(X) &= \frac{0}{0} \cong 0
+    .\end{align*}
+\end{eg}
+
+\begin{eg}
+    The other extreme example is computing $H_0$ of an arbitrary space, $X$.
+    This is always possible.
+    We'll assume that $X$ is path connected.
+    \[
+        \begin{tikzcd}
+            S_1(X) \arrow[r, "\partial"] & S_0(X) \arrow[r, "\partial"] & 0
+        \end{tikzcd}
+    \]
+    It's clear that $S_0(X) = Z_0(X)$, which consists of elements of the form $\sum n_i x_i$, where  $x_i \in X$, a zero simplex.
+
+    Define $\alpha: Z_0(X) \to  \Z: \sum n_i x_i \mapsto \sum n_i$.
+    Then $\alpha$ is a morphism of abelian groups.
+    Also $\im \alpha = \Z$ (as $z x_0 \mapsto z$).
+    This would imply that $\frac{Z_0}{\Ker \alpha} \cong \Z$.
+    Claim: $B_0(X) = \Ker \alpha$, which would imply that $\frac{Z_0}{B_0} = H_0 \cong \Z$.
+
+    Proof:
+    \begin{itemize}
+        \item $B_0 \subset \Ker \alpha$.
+            Take $\phi: \sigma_1 \to  X$.
+            Then $\partial \phi \in S_0$ and $\partial\phi = \partial_0\phi - \partial_1\phi = \phi(1) - \phi(0)$.
+            Then $\alpha(\partial\phi) = 1 - 1 = 0$. Since $B_0$ consist of linear combinations of things like $\partial \phi$, we get that $\alpha(B_0(\phi)) = 0$, so $B_0\subset  \Ker \alpha$.
+        \item Take any element $\sum n_i x_i \in \Ker \alpha$.
+            Then  we have to show that this element is a boundary.
+            Belonging to the kernel means that $\sum n_i = 0$.
+
+            Choose any point $x_0 \in X$, fix one.
+            For each $i$, choose a singular one simplex, a path $\phi: \sigma_1 \to  X$, with starting point $x_0$ and end point $x_i$.
+            Here we use the assumption that $X$ is path-connected.
+            Then
+            \[
+                \partial(\sum n_i \phi_i) := \sum n_i \partial\phi_i = 
+                \sum n_i (x_i - x) = \sum n_i x_i - \left(\sum n_i\right) x = \sum n_i x_i
+            ,\] 
+            so this element, which we've assumed lied in the kernel is also a boundary, i.e. $\sum n_i x_i \in B_0(X)$.
+    \end{itemize}
+\end{eg}
+
+
+What happens if our space is not path-connected?
+
+Suppose $C_*$ is a chain complex and there exists an $I$ such that for all $n$, 
+\[
+C_n = \bigoplus_{i \in I} C_n^{i}
+,\] 
+and $\partial: C_n \to  C_{n-1}$ is of the form $\partial = \bigoplus \partial_i$,
+where for all $i \in I$, $\partial_i: C_n^{i} \to  C_{n-1}^{i}$.
+If this is the case, we have that $\partial_i  \circ  \partial_i = 0$.
+Then it's easy to show that
+\[
+    H_n(C_*) = \bigoplus H_n(C_*^{i})
+.\] 
+
+
+Let $X$ be a space such that $X = \bigsqcup_{\alpha \in A} X_\alpha$, where $X_\alpha$ are the path components of $X$.
+Now, let $\phi: \sigma_p \to  X$ be any singular $p$-simplex.
+Then $\phi(\sigma_p) \subset X_\alpha$ for exactly one $\alpha$.
+It's not so hard to see that $S_n(X) = \bigoplus S_n(X_\alpha)$.
+Moreover,  $\partial(S_n(X_\alpha)) \subset S_{n-1}(X_\alpha)$,
+which means that $\partial$ is a direct sum.
+From this, it will follow that
+\[
+    H_n(X) = \bigoplus H_n(X_\alpha)
+.\]
+
+This shows that
+\begin{prop}
+    $H_0(X) = \bigoplus_\alpha H_0(X_\alpha) \cong \bigoplus_\alpha \Z$
+\end{prop}
+
+\begin{theorem}
+    Let $X \subset \R^n$ be a convex subset and assume that $X \neq \O$.
+    Then $H_0(X) \cong \Z$, because a convex set is path connected,
+    and $H_p(X) = 0$ for all $p > 0$.
+\end{theorem}
+\begin{proof}
+    We will define a map going from $S_n(X) \to S_{n+1}(X)$.
+    Fix $x \in X$.
+    Take $\phi: \sigma_n \to  X$, and we'll build up a $\theta: \sigma_{n+1} \to  X$.
+
+    Now consider the purple point, we can write is as a convex combination of the blue and the red point:
+    \[
+        t_0 \underbrace{(1, 0, \ldots, 0)}_{\tikz \fill[blue] circle(2pt);} + (1-t_0) \underbrace{\left( 0,
+            \frac{t_1}{1-t_0},
+            \frac{t_2}{1-t_0},
+            \ldots,
+            \frac{t_{p+1}}{1-t_0}
+        \right)}_{\tikz \fill[red] circle(2pt);}
+    .\] 
+    Then we define:
+    \[
+        \theta(t_0, t_1, \ldots, t_{n+1}) = t_0 x  + (1-t_0) \phi\left(
+        \frac{t_1}{1-t_0},
+        \frac{t_2}{1-t_0},
+        \ldots,
+        \frac{t_{p+1}}{1-t_0}\right)
+    \] 
+    and if $t_0 = 1$, we simply define $\theta$ to be $x$.
+
+    We need to prove that $\theta$ is continuous.
+    \begin{align*}
+        \|\theta(t_0, t_1, \ldots, t_{n+1}) - x\| &= 
+        \|(1-t_0)\phi(\ldots) + t_0 x - x\|\\
+                                                  &= \|(t-t_0) \phi(\ldots) - (1-t_0) x\|\\
+                                                  &\le  |(1-t_0)| (\|\phi(\ldots)\| + \|x\|)
+    .\end{align*}
+    Now, the second term is a constant.
+    As $\sigma_n$ is compact, $\phi(\sigma_n)$ is also compact, so  $\|\phi(\sigma_n)\| \le  M$.
+    So we have
+    \begin{align*}
+        & \le  |(1-t_0)| (M + C) \xrightarrow{t_0 \to 0} 0
+    .\end{align*}
+\begin{figure}[H]
+    \centering
+    \incfig{homology-of-convex-subset-of-rn}
+    % \caption{homology of convex subset of Rn}
+    \label{fig:homology-of-convex-subset-of-rn}
+\end{figure}
+
+This means we have a map $T: S_n(X) \to  S_{n+1}(X)$, which is a morphism, as we defined it for all generators, $T(\phi) = \theta$.
+Have a look at the drawing and conclude that $\partial_0(T\phi) = \phi$.
+Also $\partial_1 T\phi = T \partial_0 \phi$ and $\partial_2 T \phi = T \partial_1 \phi$.
+In general, we claim that $\partial_i (T(\phi)) = T(\partial_{i-1} \phi)$, for any $n$-simplex with $n>0$. Forgetting about $t_0 = 1$ (not a problem, consider this case separatly)
+\begin{align*}
+    (\partial_i T(\phi))(t_0, \ldots, t_n) &= \theta(t_0, t_1, \ldots, t_{i-1}, 0, t_i, \ldots, t_n)\\
+                                           &= (1-t_0) \phi\left(\frac{t_1}{1-t_0}, \ldots, \frac{t_{i-1}}{1-t_0}, 0, \frac{t_i}{1-t_0}, \ldots, \frac{t_n}{1-t_0}\right) + t_0 x\\
+                                           &= T(\partial_{i-1} \phi)(t_0, t_1, \ldots, t_n)
+.\end{align*}
+
+This does not work if we're working with a $0$-simplex.
+(Because then $\partial_{i-1}$ becomes zero, and the only homomorphisms that we have are the identity, so \ldots)
+
+Now, consider the total boundary,
+\begin{align*}
+    \partial T \phi &= \partial_0 T \phi + \sum_{i=1}^{n} (-1)^{i} \partial_i T \phi\\
+                    &= \phi + \sum_{i=1}^{n} (-1)^{i} T\partial_{i-1} \phi\\
+                    &= \phi + \sum_{j=0}^{n-1} (-1)^{j+1} T\partial_{j} \phi\\
+                    &= \phi + T\left(\sum_{j=0}^{n-1} (-1)^{j+1} \partial_{j} \phi\right)\\
+                    &= \phi - T( \partial \phi)
+.\end{align*}
+Have a look at the drawing to see this.
+Conclusion: $\phi = (\partial T + T \partial) \phi$.
+
+For all $n > 0$.
+Let $ \left<z \right> \in H_n(X)$, with $z \in Z_n(X)$.
+Then $z = (\partial T + T \partial) z$, or $z = \partial T z+ T \partial z$. Because  $z$ is a cycle, $z = \partial(T z)$, so  $z$ is not only a cycle, but also a boundary. 
+Hence $\left<z \right> = \left<0 \right>$, so $H_n(X) = 0$.
+\end{proof}
+
+\begin{remark}
+    The appearance of $\partial T + T \partial$ is a rather general phenomenon.
+    Suppose we have two chain complexes.
+
+    \[
+        \begin{tikzcd}
+            C_{n+1} \arrow[r, "\partial"] \arrow[d, "f_{n+1}"]& C_n \arrow[dl, "T"] \arrow[r, "\partial"] \arrow[d, "f_n"]& C_{n-1} \arrow[dl, "T"] \arrow[d, "f_{n-1}"]\\
+            D_{n+1} \arrow[r, "\partial"] \arrow[u, "g_{n+1}"]& D_n \arrow[u, "g_n"]\arrow[r, " \partial"] & D_{n-1} \arrow[u, "g_{n+1}"]
+        \end{tikzcd}
+    \]
+
+    If $f - g = \partial T +  T \partial$ for some $T$ for some $T: C_n \to  D_{n+1}$ for all $n$, where $f$ and $g$ are chain maps.
+    Then $f_* = g_*: H_n(C_*) \to  H_n(D_*)$.
+    When $f - g = \partial T + T \partial$ is satisfied, we say that $f$ and $g$ are chain homotopic.
+    This indeed has something to do with homotopic maps.
+    
+    If you have two maps that are homotopic, then $f_\#$ and $g_\#$ will be chain homotopic maps.
+
+    There is a proof of the theorem in the book: long, not difficult.
+    There is a better proof, see problem 8.
+\end{remark}
+
+Idea of the proof:
+
+\begin{figure}[H]
+    \centering
+    \incfig{chain-homotopic-proof}
+    % \caption{chain homotopic proof}
+    \label{fig:chain-homotopic-proof}
+\end{figure}
+
+This goes from two dimensional stuff to three dimensional stuff.
+But the prism on the left is not a simplex.
+But we can divide it into simplices.
+Now, we look at $\partial T \phi + T \partial \phi$, and we see that (being careful with signs) is $g_\#(\phi) - f_\#(\phi)$.
+
+
+Conclusion: If $f \sim g: X \to  Y$, then for all $n \ge 0$, we have that $f_* = g_*: H_n(X) \to  H_n(Y)$.
+
+\begin{theorem}
+    If $X$ and $Y$ have the same homotopy type, then they also have isomorphic homology groups.
+\end{theorem}
+\begin{proof}
+    Let $f: X \to  Y$ be the homotopy equivalence and $g:Y \to  X$ be the homotopy inverse, so $f  \circ  g \simeq 1_Y$ and $g  \circ  f \simeq 1_X$.
+    Then $f_*  \circ  g_* = 1_{H_n(Y)}$ and $f_*  \circ  g_* = 1_{H_n(X)}$.
+    This means that $f_*$ is an isomorphism with inverse $g_*$.
+\end{proof}
+
+As we saw with homotopy groups, retracts and deformation retracts can be useful.
+
+Recall:
+\begin{definition}
+    Let $A \subset X$. Then $A$ is a retract of $X$ iff there exists a map $r: X \to  A$ such that $r|_A = 1_A$.
+\end{definition}
+
+We make the definition of deformation retract bit more general
+\begin{definition}[deformation retract \emph{(version 2)}]
+    $A$ is a deformation retract iff there is a retract $r: X \to  A$ such that $r \simeq 1_X$.
+    So there exists $r_t$ such that $r_0 = r$ and $r_1 = 1$. \footnote{And not necessarily $r_t|_A = 1_A$ for all $t$.}
+\end{definition}
+
+\begin{remark}
+    We sometimes call this a \emph{weak deformation retract}
+\end{remark}
+
+\begin{prop}[1.12]
+    \begin{itemize}
+        \item Let $A$ be a retract of $X$.
+            Then $i_*: H_n(A) \to  H_n(X)$ (with $i: A \to  X$) is injective and \emph{moreover}, $i_*(H_n(A))$ is a direct summandof $H_n(X)$!
+            So there exists a subgroup $B \le  H_n(X)$ such that $H_n(X) = i_* H_n(A) \oplus B$.
+        \item If $A$ is a deformation retract of $X$, then $i_*$ is an isomorphism.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item The last bullet point is trivial.
+            This follows from induced maps from homotopic maps.
+        \item Let $r: X \to  A$ be a retraction. 
+            Then we have
+            % TODO: bend
+            \[
+                \begin{tikzcd}
+                    A \arrow[r, "i"] \arrow[rr, bend right, "r  \circ  i = 1_A"]& X \arrow[r, "r"] & A
+                \end{tikzcd}
+            \]
+            So  $(r  \circ  i)_* = (1_A)_* = 1_{H_n(A)}$ for all $n$.
+            Therefore, $i_*$ is injective. (Note that this proof holds for all functors!)
+
+            Claim: $H_n(X) = \im(i_*) \oplus \Ker r_*$.
+            \begin{itemize}
+                \item 
+                    Let  $\alpha \in  \im(i_*) \cap  \Ker r_*$.
+                    We show that $\alpha = 0$.
+                    So  $\alpha = i_* (\beta)$ and  $r_*(\alpha) = 0$.
+                    This means that  $r_*(i_*(\beta)) = 0$, but $r_*  \circ i_* = 1$, so $\beta  = 0$.
+                    So $\alpha = i_* \beta = 0$.
+                \item 
+                    We show that any element can be written as a sum of elements of both groups.
+                    Let $\gamma \in H_n(X)$.
+                    Then
+                    \[
+                        \gamma = \underbrace{i_* (r _* (\gamma))}_{ \in  \im i_*} + \gamma - i_* (r _* (\gamma))
+                    ,\] 
+                    and
+                    \begin{align*}
+                        r_*( \gamma - i_* r_* \gamma) &= r_* \gamma - r_* i_* r_*\gamma\\
+                                                      &= r_* \gamma - r_* \gamma = 0
+                    .\end{align*}
+            \end{itemize}
+    \end{itemize}
+\end{proof}

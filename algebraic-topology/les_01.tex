@@ -1,0 +1,328 @@
+\lesson{1}{di 01 okt 2019 10:33}{Introduction}
+
+
+\begin{itemize}
+    \item First part: fundamental groups. We follow Munkres:
+        \begin{itemize}
+            \item Chap 9 `Fundamental group'
+            \item Chap 11 `The Seifert-Van Kampen thm' and
+            \item Chap 12/13 `Classification covering spaces'
+        \end{itemize}
+    \item Second part: Homology groups, via cudi, chapter of a book.
+    \item 10 problems (solve them during the semester) No feedback during the semester, but asking questions is allowed. Working together is allowed.
+    \item Exam (completely open book) First 4 questions: 1h30 prep. Last one 30 min, no prep
+        \begin{enumerate}
+            \item Theoretical question (open book, explain the proof, \ldots) \hfill /4
+            \item New problem (comparable to one of the 10 problems)\hfill /4
+            \item Explain your solution $n$-th problem solved at home \hfill /4
+            \item Explain your solution $m$-th problem solved at home\hfill /4
+            \item 4 small questions \hfill /4
+        \end{enumerate}
+        After the exam, hand in your solutions of the other problems. After a quick look, the points of 3.\ and 4.\ can be $\pm 1$ (in extreme cases $\pm 2$)
+    \item No exercise classes for this course!
+\end{itemize}
+
+\setcounter{chapter}{-1}
+\chapter{Introduction}
+
+\section{What is algebraic topology?}
+Functor from category of topological spaces to the category of groups.
+\begin{itemize}
+    \item Category: set of spaces and morphisms.
+    \item Functor: $X \leadsto G_X$ and  $f:X\to Y \leadsto f_*: G_X \to  G_Y$ such that
+        \begin{itemize}
+            \item $(f \circ g)_* = f_* \circ g_* $
+            \item $(1_X)_* = 1_{G_X}$
+        \end{itemize}
+\end{itemize}
+
+Two systems we'll discuss:
+\begin{itemize}
+    \item fundamental groups
+    \item homology groups
+\end{itemize}
+
+
+\begin{eg}
+    Suppose we have a functor.
+    If $G_X \not\cong G_Y$, then  $X$ and  $Y$ are not homeomorphic.
+    If `shadows' are different, then objects themselves are different too.
+\end{eg}
+\begin{explanation}
+    Suppose $X$ and $Y$ are homeomorphic.
+    Then $\exists f: X \to  Y$ and $g: Y \to  X$, maps (maps are always continuous in this course), such that $g  \circ f = 1_X$ and $f \circ g = 1_Y$.
+    Then $f_*: G_X \to G_Y$ and $g_*: G_Y \to  G_X$ such that $(g \circ f)_* = (1_X)_*$ and  $(f \circ g)_* = (1_Y)_*$. Using the rules discussed previously, we get
+    \[
+    g_*  \circ f_* = 1_{G_X} \quad f_*  \circ  g_* = 1_{G_Y}
+    ,\] 
+    which means that $f_* : G_X \to  G_Y$ is an isomorphism.
+\end{explanation}
+
+\section{Fundamental group}
+Pick a base point $x_0$ and consider it fixed. (The fundamental group will not depend on it. We assume all spaces are path connected)
+$X \leadsto \pi(X)$.
+\begin{itemize}
+    \item A loop based at $x_0 \in X$ is a map $f: I = [0, 1] \to X$, $f(0) = f(1) = x_0$.
+    \item Loops are equivalent if one can be deformed in the other in a continuous way, with the base point fixed.
+    \item The fundamental group consists of equivalent classes of loops.
+\end{itemize}
+
+\begin{eg}
+    Let $X = B^2$ (2 dimensional disk).
+    Then $\pi(B^2) = 1$, because every loop is equivalent to the `constant' loop.
+\end{eg}
+\begin{eg}
+    Let $X = S^{1}$ and pick $x_0$ on the circle.
+    Two options: 
+    \begin{itemize}
+        \item The loop is trivial equivalent to the constant loop
+        \item The loop goes around the circle.
+        \item The loop goes around the circle, twice.
+        \item The loop goes around the circle, clockwise, once
+        \item \ldots
+    \end{itemize}
+    $\pi(S^{1}) \cong \Z$ (proof will follow).
+\end{eg}
+
+The composition of loops is simply pasting them.
+In the case of the circle, the loop $-1$  $\circ$ the loop  $2$ is the loop $1$.
+
+Suppose $\alpha: I \to  X$ and $f : X\to Y$. Then we define 
+\[
+    f_*[\alpha] = [f \circ \alpha]
+.\] 
+
+
+\begin{theorem}[Fixed point theorem of Brouwer]
+    Any continuous map from a rectangle to itself has at least one fixed point.
+\end{theorem}
+\begin{proof}
+    Suppose there is no fixed point, so $f(x) \neq x$ for all  $x \in B^2$.
+    Then we can construct map $r : B^2 \to  S_1$ as follows:
+    take the intersection of the boundary and half ray between $f(x)$ and $x$.
+    \begin{figure}[H]
+        \centering
+        \incfig{proof-fixed-point-brouwer}
+        \caption{Proof of the Brouwer fixed point theorem}
+        \label{fig:proof-fixed-point-brouwer}
+    \end{figure}
+    If $x$ lies on the boundary, we have the identity map.
+    This map is continuous.
+    Then we have $S^1 \to B^2 \to S^1$, via the inclusion and $r$.
+    Looking at the fundamental groups:
+    \[
+        \pi(S^1)  =\Z \to  \pi(B^2) = 1 \to  \pi(S^1) = \Z
+    .\] 
+    The map from $\pi(S^1) \to  \pi(S^{1})$ is the identity map, but the first map maps everything on $1$. \phantom\qedhere\hfill\contra 
+\end{proof}
+
+
+
+\setcounter{chapter}{8}
+\chapter{Fundamental group}
+
+\setcounter{section}{50}
+\section{Homotopy of paths}
+\begin{definition}[Homotopy]
+    Let $f,g:X\to Y$ be maps (so continuous). Then a homotopy between $f$ and $g$ is a continuous map $H: X\times I \to Y$ such that
+    \begin{itemize}
+        \item $H(x, 0) = f(x)$, $H(x, 1) = g(x)$ 
+        \item For all $t \in I$, define $f_t: X \to  Y: x \mapsto  H(x, t)$
+    \end{itemize}
+    We say that $f$ is homotopic with $g$, we write $f \simeq g$.
+    If $g$ is a constant map, we say that $f$ is null homotopic.
+\end{definition}
+
+\begin{definition}[Path homotopy]
+    Let $f, g: I \to  X$ be two paths such that $f(0) = g(0) = x_0$ and $f(1) = g(1) = x_1$. Then $H: I \times  I \to  X$ is a path homotopy between $f$ and $g$, if and only if
+    \begin{itemize}
+        \item $H(s,0) = f(s)$ and  $H(s, 1) = g(s)$ (homotopy between maps)
+        \item  $H(0, t) = x_0$ and $H(1, t) = x_1$ (start and end points fixed)
+    \end{itemize}
+    Notation: $f \simeq_p g$.
+\end{definition}
+
+
+\begin{figure}[ht]
+    \centering
+    \incfig{homotopy-general-example}
+    \caption{General example of a homotopy.}
+    \label{fig:homotopy-general-example}
+\end{figure}
+
+
+\begin{lemma}
+    $\simeq$ and  $\simeq_p$ are equivalence relations.
+\end{lemma}
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item Reflective: $F(x, t) = f(x)$
+        \item Symmetric: $G(x, t) = H(x, 1-t)$ 
+        \item Transitive:  Suppose $f \simeq g$ and  $g \simeq h$, with  $H_1, H_2$ resp.
+            \[
+                H(x, t) = \begin{cases}
+                    H_1(x, 2t) & 0 \le t \le  \frac{1}{2}\\
+                    H_2(x, 2t-1) & \frac{1}{2} \le  t \le  1
+                \end{cases}
+            . \qedhere
+        \] 
+    \end{itemize}
+\end{proof}
+
+
+\begin{eg}[Trivial, but important]
+   Let $C \subset \R^n$ be a convex subset.
+   \begin{itemize}
+       \item Any two maps $f, g: X \to C$ are homotopic.
+       \item Any two paths $f, g: I \to  C$ with $f(0) = g(0)$ and  $g(1) = f(1)$ are path homotopic.
+   \end{itemize}
+
+   Choose $H: X \times I \to  C: (x, t) \to  H(x, t) = (1-t) f(x) + t g(x)$.
+\end{eg}
+
+
+\subsection*{Product of paths}
+Let $f: I\to X$, $g: I \to X$ be paths, $f(1) = g(0)$.
+Define  \[
+    f*g: I \to X: s \mapsto \begin{cases}
+        f(2s) & 0 \le  s \le  \frac{1}{2}\\
+        g(2s - 1) & \frac{1}{2}\le s\le 1.
+\end{cases}
+\]
+\begin{remark}
+    If $f$ is path homotopic to $f'$ and $g$ path homotopic to $g'$ (which means that $f(1) = f'(1) = g(0) = g'(0)$), then $f * g \simeq_p f' * g'$.
+\end{remark}
+
+So we can define $[f] * [g] := [f*g]$ with $[f] := \{g : I \to  X  \mid g \simeq_p f\} $
+
+\begin{theorem}\leavevmode
+    \begin{enumerate}
+        \item $[f] * ([g] * [h])$  is defined iff $([f] * [g])*[h]$ is defined and in that case, they are equal.
+        \item Let $e_x$ denote the constant path $e_x: I \to  X: s \mapsto x$, $x \in X$. If $f(0) = x_0$ and $f(1) = x_1$ then $[e_{x_0}] * [f] = [f]$ and $[f] * [e_{x_1}] = [f]$.
+        \item Let $\overline{f} : I \to  X: s \mapsto  f(1-s)$. Then $[f] * [\overline{f}] = [e_{x_0}]$ and $[\overline{f}]*[f] = [e_{x_1}]$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    First, two observations
+    \begin{itemize}
+        \item Suppose $f\simeq_p g$ via homotopy $H$, $f, g: I\to X$.
+            Let $k: X \to  Y$.
+            Then $k  \circ  f \simeq_p k \circ g$ using $k  \circ H$.
+        \item If $f*g$ (not necessarily path homotopic). Then $ k  \circ (f*g) = (k \circ f) * (k \circ g) .$ 
+    \end{itemize}
+
+    Now, the proof
+    \begin{itemize}
+        \item[2.]  Take $e_0: I \to  I: s \mapsto 0$.
+            Take $i: I \to  I: s \mapsto s$ 
+            Then $e_0*i$ is a path from $0$ to $1 \in I$.
+            The path $i$ is also such a path.
+            Because $I$ is a convex subset, $e_0*i$ and $i$ are path homotopic, $e_0 *i\simeq_p i$.
+            Using one of our observations, we find that
+            \begin{align*}
+                f  \circ (e_0 * i) &\simeq_p  f  \circ i\\
+                (f  \circ  e_0) * (f  \circ  i ) &\simeq_p f\\
+                e_{x_0} * f  &\simeq_p f\\
+                [e_{x_0}] * [f]  &= [f]
+            .\end{align*}
+
+        \item [3.] Note that $i * \overline{i} \simeq_p e_0$.
+            Now, applying the same rules, we get 
+            \begin{align*}
+                f  \circ (i * \overline{i}) &\simeq_p f  \circ  e_0\\
+                f * \overline{f} &\simeq_p  e_{x_0}\\
+                [f] * [\overline{f}] & = [e_{x_0}]
+            .\end{align*}
+        \item[1.]  Remark: Only defined if $f(1) = g(0), g(1) = h(0)$.
+            Note that $f*(g*h) \neq (f*g)*h$. The trajectory is the same, but the speed is not.
+
+            Assume the product is defined.
+            Suppose $[a, b]$,  $[c, d]$ are intervals in  $\R$.
+            Then there is a unique positive (positive slope), linear map from $[a, b] \to [c,d]$.
+            For any $a, b \in [0, 1)$ with $ 0<a<b<1$, we define a path
+            \begin{align*}
+                k_{a,b}: [0, 1] &\longrightarrow  X\\
+                [0, a] & \xrightarrow{\text{lin.}}[0, 1] \xrightarrow{f}  X\\
+                [a, b] & \xrightarrow{\text{lin.}}[0, 1] \xrightarrow{g}  X\\
+                [b, 0] & \xrightarrow{\text{lin.}}[0, 1] \xrightarrow{h}  X\\
+            \end{align*} 
+
+            Then $f*(g*h) = k_{\frac{1}{2}, \frac{3}{4}}$ and $(f*g)*h = k_{\frac{1}{4}, \frac{1}{2}}$
+
+            Let $\gamma$ be that path $\gamma:I \to  I$ with the following graphs:
+
+            \begin{figure}[H]
+                \centering
+                \incfig{proof-path}
+                \caption{proof path}
+                \label{fig:proof-path}
+            \end{figure}
+            Note  that $\gamma \simeq_p i$.
+            Now, using the fact that composition of positive linear maps is positive linear.
+            \begin{align*}
+                k_{c, d}  \circ  \gamma &\simeq_p  k_{c, d}  \circ i\\
+                k_{a, b} &\simeq_p  k_{c, d},
+            \end{align*} 
+            which is what we wanted to show.
+    \end{itemize}
+\end{proof}
+
+
+\section{Fundamental group}
+\begin{definition}
+    Let $X$ be a space and $x_0 \in X$, then the fundamental group of $X$ based at $x_0$ is
+    \[
+        \pi(X, x_0) = \{ [f]  \mid  f : I \to X, f(0) = f(1) = x_0\} 
+    .\] 
+    (Also $\pi_1(X, x_0)$ is used, first homotopy group of $X$ based at $x_0$)
+
+    For $[f], [g] \in \pi(X, x_0)$, $[f] * [g]$ is always defined,  $[e_{x_0}]$ is an identity element, $*$ is associative and $[f]^{-1} = [\overline{f}]$. This makes $(\pi(X, x_0), *)$ a group.
+\end{definition}
+\begin{eg}
+    If $C \subset \R^n$, convex then $\pi(X, x_0) = 1$.
+    E.g. $\pi(B^2, x_0) = 1$.
+\end{eg}
+
+\begin{remark}
+    All groups are a fundamental group of some space.
+\end{remark}
+
+Question: how does the group depend on  the base point?
+
+\begin{theorem}[52.1]
+    Let $X$ be a space, $x_0, x_1 \in X$ and $\alpha: I \to X$ a path from  $x_0$ to $x_1$.
+    Then
+    \begin{align*}
+        \hat{\alpha}: \pi(X, x_0) &\longrightarrow\pi(x, x_1)\\
+        [f] &\longmapsto  [\overline{\alpha}] * [f] * [\alpha]
+    .\end{align*}
+    is an isomorphisms of groups. Note however that this isomorphism depends on $\alpha$.
+\end{theorem}
+\begin{proof}
+    Let $[f], [g] \in \pi_1(X, x_0)$.
+    Then 
+    \begin{align*}
+        \hat{\alpha}([f]*[g]) &= [\overline{\alpha}] * [f] * [g] * [\alpha]\\
+                              &= [\overline{\alpha}] *[f] * [\alpha] * [\overline{\alpha}] * [g] * [\alpha]\\
+                              &= \hat{\alpha}[f] * \hat{\alpha}[g]
+    .\end{align*}
+    We can also construct the inverse, proving that these groups are isomorphic.
+\end{proof}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{dependence-of-base-point}
+    \caption{Construction of the group homomorphism}
+    \label{fig:dependence-of-base-point}
+\end{figure}
+\begin{remark}
+    If $f: (x, x_0) \to (Y, y_0)$ is a map of pointed topology spaces ($f: X \to Y$ continuous and $f(x_0) = y_0$).
+    Then \[
+        f_*:\pi(X, x_0) \to  \pi(Y, y_0): [\gamma] \mapsto [f  \circ \gamma]
+    \]
+    is a morphism of groups, because of the two `rules' discussed previously, with
+    \[
+        (f \circ g)_* = f_*  \circ g_* \qquad (1_X)_* = 1_{\pi(X, x_0)}
+    .\] 
+\end{remark}

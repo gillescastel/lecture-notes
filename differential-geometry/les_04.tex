@@ -1,0 +1,157 @@
+%\lesson{4}{wo 16 okt 2019 16:10}{Derivations and vector fields}
+
+
+
+
+\section{Tangent vectors as derivations}\label{sec:tangvectder}
+
+ 
+
+Fix $M = \R^n$.
+Recall that a tangent vector at $p$ is an element of $T_p \R^n \cong \R^n$.
+\begin{definition}[Derivation]
+    A derivation at a point $p \in \R^{n}$ is a linear map $D:C^{\infty}(\R^n) \to  \R$ satisfying the Leibniz rule:
+    \[
+        D(fg) = D(f) g(p) + f(p) D(g)
+    .\] 
+\end{definition}
+\clearpage
+\begin{eg}
+    $\forall v \in \R^n$, the directional derivative 
+    \begin{align*}
+        C^{\infty}(\R^n) &\longrightarrow \R \\
+        f &\longmapsto (d_p f)(v) = \sum_i v_{i} \frac{\partial f}{\partial x_i} 
+    \end{align*}
+    is a derivation. This follows from the fact that partial derivatives obey the Leibniz rule.
+\end{eg}
+\begin{remark}
+    The derivation of a constant function, $Dc$, is always $0$.
+    Because $D$ is linear, it is enough to show this for $c = 1$.
+    We have $D 1 = (D 1 ) 1 + 1 ( D 1) = 2 ( D 1)$, so $D 1 = 0$.
+\end{remark}
+\begin{prop}
+    The map
+    \begin{align*}
+        \phi: T_p \R^n &\longrightarrow \text{Derivations at $p$} \\
+        v &\longmapsto  \Big( f \mapsto \sum_i v_{i} \frac{\partial f}{\partial x_i}(p) \Big)
+    \end{align*}
+    is an isomorphism of vector spaces.
+\end{prop}
+\begin{proof}\leavevmode
+    \begin{itemize}
+        \item This formula really defines a derivation, as we've showed in the previous example.
+
+        \item It is clearly linear.
+        \item To show that it's injective, we check that the kernel is $0$.
+            If for all $f$, $\sum_i v_{i} \frac{\partial f}{\partial x_i} = 0$, then it is particular true for the functions $x_{j}$, so $v_{j} = 0$ for all $j$. In formulae: $v_{j} =\sum_i v_{i} \frac{\partial x_{j}}{\partial x_i}= 0$.
+        \item Surjectivity. Let $D$ be a derivation at $p$.
+            For all $f \in C^{\infty}(\R^n)$, we have $$f(x) = f(p) + \sum_i (x_{i} - p_{i}) g_i(x),$$ where $g_i(x)$ is a smooth function with $g_i(p) = \frac{\partial f}{\partial x_i}(p)$. (This is a version of Taylor's theorem, in which the $o(x-p)$ terms are absorbed in $g$.)
+            Then 
+\begin{align*}
+  D f &= 0 +  \sum_i D(x_{i}) g_i(p) + 0\\
+&=\sum_i D(x_{i}) \frac{\partial f}{\partial x_i}(p).
+\end{align*}
+ So $v = (D(x_{1}),\dots, D(x_{n}))$ maps to $D$.
+    \end{itemize}
+\end{proof}
+
+\setcounter{chapter}{2}
+\chapter{Vector fields}
+\section{Vector fields}
+\begin{definition}[Vector field]
+    A vector field on a manifold $M$ is a map $X: M \to  \bigcup_{p \in M} T_p M$, such that
+    \begin{itemize}
+        \item $X(p) \in T_pM$
+        \item $X$  satisfies the following smoothness condition:  for any chart $(U, \phi)$, writing $X(p) = \sum_i a_{i}(p) \frac{\partial}{\partial x_i} \Big|_p$, all the coefficients $a_{i}: M \to \R$ are smooth.
+    \end{itemize}
+\end{definition}
+\begin{notation}
+    We denote the set of all vector fields on $M$ with $\mathfrak X(M)$.
+\end{notation}
+\begin{eg}
+    Let $(U, \phi)$ be a chart on $M$.  
+Then    $\frac{\partial }{\partial x_i}$ is a vector field on $U$, for all $i = 1, \ldots, \dim(M)$.
+\end{eg}
+\begin{eg}
+    If $U \subset \R^2$ open, using the chart $\text{Id}$, $\frac{\partial }{\partial x_1}$ is just the vector field with unit vectors pointing in the $x_1$ direction.
+\end{eg}
+
+\section{Integral curves}
+\begin{definition}[Integral curve]
+    Let $X \in \mathfrak{X}(M)$. A smooth curve 
+    $\gamma: (a, b) \to  M$ is an  \emph{integral curve of $X$} iff $$\dot \gamma(t) = X|_{\gamma(t)}$$ for all $t \in (a, b)$.
+\end{definition}
+\begin{remark}
+    Here $\dot \gamma(t)$ is defined as  $(\gamma_*)_t(1)$, where $(\gamma_*)_t : T_t(a, b) \to  T_{\gamma(t)} M$, and $T_t(a, b) \cong \R$, so using $1$ as an input is valid.
+    Another way to look at it, in terms of tangent vectors as equivalence classes of curves: $\dot \gamma(t)$ equals $[s \mapsto  \gamma(s+t)]$.
+\end{remark}
+\begin{prop}
+    Let $X $ be a vector field, $p \in M$.
+    Then there exists a neighborhood $U$ of $p$, an $\epsilon>0$ and a unique smooth map $$F: U \times (-\epsilon, \epsilon) \to  M$$ s.t.\ for all $q \in U$,  the curve
+    $\gamma_q$ defined by $\gamma_q(t)=F(q,t)$ is an  integral curve of $X$ with  $\gamma_q(0) = q$.
+\end{prop}
+\begin{proof}
+    Fix a chart $(\phi, V)$ near $p$. In these coordinates, we have $X = f_i(x) \frac{\partial }{\partial x^i}$ for some smooth functions $f_i$.
+    We need to show that there exists a neighboorhood $W \subset \phi(V)$ of $p$, $\exists  \epsilon >0$ and $\exists !\;\; y: W \times (-\epsilon, \epsilon) \to  \phi(V)$ such that 
+    $$\begin{cases}
+     \frac{\partial }{\partial t} y(x, t) = f(y(x, t))\\
+     y(x, 0) = x
+    \end{cases}$$
+for all $x$.
+   % \frac{\partial }{\partial t} y(x, t) = f(y(x, t))$, and $y(x, 0) = x$ for all $x$.
+    This holds by the fundamental theorem of ODE's.
+ (It  says that for each initial value $x$, there is a unique solution defined on a small interval $(-\epsilon, \epsilon)$, and the solution varies smoothly with $x$.)
+\end{proof}
+\begin{remark}
+    The map $F$ in the above proposition is called \emph{flow}.
+\end{remark}
+\begin{remark}
+In particular, for all $p \in M$, there exists an $\epsilon> 0$ and a unique integral curve $\gamma_p$ of $X$ defined on $(-\epsilon, \epsilon)$, starting at point $p$.
+\end{remark}
+\begin{eg}
+    Sometimes, we cannot continue the curve. For example, look at $\R^2\setminus\{(0,0)\}$ and $X = \frac{\partial }{\partial x_1}$. Then the integral curve starting at $(-2, 0)$ is defined only up to time $t=2$.
+\end{eg}
+
+
+
+
+
+    Assume, for the sake of simplicity, that the flow of $X$ is defined on $M \times \R$.   Then $F$ is a $1$-parameter group of diffeomorphisms, as a consequence of the uniqueness in the above proposition.
+ \begin{definition}[$1$-parameter group of diffeomorphisms]
+  A $1$-parameter group of diffeomorphisms on $M$ is a smooth map $F\colon M \times \R \to M$ such that,
+using the notation $F_t(p) = F(p, t)$ (think of it as fixing  $t$ and varying the point), one has  
+     \begin{itemize}
+        \item $F_s  \circ  F_t = F_{s+t} \;\;\forall s,t$
+        \item  $F_0 = \text{Id}$
+    \end{itemize}
+(It then follows that $F_t$ is a diffeomorphism for all $t$.)
+\end{definition}
+
+
+   
+    
+    
+     
+\begin{remark}
+    There is a bijection between 
+    \begin{itemize}
+\item vector fields on $M$ whose flow is defined on the biggest possible domain $M \times \R$, and 
+\item $1$-parameter groups of diffeomorphisms on $M$.
+\end{itemize}
+The bijection reads:
+    \[
+        \begin{tikzcd}[row sep=0em]
+        X \arrow[r, mapsto] & \text{flow } F \text{ as above}\\
+ X \text{ given by }  X(q)=\frac{d}{dt}\big|_0 F_t(q) & \arrow[l, mapsto] F\colon M \times \R\to \R.
+    \end{tikzcd}
+    \] 
+\end{remark}
+\begin{eg}
+    On $\R^2$ take $X = \frac{\partial }{\partial x_{1}}$.
+    Then the flow is $F_t(x_1, x_2) = (x_1 + t, x_2)$.
+\end{eg}
+
+\begin{eg}
+    On $\R^2$ let $X = x \frac{\partial }{\partial y}  - y \frac{\partial }{\partial x}$. Then the images of integral curves are circles.
+  The flow is  given by  $F_t(x, y) = R_t  (x, y)$, where $R_t$ denotes the rotation by the angle $t$.
+\end{eg}

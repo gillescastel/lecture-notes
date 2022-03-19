@@ -1,0 +1,161 @@
+%\lesson{7}{wo 06 nov 2019 16:18}{}
+
+\begin{remark}
+    Let $\pi_1: E_1 \to  B$ and $\pi_2: E_2 \to B$ be a vector bundle with the same base.
+    Their direct sum (Whitney sum) is a vector bundle $E_1 \oplus E_2 \to  B$ with fiber over $p \in B$ given by $(E_1 \oplus E_2)_p = (E_1)_p \oplus (E_2)_p$.
+    Trivialisations are given by taking the direct sum of the trivializations of $E_1$ and of $E_2$.
+\end{remark}
+
+\begin{definition}[Vector subbundle]
+    Let $\pi: E \to  B$ be a vector bundle.
+    A vector subbundle is a subset $D \subset E$ s.t. $\pi|_D: D \to  B$, with the induced smooth structure and vector space structure on the fibers, is a vector bundle.
+
+\end{definition}
+
+\begin{definition}[Vector bundle morphism]
+    Let $\pi_i: E_i \to  B_i$ be vector bundles for $i = 1, 2$.
+   A smooth map  $F: E_1 \to  E_2$ is a vector bundle morphism if there exists a smooth map $f: B_1 \to  B_2$ such that the following diagram commutes
+
+    \[
+        \begin{tikzcd}
+            E_1 \arrow[d, "\pi_1"] \arrow[r, "F"] & E_2 \arrow[d, "\pi_2"]\\
+            B_1 \arrow[r, dashed, "f"]& B_2
+        \end{tikzcd}
+    \]
+and such that  for all $p \in B_1$, the map $F|_{(E_1)_p}: E_{1, p} \to  (E_2)_{f(p)}$ is linear.
+    We call $F$ an isomorphism if $F$ is invertible and $F, F^{-1}$ are both vector bundle morphisms. (Or equivalently, if $F$ is a diffeomorphism.)
+\end{definition}
+
+\begin{definition}[Frame]
+    Given a vector bundle $E \to B$, a frame is a collection of sections that form a basis at every point.
+\end{definition}
+\begin{remark}
+    $E$ admits a frame iff $E$ is isomorphic to   vector bundle  $B \times \R^n$.
+In this case we call $E$ a trivial vector bundle.
+\end{remark}
+%\begin{explanation}
+%    One direction is easy: $B\times \R^{n}$ admits a frame, the standard basis.
+%\end{explanation}
+
+\begin{eg}
+    Let $S^{n} \subset \R^{n+1}$ be the unit sphere.
+    The tangent bundle $TS^{n}$ and its orthogonal $(TS^{n})^{\perp}$ are vector bundles over $S^{n}$.
+    $(TS^{n})^{\perp}$ is a trivial bundle, indeed, we can choose the normal vector at each point as a frame.
+    However, $TS^{n}$ is not a trivial bundle in general.
+    ($TS^{n}$ only admits a frame when $n = 1, 3$. The fact that $TS^2$ does not admit a frame is a consequence of the Hairy ball theorem.)
+
+    The Whitney sum $ TS^{n}\oplus (TS^{n})^{\perp}$   is isomorphic to $\R^{n+1} \times S^{n}$, which is a trivial vector bundle.
+    So this is an example of a sum of a trivial and a non-trivial vector bundle being trivial.
+    \end{eg}
+\begin{figure}[H]
+    \centering
+    \incfig{example-of-a-vector-bundle-that-doesnt-admit-a-frame}
+    \caption{The Whitney sum of $TS^{2}\oplus (TS^{2})^{\perp}$ is a trivial vector bundle.}
+    \label{fig:example-of-a-vector-bundle-that-doesnt-admit-a-frame}
+\end{figure}
+
+
+\setcounter{chapter}{4}
+\chapter{Differential forms and integration}
+
+\section{Forms on vector spaces}
+
+Let $V$ be a finite dimensional real vector space.
+
+\begin{definition}
+    For every $k\ge 1$, we define \[
+        \bigwedge^{k} V^{*} := \{\omega: \underbrace{V \times \cdots \times  V}_{\text{$k$ times }}  \to \R \mid  \text{multilinear and skew symmetric}\} 
+\]
+Skew symmetric means: $\omega(\ldots, v, \ldots, w,\ldots) =-\omega(\ldots, w, \ldots, v,\ldots)$.
+We define $\bigwedge^{0} V^{*} = \R$
+\end{definition}
+\begin{eg}
+    $\bigwedge ^{1} V^{*} = V^{*}$
+\end{eg}
+\begin{eg}
+    $\bigwedge^2 V^{*} = $ bilinear maps $V\times V \to \R$ that are skew symmetric.
+\end{eg}
+
+\begin{definition}[Wedge product]
+    $\forall  \ell, k \ge  0$, the wedge product is
+    \begin{align*}
+        \wedge: \bigwedge^{k} V^{*} \times \bigwedge^{\ell} V^{*} &\longrightarrow \bigwedge^{\ell + k}V^{*}\\
+        (\omega \wedge \tau)(v_1, \ldots, v_{k+\ell})&\longmapsto \frac{1}{k! \ell!}\sum_{\sigma \in S_{k + \ell}} (-1)^{\sigma} \omega(v_{\sigma(1)}, \ldots, v_{\sigma(k)})  \cdot \tau(v_{\sigma(k+1)}, \ldots, v_{\sigma(k+\ell)})
+    .\end{align*}
+\end{definition}
+
+% TODO: bigwedge without limits on top
+
+\begin{remark}
+    $\omega \wedge \tau = (-1)^{k \ell} \tau \wedge \omega$, where $\omega\in \bigwedge^{k} V^{*}$ and $\tau \in \bigwedge^{\ell} V^{*}$.
+\end{remark}
+
+\begin{lemma}
+    Suppose $\theta_1 ,\cdots , \theta_k \in  V^{*}$ and $v_1, \ldots, v_k \in V$. We have
+    \[
+        (\theta_1 \wedge \cdots \wedge \theta_k)(v_1, \ldots, v_k) = \det(\theta_i(v_j))
+    .\] 
+\end{lemma}
+
+\begin{lemma}
+    Let $m = \dim V$.
+    Suppose  $\theta_1, \ldots, \theta_m$ is a basis of $V^{*}$. Then $\forall  k \ge  1$,
+    \[
+    \{\theta_{i_1} \wedge \cdots \wedge \theta_{i_k}  \mid 1 \le   i_1 <  \ldots <  i_k \le  m\} 
+    \]
+    is a basis of  $\bigwedge^{k} V^{*}$.
+\end{lemma}
+\begin{eg}
+    Suppose $\dim V = 3$ and  $(\theta_1, \theta_2, \theta_3)$ is a basis of $V^{*}$, then 
+    \begin{itemize}
+        \item $1$ is a basis of $\bigwedge^{0} V^{*} = \R$
+        \item $\{\theta_1, \theta_2, \theta_2\}$ is basis of $\bigwedge^{1} V^{*} = V^{*}$ 
+    \item $\{\theta_1 \wedge \theta_2, \theta_2 \wedge \theta_3, \theta_1 \wedge \theta_3 \}$ is a basis of $\bigwedge ^2 V^{*}$
+    \item $\theta_1 \wedge \theta_2 \wedge \theta_3$ is a basis of $\bigwedge ^{3} V^{*}$.
+    \end{itemize}
+\end{eg}
+\begin{remark}
+    If $k > m$, the dimension of the space, then $\bigwedge^{k} V^{*}$ is the zero vector space.
+\end{remark}
+
+\begin{definition}[Pullback]
+    Let $f : V \to  W$ be a linear map.
+    Then the dual map is $f^{*}: W^{*} \to  V^{*}$, given by $(f^{*}\theta)(v) = \theta(f(v))$.
+    More generally, $\forall k \ge 1$, the pullback by $f$ is 
+    \begin{align*}
+        f^{*}:  \bigwedge^{k} W^{*}&\longrightarrow  \bigwedge^{k} V^{*}\\
+        \omega&\longmapsto f^{*} \omega   \end{align*}
+ where
+ $$(f^{*} \omega)(v_1, \ldots, v_k) = \omega(f(v_1), \ldots, f(v_k)).$$
+       
+      
+\end{definition}
+
+
+\section{Differential forms on manifolds}\label{sec:diffformman}
+
+Let $M$ be a manifold, $f \in C^{\infty}(M)$.
+For all $p \in M$, define \[
+    (df)_p := (f_*)_p: T_pM \to  T_{f(p)} \R = \R
+\]
+We notice that $(df)_p \in (T_pM)^{*} =: T^{*}_p M$
+ 
+Let $(U, \phi = (x_1, \ldots, x_n))$ be a chart.
+
+\begin{lemma}
+    The set $\{dx_1|_p, dx_2|_p, \ldots, dx_{k}|_p\}$ is the basis of $T^{*}_p M $, which is dual to $\big\{\frac{\partial }{\partial x_i}\big|_p \big\} $
+\end{lemma}
+\begin{proof}
+    We have that $\frac{\partial }{\partial x^i}\big|_p = (\phi^{-1})_{*, \phi(p)} e_i$, where $e_i$ is the $i$-th standard basis vector.
+    Hence, for every $j$, \[
+    dx_{j}|_p\left(\frac{\partial }{\partial x^i}\Big|_p\right) = 
+    dx_{j}|_p\left((\phi^{-1})_{*, \phi(p)} e_i\right) = 
+    (x_{j}  \circ  \phi^{-1})_{*, \phi(p)} e_i
+.\]
+Since $x_{j}  \circ  \phi^{-1}$ is the $j$th projection, this expression is
+ is the $j$th component of $e_i$, which is $\delta_{ij}$.
+\end{proof}
+
+\begin{eg}
+Consider $\R^2$ with standard coordinates $x_1, x_2$: $dx_i|_p\colon T_pR^2\to \R^2$ is given by $\frac{\partial }{\partial x_1}|_p\mapsto 1$ and $\frac{\partial }{\partial x_2}|_p\mapsto 0$.
+\end{eg}

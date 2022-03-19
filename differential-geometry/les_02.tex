@@ -1,0 +1,200 @@
+%\lesson{2}{wo 02 okt 2019 16:11}{Partition of unity, submanifolds, tangent vectors}
+
+\section{Partition of unity}
+
+\begin{definition}[Partition of unity]
+    A partition of unity is a family $\{e_\alpha\}_{\alpha \in A}$ of smooth functions $e_\alpha: M \to  [0, 1]$ such that
+    \begin{itemize}
+        \item For all $p \in M,$ there exists a neighborhood $U$ of $p$ such that the set $\{\alpha \in A: e_\alpha|_U \not\equiv 0\} $ is finite.
+        \item $\sum e_\alpha \equiv 1$
+    \end{itemize}
+\end{definition}
+\begin{definition}[Subordinate]
+    Let $\{U_\alpha\}_{\alpha \in A}$ be an open cover of $M$.
+    A partition of unity $\{e_\alpha\}_{\alpha \in A}$ is \emph{subordinate} to the cover $\iff \supp(e_\alpha) \subset U_\alpha$, where
+    \[
+        \supp( e_\alpha) = \overline{\{p \in M: e_\alpha(p) \neq 0\}}
+    .\] 
+
+\end{definition}
+\begin{prop}
+    Let $\{U_\alpha\}_{\alpha \in A}$ be an open cover of $M$.
+    Then  there exists a partition of unity subordinate to it.
+\end{prop}
+
+This is useful in the following way: we can define functions, or vector fields $s_{\alpha}$ on open subsets   of $M$ which locally look like $\R^n$. Then we create a partition of unity subordinate to this cover, and paste the functions smoothly together: $\sum e_\alpha \cdot s_\alpha$.
+This gives a smooth function (or vector field) on the whole of $M$.
+The proof uses that the topology of $M$ is second countable, which is one of the reasons of requiring C2 in the definition of a manifold.
+
+\begin{proof}[Idea of the proof, $M$ compact]
+    For all $q \in M$, choose $\alpha \in A$ such that $q \in U_\alpha$.
+    Let $\psi_q$ be a  function\footnote{Such functions are sometime called bump functions.} such that $\psi_q(q) = 1$ supported in $U_\alpha$. This is always possible, since the manifold locally looks like $\R^n$.
+
+    Since $M$ is compact, the open cover $\{ (\psi_q)^{-1} (\R_{>0})\}_{q \in M}$ has a finite subcover.
+    So $\exists q_1, \ldots, q_m \in M$ such that $\psi = \sum_{i=1}^{m} \psi_{q_i} > 0$ on $M$.
+    Now, define $\phi_i = \frac{\psi_{q_i}}{\psi}$, which satisfies $\sum \phi_i = 1$ and $\supp(\phi_i) = \supp(\psi_{q_i}) \subset U_\alpha$ for some $\alpha \in A$.
+    Now, one can rearrange these functions such that they are indexed by $A$.
+\end{proof}
+
+\section{Submanifolds}
+
+Let $N$ be a smooth manifold of dimension $n$.
+\begin{definition}[Submanifold]
+    A subset $M \subset N$ is a submanifold of dimension $m$ if $\forall p \in M$ there exists a chart $(U,\phi)$ such that $\phi(U) \cap \left( \R^m  \times \{0\} \right)  = \phi(U \cap M)$.
+\end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{submanifold}
+    \caption{Definition of a submanifold}
+    \label{fig:submanifold}
+\end{figure}
+\begin{remark}
+    A chart as above is called adapted to $M$.
+\end{remark}
+\begin{remark}
+    The set $M$ itself is a smooth manifold, with smooth atlas given by     \[
+        \{(U \cap M, \phi|_{U \cap M}) : (U, \phi) \text{ is a chart of $N$ adapted to $M$}\} 
+    .\] 
+\end{remark}
+\begin{remark}
+   Submanifolds of the same dimension as $M$ are exactly the open sets of $M$, and those with dimension $0$ are exactly the points.
+\end{remark}
+\begin{eg}
+ The union of the axes   $\{0\} \times \R \cup \R\times \{0\}$ is not a submanifold of $\R^2$. The problematic point is the origin (the ``cross'').
+\end{eg}
+
+\begin{eg}
+The unit circle    $S^1 \subset \R^2$ is a submanifold of $\R^2$.
+    The idea is that, for each point of $S^1$, we need to find a chart that `flattens' a part of the circle to a line. Define
+    \begin{align*}
+        \phi_a: \R^2 - (\R_{\ge 0} \times \{0\} ) &\longrightarrow (0, 2\pi) \times \R_+  & 
+        \phi_b: \R^2 -  (\R_{\le  0} \times \{0\})  &\longrightarrow (-\pi, \pi) \times \R_+ \\
+        \begin{pmatrix} r \cos \theta \\ r \sin \theta \end{pmatrix}   &\longmapsto (\theta, r) & 
+        \begin{pmatrix} r \cos \theta \\ r \sin \theta \end{pmatrix}   &\longmapsto (\theta, r)
+    .\end{align*}
+Note that $0$ is not included in either of the charts, but that is not a problem.
+
+We have that $\phi_a(S^{1} - \{(1, 0)\}) = (0, 2\pi) \times \{1\} $ and $\phi_b(S^{1} - \{ (-1, 0)\})  = (-\pi, \pi) \times \{1\} $.
+This is already flat, but per definition of submanifold, we need to move this to zero.
+So instead of $\{\phi_a, \phi_b\}$, use $\{\phi_a - (0, 1), \phi_b - (0, 1)\}$.
+
+
+\begin{figure}[H]
+    \centering
+    \incfig{circle-submanifold-example}
+    \caption{A circle is a submanifold of the plane.}
+    \label{fig:circle-submanifold-example}
+\end{figure}
+
+\end{eg}
+
+\begin{eg}
+ Consider the torus, $S^{1} \times S^{1}$,  where $S^{1} = \{z \in \C : |z| = 1\} $
+ Fix $\alpha \in \R$. Now consider
+ \[
+     M = \{ (e^{ 2 \pi i t}, e^{2 \pi i \alpha t}): t \in \R\} 
+ ,\] 
+ a subset of the torus.
+ This is a submanifold of the torus iff  $\alpha \in \Q$ (this happens exactly when 
+ the spiral closes up). When $\alpha \notin \Q$, $M$ is dense in the torus.
+\end{eg}
+
+
+\begin{figure}[ht]
+    \centering
+    \incfig{submanifold-torus-example}
+    \caption{Two examples of submanifolds of the torus. On the left, $\alpha =  \frac{7}{2}$ and on the right  $\alpha = 4$.}
+    \label{fig:submanifold-torus-example}
+\end{figure}
+
+\chapter{Tangent vectors}
+
+\section{Tangent vectors, tangent spaces}
+
+\begin{note}
+    This and the next section do not follow neither Lee's nor Tu's book.
+\end{note}
+
+\begin{remark}
+    Given a submanifold $M$ of $\R^n$, one can define tangent vectors to $M$ at some point $p \in M$ as the collection of
+    $\left.\frac{d}{dt}\right|_0 \gamma(t)$  where  $\gamma: (-\epsilon, \epsilon) \to  \R^n$ is smooth and $\operatorname{Im} \gamma \subset M$, $\gamma(0) = p$.
+This uses the ambient space, hence to define tangent vectors to manifolds we cannot proceed in the same way.
+\end{remark}
+
+ Let $M$ be a smooth manifold of dimension $m$.
+
+
+\begin{definition}[Tangent vector]
+  A tangent vector of $M$ at $p$ is an equivalence class $[\gamma]$ of smooth curves $\gamma: (-\epsilon, \epsilon) \to  M$ with $\gamma(0) = p$, where
+    \[
+        \gamma_1 \sim \gamma_2 \iff \exists \text{ a chart $(U,\phi)$ containing $p$ s.t.\ } (\phi  \circ  \gamma_1)'(0) = (\phi  \circ \gamma_2)'(0)
+    .\] 
+\end{definition}
+
+\begin{lemma}
+    \label{lem:1}
+    If $(\phi  \circ  \gamma_1)'(0) = (\phi  \circ  \gamma_2)'(0)$ for a chart $\phi$, then the same holds for all charts.
+\end{lemma}
+
+
+
+\begin{proof}
+The linear map $D_{\phi(p)}(\psi  \circ  \phi^{-1}): \R^m \to  \R^m$
+sends $(\phi  \circ \gamma_i)'(0)$ to $(\psi  \circ  \gamma_i)'(0)$ because of the chain rule, for $i = 1, 2$.
+Now, as $(\phi  \circ \gamma_1)'(0) = (\phi \circ \gamma_2)'(0)$, the vectors obtained  applying $D_{\phi(p)}$ must also be the same.
+\end{proof}
+
+\begin{definition}[Tangent space]
+    $\forall p \in  M, T_p M$ is the set of all tangent vectors at $p$, which we call the tangent space at $p$.
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \incfig{tangent-vector-definition-chart-independent}
+    \caption{Charts in the proof of Lemma~\ref{lem:1}}
+    \label{fig:tangent-vector-definition-chart-independent}
+\end{figure}
+
+\begin{prop}\label{prop:tangspace}
+    $T_pM$ is a vector space, and its dimension is the same as the dimension of the manifold.
+\end{prop}
+\begin{proof}
+    Let $(U, \phi)$ be a chart. We obtain a map \[T_pM \to \R^m, [\gamma] \mapsto (\phi  \circ  \gamma)'(0).\]
+
+    It's well-defined and injective by the definition of tangent vector. It is also surjective. Indeed, given $v\in \mathbb{R}^m$,  take the straight line $t \mapsto  \phi(p) + tv$ in $\R^m$  and then apply  $\phi^{-1}$, to obtain the following   curve on $M$: 
+    \[
+        \gamma(t) = \phi^{-1}(\phi(p) + tv)
+    .\] 
+ Now  $[\gamma]$ maps to $v$.
+
+    Now that we've proved that this is a bijection, we immediately get a vector space structure on $T_pM$ by ``transporting'' the one on $\mathbb{R}^m$. 
+    Suppose we had started with another chart $(V, \psi)$, then we would have obtained the  same vector space structure on $T_pM$, because
+     \[
+         D_{\phi(p)}(\psi  \circ \phi^{-1}): \R^m \to  \R^m
+    .\] 
+    is a linear isomorphism making this diagram commute:
+    \begin{center}
+        \begin{tikzcd} [
+            column sep=0.5em,
+            row sep=3em
+            ]
+            &{[\gamma] \in T_pM \arrow[dl] \arrow[dr]}&\\
+            {(\phi \circ \gamma)'(0) \in \R^m} \arrow[rr, "D_{\phi(p)}(\psi  \circ  \phi^{-1})"] & & (\psi \circ \gamma)'(0) \in \R^m
+        \end{tikzcd}
+    \end{center}
+\end{proof}
+
+\filbreak
+When you choose a chart around $p\in M$, you get a basis of $T_pM$.
+\begin{definition}[Basis of $T_pM$ induced by a chart]
+    Let $p \in M$, $(\phi, U)$ a chart with $p \in U$ whose components we denote by $x_1, \ldots, x_m$ (hence $x_i: U \to  \R$). 
+    By means of the isomorphism of vector spaces  \[
+    T_pM \to  \R^m: [\gamma] \mapsto  (\phi  \circ \gamma)'(0),\]
+    the standard basis of $\R^m$ induces a basis of $T_pM$, which we denote by  $\left.\frac{\partial }{\partial x_1} \right|_p,\dots,\left.\frac{\partial }{\partial x_m} \right|_p$.
+\end{definition}
+
+\begin{remark}
+    Let $W \subset \R^m$ open, $q \in W$.
+    There is a canonical linear isomorphism $T_p W \to \R^{m}, [\gamma] \to \gamma'(0)$. To see this, take $\phi = \text{Id}$ in the proof of the previous lemma.
+\end{remark}

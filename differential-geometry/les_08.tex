@@ -1,0 +1,180 @@
+%\lesson{8}{di 19 nov 2019 10:29}{}
+ 
+%Recap: let $f \in C^{\infty}(M)$ and $p \in M$, then $ (df)_p := (f_*)_p \in T_p^{*} M $. 
+
+Let $k\ge 0$. For every $p\in M$, consider the vector space $\bigwedge ^{k} T_p^{*} M$.
+
+\begin{definition}[Differential form]
+    A $k$-form on $M$ is a map
+    \[
+    \alpha: M \to  \bigsqcup_{p \in  M} \bigwedge ^{k} T_p^{*} M
+    \] 
+    such that
+    \begin{itemize}
+        \item $\alpha(p) \in  \Lambda^{k} T_p^{*}M$ for each $p$
+        \item For any chart $(U,\phi)$, writing
+        $$\alpha(p)=
+        \sum_{1 \le   i_1 <  \ldots <  i_k \le  m}a_{i_1   \ldots i_k}
+        dx_{i_1} \wedge \cdots \wedge dx_{i_k}|_p,$$        
+          the coefficients $a_{i_1   \ldots i_k} \colon U\to \R$ are smooth.
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    In other words: a $k$-form is a section of the vector bundle  $\bigwedge^{k} T^{*}M$.
+\end{remark}
+We denote $\Omega^{k}(M) = \{\text{$k$-forms on $M$}\}$. Notice that $\Omega^0(M)=C^{\infty}(M)$.
+
+\begin{remark}
+    Given $\alpha \in \Omega^{k}(M)$ and vector fields $X_1, \ldots, X_k \in 
+    \mathfrak{X}(M)$, we define $\alpha(X_1, \ldots, X_k)\in C^{\infty}(M)$ by
+    \[
+        (\alpha(X_1, \ldots, X_k))(p) := \alpha(p)(X_1(p), \ldots, X_k(p))
+    .\] 
+    Notice that for all $f \in C^{\infty}(M)$,
+    $\alpha( fX_1, \ldots X_k) = f \alpha(X_1, \ldots, X_k)$.
+\end{remark}
+\begin{definition}
+    Let $F: M \to  N$ be a smooth map.
+    The pullback of $k$-forms is $F^{*}: \Omega^{k}(N) \to \Omega^{k}(M)$ :
+    \[
+        (F^{*} \omega)(p)(v_1, \ldots v_k) = \omega(F(p))(
+        (F_*)_p v_1, 
+        \ldots,
+        (F_*)_p v_k)
+\]
+where $p\in M$, $v_i\in T_pM$. 
+\end{definition}
+%\begin{eg}
+%    On $\R$, $dx_1 \in \Omega^{1}(\R^2)$ looks like $(1\  0)$
+%\end{eg}
+
+We now study the pullback of differential forms on $\R^n$.
+\begin{prop}
+    Let $U \subset \R^m$ open, $V \subset \R^n$ open, $G : U \to  V$ smooth.
+    Denote with $x_j$ the standard coordinates on $\R^m$ and by $y_i$ those on $\R^n$.
+    Then
+    \begin{itemize}
+        \item[1)] $G^{*}(d y_i) = \sum_{j=1}^{m} \cfrac{\partial G_i}{\partial x_j} d x_j \in \Omega^{1}(U)$
+        \item[2)] If $m =n$, then
+            \[G^{*} (f(y) dy_1 \wedge \ldots\wedge dy_m) = (f  \circ  G) \det (\operatorname{Jac} G) dx_1 \wedge \ldots \wedge dx_m.\]
+    \end{itemize}
+\end{prop}
+Above $\operatorname{Jac} G$ denotes the Jacobian of $G$, i.e. the matrix representing the derivative $DG$ of $G$.
+\begin{proof}
+    \begin{itemize}
+        \item $G^{*}(dy_i)\left(\frac{\partial }{\partial x_j}\right) = dy_i \left( G_* \frac{\partial }{\partial x_j}\right) = dy_{i}(\sum_k \frac{\partial G_k}{\partial x_{j}} \frac{\partial }{\partial y_{k}}) = \frac{\partial G_i}{\partial x_{j}} $
+        \item 
+            $G^{*}( f d y_1 \wedge \ldots \wedge dy_m) = (G^{*} f) (G^{*} dy_1 \wedge \ldots \wedge G^{*} dy_m)$.
+            Evaluating on $\frac{\partial }{\partial x_1},\dots,\frac{\partial }{\partial x_m}$, we get
+            \[
+                (G^{*} f) \det \underbrace{\left(G^{*}(dy_{i}) \left(\frac{\partial }{\partial x_j}\right)\right)}_{=\dfrac{\partial G_i}{\partial x_{j}} \text{ by above}}
+                = (f  \circ  G) \det (\operatorname{Jac} G)
+            .\] 
+
+    \end{itemize}
+\end{proof}
+\section{Orientation and volume forms}
+\begin{definition}[Oriented atlas]
+    An oriented atlas is a smooth atlas $(U_{\alpha},\phi_{\alpha})$ s.t.\ $\det D(\phi_\beta  \circ  \phi_\alpha^{-1}) > 0$ for all $\alpha,\beta$.
+\end{definition}
+\begin{definition}[Orientation]
+    An orientation is a choice of maximal oriented atlas.
+\end{definition}
+\begin{remark}
+    Not all manifolds are orientable, e.g.\ the Möbius band and $\R\mathbb{P}^2$ are not.
+\end{remark}
+\begin{remark}
+Let $V$ be vector space.
+On $\{\text{ordered bases of $V$}\}$, there is an equivalence relation $(v_1, \ldots, v_m) \sim (w_1, \ldots, w_m)$ if change of basis has $\det > 0$.
+An orientation of  $V$ is by definition a choice of one of the two equivalence classes. 
+An ordered basis of an oriented vector space is positive if it belongs to the equivalence class that gives the orientation.
+
+
+Now let $M$ be a manifold. An orientation on $M$ induces and orientation on each tangent space $T_pM$.
+\end{remark}
+\begin{definition}[Volume form]
+    A volume form on $M^{m}$ is an $m$-form $\Omega$ such that  $\Omega (p) \neq 0$ for all  $p \in  M$.
+\end{definition}
+\begin{remark}
+    If $\Omega$ is a volume form, then an other volume form looks like $f \Omega$, where $f : M \to  \R\setminus \{0\}$.
+\end{remark}
+
+\begin{prop}
+    $M$ is orientable iff there exists a volume form $\Omega$
+\end{prop}
+\begin{proof}
+    We denote by $\text{Vol}:=dx_1 \wedge \ldots \wedge dx_m$ the standard volume form on~$\R^m$.
+
+    $\impliedby$: choose an atlas consisting of charts such that $(\phi^{-1}_\alpha)^{*}\Omega = f_\alpha \text{Vol}$, where $f_\alpha $ is a positive function.
+    Then $\det D(\phi_\beta  \circ  \phi_\alpha^{-1}) > 0$ because of item 2 of the last proposition.
+    
+      $\implies$: given an oriented atlas  $\{(U_{j},\phi_{j})\}$, choose a partition of unity $\{e_{\alpha}\}$ subordinate to it, and define 
+      $\Omega = \sum_{\alpha} e_\alpha \cdot(\phi_\alpha)^* \text{Vol}.$
+ Then $\Omega$ is a volume form, because on $U_\alpha\cap U_\beta$ we have
+ $$ (\phi_\beta)^* \text{Vol}    =(\phi_\alpha)^*\underbrace{(\phi_\beta\circ \phi_\alpha^{-1})^* \text{Vol}}_{\det (D(\phi_\beta\circ \phi_\alpha^{-1}))\cdot \text{Vol}}=(\text{a positive function})\cdot (\phi_\alpha^{-1})^*\text{Vol}.
+ $$
+\end{proof}
+\section{Integration on manifolds}
+ 
+
+Let $M^{m}$ be a oriented manifold.
+We want to define $\int_M \omega$, where $\omega \in  \Omega^{m}(M)$ has compact support.
+
+\paragraph{Step 1.}
+Assume  the support  $\supp(\omega):=\overline{\{p\in M: \omega(p)\neq 0\}}$ is contained in one chart $(U,\phi)$ of the oriented atlas..
+Write $(\phi^{-1})^{*} \omega = f dx_1 \wedge \ldots \wedge dx_m$ for some $f \in C^{\infty}(\phi(U))$.
+\begin{definition}[Integral of top form supported in a chart]
+    \[
+        \int_M \omega := \int_{\phi(U)} (\phi^{-1})^{*} \omega := \int_{\phi(U)} f(x) \: dx_1 dx_2 \cdots dx_m,\]
+where on the right hand side is the multiple Riemann integral of the function $f$ over $\phi(U)$.         
+\end{definition}
+
+Recall the transformation rule in $\R^{m}$.
+Let $U, V \subset \R^m$ and $\theta: V \to  U$ a diffeomorphism.
+Let $f \in C^{\infty}(U)$ be integrable.
+Then
+\[
+    \int_U f(x) \: dx_1 \cdots dx_m = \int_V (f  \circ  \theta)(y) | \det (\operatorname{Jac} \theta)| \: dy_1 \cdots dy_m
+.\] 
+
+ 
+\begin{lemma}
+    $\int_M \omega$ is independent of the choice of chart in the oriented atlas.
+\end{lemma}
+\begin{proof}
+  Let $(V,\psi)$ be another chart as above, and denote $\theta:=\phi \circ \psi^{-1}$.
+  \begin{figure}[H]
+    \centering
+    \incfig{tangent-vector-definition-chart-independent-ForDiffForms}
+  %  \caption{Definition of a vector bundle}
+    \label{tangent-vector-definition-chart-independent-ForDiffForms}
+\end{figure}
+We want to find $g\in C^{\infty}(\psi(V))$ such that $(\psi^{-1})^*\omega=
+  g(y) \: dy_1 dy_2 \cdots dy_m$. To do so we compute
+$$
+  (\psi^{-1})^*\omega=(\phi^{-1}\circ \theta)^*\omega= \theta^*((\phi^{-1})^*\omega)=
+ \underbrace{(f  \circ  \theta) \det (\operatorname{Jac} \theta)}_{\text{ so this is $g$}}  dy_1 \wedge \ldots \wedge dy_m
+$$
+using a Proposition from \S\ref{sec:diffformman} in the last equality.
+By the transformation rule $$\int_{\phi(U)} f(x) \: dx_1 dx_2 \cdots dx_m=
+ \int_{\psi(V)} \underbrace{(f  \circ  \theta)(y) | \det (\operatorname{Jac} \theta)|}_{=g} \: dy_1 \cdots dy_m,$$
+ finishing the proof.
+(The function on the right hand side equals $g$ since 
+the absolute values  can be removed, due to the fact that $\psi$ and $\phi$ lie in the oriented atlas of $M$.)
+\end{proof}
+
+
+\paragraph{Step 2.}
+For any $\omega \in \Omega^{m}(M)$ with compact support, let $\{(U_\alpha, \phi_\alpha)\} $ be an oriented atlas such that $\supp(\omega) \cap U_\beta \neq \emptyset$ for finitely many $\beta$.
+Let  $e_\beta$ be a partition of unity subordinate to this cover.
+Notice that  $\omega = (\sum e_\beta) \omega = \sum (e_\beta \omega)$.
+ \begin{definition}[Integral of top form]
+    \[
+    \int_M \omega = \sum_\beta \int e_\beta \omega
+    .\] 
+\end{definition}
+Notice that each summand  $\int e_\beta \omega$ was defined in Step 1, since $\supp(e_\beta \omega)\subset U_{\beta}$.
+
+\begin{remark}
+ One can show: this definition is independent of the choice of oriented atlas and partition of unity.
+\end{remark}
