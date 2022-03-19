@@ -1,0 +1,260 @@
+\lesson{16}{di 17 nov 2020 12:45}{}
+\url{https://youtu.be/c1haPsdBdmA}
+\paragraph{Cochain complex}
+\begin{remark}
+    Def 1.29 is wrong in the text, indices not at the right place.
+\end{remark}
+\[
+\cdots \to  C^{n-1} \xrightarrow{d^{n-1}}  C^{n} \xrightarrow{d^{n}}   C^{n+1} \to  \cdots
+\] 
+with again $d^2 = 0$.
+We have coboundaries and cocycles.
+\[
+    B^{n}(C^*) = \im \subset  \Ker = Z^{n}(C^{*})
+.\] 
+Etc \ldots
+We can also view a cochain complex as a chain complex just by renumbering.
+
+If $0 \to  A^{*} \to  B^{*} \to  C^{*} \to 0$ is a short exact sequence of cochain complexes, we obtain a long exact sequence in cohomology
+\[
+H^{n}(A^{*}) \to  H^{n}(B) \to  H^{n}(C) \xrightarrow{} H^{n+1} (A) \to   \cdots
+.\] 
+
+\nchapter{2}{Tor and Ext}
+\nsection{2}{1}{Derived functors}
+
+\begin{definition}
+    Let $A$ be an $R$-module. Then a projective resolution of $A$ is an \emph{exact} sequence of $R$-modules $P_*$:
+\[
+\cdots \to P_3 \xrightarrow{d_3} P_2 \xrightarrow{d_2} P_1 \xrightarrow{d_1} P_0   \xrightarrow{\epsilon} A \to  0
+,\] 
+where every $P_i$ is a projective module. 
+
+\end{definition}
+
+\begin{definition}
+    The deleted projective resolution of $A$, $(P_A)_*$ is the sequence 
+    \[
+        \cdots \to P_3 \xrightarrow{d_3} P_2 \xrightarrow{d_2} P_1 \xrightarrow{d_1} P_0  \to  0
+    .\] 
+    This is not exact per se, but we can consider it as a chain complex.\footnote{Just add zeros at the end}
+    
+    Then we have
+    \[
+        H_n(P_A) = \begin{cases}
+            0 &\text{if $n = 0$}\\
+            A & \text{if $n \neq 0$}.
+        \end{cases}
+    \] 
+\end{definition}
+
+\begin{theorem}
+    Every $R$-module has a projective (even free) resolution.
+\end{theorem}
+\begin{proof}
+    Every module $A$ is a quotient of a free module, so we have
+    \[
+        P_0 \xrightarrow{\epsilon} A \to  0
+    .\] 
+    Consider $K_1 = \Ker \epsilon$. Then this can also be viewed as a quotient of a free module \ldots
+    \[
+        \begin{tikzcd}
+            P_1 \arrow[rr, "d_1"] \arrow[dr, "\epsilon"]& &P_0 \arrow[r, "\epsilon"] & A \arrow[r, ""] & 0\\
+                                                       & K_1 \arrow[ur, "", hook]& &  
+        \end{tikzcd}
+    \]
+    This way we can construct a projective resolution.
+\end{proof}
+
+
+\begin{theorem}
+    Let $A, B$ be two $R$-modules. Let $f: A \to  B$ be an $R$-module map.
+    Consider the diagram
+    \[
+        \begin{tikzcd}
+            P_3 \arrow[r, ""] \arrow[d, "f_3"]& 
+            P_2 \arrow[r, ""] \arrow[d, "f_2"]& 
+            P_1 \arrow[r, ""] \arrow[d, "f_1"]& 
+            P_0 \arrow[r, "\epsilon"] \arrow[d, "f_0"]& 
+            A \arrow[r, ""] \arrow[d, "f"]& 
+            0\\
+            P_3' \arrow[r, ""] & 
+            P_2' \arrow[r, ""] & 
+            P_1' \arrow[r, ""] & 
+            P_0' \arrow[r, "\epsilon'"] & 
+            B \arrow[r, ""] & 
+            0\\
+        \end{tikzcd}
+    \]
+    If the top sequence is a complex and $P_i$ is projective, and the bottom sequence is exact, \footnote{So if we have projective resolutions both conditions are satisfied.}
+    Then we can define maps $f_i: P_i \to  P_i'$ such that all squares in the diagram are commutative.
+    So the total map $\tilde{f}$ is a chain map.
+
+    Moreover, this $ \tilde{f}$ is unique up to homotopy!
+\end{theorem}
+\begin{proof}
+    We prove only the existence. Read uniqueness in the text.
+
+    Construction of $f_n$ by induction.
+    Start with $f_0$, 
+    \[
+        \begin{tikzcd}
+            & P_0  \arrow[d, "\epsilon"] \arrow[ddl, "f_0", dashed]&\\
+            & A \arrow[d, "f"]& \\
+            P_0' \arrow[r, "\epsilon'"]& B \arrow[r, ""]&0 \\
+        \end{tikzcd}
+    \]
+    Now, without the primes is projective, bottom row is exact, so by definition of projective module, we have the map $f_0$. This is not unique!
+    Assume $f_0, \ldots, f_{n-1}$ have been constructed.
+    \[
+        \begin{tikzcd}
+            P_n \arrow[r, "d_n"] &
+            P_{n-1} \arrow[r, "d_{n-1}"] \arrow[d, "f_{n-1}"]&
+            P_{n-2} \arrow[d, "f_{n-2}"]\\
+            P'_n \arrow[r, "d'_n"] &
+            P'_{n-1} \arrow[r, "d'_{n-1}"] &
+            P'_{n-2}\\
+        \end{tikzcd}
+    \]
+    Let us rewrite\ldots
+    \[
+        \begin{tikzcd}
+            & P_n \arrow[d, "d_n"]& \\
+            & P_{n-1} \arrow[d, "f_{n-1}"]& \\
+            P_n' \arrow[r, "d_n'"] & ? \arrow[r, ""]& .
+        \end{tikzcd}
+    \]
+    Because it should be surjective, $?$ should be $\Im d_n'$. But that is not the image of  $P_{n-1}$ under $f_{n-1}$, so doesn't work. WRONG:
+    \[
+        \begin{tikzcd}
+            & P_n \arrow[d, "d_n"]& \\
+            & P_{n-1} \arrow[d, "f_{n-1}"]& \\
+            P_n' \arrow[r, "d_n'"] & \im d_n' \arrow[r, ""]& 0.
+        \end{tikzcd}
+    \]
+    To fix this: consider
+    \[
+        \begin{tikzcd}
+            & P_n \arrow[d, "d_n"]& \\
+            &  \arrow[d, "f_{n-1}"]& \\
+            P_n' \arrow[r, "d_n'"] & \im d_n' \arrow[r, ""]& 0.
+        \end{tikzcd}
+    \]
+    So prove: $f_{n-1}  \circ d_n(p) \in \im d_n'$ for all $p \in P_n$.
+    But $\im d_n' = \Ker d_{n-1}'$.
+    So enough to prove that $d_{n-1}' ( f_{n-1}(d_n(p))) = 0$.
+    By commutativity, we have that this is
+    \[
+        f_{n-2}  \circ  d_{n-1}  \circ  d_n p = f_{n-2}(0) = 0
+    .\] 
+\end{proof}
+
+\begin{definition}[Additive functor]
+    Let $A, B$ be two $R$-modules. and $f,g: A \to  B$ be two $R$-module homomorphisms.
+    Then $T$ is an additive functor if
+    \[
+        T(f+g) = T(f) + T(g)
+    .\] 
+\end{definition}
+\begin{eg}
+    $\Hom(X, -)$ is an additive functor from cat of $R$-modules to cat of abelian groups.
+    Another example $* \otimes -$.
+    Other side works to.
+\end{eg}
+
+Fix an additive functor $R$ from $R$-mod to $S$-mod.
+For any $R$-mod $A$, we also fix a projective resolution $P_A$.\footnote{Later we will show it doesn't really depend on $P_A$}
+Consider the deleted one and apply $T$ :
+
+\[
+    \begin{tikzcd}
+        T(P_3) \arrow[r, "T(d_3)"] & 
+        T(P_2) \arrow[r, "T(d_2)"] & 
+        T(P_1) \arrow[r, "T(d_1)"] & 
+        T(P_0) \arrow[r, ""] & 
+        0
+    \end{tikzcd}
+\]
+Note that $T(0) = 0$ because we have an additive functor (abelian group morhpism).
+Also $T(d_{n-1})  \circ  T(d_n) = 0$.
+This means that the resulting sequence is again a chain complex.
+
+Then
+
+\begin{definition}
+    \[
+        (L_n T)(A) = H_n(T(P_*))
+    .\] 
+\end{definition}
+
+Let $f: A \to  B$ be an $R$-map. Then we have maps $f_n$ by a previous theorem:
+
+
+\[
+    \begin{tikzcd}
+        P_2 \arrow[r, "d_2"] \arrow[d, "f_2"]&
+        P_1 \arrow[r, "d_1"] \arrow[d, "f_1"]&
+        P_0 \arrow[r, "\epsilon"] \arrow[d, "f_0"]&
+        A \arrow[r, ""] \arrow[d, "f"]&
+        0\\
+        P_2' \arrow[r, "d_2'"]  & 
+        P_1' \arrow[r, "d_1'"]  & 
+        P_0' \arrow[r, "\epsilon'"] &
+        B \arrow[r, ""] &
+        0\\
+    \end{tikzcd}
+\]
+
+Now delete $A$ and apply $T$
+
+\[
+    \begin{tikzcd}
+        T(P_2) \arrow[r, "T(d_2)"] \arrow[d, "T(f_2)"]&
+        T(P_1) \arrow[r, "T(d_1)"] \arrow[d, "T(f_1)"]&
+        T(P_0) \arrow[r, ""] \arrow[d, "T(f_0)"]&
+        0\\
+        T(P_2') \arrow[r, "(d_2)'"]  & 
+        T(P_1') \arrow[r, "(d_1)'"]  & 
+        T(P_0') \arrow[r, ""] &
+        0\\
+    \end{tikzcd}
+\]
+This diagram is also commutative, so this is a chain map.
+So we have a $T(f_N)_*: H_n(T(P_*)) \to  H_n(T(P_*'))$.
+If we choose different $f$'s, then they will be chain homotopic, so the $T(f_n)$ will be as well, so they will induce the same map on homology level.
+
+So $(L_n T) (f)$ is uniquely determined.
+Checking composition, identity, \ldots we see hat $(L_n T)$ is a functor for all  $n$.
+
+The only problem right now is that we have fixed one projective resolution for a module.
+What happens if we pick another?
+
+Suppose $P_A$ and  $\tilde{P}_A$ are  different resolutions. Then we have functors
+$ (LT)_n A$  and $\tilde{LT}_n (A)$.
+Fact: the functors $LT$ and  $\tilde{LT}$ are naturally equivalent.
+This means that for any $A$ there is an isomorphism
+
+ \[
+     \eta_A: (LT)_n (A) \to  (\tilde{LT})_n(A)
+\] 
+so that for any $R$-map $f: A \to  B$ the following diagram commutes
+\[
+    \begin{tikzcd}
+        LT_n(A) \arrow[d, "LT_n(f)"] \arrow[r, "\eta_A"] & \tilde{LT}_n(A) \arrow[d, "\tilde{LT}_n(f)"]\\
+        LT_n(B) \arrow[r, "\eta_A"] & \tilde{LT}_n(B)
+    \end{tikzcd}
+\]
+
+\begin{proof}
+    Sketch of the proof: see text.
+    Choose two projective resolutions.
+    Pick map $A \to  A$ as the identity, and we get maps between $P_i \to  \tilde{P}_i$.
+    Apply $T$.
+    Forget about $A$.
+    Then consider $LT_n(A) \xrightarrow{(f_n)_*} \tilde{LT}_n(A)$, induced map.
+    We define this is $\eta_A$.
+    This is independent because  $(f_n)_*$ unique up to homotopy.
+    Claim: this is an isomorphism.
+    Why? We can do the same in the other direction.
+    Composing the two diagrams, we have a bunch of identity maps, so the induced map of composition is identity.
+\end{proof}

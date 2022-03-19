@@ -1,0 +1,316 @@
+\lesson{22}{di 08 dec 2020 13:05}{}
+
+
+\begin{corollary}
+    If $A$ is a module ``divisible by'' $n= |G|$, so for any $a \in A$, there exists a $b \in A$ such that $nb = a$.
+    Then $H^{i}(G, A) = 0$ for all $i>0$
+\end{corollary}
+\begin{eg}
+    If $A$ is a vector space over $\Q$, then this is satisfied!
+\end{eg}
+\begin{proof}
+    For all $f \in Z^{i}(G, A)$, we have $nf = d \lambda$.
+    Then  $f = \frac{1}{n} d\lambda$.
+    So $f \in B^{i}(G, A)$.
+\end{proof}
+\begin{remark}[Exam, problems]
+    This is something we will need to use in the problem on the alternative proof of Maschkes theorem.
+\end{remark}
+
+\begin{remark}
+    We were talking about unnormalized bar resolution.
+    When considering the normalized bar resolution, we only consider map that are normalized.
+    Normalized cocycles $Z^{2}$: so $f(1,x) = f(x,1) = 0$.
+    Normalized coboundaries $B^{2}$: $g(1) = 1$.
+\end{remark}
+
+\nsection36{Group extensions and $H^{2}$ }
+\begin{definition}
+    A group extension is a short exact sequence of groups.
+    \[
+    0 \to  A \to  E \xrightarrow{\pi}   G \to  1
+    ,\] 
+    where $A$ is Abelian\footnote{This is why we use 0 for the trivial group on the left and on the right  $1$, but they're really the same groups} 
+    We will often see $A$ as a subgroup of  $E$.
+\end{definition}
+
+\begin{remark}
+    Recall that if $A$ is a  $G$-module, then $E = A \rtimes G$ is a group extension as follows:
+    \[
+    0 \to  A \to  A \rtimes G \to  G \to  1
+    .\] 
+
+\end{remark}
+
+Claim: if  we have a group extension, then there is a $G$-module structure on $A$. 
+Chose a section $\sigma: G \to  E$ such that $\pi  \circ  \sigma = 1_G$.
+Then define $g\cdot a = \sigma(g) a \sigma(g)^{-1}$
+Note that $g \cdot a$ is independent on the chosen $\sigma$.
+Why? Change $\sigma$ to  $\sigma'$, then they will differ by an element of  $a$, but  $A$ is abelian. (TODO fix this)
+
+Exercise: this defines a morphism  $G \to  \Aut A$.
+
+
+Doing this for our example of $\rtimes$, we have
+ \[
+     (0,g) (a,1) (0,g)^{-1} = \cdots = (ga,1)
+,\] 
+so action defined in semi-direct product is the same action like from $\sigma$.
+
+For any $G$-module $A$, we do have a group extension, but there might be more than one.
+How do we classify group extensions?
+
+\begin{definition}
+    Two extensions are equivalent if there exists a morphism $\phi: E_1 \to  E_2$ such that the following commutes:
+
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""] 
+            & A \arrow[r, ""] \arrow[d, "\operatorname{Id}"]
+            & E_1 \arrow[r, ""] \arrow[d, "\phi"]
+            & G \arrow[r, ""] \arrow[d, "\operatorname{Id}"]
+            & 1 \\
+            0 \arrow[r, ""] 
+            & A \arrow[r, ""]
+            & E_2 \arrow[r, ""]
+            & G \arrow[r, ""]
+            & 1 \\
+        \end{tikzcd}
+    \]
+    If this commutes, this will automatically be an isomorphism.
+\end{definition}
+
+\begin{prop}
+Equivalent extensions induce the same $G$-module structure on $A$
+\end{prop}
+\begin{proof}
+    Choose section $\sigma: G \to  E_1$ on diagram above.
+    Then there exists a section of the second row: $\phi  \circ  \sigma: G \to  E_2$.
+    More or less trivial to prove that these induce same $G$-module structure.
+\end{proof}
+
+Question: Can we classify extensions inducing a given $G$-module structure on $A$ up to equivalence?
+
+\begin{definition}
+    $\epsilon(G, A)$ is the set of extensions inducing the given  $G$-module structure up to equivalence.
+\end{definition}
+
+Main theorem:
+\begin{theorem}
+    There is a bijection between $\epsilon(G, A)$ and  $H^2(G, A)$.
+\end{theorem}
+
+\paragraph{Step 1}
+Consider $0 \to  A \to  E \to  G \to 0$.
+Given an element of $\epsilon(G, A)$, we want to find a  $f \in Z^2(G, A)$.
+
+Choose $\sigma: G \to  E$ a section.
+Then 
+\[
+    \sigma(xy) \neq \sigma(x) \sigma(y)
+\] 
+in general, because sections are only set maps, and not group morphisms. Recall if it is a group morphism it is called a splitting, and not very interesting.
+However, when applying $\pi: E \to  G$, we get
+\[
+    \pi(\sigma(xy)) = \pi(\sigma(x) \sigma(y))
+,\] 
+so $a\sigma(xy) = \sigma(x)\sigma(y)$, with  $a \in  \ker \pi = A$.
+This $a$ of course depends on  $x$ and  $y$, so we have a map  $G^2 \to  A$.
+We claim that this is $f$.
+This also depends on the section.
+\begin{definition}
+    Define $f: G^2 \to  A$ by $f(x,y) \sigma(xy) = \sigma(x)\sigma(y)$
+\end{definition}
+
+Now, we prove that $f$ is a cocycle.
+
+We know that
+\[
+    \sigma((xy)z)  = \sigma(x(yz))
+,\] 
+and
+\[
+    \sigma(xy) = f^{-1}(x,y) \sigma(x) \sigma(y)
+.\] 
+Applying this twice to $\sigma((xy)z) $ and  $\sigma(x(yz))$,
+ \[
+     f^{-1}(xy,z) f^{-1}(x,y) \sigma(x)\sigma(y)\sigma(z) = f^{-1}(x,yz) \sigma(x) f^{-1}(y,z) \sigma(y) \sigma(z)
+.\] 
+We would like to get red of $\sigma$'s, so we want them all to the right. Okay on the left, need to fix on the right.
+
+\begin{align*}
+    f^{-1}(xy,z) f^{-1}(x,y) \sigma(x)\sigma(y)\sigma(z) &= f^{-1}(x,yz) \sigma(x) f^{-1}(y,z) \sigma(x)^{-1} \sigma(x)\sigma(y) \sigma(z)\\
+    f^{-1}(xy,z) f^{-1}(x,y) &= f^{-1}(x,yz) \underbrace{\sigma(x) f^{-1}(y,z) \sigma(x)^{-1}}_{\in A}
+\end{align*}
+Underbrace is action of $x$ on  $f(yz)$
+Swapping to additive notation, we have
+\[
+    -f(xy,z) - f(x,y) = -f(x,yz) - x f(y,z)
+,\] 
+or
+\[
+    xf(y,z) - f(xy,z) + f(x,yz) - f(x,y) = 0
+,\] 
+which is exactly the 2-cocycle condition.
+So $f$ is a 2 cocycle.
+
+
+Okay, everything alright, except that $f$ does depend on the chosen  $\sigma$! 
+
+\paragraph{Step 2}
+
+What happens if we chose another section, $\sigma' : G \to  E$?
+Then we know that $\sigma'(x) = \sigma(x)$ up to an element of  $a$, because when we project down, we should get the same thing! We write this as
+ \[
+     \sigma'(x) = \beta(x) \sigma(x) \qquad \beta(x) \in A
+.\] 
+
+\begin{align*}
+    f'(x,y) &= \sigma'(x) \sigma'(y) \sigma'(xy)^{-1}\\
+            &= \beta(x) \sigma(x) \beta(y) \sigma(y) (\beta(xy) \sigma(xy))^{-1}\\
+            &= \beta(x) \sigma(x) \beta(y) \underbrace{\sigma(x)^{-1} \sigma(x)}_{1} \sigma(y) \sigma(xy) ^{-1} \beta(xy)^{-1}\\
+            &= \beta(x) \underbrace{\sigma(x) \beta(y) \sigma(x)^{-1}}_{A} \underbrace{\sigma(x) \sigma(y) \sigma(xy) ^{-1}}_{f(x,y)} \beta(xy)^{-1}
+\end{align*}
+Going again to additive notation,
+
+\[
+    f'(x,y) = \beta(x) + x \beta(y) + f(x,y) - \beta(xy)
+,\] 
+or
+\[
+    f'(x,y) -f(x,y) = x\beta(y) - \beta(xy) + \beta(x) = (d\beta)(x,y)
+,\] 
+so $f' - f \in B^2(G, A)$
+
+Conclusion: $f + B^2(G, A)$ is well defined.
+So we do have a map which attaches to any extensions in a unique way an element of $H^2(G, A)$.
+\paragraph{Step 3}
+Equivalent extensions give rise to same cohomology class.
+
+\[
+    \begin{tikzcd}
+        0 \arrow[r, ""] 
+        & A \arrow[r, ""] \arrow[d, "\operatorname{Id}"]
+        & E_1 \arrow[r, ""] \arrow[d, "\phi"]
+        & G \arrow[r, ""] \arrow[d, "\operatorname{Id}"] \arrow[l, "\sigma", bend right, swap]
+        & 1 \\
+        0 \arrow[r, ""] 
+        & A \arrow[r, ""]
+        & E_2 \arrow[r, ""]
+        & G \arrow[r, ""] \arrow[l, "\sigma' = \phi  \circ  \sigma", bend left]
+        & 1 \\
+    \end{tikzcd}
+\]
+
+Define $f$ from upper row.
+Then 
+\[
+    f(x,y) \sigma(x,y) = \sigma(x) \sigma(y)
+.\] 
+Then apply $\phi$
+\[
+    \phi(f(x,y)) \phi\sigma(x,y) = \phi\sigma(x) \phi\sigma(y)
+,\] 
+so
+\[
+    \phi f(x,y) \sigma'(x,y) = \sigma'(x) \sigma'(y)
+.\] 
+The left hand side is the 2 cocycle attached to second extension.
+But $f(x,y) \in A$, so looking at the diagram, applying $\phi$, we get that  $\phi(f(x,y)) = f(x,y)$.
+
+So
+ \[
+     f(x,y) \sigma'(xy) = \sigma'(x) \sigma'(y)
+.\] 
+
+Conclusion: we have a map
+\[
+    \epsilon(G, A) \to  H^2(G, A)
+.\] 
+
+Now, prove that this is bijective map.
+\paragraph{Injective.}
+Good exercise!
+How?
+Assume you have two extensions:
+
+\[
+    \begin{tikzcd}
+        0 \arrow[r, ""] 
+        & A \arrow[r, ""] \arrow[d, "\operatorname{Id}"]
+        & E_1 \arrow[r, ""] 
+        & G \arrow[r, ""] \arrow[d, "\operatorname{Id}"] \arrow[l, "\sigma", bend right, swap]
+        & 1 \\
+        0 \arrow[r, ""] 
+        & A \arrow[r, ""]
+        & E_2 \arrow[r, ""]
+        & G \arrow[r, ""] \arrow[l, "\sigma'", bend left]
+        & 1 \\
+    \end{tikzcd}
+\]
+and let $f$ be the cocycle to first and $f'$ to the second.
+
+And we know that  $f - f'$ is a coboundary.
+Then we can change section such that corresponding cocycles are really the same(?)
+Then we can define  $\phi: E_1 \to  E_2$
+Any element of $E$ is of the form  $a\sigma(g)$, for unique  $a$ and unique  $g$.
+Then 
+ \[
+     \phi(a\sigma(g)) = a \sigma'(g)
+.\] 
+Now check it's an isomorphism.
+More information in video.
+
+\paragraph{Surjective.}
+
+Let $f \in Z^2(G,A)$.
+Let $E = A \times G$ with product
+\[
+    (a_1,g_1)(a_1,g_2) = (a_1+g_1a_2+\boxed{f(g_1,g_2)}, g_1g_2)
+.\] 
+Prove that this is group. You will need cocycle condition.
+Then we have an extension:
+
+\[
+ 0\to A \to  E_f \to  G \to  0
+.\] 
+You can check that this works.
+
+\paragraph{Conclusion}
+\[
+    \epsilon(G,A_) = H^2(G,A)
+.\] 
+
+\begin{remark}
+    The extension you end up with the semidirect product gives you the zero element in $H^2(G,A)$.
+\end{remark}
+\begin{remark}
+    Extensions which are equivalent with the semidirect product are called split extensions.
+\end{remark}
+\begin{definition}
+    An extension  
+    \[
+    0 \to  A \to  E \to G \to  1
+    \] 
+    is split iff there exists a morphism $\sigma: G \to  E$ such that $\pi  \circ  \sigma = 1_G$,
+    or equivalently, the following commutes
+
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""] 
+            & A \arrow[r, ""] \arrow[d, "\operatorname{Id}"]
+            & E \arrow[r, ""]  \arrow[d, "\phi"]
+            & G \arrow[r, ""] \arrow[d, "\operatorname{Id}"] 
+            & 1 \\
+            0 \arrow[r, ""] 
+            & A \arrow[r, ""]
+            & A \rtimes G \arrow[r, ""]
+            & G \arrow[r, ""] 
+            & 1 \\
+        \end{tikzcd}
+    \]
+\end{definition}
+
+\begin{remark}
+    Exercise 6.6.1 is wrong!!!!
+\end{remark}

@@ -1,0 +1,167 @@
+\lesson{2}{di 29 sep 2020 12:45}{Introduction}
+
+We also have the following important result (not requiring irreducible representations.)
+
+\begin{theorem}[2.13, Maschke's Theorem]
+    Let $k$ be any field, and let $\rho: G \to  \GL_k(V)$ be a representation.
+    Let $W$ a $G$-subspace of $V$.
+    Then there exists $W'$, a $G$-subspace of $V$ such that $V = W \oplus W'$.
+\end{theorem}
+
+In terms of matrices, this means, that we have the following
+\[
+\begin{pmatrix}
+    \rho|_W & 0 \\
+    0 & \rho|_{W'}
+\end{pmatrix}
+.\] 
+
+\begin{proof}
+    We will show that there is a projection $ p_0: V \to  W$ which is a $G$-map.
+    This is enough. Why?
+    $ p_0:V \to  W$ is a projection. So $ p_0(V) \subset W$, $ p_0|_W = 1_{W}$ and $ p_0^2 = p_0$.
+    Then $V = \Ker p_0 \oplus \im p_0$. (Check for yourself)
+    Take $W' = \Ker p_0$.
+
+
+    Take $p: V \to  W$ a projection (that is not necessarily a $G$-map.)
+    Define
+    \[
+        p_0: V \to  V : v\mapsto \frac{1}{|G|} \sum_{h \in G} h\cdot p(h^{-1}\cdot v)
+    .\] 
+    \begin{itemize}
+        \item The image is certainly $W$, because $W$ is a $G$-invariant space ($p(\ldots)$ belongs to $W$, so does $h\cdot p(\ldots)$).
+        \item For $v = w \in W$. We want to prove that $ p_0(v) = v$. We get
+            \begin{align*}
+                p_0(w) &=\frac{1}{|G|} \sum _{h \in G} h \cdot p(h^{-1} \cdot w)\\
+                &= 
+                \frac{1}{|G|} \sum _{h \in G} h \cdot h^{-1} \cdot w \\
+                                    &= \frac{1}{|G|} \sum _{h \in G} w \\
+                                    &= w \\
+            .\end{align*}
+    \end{itemize}
+
+    So $\im (p_0) = W$ and $p_0$ is also a projection onto $W$.
+    We now claim that $p_0$ is a $G$-map
+    \begin{align*}
+        p_0(g\cdot v)
+        &= \frac{1}{|G|} \sum_{h \in G} h\cdot p(h^{-1}\cdot g \cdot v)\\
+        &= \frac{1}{|G|} \sum_{h \in G} g\cdot  g^{-1}\cdot h\cdot p(h^{-1}\cdot g \cdot v)\\
+        &= g\cdot \left(\frac{1}{|G|} \sum_{h \in G} g^{-1}\cdot h\cdot p(h^{-1}\cdot g \cdot v)\right)\\
+        &= g\cdot \left(\frac{1}{|G|} \sum_{h \in G} g^{-1}h\cdot p(h^{-1}g \cdot v)\right)\\
+        &= g\cdot p_0(v)
+    .\end{align*}
+
+    This proves that $p_0$ is a $G$-map.
+    Take $W' = \Ker p_0$.
+\end{proof}
+
+\begin{remark}
+    Also works for compact topological groups.
+    Sums become integrals over Haar measure, $|G|$ becomes volume of $G$, \ldots
+\end{remark}
+
+% TODO: subscripts escape from math mode doesn't work with tab \ldots
+
+
+An important corollary is that any representation can be described using irreducible representation.
+
+\begin{theorem}[2.14]
+    Let $\rho: G \to  \GL_k(V)$ be a representation.
+    Then there exists subspaces $U_1, U_2, \ldots, U_k$ of $V$ such that each $U_i$ is a  $G$-subspace and $\rho|_{U_i}$ is irreducible and $V = U_1 \oplus U_1 \oplus \cdots \oplus U_k$.
+\end{theorem}
+
+As a matrix:
+
+\[
+\begin{pmatrix}
+    \rho|_{U_1} & 0 &0 &0\\
+    0 & \rho|_{U_2} & 0&0\\
+    0 & 0& \ddots & 0\\
+    0 & 0 &0&\rho|_{U_3} 
+\end{pmatrix}
+.\] 
+
+\begin{proof}
+    Proof is induction on the dimension of $V$.
+
+    \begin{description}
+        \item[$\dim V = 1$] We are done. The representation is irreducible, $V = U_1$.
+        \item [$\dim V > 1$] Either $V$ is irreducible (then $V = U_1$)
+            If not, then there exists $W$, a $G$-space of $V$ which is not trivial.
+            Then, by Maschke's Theorem, there exists a non-trivial $W'$ such that  $V = W \oplus W'$ and $W'$ is also a  $G$-subspace.
+            This implies that $0 < \dim W', \dim W < \dim V$.
+            Then by induction  $W = U_1 \oplus \cdots \oplus U_k$, and same for $W'$.
+            Then $V = U_1 \oplus \cdots \oplus U_k \oplus \cdots \oplus U_n$
+    \end{description}
+\end{proof}
+
+
+This decomposition is unique in the following sense.
+The spaces might not be the same, but the representation look alike.
+We can pair the spaces with same dimension. The actions are $G$-equivalent.
+
+\begin{eg}
+    Take $\rho: G \to \GL(\R^2): g \mapsto (v \mapsto v)$.
+    Then $R = \left< v\right> \oplus \left<w \right>$ for any $v, w$ independent.
+\end{eg}
+
+We will prove the uniqueness later.
+
+
+\begin{definition}
+    Let $\rho: G \to  \GL_k(V)$ be a representation.
+    Then \[
+    V^{G} = \{v \in V: g\cdot v = v \text{ for all $g \in G$ }\} 
+\]
+\end{definition}
+
+\begin{prop}[2.15]
+    Let \[
+        \epsilon: V \to  V: v \mapsto \frac{1}{|G|} \sum_{g \in G} g\cdot v.
+    \]\footnote{Dividing by  $|G|$ uses that  $G$ is finite, but also that char = 0.}
+
+    \begin{enumerate}[(a)]
+        \item $g\cdot  \epsilon(v) = \epsilon(v)$ for all $g, v$, which is to say that $\im \epsilon \subset V^{G}$
+        \item $\epsilon$ is $G$-linear
+        \item For all $v \in V^{G}: \epsilon(v) = v$, which is to say that $\epsilon|_{V^{G}} = 1_{V^{G}}$
+    \end{enumerate}
+    These properties imply that $\epsilon: V \to  V^{G}$ is a $G$-projection onto $V^{G}$.
+    This implies that $V = \Ker \epsilon \oplus V^{G}$
+    Choosing a basis $\mathbf{v} = \{v_1, \ldots, v_k, v_{k+1}, \ldots, v_n\}$, such that the last vectors form a basis of $V^{G}$, we find that 
+    $[\epsilon]_{\mathbf{v}} = \begin{pmatrix}
+        0 & 0 \\
+        0 & I
+    \end{pmatrix}$
+\end{prop}
+
+\begin{remark}
+    Note that this is $\epsilon_+$ from some time ago, where  $G = \Z_2$.
+\end{remark}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\nsection{2}{3}{New representations from old ones}
+
+Some examples:
+
+\begin{itemize}
+    \item Let $\rho, \sigma$ be representations of  $G$ over $V, W$.
+        Take $U = V \oplus W$.
+        Then \[\rho \oplus \sigma: G \to  \GL_k(V \oplus W) : g\mapsto v + w \mapsto  \rho(g) v + \sigma(g) w.\]
+    \item Consider $V \otimes W$.
+        Then  \[\rho\otimes \sigma: G \to  \GL(V \otimes W): g \mapsto v \mapsto (\rho(g) v) \otimes (\sigma(g) w)\]
+    \item Consider $\Hom_k(V, W)$, the vector space of linear maps from  $V$ to $W$.
+        \begin{align*}
+            \psi: G &\longrightarrow \GL_k(\Hom_k(V, W))\\
+            g &\longmapsto (f \mapsto (v \mapsto \sigma(g) f( \rho(g)^{-1} v )))
+        .\end{align*} 
+\end{itemize}
+
+\begin{ex}
+    Check that this is a representation and this
+\end{ex}
+
+
+% TODO: oplus becomes operator

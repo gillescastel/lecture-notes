@@ -1,0 +1,328 @@
+\part{Nilpotent groups}
+\lesson{7}{di 20 okt 2020 14:38}{Nilpotent groups}
+\url{https://www.youtube.com/watch?v=nQ4Q-KoqenY}
+
+\begin{definition}[Commutator]
+    Let $G$ be a group.
+    Let $a, b \in G$. Then the commutator of $a$ and $b$ is
+    \[
+        [a, b] = a^{-1} b^{-1} a b
+    .\] 
+\end{definition}
+
+\begin{remark}
+    $[a,b]^{-1} = [b, a]$, and of course $[a, b] = 1$ iff  $ab = ba$.
+\end{remark}
+
+
+\begin{definition}[Commutator of groups]
+    Let $H, K \le G$.
+    Then \[
+       [K, H] = [H, K] =  \operatorname{grp} \{[h, k]  \mid  h \in H, k \in K\}.
+    \]
+    Note that $\{[h, k]\}$ is in general \emph{not} a group.
+\end{definition}
+
+Useful proposition:
+
+\begin{prop}
+If $N \le G$ then $N\triangleleft G$ iff $[G, N] \le N$.
+\end{prop}
+\begin{proof}
+    Indeed, $[G, N] \le N$ if for all $g \in G, n \in N$, $[g, n ] \in N$.
+    This implies that $g^{-1} n^{-1} g n \in N$.
+    So $g ^{-1} n^{-1} g \in N$.
+    So for all $g \in G$, $n \in N$ we have $g n g^{-1} \in N$.
+    So $N \triangleleft G$.
+\end{proof}
+
+\begin{remark}[Notation]
+    $a^{b} = b^{-1} a b$
+\end{remark}
+
+\nchapter{16}{General properties and examples of nilpotent groups}
+\nsection{16}{1}{Definitions}
+
+\begin{definition}[Central series]
+    Let $G$ be a group. Then the central series of this group is a finite collection of normal subgroups $G_1 \triangleleft G, \ldots, G_s \triangleleft G$ such that
+        \[
+        1 = G_0 \le  G_1 \le  G_2 \le \cdots \le  G_{s-1} \le G_s = G
+    \]
+    and
+    \[
+        \frac{G_{i+1}}{G_i} \le Z\left(\frac{G}{G_{i}}\right) \tag{$*$}
+    .\] 
+    Recall, $Z(K) = \{k \in K  \mid [k, x] = 1 \forall x \in K\} $
+    In other words: all elements of $G_{i+1}$ are modulo $G_i$ commuting with  $G$.
+\end{definition}
+
+We can rewrite $(*)$ as
+ \begin{align*}
+     &\iff \left[\frac{G_{i+1}}{G_i}, \frac{G}{G_i}\right] = 1\\
+     & \iff [G_{i+1}, G] \le G_i
+.\end{align*} 
+Note that this last condition automatically implies that $G_{i+1}$ is normal:indeed $[G_{i+1}, G]\le G_i \le G_{i+1}$.
+
+
+\begin{definition}[Nilpotent]
+    A group $G$ is nilpotent iff it admits a central series.
+
+    If the series has length $s$, then $G$ is said to be nilpotent of class $\le s$.
+\end{definition}
+
+We say it's class $s$ if there exists no shorter series.
+
+
+Note that $\frac{G_{i+1}}{G_i}$ are abelian. Indeed, all these elements commute with everything inside $G / G_{i}$, so certainly they commute with everything in $\frac{G_{i+1}}{G_i}$. (The centre of a group is always abelian.)
+
+This implies that all nilpotent groups are solvable (soluble)\footnote{This means by definition that we can find a series with abelian quotients.}
+
+
+Given a group $G$, we can construct the upper and lower central series.
+
+
+\paragraph{Upper central series}
+\[
+    Z_0(G) = 1 \qquad Z(G) = Z(G), \qquad Z_{i+1}(G) \text{ is defined by } \frac{Z_{i+1}(G)}{Z_i(G)} = Z\left(\frac{G}{Z_i(G)}\right)
+,\] 
+so we define it to satisfy the condition $(*)$ as good as possible, as big as possible.
+So we just take the full center.
+(These terms are also normal subgroups because some group isomorphism lemma.)
+
+Possible problems: we never get to the full group $G$.
+
+\paragraph{Lower central series}
+
+This starts from $G$.
+
+\[
+    \gamma_1(G), \quad \gamma_{i+1}(G) = [\gamma_{i}(G), G]
+.\] 
+
+Note that $\gamma_2(G) = [G, G]$, $\gamma_3(G) = [[G, G], G]$.
+This is a \emph{decreasing} normal series.
+
+Possible that we don't reach $1$.
+
+
+But, as we'll see later on, if we have a central series, these series will terminate, and even more, they'll be the shortest ones!
+(This is one of the problems!) \marginpar{Explanation 35:21}
+
+
+\begin{corollary}
+    $G$ is nilpotent of class $\le c$ iff $Z_c(G) = G$ iff  $\gamma_{c+1}(G) = 1$.
+    It's exactly of class $c$ iff ($Z_c(G) = G$ and  $Z_{c-1}(G) \neq G$) iff ($\gamma_{c+1}(G) = 1$ and $\gamma_c(G) \neq 1$).
+\end{corollary}
+
+
+\begin{eg}
+    If $G$ is abelian, then $ Z_1(G) = Z(G) = G$, so it's nilpotent of class $1$.
+\end{eg}
+\begin{eg}
+    Trivial group is nilpotent of class $0$.
+\end{eg}
+
+\begin{eg}
+    Let $G = D_3 = \{1, a, a^2, b, ab, a^2b\} $
+    Then
+    \[
+    Z_0 = 1,
+    \qquad Z_1 = \{1\} = Z_0
+    .\] 
+    We cannot continue \ldots
+    This implies that $Z_i(G) = 1$ for all  $i$.
+
+    Note however that  $N = \{1, a, a^2\}\triangleleft D_3 $ is a normal subgroup and $1\le N \le D_3$ is a series and $N / 1$ is abelian and  $ D_3 / N$ is abelian. So $ D_3$ is solvable!
+
+    We can also check that the lower central series cannot reach $1$.
+    \[
+        \gamma_1(G) = G \qquad \gamma_2(G) = [G, G] = ?
+    \] 
+    Wel, $b^{-1} a^{-1} b a = a^2 \in [G, G]$. Then also $a = (a^2)^2 \in [G, G]$.
+    You take $b$ always an even number of times, so you always get something without  $b$.
+    So
+    \[
+        \gamma_1(G) = G \qquad \gamma_2(G) = [G, G] = \{1, a, a^2\} 
+    \] 
+    Now, what is 
+    \[
+        \gamma_3(G) = [\gamma_2(G), G]
+    .\] 
+    Here again, we have $[a, b] \in \gamma_3(G)$ and even number of $b$'s, so $\gamma_3 = \gamma_2$.
+    So we have
+    \[
+    G \quad \{1, a, a^2\}  \quad \{1, a, a^2\}  \quad \cdots
+    .\] 
+\end{eg}
+
+
+
+\paragraph{Groups of order eight}
+
+\begin{remark}[Exam]
+    Do this for quaternion group!
+    You should find that quaternions are nilpotent of class $2$.
+\end{remark}
+
+Let $G = D_4 = \{1, a, a^2, a^3, b, ab, a^2b, a^3b\} $.
+Then
+
+\[
+    Z_0(G) = 1 \quad Z_1(G) = Z(G) = \{1, a^2\} 
+.\] 
+Then the second term is defined by
+\[
+    \frac{Z_2}{Z_1} = Z \left(\frac{D_4}{\{1, a^2\} }\right)
+.\] 
+Now, $ D_4 / \{a, a^2\} $ is an abelian group (klein four), so abelian, so 
+
+\[
+    \frac{Z_2}{Z_1} = Z \left(\frac{D_4}{\{1, a^2\} }\right) = \frac{D_4}{\{1, a^2\} } = \frac{D_4}{Z_1}
+.\] 
+This implies that
+\[
+Z_2 = D_4 = G
+.\] 
+
+This means that we have a central series
+\[
+    1 =  Z_0(G) \le  Z_1(G) \le Z_2(G)
+,\] 
+or
+\[
+    1  \le  \{1, a^2\}  \le D_4
+,\] 
+so $ D_4$ is nilpotent of class $2$.
+
+The lower series:
+\[
+    \gamma_1(D_4) = D_4
+.\] 
+Then
+\[
+    \gamma_2(D_4) = [D_4, D_4] = ?
+.\]
+Then $b^{-1} a^{-1} ba = a^2$.
+I cannot reach an element with a $b$.
+We can check that $a^3$ is not an element either.
+\[
+    \gamma_2(D_4) = [D_4, D_4] = \{1, a^2\} 
+.\]
+Then 
+\[
+    \gamma_3 = [\gamma_2(D_4), D_4]
+.\] 
+
+Then $[1, x] = 1$ and  $[a^2, x] = 1$, because $a^2$ is in the center.
+
+This gives also that $ D_4$ is nilpotent of class $2$.
+
+
+ \begin{remark}
+    You can show that $D_{k}$ is nilpotent iff $k = 2^{n}$ for some $n$!
+\end{remark}
+You should be able to prove this at a certain moment.
+
+
+
+\paragraph{Infinite nilpotent groups}
+
+\begin{prop}
+    Let $B$ be an (associative) ring with $1$.
+    Let $I$ be a subring of $B$ with $I^{n}=0$.
+    Then 
+    \begin{enumerate}[(1)]
+        \item $G = 1 + I$ and  $G_i = 1 + I^{i}$ are subgroups of $(U(B), \times )$.
+        \item $1 = G_n \le  G_{n-1} \le  \cdots \le  G_2 \le G_1 = G$ is a central series of $G$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(a)]
+        \item Groups
+\begin{description}
+        \item[products]
+    Let $1 +x, 1 + y \in G$.
+    Then $(1+x)(1+y) = 1 + x + y + xy  \in 1 + I = G$.
+            \item[inverse]
+    Look at 
+    \[
+        (1+x)(1 - x + x^2 - x^3 + \cdots + (-1)^{n-1} x^{n-1}) = 1 + + (-1)^{n-1}x^{n}  = 1
+    .\] 
+    as $x^{n} \in I^{n} = 0$.
+    \end{description}
+\item To show $[G, G_i] \le G_{i+1}$ (note that numbering is inverse)
+    Let $g \in G, h \in G_i$.
+    Then we need to calculate $[g, h]$.
+    We want this to be of the form  $1 + \ldots$, so let's consider in our ring
+    \begin{align*}
+        [g, h] - 1 &= g^{-1} h^{-1} g h - 1\\
+                   &= g^{-1}h^{-1}(gh - hg)\\
+    .\end{align*} 
+    What can we say about $gh - hg$.
+    Well, let  $g = 1 + x$ and  $h = 1 - y$, where $x \in I$ and $y \in I^{i}$.
+    Then
+    \[
+        gh - hg = (1+x)(1+y) - (1+y) (1+x) = xy -  yx
+    .\] 
+    So we get
+    \begin{align*}
+        [g, h] - 1 &= g^{-1} h^{-1} g h - 1\\
+                   &= g^{-1}h^{-1}(gh - hg)\\
+                   &= g^{-1} h^{-1}(xy - yx)
+    .\end{align*} 
+    Now, $xy = yx \in I^{i + 1}$ and $g ^{-1}h^{-1} = 1 + z$ for some $z$, so we find that
+    \[
+        [g, h] -1 \in I^{i+1}, \text{ so  } [g, h] = 1 + w \in G_{i+1}
+    .\] 
+    This is what we wanted to show.
+    \end{enumerate}
+    
+\end{proof}
+
+This is a way to construct infinite nilpotent groups!
+
+(Why did we need $B$? We needed a $1$. and $1 \not\in I$, because $1 ^{n} \neq 0$.)
+
+\begin{eg}
+    Let $R$ be a commutative ring with $1$. (e.g. $ \Z$, a field)
+    Let $B = R^{n \times n}$.
+    Let
+    \[
+    I = \left\{
+        \begin{pmatrix}
+            0 & * & *\\
+            0 & \ddots & *\\
+            0 & 0 & 0
+        \end{pmatrix}
+    \right\}  \qquad \qquad (I^{n} = 0)
+    ,\] 
+    and
+    \[
+    1 = \begin{pmatrix}
+        1 & 0 & 0\\
+        0 & \ddots & 0\\
+        0 & 0 & 1
+    \end{pmatrix}
+    .\] 
+    Conclusion: $ G = 1 + I $ is nilpotent of class $\le n-1$.
+    \[
+    G = \left\{
+        \begin{pmatrix}
+            1 & * & *\\
+            0 & 1 & *\\
+            0 & 0 & 1
+        \end{pmatrix}  \mid * \in R
+    \right\} 
+    .\] 
+\end{eg}
+
+\begin{eg}[Integral Heisenberg group]
+    Let $H = \left\{\begin{pmatrix}
+        1 & x & y\\
+        0 & 1 & z\\
+        0 & 0 & 1
+    \end{pmatrix}  \mid  x, y, z \in \Z\right\} $.
+    This is a nilpotent group of class $2$. (Easy to see that it is not abelian)
+\end{eg}
+
+This example have inspired the name of nilpotent group!

@@ -1,0 +1,359 @@
+\lesson{6}{di 13 okt 2020 14:52}{}
+
+Previous example for $ D_3$:
+\begin{center}
+\begin{tabular}{cccc}
+    & $1$ &  $a$ &  $b$ \\ \hline
+    $\chi_{1}$ & 1& 1 & 1\\
+    $\chi_{2}$ &$1$ & $1$& $-1$\\
+    $\chi_{3}$ & 2& $-1$& 0\\
+\end{tabular}
+\end{center}
+
+Now we want to find the irreducible components of $\rho_\text{reg} : D_3 \to  \GL(\C[D_3])$.
+We know that
+
+\begin{align*}
+    \chi_{\rho_\text{reg} }(e) &= |D_3|= 6\\
+    \chi_{\rho_\text{reg} }(g) &= 0 \text{ for $g \neq e$ }
+.\end{align*}
+
+Remember that $(\chi_{\rho} = \chi_{i})_G$ counts the number of components equivalent to $\chi_{i}$.
+
+This is easy because we have lot's of zeros:
+\begin{align*}
+    (\chi_{\rho_\text{reg}} | \chi_{1}) &= \frac{1}{6} ( 6 \cdot  1 + 0 + \cdots + 0) = 1\\
+    (\chi_{\rho_\text{reg}} | \chi_{2}) &= \frac{1}{6} ( 6 \cdot  1 + 0 + \cdots + 0) = 1\\
+    (\chi_{\rho_\text{reg}} | \chi_{3}) &= \frac{1}{6} ( 6 \cdot  2 + 0 + \cdots + 0) = 2
+.\end{align*} 
+So
+\[
+\chi_{\rho_\text{reg} } = \chi_{1} + \chi_{2} + 2 \chi_{3}
+.\] 
+
+\begin{theorem}
+    Let $G$ be a finite group and $ \chi_{1}, \ldots, \chi_{r}$ be the irreducible characters of $G.$
+    Then 
+    \[
+    \chi_{\rho_\text{reg} } = n_1 + \chi_{1} + \cdots + n_r \chi_{r}
+    ,\] 
+    with $n_1 = \chi_{i}(e) = $ dimension of the $i$th irreducible representation.
+\end{theorem}
+\begin{proof}
+    See the calculation above.
+    \begin{align*}
+        (\chi_{\rho_\text{reg} } | \chi_{i}) &= \frac{1}{|G|} \sum \chi_{\rho_\text{reg} } (g) \overline{\chi_{i} (g)}\\
+        &= \frac{1}{|G|} \chi_{\rho_\text{reg} }(e) \overline{\chi_i (e)}\\
+        &=\frac{1}{|G|} |G| \overline{n_i} = n_i
+    .\end{align*} 
+\end{proof}
+\begin{corollary}
+    $|G| = \dim \rho_\text{reg} =  n_1^2 + n_2^2 + \cdots + n_r^2$
+\end{corollary}
+\begin{prop}
+    $n_i  \mid  G$
+\end{prop}
+\begin{proof}
+    Not in this course. But you may assume this during exercises.
+\end{proof}
+
+\nsection{3}{5}{Examples of character tables}
+
+\paragraph{Abelian groups.}
+
+Let $G = \Z_n = \Z / n \Z$.
+
+Each elements is in its own conjugacy class.
+
+\begin{center}
+\begin{tabular}{cccc}
+     & $1$ &  $t$ &  $t^{n}$\\ \hline
+    $\chi_{1}$ & 1& 1&1\\
+    $\chi_{2}$ &  &  & \\
+    $\chi_{n}$ &  &  & \\
+\end{tabular}
+\end{center}
+
+Note that the sum of the squares of the first column should be $n$, but we have  $n$ rows, so each element is  $1$. So each representation is one-dimensional.
+
+\begin{center}\begin{tabular}{cccc}
+     & $1$ &  $t$ &  $t^{n}$\\ \hline
+    $\chi_{1}$ & 1& 1&1\\
+    $\chi_{2}$ & 1 &  & \\
+    $\chi_{n}$ & 1 &  & \\
+\end{tabular}\end{center}
+
+So we have that $\rho: G \to  GL(\C)$.
+And we know even more, $\rho(t)^{n} = \rho(t^{n}) = \rho(1) = 1$, so they are roots of unity.
+Let $\omega$ be the standard $n$-th root of unity, i.e. $\omega = e^{ 2 \pi i / n }$
+The only possible choices for $\rho(t)$ is  $\omega^{n}$ for some $n$
+
+\begin{center}\begin{tabular}{cccc}
+     & $1$ &  $t$ &  $t^{n-1}$\\ \hline
+    $\chi_{1}$ & 1& 1&1\\
+    $\chi_{2}$ & 1 & $\omega^{2}$ & \\
+    $\chi_{n}$ & 1 & $\omega^{n}$ & \\
+\end{tabular}\end{center}
+
+Now, the rest follows. $\chi(t^2) = \chi(t)^2$ in this case, so
+
+\begin{center}\begin{tabular}{cccc}
+     & $1$ &  $t$ &  $t^{n-1}$\\ \hline
+    $\chi_{1}$ & 1& 1&1\\
+    $\chi_{2}$ & 1 & $\omega^{2}$ & $(\omega^{2})^{n-1}$\\
+    $\chi_{n}$ & 1 & $\omega^{n}$ & $(\omega^{n})^{n-1}$\\
+\end{tabular}\end{center}
+
+\begin{eg}
+    Let $G = \Z_4$
+
+    \begin{center}\begin{tabular}{ccccc}
+         & 1 & $t$ &  $t^2$ & $t^3$ \\\hline
+        $\chi_{1}$ & 1 & 1 & 1 & 1\\
+        $\chi_{2}$ & $1$ &  $i$ &  $-1$ &  $-i$\\
+        $\chi_{3}$ & $1$ &  $-1$ &  $1$ &  $-1$\\
+        $\chi_{4}$ & $1$ &  $-i$ &  $-1$ &  $i$\\
+    \end{tabular}\end{center}
+    
+    Note that character table can contain complex numbers, real numbers which are not integers, \ldots
+\end{eg}
+
+What if we don't have a cyclic group?
+
+
+Let $A, B$ be two finite abelian groups and assume that  $\rho: A \to  \C^{\times }$ is a morphism (one-dimensional representation) and $\sigma: B \to  \C^{\times }$ is a morphism as well.
+Then
+\begin{align*}
+    \psi: A \times B &\longrightarrow \C^{\times } \\
+    (a,b) &\longmapsto \rho(a)\sigma(b)
+.\end{align*}
+is a morphism.
+This is irreducible. Note that two ``$\psi$'s'' are the same iff the $\rho$'s and $\sigma$'s are the same. So we do get $|A\times B|$ representations.
+
+Also, one-dimensional representation are only equivalent when they are the same.
+
+
+\paragraph{Dihedral group of $4$ elements}
+
+\[
+D_4 = \{1, a, a^2, a^3, b, ab, a^2b, a^3b\} 
+.\] 
+And $a^4 = 1 = b^2$ and $ba = a^{-1}b$
+
+Conjugacy classes?
+\begin{align*}
+    c_1 &= \{1\} \\
+    c_2 &= \{a^2\}  \text{ $a^2$ is a central element}\\
+    c_3 &= \{a, a^{3}\} \\
+    c_4 &= \{b, a^2b\} \\
+    c_5 &= \{ab, a^3b\} 
+.\end{align*}
+
+So we have
+ 
+\begin{center}\begin{tabular}{cccccc}
+     & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $?$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{3}$ & $?$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{4}$ & $?$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{5}$ & $?$ & $?$ & $?$ & $?$ & $?$ 
+\end{tabular}\end{center}
+
+Now, let $n_i$ denote the elements in the first column.
+
+$1 + n_2^2 + n_3^2 + n_4^2 + n_5^2 = 8$.
+The only solution for this equation is $1, 1, 1, 1, 2$. 
+
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{3}$ & $1$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{4}$ & $1$ & $?$ & $?$ & $?$ & $?$  \\
+    $\chi_{5}$ & $2$ & $?$ & $?$ & $?$ & $?$ 
+\end{tabular}\end{center}
+
+A one-dimension representation is a map into $\C^{\times }$. So in particular if we mod out our group with the kernel of this representation, we have an abelian group.
+
+So let's look for normal subgroups.
+\[
+N = \{1, a^2\}  \qquad  D_8 / N = \{1, \overline{a}, \overline{b}, \overline{a} \overline{b}\} \cong  \Z_2 \times \Z_2 = \left<\overline{a}, \overline{b}  \mid  \overline{a} \overline{b} = \overline{b} \overline{a}\right>
+.\] 
+
+(TODO frac other way around)
+
+So first we want to find the representations of the Klein 4 group. We know the character table for this (abelian)
+We can map $a \to  \pm 1$ and $b \to  \pm 1$ so four combinations:
+
+\begin{center}\begin{tabular}{ccccc}\\
+     & $1$ & $ \overline{a}$ & $\overline{b}$ & $\overline{a} \overline{b}$\\\hline
+    $\chi_{1}$ & 1 & 1 & 1 & 1\\
+    $\chi_{2}$ & 1 & 1 & $-1$ & $-1$\\
+    $\chi_{3}$ & 1 & $-1$ & 1 & $-1$\\
+    $\chi_{4}$ & 1 & $-1$ & $-1$ & 1\\
+\end{tabular}\end{center}
+
+So back to original table.
+So let's look at $a^2$. Now $\overline{a} \mapsto  1$, so we have
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $1$ & $?$ & $?$ & $?$  \\
+    $\chi_{3}$ & $1$ & $1$ & $?$ & $?$ & $?$  \\
+    $\chi_{4}$ & $1$ & $1$ & $?$ & $?$ & $?$  \\
+    $\chi_{5}$ & $2$ & $?$ & $?$ & $?$ & $?$ 
+\end{tabular}\end{center}
+
+We have that $a \mapsto  \overline{a}$, so 
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $1$ & $1$ & $?$ & $?$  \\
+    $\chi_{3}$ & $1$ & $1$ & $-1$ & $?$ & $?$  \\
+    $\chi_{4}$ & $1$ & $1$ & $-1$ & $?$ & $?$  \\
+    $\chi_{5}$ & $2$ & $?$ & $?$ & $?$ & $?$ 
+\end{tabular}\end{center}
+
+Same for $b \mapsto  \overline{b}$
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $1$ & $1$ & $-1$ & $-1$  \\
+    $\chi_{3}$ & $1$ & $1$ & $-1$ & $1$ & $-1$  \\
+    $\chi_{4}$ & $1$ & $1$ & $-1$ & $-1$ & $1$  \\
+    $\chi_{5}$ & $2$ & $?$ & $?$ & $?$ & $?$ 
+\end{tabular}\end{center}
+
+Now, what about the last one?
+Multiple options:
+\begin{itemize}
+    \item Isometries of the square.
+    \item Trick
+\end{itemize}
+
+Trick: We know that $\chi_{\rho_\text{reg}}  = \chi_{1} + \chi_{2} + \chi_{3} + \chi_{4} + 2 \chi_{5}$
+
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $1$ & $1$ & $-1$ & $-1$  \\
+    $\chi_{3}$ & $1$ & $1$ & $-1$ & $1$ & $-1$  \\
+    $\chi_{4}$ & $1$ & $1$ & $-1$ & $-1$ & $1$  \\
+    $+ 2 \chi_{5}$ & $2$ & $?$ & $?$ & $?$ & $?$ \\ \hline
+    $\chi_{\rho_\text{reg}}$ & 8 & 0& 0 & 0 & 0
+\end{tabular}\end{center}
+
+So we can fill in question marks:
+
+\begin{center}\begin{tabular}{cccccc}
+    & 1 & $a^2$ & $a$ &  $b$ &  $ab$\\ \hline
+    $\chi_{1}$ & $1$ & $1$ & $1$ & $1$ & $1$  \\
+    $\chi_{2}$ & $1$ & $1$ & $1$ & $-1$ & $-1$  \\
+    $\chi_{3}$ & $1$ & $1$ & $-1$ & $1$ & $-1$  \\
+    $\chi_{4}$ & $1$ & $1$ & $-1$ & $-1$ & $1$  \\
+    $+ 2 \chi_{5}$ & $2$ & $-2$ & $0$ & $0$ & $0$ \\ \hline
+    $\chi_{\rho_\text{reg}}$ & 8 & 0& 0 & 0 & 0
+\end{tabular}\end{center}
+
+\hr
+
+By order of the group:
+
+\begin{enumerate}
+    \item Abelian
+    \item Abelian
+    \item Abelian
+    \item Abelian
+    \item Abelian
+    \item Abelian or $ S_3 = D_3$
+    \item Abelian
+    \item 5 groups: 3 abelian, $ D_4$ and group of quaternions.
+\end{enumerate}
+
+So let's do the quaternions.
+
+\[
+Q = \{1, -1, i, -i, j, -j, k, -k\} 
+.\] 
+Conjugacy classes:
+
+\begin{align*}
+    c_1 &= \{1\} \\
+    c_2 &= \{-1\} \\
+    c_3 &= \{i, -i\} \\
+    c_4 &= \{j, -j\} \\
+    c_5 &= \{k, -k\} 
+.\end{align*}
+
+By the previous trick of group of order $8$:
+
+\begin{center}\begin{tabular}{cccccc}
+    & $1$ &  $-1$ &  $i$ &  $j$ &  $k$\\\hline
+    $\chi_{1}$ & $1$ & $1$ & $1$& $1$& $1$\\
+    $\chi_{2}$ & $1$ & $?$ & $?$& $?$& $?$\\
+    $\chi_{3}$ & $1$ & $?$ & $?$& $?$& $?$\\
+    $\chi_{4}$ & $1$ & $?$ & $?$& $?$& $?$\\
+    $\chi_{5}$ & $2$ & $?$ & $?$& $?$& $?$\\
+\end{tabular}\end{center}
+
+Normal subgroups of $Q$? Every subgroup is normal.
+ \[
+     \{1, -1\}  \triangleleft Q \implies \frac{Q}{\{1, -1\} } = \overline{1}, \overline{i}, \overline{j}, \overline{k} = \Z_2 \times \Z_{2} = \left<\overline{j}, \overline{i}  \mid \overline{i} \overline{j} = \overline{j} \overline{i}\right>
+.\] 
+
+So:
+
+\begin{center}\begin{tabular}{cccccc}
+    & $1$ &  $-1$ &  $i$ &  $j$ &  $k$\\\hline
+    $\chi_{1}$ & $1$ & $1$ & $1$& $1$& $1$\\
+    $\chi_{2}$ & $1$ & $1$ & $1$& $-1$& $-1$\\
+    $\chi_{3}$ & $1$ & $1$ & $-1$& $1$& $-1$\\
+    $\chi_{4}$ & $1$ & $1$ & $-1$& $-1$& $1$\\
+    $\chi_{5}$ & $2$ & $?$ & $?$& $?$& $?$\\
+\end{tabular}\end{center}
+
+We can do the same thing as before to find the last ones.
+
+\begin{center}\begin{tabular}{cccccc}
+    & $1$ &  $-1$ &  $i$ &  $j$ &  $k$\\\hline
+    $\chi_{1}$ & $1$ & $1$ & $1$& $1$& $1$\\
+    $\chi_{2}$ & $1$ & $1$ & $1$& $-1$& $-1$\\
+    $\chi_{3}$ & $1$ & $1$ & $-1$& $1$& $-1$\\
+    $\chi_{4}$ & $1$ & $1$ & $-1$& $-1$& $1$\\
+    $\chi_{5}$ & $2$ & $-2$ & $0$& $0$& $0$\\
+\end{tabular}\end{center}
+
+So character tables of $Q$ and  $ D_4$ are the same. But $Q \not \cong D_4$!
+
+An explicit representation of the last one:
+
+\[
+    \rho(1) = \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} \qquad
+    \rho(-1) = \begin{pmatrix}
+        -1 & 0 \\
+        0 & -1
+    \end{pmatrix} \qquad
+    \rho(i) = \begin{pmatrix}
+        i & 0 \\
+        0 & -i
+    \end{pmatrix} \qquad
+    \rho(j) = \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix} \qquad
+    \rho(k) = \begin{pmatrix}
+        0 & i \\
+        i & 0
+    \end{pmatrix}
+.\] 
+
+TIP: atlas of finite groups.

@@ -1,0 +1,189 @@
+\lesson{4}{di 06 okt 2020 14:34}{}
+
+Then we have $\chi_\rho(g) = \sum_{i=1}^{n}\lambda_i$.
+
+\begin{corollary}
+    $\chi_\rho(g^{-1}) = \overline{\chi_\rho (g)} = \chi_{\rho^{*}} g$
+\end{corollary}
+
+\begin{proof}
+    Fix a basis $\mathbf{v}$ such that $[\rho(g)]_{\mathbf{v}} = \operatorname{diag}(\lambda_i)$.
+    Then $[\rho(g^{-1})]_{\mathbf{v}} = \operatorname{diag}(\lambda_i ^{-1})$.
+    But because $|\lambda| = 1$, we have that
+     \[
+         [\rho(g^{-1})]_{\mathbf{v}} = \operatorname{diag}(\overline{\lambda_i})
+    .\] 
+    Therefore $\chi_\rho(g^{-1}) = \overline{\chi_\rho (g)}$.
+
+    For $\rho^*$, a similar argument holds.
+\end{proof}
+
+We skip to section 3.2:
+
+\nsection{3}{2}{Properties of characters}
+
+\begin{theorem}[3.10]
+    Let $G$ be a finite group.
+    Consider two representations: $\rho: G \to \GL(V)$ and $\sigma: G \to \GL(W)$.
+    Then 
+    \begin{enumerate}[(1)]
+        \item $\chi_\rho(1) = \dim V$ and  $|\chi_\rho(g)| \le  \dim V$.
+        \item $\chi_{\rho \oplus \sigma} (g)= \chi_{\rho}(g) + \chi_\sigma (g)$
+        \item $\chi_{\rho \otimes \sigma} = \chi_\rho(g) \chi_\sigma(g)$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}[(1)]
+        \item $\chi_\rho(1) = \Tr(1_V) = \dim V$
+
+            For the second part:
+            \[
+                |\chi_\rho(g)| = \left| \sum_{i=1}^{n} \lambda_i\right| \le  \sum |\lambda_i| = \sum 1 = \dim V
+            .\] 
+            
+        \item Choose a basis $\mathbf{v}$ of $V$ and  $\mathbf{w}$ of $W$ such that 
+            \[
+                [\rho(g)]_{\mathbf{v}} = \operatorname{diag}(\lambda_i) \qquad  = \Lambda
+                [\sigma(g)]_{\mathbf{w}} = \operatorname{diag}(\mu_i) = M
+            .\] 
+            Then $\mathbf{v} \cup  \mathbf{w}$ is a basis of $v\oplus w$.
+            Then
+            \[
+                [\rho \oplus \sigma] = \begin{pmatrix}
+                    \Lambda & 0 \\
+                    0 & M
+                \end{pmatrix}
+            .\] 
+            Then we have that 
+            \[
+                \chi_{\rho \oplus \sigma}(g) = \sum \lambda_i + \sum \mu_i = \chi_\rho(g) + \chi_\sigma(g)
+            .\] 
+        \item Choose $\mathbf{v}$ and $\mathbf{w}$ like in $(2)$.
+            Then
+             $v_i \otimes w_j$ form a basis of $V \otimes W$ and 
+             \[
+                 (\rho \otimes \sigma)(g)( v_i \otimes w_j ) = \rho(g)v_i \otimes \sigma(g) w_j = (\lambda_i \mu_j) v_i \otimes w_j.
+         \]
+         So all of $v_i \otimes w_j$ are eigenvectors with eigenvalues $\lambda_i \mu_j$.
+         So
+          \[
+              \chi_{\rho \otimes \sigma}(g) = \sum \sum \lambda_i \mu_j = (\sum \lambda_i) (\sum \mu_j) = \chi_\rho(g) \chi_\sigma(g)
+         .\] 
+    \end{enumerate}
+\end{proof}
+
+This theorem says there is some information of the vector space in the character. For example, you can read of the dimensions of $V$ by $(1)$.
+We will later prove that the characters contain all information!
+Once you know the character, you will know the whole representation.
+
+\begin{ex}
+    What is the character of $\Hom_{k}(V, W)$ in term of the characters of $\rho$ and $\sigma$?
+\end{ex}
+
+\nsection{3}{3}{Inner products of characters}
+
+Consider $\operatorname{Map}(G, \C) = \{f  \mid  f : G \to  \C\}$.
+This is a vector space of dimension $|G|$.
+Also consider $C(G)$, the set of all class functions. This is a subspace of $ \operatorname{Map}(G, \C)$ of dimension $m$, where $m$ is the number of conjugacy classes of $G$.
+
+Indeed, let $G = C_1 \cup  C_2 \cup C_n$ be partition of $G$ into conjugacy classes.
+Let
+\[
+\Delta_i : G \to  \C: x \mapsto  \begin{cases}
+    1 & x \in C_i\\
+    0 & \text{else}
+\end{cases}
+.\] 
+Then these functions form a basis of $C(G)$.
+
+The goal of this section is to show that there exists a different interesting basis!
+Consider all characters of irreducible representations of $G$ up to $G$-equivalence.
+Each of these representations determines a character. We will speak of them as irreducible characters.
+The set of irreducible characters will also form a basis of this space!
+So in particular, the number of different irreducible representations is exactly the number of conjugacy classes.
+
+We will show that these form an orthonormal basis w.r.t.\ a particular inner product.
+
+
+\begin{definition}
+    Let $\alpha, \beta \in \operatorname{Map}(G, \C)$. Then
+    \[
+        (\alpha|\beta)_G = \frac{1}{|G|} \sum_{g \in G} \alpha(g) \overline{\beta(g)}
+    .\] 
+\end{definition}
+
+\begin{prop}[3.13']
+    Let $\rho: G \to \GL(V)$ and $\sigma: G \to \GL(W)$ be two representations.
+    Let $\psi: G \to  \GL(\Hom(V, W))$ be the associated representation.
+    Then 
+    \[
+        (\chi_\sigma | \chi_\rho)_G =  \Tr \epsilon = \dim \Hom_{G}(V, W)
+    ,\] 
+    where
+    \[
+        \epsilon: \Hom(V, W) \to  \Hom_{G}(V, W) : f \mapsto  \left(\frac{1}{|G|} \sum_{g} \psi(g)\right) f 
+    .\] 
+
+\end{prop}
+\begin{proof}
+    This is an alternative proof (differs from the notes)
+    
+
+    Let's first compute the trace.
+    \[
+        \Tr \epsilon = \frac{1}{|G|} \sum_g \Tr \psi(g)
+    .\]
+
+    Consider $\mathbf{v}$ a basis of $V$ of eigenvectors for $\rho(g)$ with eigenvalue $\lambda_i$.
+    Let $\mathbf{w}$ be a basis of $W$ with eigenvectors for $\sigma(g)$ with eigenvalues $\mu_j$.
+
+    Note that 
+        \begin{align*}
+            f_{ij}: V &\longrightarrow W \\
+            v_i &\longmapsto w_j\\
+            v_k &\longmapsto 0 \qquad \text{if $k \neq i$}
+        \end{align*}
+        form a basis of $\Hom(V, W)$. ($f_{ij} = w_j \otimes v_i^{*}$)
+
+        Now that we have a basis, we can think about what $\psi(g)$ is doing.
+        What is $\psi(g)(f_{ij})(v_k)$?
+        \[
+            \sigma(g) f_{ij}(\rho(g)^{-1} v_k)
+            = \sigma(g) f_{ij}(\lambda_k^{-1} v_k)
+            = \overline{\lambda_k} \sigma(g) f_{ij}( v_k)
+        .\] 
+        \begin{itemize}
+            \item If $k \neq i $, we have that this is  $0$
+            \item If $k = i$, we have  $\overline{\lambda_i} \mu_j w_j$
+        \end{itemize}
+        So $\psi(g) f = \mu_j \overline{\lambda_i} f_{ij}$.
+        So each of these $f_{ij}$ are an eigenvector for $\psi$ with eigenvalue  $\mu_j \overline{\lambda_i}$.
+        This gives that
+        \[
+            \Tr \psi(g) = \sum \sum \mu_{\overline{j}} \lambda_i  = \left(\sum \mu_j\right) \left(\overline{\sum \lambda_i}\right) = \chi_\sigma(g)\overline{\chi_\sigma(g)} 
+        .\] 
+        So in total, we have
+        \[
+            \Tr \epsilon = \frac{1}{|G|} \sum_{g} \chi_\sigma(g) \overline{\chi_\rho (g)} = (\chi_\sigma(g) | \chi_\rho(g))_G
+        .\] 
+\end{proof}
+
+Interpretation?
+
+Remember that $\epsilon: \Hom(V, W) \to  \Hom(V, W)$ was the projection onto $(\Hom(V, W))^{G} = (\Hom_{G}(V, W))$.
+So we can write
+\[
+\Hom_{k}(V, W) = \Ker \epsilon \oplus \Hom_{G}(V, W)
+.\] 
+Choosing a basis, we had
+\[
+    [\epsilon] =  \begin{pmatrix}
+        0 & 0 \\
+        0 & I
+    \end{pmatrix}
+,\] 
+where $I$ is the identity on  $ \Hom_{G}(V, W)$.
+So $\Tr \epsilon = \dim \Hom_{G}(V, W)$, so the dimension of the space of $G$ maps from $V$ to $W$.
+
+In particular, the inner product is always a natural number.

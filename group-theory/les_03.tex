@@ -1,0 +1,292 @@
+\lesson{3}{di 06 okt 2020 11:25}{}
+
+
+Recap.
+Let 
+
+\begin{align*}
+    \rho: G \to \GL_{k}(V) && \sigma: G \to \GL_{k}(W)
+.\end{align*}
+Then define
+\[
+\psi: \to \GL_{k}(\Hom_{k}(V, W))
+\] 
+as
+\[
+    \psi(g) : \Hom_{k}(V, W) \to  \Hom_{k}(V, W) : f \mapsto \psi(g) (f)
+,\] 
+where
+
+\[
+    \psi(g)(f) : V \to  W : v \mapsto  \sigma(g) f(\rho(g)^{-1} w)
+.\] 
+The map $\psi(g)$ is linear map (check this).
+To check that is a representation, we check the following:
+\begin{align*}
+    (gh) \cdot  f (v) &= (gh) \cdot  f((gh)^{-1} \cdot v)\\
+                      &= g \cdot  h \cdot  f ( h^{-1} \cdot  g ^{-1} \cdot  v )\\
+                      &= g \cdot  h \cdot  f(v)
+.\end{align*}
+
+\begin{remark}
+    What is $(\Hom_{k}(V, W))^{G} =: \Hom_{G}(V, W)$?
+
+    $f \in \Hom_{G}(V, W)$ if $g \cdot  f = f$ for all $g \in G$.
+    So
+    \begin{align*}
+        \sigma(g) f(\rho(g)^{-1} v) &= f(v) \quad \forall  g \in  G, v \in V\\
+        f(\rho(g^{-1}) v) &= \sigma(g^{-1} ) f(v)\\
+        f(\rho(g) v) &= \sigma(g) f(v)
+    .\end{align*}
+    This is exactly the definition of a $G$-map.
+    So 
+    \[
+    f \in \Hom_{k}(V, W)^{G} \iff \text{ $f $ is a $G$-map }
+    .\] 
+
+\end{remark}
+
+\paragraph{Special case: contragrediant representation}
+    
+    Consider $\rho: G \to \GL_{k}(V)$ and let $k$ be the trivial $1$-dimensional $G$-module.
+    (I.e. $\sigma: G \to \GL_{k}(k): g \mapsto  \sigma(g) = k \to  k : x \mapsto x$)
+
+    So the dual space $V^{*} = \Hom_{k}(V, k)$ becomes a $G$-module with $\psi: G \to \GL_{k}(V^{*})$ with
+    \[
+        \psi(g)(f)(v) = \sigma(g) f(\rho(g)^{-1} \sigma) = f(\rho(g)^{-1} \sigma)
+    ,\] 
+    as $\sigma(g)$ is doing nothing.
+    We write $\rho^{*} := \psi$.
+    This is called the contragrediant representation.
+
+
+Let $\mathbf{v} = \{ v_1, \ldots, v_n\} $ be a basis of $V$ and let $\mathbf{v}^{*} = \{v_1^{*}, \ldots, v_n^{*}\} $ the dual basis:
+\[
+v_i^{*} : V \to  k : v_j \mapsto \delta_{ij}
+.\] 
+
+Let $[\rho(g)]_{\mathbf{v}} = r_{ij}(g)$.
+Then $[\rho^{*}(g)]_{\mathbf{v}^{*}} = r_{ji}(g^{-1}) = r_{ij}(g^{-1})^{T}$
+
+\begin{proof}
+    Let $[\rho^{*}(g)]_{\mathbf{v}} = t_{ij}(g)$.
+    Then
+    \[
+        \rho^{*}(g)(v^{*}_j) = \sum_{k=1}^{m} t_{kj}(g) v_k^{*}
+    \]
+    So
+    \[
+        \rho^{*}(g)(v_j^{*})(v_i) = \sum_{k=1}^{m} t_{kj}(g) v_k^{*}(v_i) = t_{ij}(g)
+    .\] 
+
+    On the other hand:
+    \begin{align*}
+        \rho^{*}(g)(v_j^*)(v_i) :&= v_j^* ( \rho(g^{-1}) v_i )\\
+                                 &= v_j^* (\sum r_{ki}(g^{-1}) v_k)\\
+                                 &= r_{ji}(g^{-1})
+    .\end{align*} 
+    This finishes the proof.
+\end{proof}
+
+\begin{prop}
+    $\Hom_{k}(V, W) \cong W \otimes V^*$ as $G$-modules.
+\end{prop}
+\begin{proof}
+    Exercise
+\end{proof}
+
+\nsection{2}{4}{Permutation representations (2.4 -- 2.6)}
+
+Let $G$ be a finite group.
+Let $X$ be a finite set. 
+
+We assume that an action of $G$ on $X$ is given, i.e.
+\[G \times  X \to  X: (g, x) \mapsto  g\cdot x,\]
+with
+\begin{enumerate}[(1)]
+    \item $1x = x$
+    \item $g(hx) = (gh) x$
+\end{enumerate}
+
+In other words, this is group homomorphism $G \to  SX$.
+
+We can use this to build a linear representation!
+So first we need to find a vector space.
+Let $X = \{x_1, \ldots, x_n\} $
+Then we choose as our vector space
+\[
+    k[X] = \{k_1 x_1 + k_2 x_2 + \cdots + k_n x_n  \mid  k_i \in k\} 
+.\] 
+This is a vector space with basis $X$.
+
+\begin{remark}
+    You can also see this as $k[X] = \operatorname{Map}(X, k)$.
+\end{remark}
+
+Now we can extend the action of $G$ linearly onto our vector space.
+Define 
+\[
+    \rho: G \to \GL_{k}(k[X]): \rho(g)(k_i x_i) = k_i (g\cdot x_i)
+.\] 
+We call this the permutation representation.
+
+\begin{ex}
+    Let $G = S_4$ which acts on $X = \{e_1, e_2, e_3, e_4\}$.
+    Then
+    \[
+        \rho(\operatorname{Id}) = \begin{pmatrix}
+            1 & 0 & 0 & 0\\
+            0 & 1 & 0 & 0\\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+        \qquad
+        \qquad
+        \rho(23) = \begin{pmatrix}
+            1 & 0 & 0 & 0\\
+            0 & 0 & 1 & 0\\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+    .\] 
+
+    \[
+        \rho((1,2)(3,4)) = \begin{pmatrix}
+            0 & 1 & 0 & 0\\
+            1 & 0 & 0 & 0\\
+            0 & 0 & 0 & 1 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix}
+        \qquad
+        \qquad
+        \rho(1,2,3) = \begin{pmatrix}
+            0 & 0 & 1 & 0\\
+            1 & 0 & 0 & 0\\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+    .\] 
+
+    We see that we get a permutation matrix.
+\end{ex}
+
+\begin{remark}
+    Note that $\operatorname{Tr}(\rho(g))$ is the number of fixed points, i.e. $|X^{g}|$
+\end{remark}
+
+
+\begin{eg}[Important example: regular presentation]
+    Let $X = G$, so $G$ acts on itself by left multiplication.
+    \[
+        G \times G : (g, h) \mapsto  g\cdot h = gh
+    .\] 
+    Elements of $k[G]$ are of the form  $\sum_{g \in G} \alpha_g g$ with $\alpha_g \in k $.
+    And so for the corresponding premutation representation we have that
+    \[
+        \rho(g)(\sum \alpha_h h) = \sum \alpha_h(gh)
+    .\] 
+    This representation is called the regular representation. 
+    Notation: $\rho_\text{reg}$.
+
+    (This is important because when we decomse $\rho_\text{reg} $ into irreducible representations, we get \emph{all} possible irreducible representations. See later)
+
+    What about the trace?
+
+    \[
+        \operatorname{Tr}(\rho_\text{reg} (g)) = |G^{g}| = \begin{cases}
+            |G| &\text{if $g = 1$ }\\
+            0 &\text{if $g \neq 1$}
+        \end{cases}
+    .\] 
+\end{eg}
+\begin{remark}
+    Note that in the preceding example, $k[G]$ is a ring!
+    We can add. What about multiplication?
+
+    \[
+        (\sum_{g \in G} \alpha_g g)(\sum_{h \in G} \beta_h h)
+        = \sum_{g \in G} \sum_{h \in G} \alpha g \beta_h (gh)
+        = \sum_{g \in G} \left(\sum_{k \in G} \alpha_{k} \beta_{k^{-1} g} \right)g 
+    ,\] 
+    where in the last equality, we grouped them for each $g \in G.$
+
+    This is ring with identity: the one is $1 e_g$.
+
+    We call this the group ring or group algebra!
+\end{remark}
+
+\begin{remark}
+    If $V$ is a $G$-module via $\rho: G \to \GL_{k}(V)$.
+    Then we can turn $V$ into a $k[G]$-module by defining
+    \[
+        \left(\sum_{g \in G} \alpha_g g\right) v = \sum_{g \in G} \alpha_g ( gv )
+        := \sum_{g \in G} \alpha_g (\rho_g v)
+    .\] 
+
+    We can also go the other way around.  (Careful: we need ask that $1$  acts as the identity (?))
+\end{remark}
+
+\nchapter{3}{Character theory}
+
+Let $G$ be a finite group and $k = \C$.
+
+\nsection{3}{1}{Characters and class functions of a finite group}
+
+\begin{definition}
+    Let $\rho: G \to \GL(V)$ be a representation.
+    Then the character of $\rho$ is
+     \[
+         \chi_\rho: G \to  \C: g \mapsto  \operatorname{Tr}(\rho(g))
+    .\] 
+\end{definition}
+
+\begin{eg}
+    Remember that for a permutation representation, this is $|X^{g}|$.
+\end{eg}
+
+Characters are class functions:
+
+\begin{definition}[Class function]
+    A function $\theta: G \to  \C$ is a class function iff 
+    \[
+        \theta(g) = \theta(h g h^{-1})  \qquad \forall  g, h \in G
+    .\] 
+\end{definition}
+
+Indeed,
+\[
+    \Tr(\rho(hgh^{-1})) = \Tr(\rho(h) \rho(g) \rho(h^{-1})) = \Tr(\rho(g))
+,\] 
+so that $\chi$ is a class function.
+
+\begin{remark}
+    Remember that two permutations are conjugate iff the have the same type of disjoint cycle decomposition. (Same number of $n$-cycles for all $n$).
+\end{remark}
+
+\begin{theorem}[3.5]
+    Let $\rho: G \to \GL(V)$ be a representation.
+    Fix $g \in G$.
+    Then there exists a basis $\mathbf{v} = \{v_1, \ldots, v_n\} $ of $V$ w.r.t.\ which $[\rho(g)]_{\mathbf{v}}$ is a diagonal matrix.
+\end{theorem}
+So we can find a basis of eigenvectors.
+
+\begin{proof}
+    The order of $g$ is finite.
+    So $g^{d} = 1$ for some $d \in \N$.
+    So $(\rho(g))^{d} = I$. So $\rho(g)$ is a zero of  $X^{d} - 1$.
+    This implies that the minimal polynomial of $\rho(g) $ divides  $X^{d} - 1$.
+    This polynomial splits into linear factors.
+    So the minimal polynomial of $\rho(g)$  also splits into unique (different) linear factors.
+    This implies that $\rho(g)$ can be put into diagonal form.
+\end{proof}
+
+So 
+\[
+    [\rho(g)]_{\mathbf{v}} = \begin{pmatrix}
+        \lambda_1 & 0 & 0\\
+        0 & \ddots & 0\\
+        0 & 0 & \lambda_n
+    \end{pmatrix}
+.\] 
+
+But we also know that because $[\rho_(g)]^{d} = 1$, we have $\lambda^{d} = 1$ as well.  So $\lambda_i$ are roots of unity!

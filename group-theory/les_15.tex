@@ -1,0 +1,207 @@
+\lesson{15}{di 17 nov 2020 10:39}{}
+\url{https://www.youtube.com/watch?v=p-XImEROX3M}
+
+\nsection{1}{2}{Chain complexes and homology}
+
+\begin{definition}
+    A Chain complex is a series of $R$-modules and $R$-module maps
+
+    \[
+    C_{\bullet}: \qquad \cdots \to  C_{n+1} \xrightarrow{d_{n+1}}   C_n \xrightarrow{d_n}   C_{n-1} \to  \cdots
+    \] 
+    such that $d_n  \circ  d_{n+1} = 0$.
+    This implies that $\im d_{n+1} \subset \Ker d_n$.
+    \begin{itemize}
+        \item The $n$-cycles of $C_\bullet = \Ker d_n$:  $Z_n(C_*) = \Ker d_n$
+        \item The  $n$-boundaries of $C_* = Im d_{n+1}$. $B_n(C_*) = \Im d_{n+1}$
+    \end{itemize}
+    The $n$-th homology of $(C_*, d_*)$ is then  $H_n(C_*) = \frac{Z_n}{B_n}$
+\end{definition}
+
+\begin{definition}
+    Let $(C_*, d_*)$,  $(C'_*, d_*')$ be two chain complexes. Then a chain map $f_*$ is a sequence of maps $f_n: C_n \to  C_n'$ such that each square in the diagram below commutes.
+    \[
+        \begin{tikzcd}
+            \cdots \arrow[r, " "] & C_{n+1} \arrow[r, " d_{n+1}"] \arrow[d, "f_{n+1}"]& C_n \arrow[r, "d_n"] \arrow[d, "f_n"]&C_{n-1} \arrow[d, "f_{n-1}"] \arrow[r, ""]& \cdots\\
+            \cdots \arrow[r, ""]  & C_{n+1}' \arrow[r, " d_{n+1}"] & C_n' \arrow[r, "d_n"] &C_{n-1}' \arrow[r, ""] & \cdots\\
+        \end{tikzcd}
+    \]
+\end{definition}
+
+A chain map induces something on the level of homology.
+Let $f_*: C_* \to  C_*'$ be a chain map. Then $f_*$ induces a map
+\begin{align*}
+    (f_n)_*: H_n(C_*) &\longrightarrow H_n(C_*') \\
+    z + B_n(C_*) &\longmapsto f_n(z) + B_n(C_*')
+.\end{align*}
+We need to check two things:
+\begin{itemize}
+    \item We want$f_n(z) \in Z_n(C_*')$. Indeed $d_n' f_n(z) = f_{n-1} (d_n (z) )= f_{n-1}(0) = 0$
+
+    \item If $z = z' + b$ with $b \in B_n(C_*)$, then $f(z) = f(z') = b'$ with  $b' \in B_n(C_*')$
+\end{itemize}
+
+We have that $(f_n  \circ  g_n)_* = (f_n)_*  \circ  (f_n)_*$ and $(1_C)_* = 1_{H_n(C_*)}$.
+So this shows that taking the homology of a complex is a functor from the category of chain complexes to the category of $R$-modules.
+
+\begin{definition}
+    A chain map $f_*: C_* \to  C_*'$ is null homotopic iff there exists a sequence of $R$-module maps $s_n: C_{n} \to  C_{n+1}'$ such that 
+    \[
+        f_n = d_{n+1} ' \circ  s_n + s_{n-1}  \circ  d_n \qquad \forall  n \in \Z
+    .\] 
+
+    \[
+        \begin{tikzcd}
+            \cdots \arrow[r, ""] &  C_{n+1} \arrow[d, "f_{n+1}"]\arrow[r, ""]  &C_n \arrow[d, "f_n"]\arrow[r, ""] \arrow[dl, "s_n"]& \arrow[d, "f_{n-1}"]C_{n-1} \arrow[r, ""] \arrow[dl, "s_{n-1}"]& \cdots\\
+            \cdots \arrow[r, " "] & C'_{n+1} \arrow[r, ""]  &C'_n \arrow[r, ""] & C'_{n-1} \arrow[r, ""] & \cdots\\
+        \end{tikzcd}
+    \]
+\end{definition}
+\begin{definition}
+    Two chain maps $f_*$, $g_*$ are homotopic iff $f_* - g_*$ is nullhomotopic.
+\end{definition}
+
+\begin{prop}
+Homotopic maps induce the same maps on homology.
+\end{prop}
+\begin{proof}
+    $f_n - g_n = d_{n+1}'  \circ s_n + s_{n-1}'  \circ  d_n$ for some $s_n$.
+    Hence,
+     \begin{align*}
+         (f_n - g_n) (z) + B_n(C_*')
+         &= d_{n+1}' s_n(z) + s_{n-1} d_n(z)\\
+         &= d_{n+1}' s_n(z) \in B_n(C'_*)
+    ,\end{align*} 
+    so $(f_n)_* = (g_n)_*$.
+\end{proof}
+
+\begin{remark}[Contracting homotopy]
+    If $1_{C_*}$ is homotopic to the $0$-map, then $C_*$ is an exact sequence.
+    Indeed, $0 = 1_{H_n}: H_n(C) \to H_n(C')$, so the zero map is the same as the identity map.
+    So $H_n(C_*) = 0$.
+
+    The converse is not always true. (under some circumstances, it is: if we are working over abelian groups and modules are all free abelian groups, then converse is true)
+\end{remark}
+\begin{remark}
+    If $f_*: C_* \to  C'_*$ is a chain map and $g_*: C_*' \to  C_*$ is a chain map such that
+    $ g_*  \circ  f_* $ is homotopic to $1_{C_*}$ and $f_*  \circ  g_*$ is homotopic to $1_{C_*'}$.
+    Then $(f_n)_*: H_n(C_*) \to H_n(C_*')$ and $(g_n)_*:H_n(C_*') \to  H_n(C_*)$ are isomorphism and each other inverses.
+\end{remark}
+
+\nsection{1}{3}{The Snake Lemma and long exact sequences in homology}
+
+
+\[
+    \begin{tikzcd}
+        & \Ker \alpha \arrow[d, ""] & \Ker \beta \arrow[d, ""] & \Ker \gamma \arrow[d, ""]\\
+        & A' \arrow[d, "\alpha"]\arrow[r, "i_1"] & \arrow[d, "\beta"]A \arrow[r, "p_1"] & A'' \arrow[r, ""] \arrow[d, "\gamma"]& 0\\
+        0 \arrow[r, ""] & B' \arrow[r, "i_2"] \arrow[d, ""]& B \arrow[r, "p_2"] \arrow[d, ""]& B'' \arrow[d, ""] &\\
+                        & \coker \alpha & \coker \beta & \coker \gamma & 
+    \end{tikzcd}
+\]
+
+Then there exists maps $\overline{i_1}$, $\overline{p_1}$ between kernels and $ \overline{i_2}$, $ \overline{p_2}$ between cokernels and also a map $\partial: \Ker \gamma \to  \coker \alpha$ such that the sequence
+\[
+\Ker \alpha \to  \Ker \beta \to  \ker \gamma \xrightarrow{\partial} \coker \alpha \to  \coker \beta \to  \coker \gamma
+\] 
+is exact.
+If $i_1$ is injective, then we can add  $0$ in front of this sequence.
+If $p_2$ is surjective, we can add $0$ at the back of this sequence.
+
+How is
+\[
+\partial: \Ker \gamma \to  \coker \alpha = \frac{B'}{\im \alpha}
+.\] 
+defined?
+Take $x \in \Ker \gamma$.
+Then there exists $y \in A$ with $p_1(y) = x$.
+Then $\beta(y) \in B$. Note that $p_2(\beta(y)) = 0$, so there exists a $b' \in B'$ such that $i_2(b') = \beta(y)$.
+Since  $i_2$ is injective, there exists exactly one.
+Define $\partial(x) = b'$.
+We made one choice:  $y$ such that $p_1(y) = x$, but you can show that this choice doesn't matter.
+
+\hr
+
+\paragraph{Exact sequences of chain complexes}
+Let $f_*: (C_*, d_*) \to  (C_*', d_*')$ be a chain map between two chain complexes.
+Then  for each $n$ we have $f_n: C_n \to  C_n'$.
+We have $\Ker f_n$ and  $\im f_n$.
+You can show that we can restrict $d_n$ to the kernels:
+
+\[
+    \begin{tikzcd}
+        \cdots \arrow[r, "d_{n+1}"] & \Ker f_n \arrow[r, "d_n"] & \Ker f_{n+1} \arrow[r, ""]& \cdots
+    \end{tikzcd}
+\]
+You can show this by using commutativity of diagram for chain maps.
+Same holds for images. We call this is a subcomplex.
+
+\begin{definition}
+    An exact sequence of chain complexes is a sequence
+    \[
+    \cdots \to  C_*^{n+1} \xrightarrow{f^{n+1}_*}  C_*^{n} \xrightarrow{f_*^{n}} \cdots
+    \] 
+    such that $\im f_*^{n} = \Ker f_*^{n-1}$.
+\end{definition}
+
+More explicitly the following diagram has exact rows.
+
+\[
+    \begin{tikzcd}
+       \cdots \arrow[r, ""] & \arrow[d, "d"]C_{m+1}^{n} \arrow[r, "f_{m+1}^{n}"] & \arrow[d, "d"]C_{m+1}^{n-1} \arrow[r, ""] & \cdots\\
+        \cdots\arrow[r, ""] & \arrow[d, "d"]C_{m}^{n} \arrow[r, "f_{m}^{n}"] & \arrow[d, "d"]C_{m}^{n-1} \arrow[r, ""] & \cdots\\
+        \cdots\arrow[r, ""] & C_{m-1}^{n} \arrow[r, "f_{m-1}^{n}"] & C_{m-1}^{n-1} \arrow[r, ""] & \cdots
+    \end{tikzcd}
+\]
+
+Consider a short exact sequence of chain complexes.
+
+\[
+    0 \to  C_*'  \xrightarrow{i_*}  C_* \xrightarrow{p_*}   C_*'' \to  0
+.\] 
+
+Such a short exact sequence induces a long exact sequence in homology.
+
+\[
+    \to  H_n(C_*) \xrightarrow{(p_n)_*} H_n(C''_*) \xrightarrow{\Delta}  H_{n-1}(C_*') \xrightarrow{(i_{n-1})_*} H_{n-1}(C_*) \xrightarrow{(p_{n-1})_*}  H_{n-1}(C_*'') \xrightarrow{\Delta}  \cdots
+.\] 
+
+\begin{proof}
+    Video.
+    \begin{enumerate}[Step 1]
+        \item Write four rows
+        \item Snake lemma on last two rows. Write kernel part
+        \item Snake lemma on first two rows. Write cokernel part
+        \item Note that $d_n: C_n \to  C_{n-1}$ induces a map $d_{n}: C_n \to  \Ker d_{n-1}$.
+            Why? $d^2 = 0$. 
+            Now, $d_n(\im d_{n+1}) = 0$, so $d_n$ induces a map 
+             \[
+                 \overline{d_n}: \frac{C_n}{\im d_{n+1}} \to  \Ker d_{n-1}: c+ \im(d_{n+1}) \mapsto  d_n(c)
+            .\] 
+            Using this map, we can connect the two sequences from cokernels to kernels with similar maps $\overline{d_n}'$ and $\overline{d_n}''$
+        \item This diagram is commutative (was commutative and now modding out). We can again use snake lemma.
+        \item We get exact sequences between kernels of $\overline{d}$'s and cokernels of $\overline{d}$'s, and a connecting homomorphism $\partial$.
+        \item Now, rewrite  $\Ker(\overline{d_n}) = \frac{Z_n(C)}{\im \ldots} = H_n(C)$, \ldots
+    \end{enumerate}
+\end{proof}
+
+Definition of $\Delta$, same reasoning as snake Lemma.
+
+
+\hr
+
+Sequences are natural.
+If
+\[
+    \begin{tikzcd}
+        0 \arrow[r, ""] & C_*' \arrow[d, "\alpha"]\arrow[r, ""] & C_* \arrow[r, ""] \arrow[d, "\beta"]& C_*'' \arrow[r, ""] \arrow[d, "\gamma"]& 0\\
+        0 \arrow[r, ""] & D_*' \arrow[r, ""] & D_* \arrow[r, ""] & D_*'' \arrow[r, ""] & 0\\
+    \end{tikzcd}
+\]
+consists of short exact sequences of chain complexes and chain maps $\alpha, \beta, \gamma$ and commutative, then the following is also commutative at every square.
+\[
+    \begin{tikzcd}
+\cdots \arrow[r, ""] & H_n(C_*) \arrow[d, "(\beta)_*"]\arrow[r, ""] & H_n(C_*'') \arrow[d, "{\gamma_{n}}_*"]\arrow[r, "\Delta"] & H_{n-1}(C_*') \arrow[r, ""] \arrow[d, "(\alpha_{n-1})_*"]& \cdots\\
+        \cdots \arrow[r, ""] & H_n(D_*) \arrow[r, ""] & H_n(D_*'') \arrow[r, "\Delta"] & H_{n-1}(D_*') \arrow[r, ""] & \cdots
+    \end{tikzcd}
+\]

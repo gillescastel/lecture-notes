@@ -1,0 +1,321 @@
+\lesson{5}{di 13 okt 2020 11:28}{}
+
+\begin{remark}
+    If $\rho$ and $\sigma$ are two equivalent representations. So there is a $G$-map between them. So their matrices are in the right bases the same, so 
+    \[
+        \chi_{\rho} = \chi_{\sigma}
+    .\] 
+
+    In other words:
+    \[
+        \begin{tikzcd}
+            V \arrow[d, "\rho(g)"]\arrow[r, "A"] & W \arrow[d, "\sigma(g)"]\\
+            V \arrow[r, "A"] & W
+        \end{tikzcd}
+    \]
+    So then
+    \[
+        \rho(g) = A^{-1} \sigma(g) A
+    ,\] 
+    so 
+    \[
+        \Tr \rho(g) = \Tr \sigma(g)
+    .\] 
+
+    The remarkable thing is the reverse is also true!
+\end{remark}
+
+First a corollary of the previous result.
+
+\begin{corollary}
+    Let $\rho: G \to \GL(V)$ and $\sigma: G \to \GL(W)$ be irreducible representations.
+    Then 
+    \[
+        (\chi_{\rho} | \chi_{\sigma}) = \begin{cases}
+            0 & \text{if $\rho$ is not equivalent to $\sigma$}\\
+            1 & \text{if $\rho$ is equivalent to $\sigma$.}
+        \end{cases}
+    \] 
+\end{corollary}
+\begin{proof}
+    \begin{itemize}
+        \item Suppose $\rho$ is not equivalent to $\sigma$.
+            Then $\Hom_{G}(V, W)$.
+            Because $\rho$ and  $\sigma$ are irreducible, Schur's Lemma says that any  $G$-map is either $0$ or an isomorphism. But $\rho$ and $\sigma$ are not equivalent, so there are no isomorphism. So  $ \Hom_{G}(V, W) = 0$.
+            This then means that $(\chi_{\rho} | \chi_{\sigma}) = \dim \Hom_{G}(V, W) = 0$.
+        \item Suppose that $\rho$ is equivalent to $\sigma$.
+            Then their characters are the same, so 
+            \begin{align*}
+                (\chi_{\rho} | \chi_{\sigma})_G &= (\chi_{\rho} | \chi_{\rho})_G = \dim_G \Hom_{G}(V, V)
+            .\end{align*}
+            Then we again use Schur's Lemma. Any $G$-map from $V \to  V$ is multiplication by a scalar (our vector spaces are over $\C$).
+            So therefore $ \Hom_{G}(V, V) \cong \C ,$ 
+            so
+            \[
+                (\chi_{\rho} | \chi_{\sigma})_G = 1
+            .\] 
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    Let $\rho_1, \ldots, \rho_r$ be irreducible representations of $G$ such that $\rho_i \not\cong \rho_j$ if  $i \neq j$.
+    Then we have that $(\chi_{\rho_i} | \chi_{\rho_j} ) = \delta_{ij}$.
+    So these are orthonormal vectors of space $C(G)$. 
+    This implies that $r \le  \dim C(G)$. So we cannot find more irreducible representation (up to equivalence) than the dimension of $C(G)$, the vector space of class functions.
+    Remember, this dimension was the number of conjugacy classes of $G$.
+    So  $r \le  \text{\# cong. classes of $G$}$.
+\end{remark}
+
+\begin{definition}[Irreducible character]
+    If $\rho$ is an irreducible representation, then $\chi_{\rho}$ is an irreducible character.     
+\end{definition}
+
+\begin{theorem}[3.15]
+    Let $\chi_{1}, \ldots, \chi_{r}$ be all the different irreducible characters of $G$\footnote{Note that we don't have to specify `up to equivalence', because equivalent representations give rise to the same character}
+    By the previous discussion,  $r < \dim C(G)$. But even more:  $\{\chi_{1}, \chi_{2}, \ldots, \chi_{r}\} $ is a basis of $C(G)$. 
+    As a result: $r = \dim C(G)$.
+\end{theorem}
+\begin{proof}
+    The only thing we have to show is that these vectors generate the whole space.
+    Let $\alpha$ be a class function of $G$.
+    suppose that $(\alpha | \chi_{_i}) = 0$ for all $i \in \{1, 2, \ldots, r\} $
+    We claim that $\alpha \equiv 0$.
+    This will prove that  $\{\chi_{_i}\}^{\perp}  = \O$, proving the theorem.
+
+    (By the way, note that we can at least build all characters (also the ones which are not irreducible), because the character of a reducible representation is the sum of the characters of the irreducible components. But we want to show we can create \emph{any} class function)
+
+    Pick any representation $\rho: G \to \GL(V)$.
+    Define
+    \begin{align*}
+        \rho_\alpha: V &\longrightarrow V \\
+        v&\longmapsto  \sum_{g \in G} \underbrace{\alpha(g)}_{\in \C} (\rho(g)(v))
+    .\end{align*}
+    We claim that this map is a $G$-map.
+
+    \begin{proof}
+        Pick any $h \in G$.
+        Then
+        \begin{align*}
+            \rho_\alpha(\rho_h v) &= \sum \alpha(g) \rho(g)(\rho(h)(v))\\
+                                  &= \sum \alpha( g ) \rho(h) \rho(h)^{-1} \rho(g) \rho(h) v\\
+                                  &= \sum \alpha(g) \rho(h) \rho(h^{-1} gh) v
+                                  \shortintertext{Because $\alpha$ is a class function we have}
+                                &= \sum \alpha(h^{-1}g h) \rho(h) \rho(h^{-1} gh) v\\
+                                &= \rho(h) \sum_{g \in G} \alpha(g) \rho(g) v\\
+                                &= \rho(h) \rho_\alpha(v)
+        .\end{align*}
+    \end{proof}
+
+    Now we proved this for any representation. Now we will pick an irreducible one.
+    Let $\rho$ be an irreducible representation. Then  $\rho_\alpha \in  \Hom_{G}(V, W)$. So $\rho_\alpha = \lambda 1_V$ by Schur's lemma.
+    This implies that $\Tr \rho_\alpha = \lambda \dim V$.
+    We will show that $\rho_\alpha$ is zero. 
+    Indeed, the trace is also
+    \begin{align*}
+        \Tr(\rho_\alpha) &= \sum_{g \in G} \alpha(g) \Tr(\rho(g)) \\ 
+                         &= \sum_{g \in G} \alpha(g) \chi_{\rho}(g)\\
+                        &= |G| \frac{1}{|G|} \sum_{g \in G} \alpha(g) \chi_{\rho}(g)\\
+                        &= |G| \frac{1}{|G|} \sum_{g \in G} \alpha(g) \overline{\overline{\chi_{\rho}(g)}}\\
+                        &= |G| \frac{1}{|G|} \sum_{g \in G} \alpha(g) \overline{\chi_{\rho^*(g)}}\\
+                        &= |G| ( \alpha | \chi_{\rho^{*}} )_G
+                        \shortintertext{Now, Problem I: if $\rho$ is irreducible then $\rho^*$ is irreducible. (But you don't really need it here, because we assumed this was zero for any representation \ldots)}
+                        &= |G| 0 = 0
+    .\end{align*} 
+    This then implies that $0 = \lambda \dim V$, so  $\lambda = 0$, hence $\rho_\alpha$ = 0.
+
+    So what we did was the following: Suppose that $(\alpha | \chi_{i}) = 0$ for all $i$ and all  $\alpha$.
+    Then assuming that  $\rho$ was irreducible, then we showed that $\rho_\alpha$ is the zero map.
+
+    Now assume that $\rho = \rho_1 \oplus \rho_2 \oplus \cdots \oplus \rho_k$ with $\rho_i$ irreducible. So  $V = V_1 \oplus V_2 \oplus \cdots \oplus V_k$.
+    Then it's easy to see that
+    \[
+        \rho_\alpha = (\rho_1)_\alpha \oplus (\rho_2)_\alpha \oplus \cdots \oplus (\rho_k)_\alpha
+    .\] 
+    Because $(\rho_i)_\alpha = 0$, so also $\rho_\alpha = 0$.
+    So this is also true for reducible representations.
+
+    \hr
+    Let us now consider the regular representation
+    \[
+        \rho_\text{reg}  \to  \GL(\C[G]) : g \mapsto  (a h \mapsto a (gh))
+    .\] 
+
+    Net let $v = 1 e \in \C[G]$.
+    Then
+    \begin{align*}
+        0 = (\rho_\text{reg})_\alpha (e) &= \sum_{g \in G} \alpha(g) \rho_\text{reg}(g) e\\
+                                         &= \sum_{g \in G} \alpha(g) g
+    .\end{align*}
+    This implies that for all $g \in G$ that $\alpha(g) = 0$, so  $\alpha \equiv 0$.
+
+    This proves the claim. 
+    Why?
+    Consider any $\alpha \in C(G)$.
+    Consider
+    \[
+        \alpha' = \alpha - \sum_{i=1}^{r}(\alpha | \chi_{i}) \chi_{i}
+    .\] 
+    This is a class function, so $\alpha' \in C(G)$.
+    Then 
+    \begin{align*}
+        (\alpha' | \chi_{k})
+        &= (\alpha | \chi_{k}) - \sum (\alpha | \chi_{i}) (\chi_{i} | \chi_{k})\\
+        &= (\alpha | \chi_{k}) - \sum (\alpha | \chi_{i}) \delta_{ij}\\
+        &= (\alpha | \chi_{k}) - (\alpha| \chi_{k})\\
+        & = 0
+    .\end{align*} 
+    Conclusion: $\alpha' = 0$ so  $\alpha = \sum_{i=1}^{r} (\alpha | \chi_{i}) \chi_{i}$
+\end{proof}
+
+So we proved that for each conjugacy class, there is a irreducible representation. But we still don't know how we can find it.
+
+
+\begin{corollary}[Morse or less Theorem 3.16]
+    Let $V$ be a $G$-module. Suppose that $V = V_1 \oplus V_2 \oplus \cdots \oplus V_m$ where each $V_i$ is a irreducible submodule.
+    Let $\chi_{1}, \chi_{2}, \ldots \chi_{r}$ be all the different irreducible characters with corresponding representations $\rho_i$.
+    Let $\rho$ be the representation corresponding to the  $G$-module $V$.
+    Then $(\chi_{\rho} | \chi_k)$ is equal to the number of modules $V_i$ which are  $G$-equivalent to $\rho_k$.
+\end{corollary}
+
+So this kinda proves that the decomposition of $V$ is unique upto equivalence of submodules. Indeed $(\chi_{\rho} | \chi_{k})$ does not depend on the decomposition and gives you the number of modules in the decomposition that are equivalent to $\rho_k$.
+
+\begin{proof}
+    Let $\sigma_i: G \to \GL(V_i)$ denote the representation corresponding to $V_i$.
+    Then  $\rho = \sigma_1 \oplus \cdots \oplus \sigma_n$.
+    Then $\chi_{r} = \chi_{\sigma_1} + \cdots + \chi_{\sigma_n}$.
+    So $(\chi_{\rho} | \chi_{k}) = \sum (\chi_{\sigma_i}  | \chi_{k})$.
+    Note that $\sigma_i$ and  $\rho_k$ are irreducible so their inner product is $0$ or $1$ iff they are equivalent or not. So
+     \[
+         (\chi_{\rho} + \chi_{_k}) = \underbrace{1 + \cdots + 1}_{\ell  \text{ times }} = \ell
+    ,\] 
+    where $\ell$ is exactly what we were looking for.
+\end{proof}
+
+Let's discuss the latest topic of representation theory: character tables.
+
+
+\nsection{3}{4}{Character tables}
+
+For a finite group $G$, its character table if of the form
+
+
+\begin{tabular}{ccccc}
+         & $c_1$ & $ c_2$ & $\cdots$ & $c_r$ \\ \hline
+    $\chi_1$ &  & & & \\
+    $\chi_2$ &  & & & \\
+    $\vdots$ &  & & $\chi_{i} (c_j)$ & \\
+    $\chi_r$ &  & & & \\
+\end{tabular}
+
+\begin{itemize}
+    \item Here, we have $c_i \in  C_i$ where $C_i$ a conjugacy class. So for each column we have a representative of each conjugacy class.
+Note: by convention: $C_1 = \{e\}$, so $ c_1 = e$.
+
+\item The $\chi_i$ are the different irreducible characters.
+Convention: $\chi_1$ corresponds to the trivial  $1$-dimensional representation. Therefore $\chi_1(g) = 1$ for all $g$.
+
+\item Note that $\chi_{i}(e) = \text{dimension of the $i$-representation}$. So the first column contains the dimension of the representation.
+    Convention: increasing dimension.
+
+\end{itemize}
+
+\begin{eg}
+    Let $G = S_3 = D_3 = \{1, a, a^2, b, ab, a^2b\} $. with $a^3 = 1$, $b^2 = 1$ and $ba = a^2 b$.
+
+    What are conjugacy classes?
+    \begin{align*}
+        c_1 &= \{1\} \\
+        c_2 &= \{a, a^2\} \\
+        c_3 &= \{b, a^2b, ab\} 
+    .\end{align*}
+
+    So our table looks as follows:
+
+    \begin{center}
+    \begin{tabular}{cccc}
+        & $1$ &  $a$ &  $b$ \\ \hline
+        $\chi_{1}$ & 1& 1 & 1\\
+        $\chi_{2}$ & & \\
+        $\chi_{3}$ & & \\
+    \end{tabular}
+    \end{center}
+
+    In the exercises, we saw that if $N \triangleleft G$, then $\rho: G / N \to  \GL(V)$ is a representation as well.
+
+    Here, $\{1, a, a^2\} \triangleleft D_3$ and we have that $ \frac{D_3}{\{1, a, a^2\} } = \Z_2 = \Z / 2\Z$.
+    Now, there's an easy representation of $\Z_2$:
+    \begin{align*}
+        \rho: \Z_2 &\longrightarrow \GL(C)  \\
+        t &\longmapsto -1\\
+        1 &\longmapsto 1
+    .\end{align*}
+    So now, we have for $D_3$: something that maps $a$ to $1$ and  $b$ to  $-1$.
+
+    So we have in our table:
+
+\begin{center}
+    \begin{tabular}{cccc}
+        & $1$ &  $a$ &  $b$ \\ \hline
+        $\chi_{1}$ & 1& 1 & 1\\
+        $\chi_{2}$ &$1$ & $1$& $-1$\\
+        $\chi_{3}$ & & \\
+    \end{tabular}
+    \end{center}
+
+    For the last one, remember that $D_3$ was isometries from triangle in the plane mapping to itself.
+    So we have a representation in the plane:
+    \[
+    a = \begin{pmatrix}
+        \cos 2 \pi / 3 & \sin 2 \pi /3 \\
+        -\sin 2 \pi /3  & \cos 2 \pi / 3 \\
+    \end{pmatrix}
+    \qquad b = \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}
+    .\] 
+    So $\Tr a = -1$ and  $\Tr b  = 0$. We claim that this is an irreducible representation. So the character table becomes
+
+    \begin{center}
+    \begin{tabular}{cccc}
+        & $1$ &  $a$ &  $b$ \\ \hline
+        $\chi_{1}$ & 1& 1 & 1\\
+        $\chi_{2}$ &$1$ & $1$& $-1$\\
+        $\chi_{3}$ & 2& $-1$& 0\\
+    \end{tabular}
+    \end{center}
+
+\end{eg}
+
+
+\begin{prop}
+    Let $\rho: G \to \GL(V)$ be a representation with character $\chi_\rho$.
+    Then  $\rho$ is irreducible iff $(\chi_{\rho} | \chi_{\rho})_G = 1$
+\end{prop}
+\begin{proof}
+    Let $\chi_1 \chi_{2}, \ldots, \chi_{r}$ be all the different irreducible characters.
+    Then
+    \[
+    \chi_{\rho} = \sum n_i \chi_{i}
+    .\] 
+    Then the inner product is
+    \[
+        (\chi_{\rho} | \chi_{\rho}) = \sum \sum n_i n_j (\chi_{i}  \mid  \chi_{j})_G = n_1^2 + n_2^2 + \cdots + n_r^2
+    .\] 
+    This is a sum of natural numbers. (Q: why not complex?)
+    This is one if exactly one of the $n_i = 1$ and the others are  $0$.
+\end{proof}
+
+\begin{eg}[Previous example, continuoud]
+    \[
+        (\chi_{3} | \chi_{3}) = \frac{1}{6} (
+        \chi_{3}^2(e) + 
+        \chi_{3}^2(a) + 
+        \chi_{3}^2(a^2) + 
+        \chi_{3}^2(b) + 
+        \chi_{3}^2(ab) + 
+        \chi_{3}^2(a^2b)
+        ) = 1
+    .\] 
+    We should also check that the inner product with the other ones is $0$.
+\end{eg}

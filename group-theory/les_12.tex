@@ -1,0 +1,246 @@
+\lesson{12}{do 05 nov 2020 10:36}{}
+
+
+\begin{eg}
+    A group $G$ is poly-max iff $G$ is max.
+\end{eg}
+\begin{explanation}
+    You can prove this by induction of the length of the series in definition of poly.
+    \[
+    1 \triangleleft  G_1 \triangleleft  \cdots \triangleleft  G_{n-1} \triangleleft G_n = G
+    .\] 
+    Suppose holds for series of length $n$, then $G_{n-1}$ has max. So then $G_{n-1}$ has max and $\frac{G_n}{G_{n-1}}$ has max by being poly-max, we see that $G$ itself is also max. ($N$ and $G / N$ max implies that $G$ is max)
+\end{explanation}
+
+
+\begin{prop}
+    The following are equivalent for a group $G$ 
+    \begin{enumerate}[(1)]
+        \item $G$ is poly-(cyclic or finite)
+        \item $G$ is (poly-cyclic)-by-finite
+        \item $G$ is (poly-$C_{\infty}$)-by-finite\footnote{By poly-$C_{\infty}$ we mean that each quotient is either trivial or infinite cyclic}
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item $(3) \implies (2)$ easy.
+
+        \item $(2) \implies (1)$.
+            Suppose we have $N \triangleleft_f G$ (this is notation for normal group of finite index)
+            Combining this with poly-cyclic, we have
+            \[
+            1 \triangleleft N_1 \triangleleft \cdots \triangleleft N_k \triangleleft N \triangleleft_f G
+            .\] 
+            Where first quotients are cyclic and last one is finite.
+            Then clearly this series also pol(cyclic or finite).
+    \end{itemize}
+
+    Hard one: $(1) \implies (3)$.
+    \begin{lemma}
+        Let $H$ be a fg group and $B$ be a finite group.
+        Then there are only finitely many $N \triangleleft H$ such that $H / N \cong B$.
+    \end{lemma}
+    \begin{proof}
+        If $N\triangleleft H$ such that $H / N \cong B$, then there is an isomorphism  $H / N \xrightarrow{\phi} B$.
+        Then the map
+        \[
+        \psi: H \xrightarrow{\pi}   H / N \xrightarrow{\phi} B
+        \] 
+        is a morphism with $\Ker(\psi) = N$.
+        So $N$ appears as the kernel of a homomorphism from $H$ to $B$.
+        But $ H = \left< h_1, h_2, \ldots, h_k\right>$ and $B = \{b_1, b_2, \ldots, b_n\}$.
+        For each image of generator of $H$ there are only finitely many possible images, so there are only finitely may $\psi$.
+        So there are only finitely many kernels $N$.
+    \end{proof}
+    \begin{lemma}
+        Let $K \triangleleft_f H \triangleleft G$ and $H$ is fg.
+        If $H$ is fg, then there exists a  $ K^0 \triangleleft G$ and $K^0 \triangleleft_f K$.
+    \end{lemma}
+    \begin{proof}
+        Let $g \in G.$
+        Consider the group $g K g^{-1}$.
+        As $H \triangleleft G$, we have that $g K^{-1} g \le  H$.
+        Moreover, this subgroup will be normal in $H$!
+        Indeed, 
+        \begin{align*}
+            h g K g^{-1} h^{-1} &= g(g^{-1} h g) K (g^{-1} h^{-1} g) g^{-1}\\
+            \shortintertext{Now, as $H \triangleleft G$}
+                                &= g h' K h'^{-1}  g^{-1}\\
+        \shortintertext{Now, as $K \triangleleft H$}
+                                &= g K g ^{-1}
+        .\end{align*} 
+
+        So $g K^{-1} g \triangleleft H$.
+
+        Now, claim: $H / K \cong H / (g K g^{-1})$. The following is an isomorphism (check)
+        \[
+            \phi: H / K \to  H / (g K g^{-1}) : hK \mapsto  g h g ^{-1}( g K g ^{-1})
+        .\] 
+        Moreover, $H / K$ is finite.
+        So by the previous lemma, there are only finitely many $g K g^{-1}$.
+
+        Let \[
+        K^{0} = \bigcap_{g \in G} g K g^{-1} = K_1 \cap K_2 \cap  \cdots \cap  K_n,
+    \]
+    where $K_i = g_i K g_i^{-1}$.
+    Clearly, $K^{0} \triangleleft G$.
+    Also $K^{0} \le K$.
+    So the thing we eed to prove that the index in $H$ is finite.
+
+    Two interesting properties:
+    \[
+    A\le B\le C \qquad |C:A| = |C:B| |B:A|,
+ \] 
+ and
+ \[
+ A,B \le C \qquad |C:A| \ge  |C \cap B : A \cap B|
+ .\] 
+ So we get
+
+    \begin{align*}
+        |H : K_1 \cap K_2 \cap \cdots K_n| &= 
+        |H : K_1 | |K_1: K_2 \cap \cdots K_n|\\
+       &\le |H:K_1| |H : K_2 \cap \cdots \cap K_n|\\
+       &\le |H:K_1| |H:K_2| \cdots |H :K_n|
+    .\end{align*}
+    But $\frac{H}{K_i} = \frac{H}{K}$, and as we assumed that $|H:K| < \infty$, we have that this product is also finite.
+
+    So we indeed have
+    \[
+    K^{0} \triangleleft_f K \triangleleft _f H_\text{fg}  \triangleleft G
+    ,\] 
+    and also $K^{0} \triangleleft G$
+    \end{proof}
+    \begin{lemma}
+        Let $B \triangleleft A$, $B$ finite and $A / B \cong C_{\infty} = (\Z, +)$.
+        Then there exists a $C \triangleleft A$ such that $C \cong C_{\infty}$ such that $A / C$ is finite.
+        So we can reverse the situation.
+    \end{lemma}
+    \begin{proof}
+        We have $A / B = C_\infty$.
+        So fix $x \in A$ such that $A / B = \left<x B \right>$.
+        Then $\left<x \right>$ is an infinite cyclic subgroup of $A$.\footnote{Because quotient is infinite cyclic, now power of $x$ can be trivial}
+        And we claim that $A = B \left<x \right>$.\footnote{Indeed, $a \in A$. then $a B = x^{k} B$ for some $k \in \Z$. So $a = b x^{k}$ for some $k \in \Z, b \in B$}
+        Now, $x$ determines an automorphism of $B$ by means of conjugation.
+        \[
+        \phi: B \to  B: b \mapsto  x b x^{-1}
+        .\] 
+        As $B$ is a finite group, the automorphism group of $B$ is also finite.
+        So $\phi^{e} = 1_B$ for some $e>0$. 
+        But this implies that $x^{e} b x^{-e} = b$ for all $b$.
+        As  $A = B \left<x \right>$, we have that 
+        $x^{e}$ commutes with all elements of $A$, so $x^{e} \in Z(A)$.
+        Then $C = \left<x^{e} \right> \subset Z(A)$, so $C \triangleleft A$.
+        And $C \cong C_\infty$.
+        So the only thing left to prove is that $C$ has finite index in $A$.
+
+        \begin{align*}
+            |A :C| &= |A: BC| | BC : C|\\
+                   & \le     |e|  | B| < \infty
+        ,\end{align*}
+        where $|A:BC| = |e|$.\footnote{This equality implies that $|\frac{A}{C}| > |B|$ in most cases}
+    \end{proof}
+
+    Now, we're ready to prove $(1) \implies (3)$.
+
+    Induction on the series.
+    So we have
+    \[
+    1 = G_0 \triangleleft \cdots \triangleleft G_{n-1} \triangleleft G_n
+    ,\] 
+    and $\frac{G_{i+1}}{G_i}$ is finite or $C_\infty$.
+    By induction on the length, we can assume that there exists an $L \triangleleft_f G_{n-1}$ which is of finite index and $L$ is poly-$C_\infty$.
+    Now we have to prove the same for $G_n$.
+
+    \begin{remark}
+       Any subgroup of a poly-$C_\infty$ group is itself poly-$C_\infty$.
+        Why? One of the problems!
+    \end{remark}
+
+
+    As cyclic groups and finite groups are max, it means that our group is poly-max.
+    So it's a max group.
+    So $G_{n-1}$ is finitely generated.
+    Then we have the following situation:
+    \[
+        \underbrace{L}_{K} \triangleleft_f \underbrace{{G_{n_1}}}_{H} \triangleleft G_n
+    ,\] 
+    so we have by Lemma 2
+    \[
+        L^{0} \triangleleft_f\underbrace{L}_{K} \triangleleft_f \underbrace{{G_{n-1}}}_{H} \triangleleft G_n
+    ,\] 
+    and $L^{0} \triangleleft G_n$.
+
+    By cyclic-or-finite we have that $\frac{G_n}{G_{n-1}}$ is finite or $C_\infty$.
+    \begin{itemize}
+        \item If finite, then
+            \[
+            L^{0} \triangleleft_f L \triangleleft _f G_{n-1} \triangleleft _f G_n
+            ,\] 
+            so $L^{0} \triangleleft _f G_{n}$ and $L^{0}$ is poly-$C_{\infty}$, because $ L_0$ is a subgroup of $L$ which was by induction poly-$C_\infty$. Now we're done
+        \item If $C_\infty$, we work with Lemma 3.
+            So we have
+            \[
+            \frac{G_{n-1}}{L^{0}} \triangleleft \frac{G_n}{L^{0}}
+            .\] 
+            Because $L^{0} \triangleleft _f L \triangleleft _f G_{n-1}$, we have that $\frac{G_{n-1}}{ L^{0}}$ is finite.
+            We also know that
+            \[
+            \frac{G_n / L^{0}}{G_{n-1} / L^{0}} \cong \frac{G_n}{G_{n-1}} \cong \Z
+            .\]     
+            So by Lemma 3 we can find a $K / L^{0} \triangleleft_f \frac{G_n}{L^{0}}$ such that $\frac{K}{L^{0}} \cong C_\infty$.
+
+            So we have
+            \[
+            L^0 \triangleleft K \triangleleft_f G_n
+            .\] 
+            and we know that $L^{0}$ is poly-$C_{\infty}$, so we have
+            \[
+            1 \triangleleft L_1 \triangleleft \cdots \triangleleft L_{k-1}\triangleleft L^{0}\triangleleft K \triangleleft _f G_n
+            .\] 
+            All left quotients are $\Z$ or trivial.
+            Also the quotient $L^{0} \triangleleft K$ is cycilic.
+            So $K$ is poly-$C_\infty$.
+            We are done.
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    We mostly use the term poly-cyclic-by-finite.
+    A subclass of these groups are the polycyclic (e.g.\ fg nilp. groups)
+\end{remark}
+
+\begin{lemma}
+    A nilpotent group is polycyclic iff it is finitely generated.
+
+    In particular, an \emph{abelian} group is polycyclic iff it is finitely generated.
+\end{lemma}
+\begin{proof}
+    If polycyclic, it has max, so it is finitely generated.
+    If finitely generated, then also finitely generated nilpotent group, so polycyclic.
+\end{proof}
+
+\begin{definition}
+    A group $G$ is solvable (soluble) iff $G$ is poly-abelian.
+\end{definition}
+
+\begin{remark}
+    Sometimes also defined as $G$,  $G^{(i+1)} = [G^{(i)}, G^{(i)}]$.
+    Then solvable if $G^{(k)} = 1$.
+    Equivalent definition.
+\end{remark}
+
+\begin{remark}
+    Remember earlier example.
+    \[
+    \left<\bigoplus_{z \in \Z} \Z, t\right>
+    .\] 
+    This is solvable.
+    Indeed, it has normal subgroup $\bigoplus_{z \in \Z} \Z$, which is abelian so sovable. The quotient is then  $\Z$ so certainly poly-abelian.
+    So this is solvable.
+    This is an example of a solvable, fg group that is not poly-cyclic.
+\end{remark}
+
+\begin{remark}
+    A solvable group is poly-cyclic iff it is poly(fg abelian).
+\end{remark}

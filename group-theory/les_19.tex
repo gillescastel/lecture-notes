@@ -1,0 +1,426 @@
+\lesson{19}{di 01 dec 2020 10:38}{}
+
+
+How to compute homology? Projective resolution of $\Z$:
+\[
+\cdots \to  P_3 \to P_2 \to  P_1 \to  P_0 \to  \Z \to  0
+.\] 
+Then delete $\Z$ and apply $\Hom_{\Z G}(-, A)$ or $- \otimes_{\Z G} A$ and then calculate homology.
+
+\begin{prop}[3.6]
+    If $0 \to  A' \to  A \to  A''\to 0$ is a s.e.s. of $G$-modules.
+    This gives rise to long exact sequence
+    \[
+        0 \to  H^{0}(G, A') \to  H^{0}(G, A) \to  H^{0}(G, A'') \xrightarrow{\partial}  H^{1}(G, A)  \to  \cdots
+    ,\] 
+    and
+    \[
+        \cdots\to H_n(G,A) \to  H_n(G, A') \xrightarrow{\partial}  H_{n-1}(G, A') \to \cdots
+    \] 
+    are long exact sequence.
+\end{prop}
+
+This is useful if we want to find cohomology over $A$ and know how it is build up with  $A'$ and  $A''$.
+
+\begin{remark}
+    We can always take $A = \Z$, the trivial $G$-module.
+    Then
+    \[
+        H^{n}(G)=H^{n}(G, \Z) \qquad H_n(G) = H_n(G, \Z)
+    .\] 
+    This are invariants of $G$.
+\end{remark}
+\begin{remark}
+    Consider $\R^{n} / G$.
+    Then $\pi_1(\frac{\R^{n}}{G}) \cong G$.
+    And $H_n(\R^{n} / G) = H_n(G)$.
+\end{remark}
+
+\begin{prop}[3.7]
+    Let $A$ be a $G$-module.
+    Then
+    \begin{itemize}
+        \item $ H_0(G,A) = A_G := \frac{A}{(IG)A}$, which is the largest quotient of $A$ on which  $G$ acts trivially.
+        \item $H^{0}(G, A) = A^{G} = \{a \in A  \mid  ga = a \quad \forall  g \in  G\} $
+    \end{itemize}
+\end{prop}
+We use the following exercise:
+\begin{ex}
+    $\frac{R}{I} \otimes_R M = \frac{M}{IM}$
+\end{ex}
+\begin{proof}
+    $H_0(G,A) = \Tor_0^{\Z G}(\Z,A)$.
+    The zero derived functor is simply the functor itself, so we have
+    \[
+    H_0(G,A) = \Tor_0^{\Z G}(\Z,A) = \Z \otimes_{\Z G} A
+\]
+We have the following ses:
+\[
+0 \to  IG \to  \Z G \xrightarrow{\epsilon}  \Z \to  0
+,\] 
+where
+\[
+    \epsilon: \Z G \to  \Z: \sum n_g g \mapsto  \sum n_g
+,\] 
+and $IG$ is defined as the kernel of  $\epsilon$.
+So we have that  $\Z \cong \frac{\Z G}{IG}$.
+So we have
+\[
+    H_0(G,A) = \Tor_0^{\Z G}(\Z,A) =
+    \Z \otimes_{\Z G} A
+    = \frac{\Z G}{IG} \otimes_{\Z G} A 
+    = \frac{A}{(IG) A} = A_{G}
+\]
+\hr
+We have
+\[
+    H^{0}(G, A) = \Ext_{\Z G}^{0}(\Z, A) = \Hom_{\Z G}(\Z, A)
+.\] 
+Any map $f \in \Hom_{\Z G}(\Z, A)$ is completely determined by $f(1)$:  $f(z) = z f(1)$.
+So we can define
+\[
+    \theta: \Hom_{\Z G}(\Z, A) \to  A : f \mapsto f(1) = a
+.\] 
+Now, $f$ is a  $G$-map, so $f(g 1) = gf(1)$. But  $\Z$ is seen as trivial $G$-module, so $ f(g 1) = f(1) = a$.
+So
+\[
+    a = f(1) = f(g 1) = gf(1) = ga
+.\] 
+So we can write this as
+\[
+    \theta: \Hom_{\Z G}(\Z, A) \to  A^{G} : f \mapsto f(1) = a
+.\] 
+Now easy to check that this is a homomorphism, injective and surjective.
+So
+$H^{0}(G, A) = A^{G}$.
+\end{proof}
+\begin{remark}
+    If $A = \Z$ trivial $G$-module, then $A^{G} = A$ and $A_G = A$.
+\end{remark}
+
+First (co)homology is a lot harder! We consider $A =\Z$.
+
+Let us compute $H_1(G, \Z)$, where $\Z$ is a trivial $G$-module.
+
+\begin{prop}
+$H_1(G, \Z) \cong \frac{G}{[G,G]} =: \frac{G}{G'}$.
+\end{prop}
+\begin{proof}
+    The s.e.s.
+    \[
+    0 \to  IG \to  \Z G \xrightarrow{\epsilon} \Z \to  0
+    \] 
+    of $G$-modules gives rise to a long exact sequence
+    \[
+        H_1(G, \Z G) \to  H_1(G, \Z) \xrightarrow{\partial}   H_0(G, IG) \to  H_0(G, \Z G) \xrightarrow{\epsilon^{*}}   H_0(G, \Z) \to  0
+    .\] 
+    We have $ H_1(G, \Z G) = \Tor_1^{n}(\Z, \Z G) = 0$, because projective module.\footnote{plugging in projective module on left or right of Tor functor gets you zero}
+    \[
+        0 \to  H_1(G, \Z) \hookrightarrow   H_0(G, IG) \to  H_0(G, \Z G) \xrightarrow{\epsilon^{*}}   H_0(G, \Z) \to  0
+    .\] 
+    We have $H_0(G, \Z) = \Z$, because module is trivial.
+
+    \[
+        0 \to  H_1(G, \Z) \hookrightarrow   H_0(G, IG) \to  H_0(G, \Z G) \xrightarrow{\epsilon^{*}}   \Z \to  0
+    .\] 
+    We have $ H_0(G, \Z G) = \frac{\Z G}{(IG)(\Z G)} = \frac{\Z G}{IG} = \Z$.
+    \[
+        0 \to  H_1(G, \Z) \hookrightarrow   H_0(G, IG) \to  \Z \xrightarrow{\epsilon^{*}}   \Z \to  0
+    .\] 
+    So $\epsilon^{*}$ is a morphism $\Z \to  \Z$ which is surjective, so $\epsilon^{*} = \pm \operatorname{Id}$, so $\epsilon^{*}$ is an isomorphism.
+
+    \[
+        0 \to  H_1(G, \Z) \hookrightarrow   H_0(G, IG) \to  \Z \xrightarrow{\epsilon^{*}, \cong}   \Z \to  0
+    .\] 
+    This implies that the map $ H_0(G, IG) \to  \Z$ maps everything to zero, because image of this is kernel of $\epsilon^{*}$.
+
+    \[
+        0 \to  H_1(G, \Z) \hookrightarrow   H_0(G, IG) \xrightarrow{0}   \Z \xrightarrow{\epsilon^{*}, \cong}   \Z \to  0
+    .\] 
+    So the kernel of $ H_0(G, IG) \to  \Z$ is everything, which is the image of $H_1(G, \Z) \hookrightarrow H_0(G, IG)$.
+    So $\hookrightarrow$ is not only injective, but also surjective.
+    So  \[
+        H_1(G, \Z) \xrightarrow{\cong}  H_0(G, IG)
+    .\] 
+    By the previous theorem,
+    \[
+        H_1(G, \Z) \cong \frac{IG}{(IG)^2}
+    .\] 
+    
+    Claim:
+    \[
+        \frac{G}{[G,G]} \cong \frac{IG}{(IG)^2}
+    .\] 
+    Let
+    \begin{align*}
+        \theta: G &\longrightarrow IG / (IG)^2 \\
+        x &\longmapsto (x-1) + (IG)^2
+    .\end{align*}
+    This is a morphism of groups. To prove this, little computation:
+    \begin{align*}
+        (x-1)(y-1) = xy - x -y + 1 &= (xy-1) + 1-x-y+1\\
+                                   &= (xy-1) - (x-1) - (y-1)
+    .\end{align*} 
+    So
+    \begin{align*}
+        \theta(xy) &= xy - 1 + (IG)^2\\
+                   &= (x-1) + (y-1) + (x-1)(y-1) + (IG)^2\\
+                   &= (x-1) + (y-1) + (IG)^2\\
+                   &= \theta(x) + \theta(y)
+    .\end{align*} 
+    Since $\frac{IG}{(IG)^2}$ is abelian, it follows that $\theta([G,G]) = 1$, so  $\theta$ induces a morphism  $\theta': \frac{G}{[G,G]} \to  \frac{IG}{(IG)^2}$ which maps $x[G,G] \mapsto (x-1) + (IG)^2$.
+
+    We want to prove that $\theta'$ is an isomorphism.
+    We will construct the inverse to do this.
+    
+     \begin{align*}
+         \phi: IG &\longrightarrow \frac{G}{[G,G]} \\
+         x-1 &\longmapsto x[G,G] \qquad \forall x \in G \setminus \{1\} 
+    ,\end{align*}
+    Remember that $IG$ is the free abelian group on $\{ x - 1  \mid  x \in G \setminus \{1\} \} $
+    Claim: this induces a morphism from $\frac{IG}{(IG)^2} \to  \frac{G}{[G,G]}$.
+    So we need to prove that $\phi((IG)^2) = 0$. Then checking that this is an inverse is easy.
+
+    Consider  
+    \begin{align*}
+        u &= \left(\sum_{x \in G} m_x (x-1)\right) \left(\sum_{y \in G} m_y (y-1)\right) \in (IG)^2\\
+          &= \sum \sum m_x m_y (x-1)(y-1)\\
+          &= \sum \sum m_x m_y ((xy-1) - (x-1) - (y-1))
+    ,\end{align*} 
+    by previous formula.
+    (should be $n$ and  $m$?)
+    Applying $\phi$, we have
+     \begin{align*}
+         \phi(u) &= \prod \prod \left( xy  x ^{-1} y^{-1}    \right) ^{m_x m_y}[G,G]\\
+                 &= \prod \prod [x^{-1}, y^{-1}] ^{m_x m_y}[G,G]\\
+                 &= 1 [G,G]
+    .\end{align*} 
+    Conclusion:  $\phi$ induces a morphism from  $\frac{IG}{(IG)^2} \to \frac{G}{[G,G]}$, and this is the inverse of $\theta'$, and vice versa.
+\end{proof}
+
+Later, we will do cohomology, which we will do for general modules.
+Now, we will look at easy groups and calculate all the (co)homology stuff:
+
+\nsection{3}{3}{(Co)homology of finite cyclic groups}
+
+Let $G = \left<x \right>$, be cyclic of order $k$.
+We need a projective resolution of  $\Z$ as a $\Z G$-module. It turns out we can take
+
+\[
+    \cdots \xrightarrow{D}  \Z G \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G \xrightarrow{\epsilon} \Z \to  0
+.\] 
+The map $D$ is multiplying with  $x -1 \in \Z G$.
+\begin{itemize}
+    \item This is a $G$-map. If group is commutative, then group ring is commutative and $\times (x-1)$ will commute with $G$-action.
+    \item Image of $D$ is $\Ker \epsilon = IG$, which is the $\Z G$-module generated by the element $x-1$. 
+        So $IG = (x-1) \Z G = \Z G( x-1)$, which image of $D$
+\end{itemize}
+
+The map $N$ is multiplying with  $1 + x + x^2 + \cdots  + x^{k-1}$.
+\begin{itemize}
+    \item This is a $G$-map.
+\end{itemize}
+
+Then we have
+$ DN = ND $, which is multiplying with
+\[
+    (x-1)(1 + x + \cdots + x^{k-1}) = x^{k} - 1 = 1 - 1 = 0
+.\] 
+So this proves that we have a chain complex! $\im D \subset \Ker N$, $\im N \subset  \Ker D$.
+But we want exactness!
+\begin{itemize}
+    \item Let us first prove that $\Ker D \subset  \im N$.
+        Let $\sum_{i=0}^{k-1} m_i x^{i}$ be an arbitrary element in our group ring.
+        Assume it lies in the kernel of $D$.
+        So then
+        \begin{align*}
+            (x-1)\sum m_i x^{i} &= 0
+        ,\end{align*} 
+        so we have equations:
+        \[
+            \begin{cases}
+                m_{k-1} - m_0 = 0\\
+                m_{0} - m_1 = 0\\
+                m_{1} - m_2 = 0\\
+                \vdots\\
+                m_{k-2}-m_{k-1} = 0,
+            \end{cases}
+        \] 
+        so all coefficients are equal.
+        So the element we were considering is 
+        \[
+            m_0 \sum x^{i} = m_0 N  = N m_0
+        ,\] 
+        so $\Ker D \subset \im n$
+    \item $\Ker N \subset \im D$.
+        Remember that $\im D =\Ker \epsilon$.
+        Let  $u \in  \Ker N$.
+        This means that $N u = 0$.
+        So $\epsilon(Nu) = \epsilon(0) = 0$.
+        But $\epsilon$ is a ring morphism, so  $\epsilon(N) \epsilon(u) = 0$.\footnote{We consider  $N$ both as the element and as the multiplication}. This is then  $k \epsilon(u) = 0$, so  $\epsilon(u) = 0$ so  $u \in \Ker \epsilon  = \im D$.
+
+
+\end{itemize}
+
+So the deleted resolution is
+\[
+    \cdots \xrightarrow{D}  \Z G \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G  \to  0
+.\] 
+
+\hr
+
+Let us now compute $H_n(G, A)$. 
+So we need to apply $-\otimes_{\Z G} A$ to this sequence:
+
+\[
+    \cdots
+    \xrightarrow{D_*}  \Z G \otimes_{\Z G} A
+    \xrightarrow{N_*} \Z G \otimes_{\Z G} A
+    \xrightarrow{D_*} \Z G \otimes_{\Z G} A
+    \xrightarrow{N_*} \Z G \otimes_{\Z G} A
+    \xrightarrow{D_*} \Z G \otimes_{\Z G} A  \to  0
+.\] 
+First of all, $\Z G \otimes_{\Z G} A \cong A$, so
+
+\[
+    \cdots
+    \xrightarrow{D_*} A
+    \xrightarrow{N_*} A
+    \xrightarrow{D_*} A
+    \xrightarrow{N_*} A
+    \xrightarrow{D_*} A  \to  0
+.\] 
+How do these maps look?
+Take $a$. This comes from  $1 \otimes a$. Then we apply $D_*$, which is applying  $D$ to the left hand side, so we have  $(x-1) \otimes a = x \otimes a - 1 \otimes a = 1\otimes xa - 1 \otimes a$, which corresponds to $xa - a = (x-1)a$.
+So we again have that this induces map is just  $D$ itself!
+We can do same thing for  $N$, so we have
+\[
+    \cdots
+    \xrightarrow{D} A
+    \xrightarrow{N} A
+    \xrightarrow{D} A
+    \xrightarrow{N} A
+    \xrightarrow{D} A  \to  0
+.\] 
+
+Now, we compute the homology!
+\begin{itemize}
+    \item $H_0(G, A) = \frac{A}{D(A)} = \frac{A}{(IG)A} = A_G$.
+    \item $H_{2n+1}(G, A) = \frac{\Ker D}{\im N}$. Now kernel of $D$ is set of elements  $a$ such that  $xa -a = 0$, or $xa = a$. SO we have that this is equal to  $\frac{A^{G}}{ \im N} = \frac{A^{G}}{NA}$
+    \item $H_{2n}(G, A) = \frac{\ker N}{\im D} =: \frac{A[N]}{\im D} = \frac{A[N]}{(IG) A}$, where $A[N]$ is new notation:
+         \[
+             A[N] = \{ a \in  A  \mid (1+x + \cdots  + x^{k-1}) a = 0\} 
+        .\] 
+\end{itemize}
+
+Assume now that $A$ is a trivial $G$-module.
+Then 
+\begin{itemize}
+    \item $ H_0(G,A) = A$
+    \item $H_{2n+1}(G, A) = \frac{A^{G}}{NA} = \frac{A}{NA} = \frac{A}{k A}$, because $x$ acts trivially
+    \item  $H_{2n}(G, A) = \frac{A[k]}{(IG) A} = \frac{A[k]}{1} = A[k]$, where
+        \[
+            A[k] := \{ a \in A  \mid k a = 0\} 
+        .\] 
+\end{itemize}
+
+So with $A = \Z$:
+\begin{itemize}
+    \item $ H_0(G, \Z) = \Z$
+    \item $H_{2n+1}(G, \Z) = \frac{\Z}{k \Z} = \Z_k \cong G$
+    \item $H_{2n}(G, \Z) = 0$
+\end{itemize}
+
+\hr
+
+\hr
+
+Now, cohomology! We leave details to reader \ldots
+We start with projective resolution:
+
+\[
+    \cdots \xrightarrow{D}  \Z G
+    \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G
+    \xrightarrow{N} \Z G
+    \xrightarrow{D}  \Z G  \to  0
+.\] 
+Now we apply $ \Hom_{\Z G}(- , A)$.
+Then we have
+\[
+    \cdots \to  
+\Hom_{\Z G}(\Z G, A) \xrightarrow{D^*} 
+\Hom_{\Z G}(\Z G, A) \xrightarrow{N^*} 
+\Hom_{\Z G}(\Z G, A) \xrightarrow{D^*} 
+\Hom_{\Z G}(\Z G, A) \xrightarrow{N^*} \cdots
+\] 
+We again have $\Hom_{\Z G}(\Z G, A) \cong A$, sending  $f \mapsto f(1)$.
+
+Under this identification, we have to understand $D_*$. 
+
+\[
+    \begin{tikzcd}
+        \Z G \arrow[r, "D"] \arrow[dr, "D^*(f)", swap]&\Z G \arrow[d, "f"]\\
+                            & A
+    \end{tikzcd}
+\]
+What is the image of $1$ under  $D^{*}$ of $f$.
+Let $ f(1) = a$.
+\begin{align*}
+    (D^{*}(f))(1) &= f(x-1)\\
+                  &= f(x) - f(1) \\
+                  &= x f(1) - f(1)\\
+                  &= (x-1) a
+.\end{align*}
+So the induced map is the same as $D$.
+Completely the same way for $N$.
+
+Result is very comparable, except switch between even and odd.
+
+\nsection34{$H^{1}$ and crossed homomorphisms (derivations)}
+
+\begin{definition}
+    Let $A$ be a $G$-module.
+    Then a map $D: G \to  A$ is a derivation (or a crossed homomorphism) iff
+    for any $g, h \in G$
+    \[
+        D(gh) = g D(h) + D(g)
+    .\] 
+    This is not a typo!
+\end{definition}
+\begin{remark}
+    If we consider $A$ also as a trivial Right $G$-module, so $ag = a$ for all $g$, then we can write
+    \[
+        D(gh) = gD(h) + D(g) h
+    .\] 
+\end{remark}
+
+You can check:
+\begin{prop}
+    $\Der(G, A)$ is the abelian group of derivations
+\end{prop}
+
+\begin{definition}[Principal derivation]
+    Any element $a \in A$ determines a derivation \[
+    D_a: G \to  A: g \mapsto D_a(g) = ga - a
+\]
+This is called a principal derivation.
+We denote the set of principal derivations with $\PDer(G, A)$.
+\end{definition}
+\begin{proof}
+    $D_a(gh) = (gh) a - a = gha - ga + ga - a = g(ha - a) + ga - a = g D_a(h) + D_a(g)$.
+\end{proof}
+
+\begin{remark}
+    $f: A \to  \PDer(G,A) a \mapsto D_a$ is a morphism of groups.
+    \begin{align*}\Ker f
+    &= \{ a \in A | D_a(g) = 0 \quad \forall  g \in G\}\\
+    &= \{ a \in A  \mid  ga - a = 0 \quad \forall  g \in  G\} \\
+    &= A^{G}.
+    \end{align*}
+    So $\PDer(G, A) = \frac{A}{A^{G}}$
+\end{remark}

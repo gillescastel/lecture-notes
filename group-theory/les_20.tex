@@ -1,0 +1,235 @@
+\lesson{20}{di 01 dec 2020 12:53}{}
+
+We will express first cohomology in terms of (principal) derivations.
+
+Relation beten derivations and $G$-module maps.
+
+Consider
+\begin{align*}
+    \Hom_{\Z G}(IG, A) &\longrightarrow \Der(G,A) \\
+    \phi &\longmapsto D_\phi = (g \mapsto \phi(g-1))
+.\end{align*}
+
+Let us first check that $D_\phi$ is a derivation.
+
+ \begin{align*}
+     D_\phi(gh) &= \phi(gh-1)\\
+            &= \phi(gh-g + g - 1)\\
+            &= \phi(gh - g)  + \phi(g-1)\\
+            &= g \phi(h-1) + \phi(g-1)\\
+            &= g D_\phi(h) + D_\phi(g)
+.\end{align*} 
+
+This is a morphism of abelian groups!
+
+Even more! This is an isomorphism!
+
+\begin{itemize}
+    \item Injective.
+        Suppose $D_p: G \to  A$ is the zero map.
+        Then $D_\phi(g) = 0$ for all  $g \in G$.
+        So $\phi(g-1) = 0$ for all  $g \in G$.
+These elements form a basis $IG$ as a free abelian group.
+So  $\phi(x) = 0$ for all  $x \in IG$.
+
+    \item Surjective.
+        Let $D \in \Der(G, A)$.
+        Define the morphism of abelian groups $\phi: IG \to  A$ by letting
+        \[
+            \phi(g-1) = D(g)
+        .\] 
+        We can do this because $IG$ is the free abelian group on the elements $g-1$.
+
+        To show that $\phi$ is a $G$-map, it suffices to show that $\phi(g(h-1)) = g\phi(h-1)$.
+        (if we can do for generators, we can do it for all elements).
+         \begin{align*}
+             \phi(g(h-1)) &= \phi(gh - g)\\
+                          &= \phi(gh-1 - (g-1))\\
+                          &= D(gh) - D(g)\\
+                          \shortintertext{Because derivation:}
+                          &= gD(h) + D(g) - D(g)\\
+                          &= g D(h)\\
+                          &= g \phi(h-1)
+        .\end{align*}
+\end{itemize}
+
+\begin{theorem}[6.4.5]
+    $H^{1}(G,A) \cong \frac{\Der(G, A)}{\PDer(G, A)}$.
+\end{theorem}
+\begin{proof}
+    Consider the ses of $G$-modules
+    \[
+    0 \to  IG \to  \Z G \to  \Z \to  0
+    .\] 
+    Then this leads to a long exact sequence of $\Ext ^{n}_{\Z G} (-, A)$-functors.
+    \[
+        0 \to \Hom_{\Z G}(\Z, A) \to  \Hom_{\Z G}(\Z G, A) \to  \Hom_{\Z G}(IG, A) \to \Ext ^{1}_{\Z G}(\Z, A) \to  \Ext ^{1}_{\Z G}(\Z G,A) \to  \cdots
+    .\] 
+    For ext functors, they are zero if first slot is projective module:
+    \[
+        0 \to \Hom_{\Z G}(\Z, A) \to  \Hom_{\Z G}(\Z G, A) \to  \Hom_{\Z G}(IG, A) \to \Ext ^{1}_{\Z G}(\Z, A) \to  0 \to  \cdots
+    .\] 
+    $\Ext_{\Z G}^{1}(\Z, A)$ is the object we're looking for, i.e. $H^{1}(G, A)$.
+    \[
+        0 \to \Hom_{\Z G}(\Z, A) \to  \Hom_{\Z G}(\Z G, A) \to  \Hom_{\Z G}(IG, A) \to H^{1}(G, A) \to  0 \to  \cdots
+    .\] 
+    We know that $\Hom_{\Z G}(IG, A) \cong \Der(G, A)$;
+    \[
+        0 \to \Hom_{\Z G}(\Z, A) \to  \Hom_{\Z G}(\Z G, A) \to  \Der(G, A) \to H^{1}(G, A) \to  0 \to  \cdots
+    .\] 
+
+    We also know that $\Hom_{\Z G}(\Z G, A) \cong A$:
+
+    \[
+        0 \to \Hom_{\Z G}(\Z, A) \to  A \to  \Der(G, A) \to H^{1}(G, A) \to  0 \to  \cdots
+    .\] 
+    We also know that $\Hom_{\Z G}(\Z, A) = A^{G}$, so we get
+    \[
+        0 \to A^{G} \to  A \to  \Der(G, A) \to H^{1}(G, A) \to  0 \to  \cdots
+    .\] 
+    So we have to know that the image of $A$ is inside  $\Der(G, A)$, and then we know that  $H^{1}(G,A)\cong \frac{\Der(G, A)}{\ldots}$.
+
+    So pick element $a \in  A$. This corresponds to $f \in \Hom_{\Z G}(\Z G, A)$ with  $f(1) = a$.
+    Remember that $IG \to  \Z G$ was the inclusion map, so the arrow in other way is restriction.
+    So $f$ becomes  $f|_{IG}$.
+    This corresponds to a derivation.
+    It is given by
+    \[
+        D(g) = f(g-1) = f(g) - f(1) = g f(1) - f(1) = ga - a = D_a(g)
+    .\] 
+
+    Conclusion:
+    \[
+        H^{1}(G, A) \cong \frac{\Der(G, A)}{\PDer(G, A)}
+    .\] 
+\end{proof}
+
+
+\begin{eg}
+    Suppose $A$ is a trivial  $G$-module.
+    \begin{itemize}
+        \item Then $D \in \Der(G, A)$ iff $D(gh) = gD(h) + D(g) = D(h) + D(h)$.
+            So  $D \in \Hom_{\text{group}}(G, A)$.
+        \item $\PDer(G, A) \ni ga -a = 0$, so  $\PDer = 0$.
+    \end{itemize}
+    So we have
+    \[
+        H^{1}(G, A) = \frac{\Hom_\text{group}(G, A) }{1} = \Hom_{\text{group}}(G, A)
+    .\] 
+\end{eg}
+
+\subsection*{Cohomology of a free group}
+We already know $H^{0}$ and $H^{1}$.
+We will prove that $H^{>1} = 0$.
+
+\begin{definition}
+Let $M$ be a  $G$-module, then we can define a group $M \rtimes G$ where as a set 
+\[
+M \rtimes  G = M \times G
+,\] 
+and the product is 
+\[
+    (m_1, g_1) (m_2,g_2) = (m_1 + g_1m_2, g_1g_2)
+.\] 
+\end{definition}
+\begin{eg}
+    Let $A$ be any abelian group.
+    Then  $A$ is a  $G = \Aut(A)$-module.
+    $A \rtimes \Aut(A)$.
+\end{eg}
+
+\begin{lemma}
+$M$ is a normal subgroup of  $M \rtimes G$ and  $\frac{M \rtimes G}{M} \cong G$.
+\end{lemma}
+
+\begin{definition}
+A section is a set map $s : G \to  M \rtimes G$ such that $ p  \circ  s  = 1_G ,$ where $p(m,g) = g$. 
+\end{definition}
+So $s: G \to  M \rtimes G$ is determined by map $d: G \to  M$: $s(g) = (d(g),g)$. 
+
+
+Claim:
+\begin{prop}
+    The section $s$ (determined by  $d$ by the map  $d: G \to  M$ ) is a morphism of groups iff $d \in \Der(G, M)$
+\end{prop}
+
+\begin{remark}
+    When $s$ is a morphism, it is called a \emph{splitting}
+\end{remark}
+\begin{proof}
+    Computation.
+    $s: G \to  M \rtimes G$ determined by $d$ is a morphism.
+    iff 
+     \[
+         s(gh) = s(g) s(h) \quad \forall g, h \in G
+    \] 
+    iff
+    \[
+        (d(gh),gh) = (d(g),g)(d(h),h)
+    \] 
+    iff
+    \[
+        (d(gh), gh) = (d(g) + g d(h), gh)
+    \] 
+    iff
+    \[
+    d \text{ is a derivation}
+    .\] 
+\end{proof}
+\begin{lemma}[6.4.8]
+    If $G$ is a free group on the set $X$, then $IG$ is a \emph{free}  $\Z G$-module on the set $X - 1$,
+    \[
+    X-1 = \{x -1  \mid  x \in X\} 
+    .\] 
+\end{lemma}
+\begin{proof}
+    We already know that it generates, but now we show that its freely generated!
+    We need to show that the universal property for free modules holds.
+    Let $A$ be any  $\Z G$-module and $\phi: X -1 \to  A$ any map.
+    Given this, we need to show existence of dashed arrow.
+    \[
+        \begin{tikzcd}
+            X-1 \arrow[dr, "\phi"] \arrow[r, "", hook]& IG \arrow[d, "\tilde{\phi}", dashed]\\
+                                   & A
+        \end{tikzcd}
+    \]
+    If there exists one, it is determined.
+    At most one $\tilde{\phi}$, because $\phi$ is determined on generators \ldots
+
+    We show that there exists a $\tilde{\phi} \in  \Hom_{\Z G}(\Z G, A)$ making the diagram commute.
+
+    Remember, $\Hom_{\Z G}(IG, A) \cong \Der(G, A)$, where $\tilde{\phi}\mapsto D_{\tilde{\phi}}$.
+
+    So it is enough to show that the corresponding derivation exists.
+    We use the fact that $G$ is a free  group to construct the derivation.
+
+     \[
+        \begin{tikzcd}
+            X \arrow[r, "", hook] \arrow[dr, "f"]& G \arrow[d, "\tilde{f}", dashed]\\
+                                                & A \rtimes G
+        \end{tikzcd}
+    \]
+    where $f(x) = (\phi(x-1),x)$.
+    Since  $G$ is a free group on  $X$, there exists a  $\tilde{f}$.
+    Note, $\tilde{f}(g) =  (d(g), g)$, because generators are mapped to themselves in the second component.
+    We have that $\tilde{f}$ is morphism of groups, so $d:G \to M$ is a derivation!
+
+    Let $\psi \in  \Hom_{\Z G}(IG, A)$ corresponding to $d$.
+    So  $\psi(x-1) = d(x)$ per definition.
+    We have that  $d(x) = \phi(x-1)$, so  $\psi(x-1) = \phi(x-1)$.
+    This shows that  $\tilde{\phi} = \psi$.
+\end{proof}
+
+\begin{corollary}[6.4.9]
+    Let $F$ be a free group and let  $M$ by any  $F$-module.
+    Then  
+    \[
+        H_i(F, M) =H^{i}(F, M) =0 \qquad i \ge 2
+    .\] 
+\end{corollary}
+\begin{proof}
+    \[
+    \cdots \to  0 \to  0\to  0 \to  IF \xrightarrow{i}  \Z F \xrightarrow{\epsilon}  \Z \to  0
+    .\] 
+    This is a free $\Z F$-resolution of $\Z$ by the previous result.
+\end{proof}

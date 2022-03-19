@@ -1,0 +1,277 @@
+\lesson{1}{di 29 sep 2020 10:30}{Introduction}
+
+
+Course consists of three parts:
+\begin{enumerate}
+    \item Representation Theory (easy)
+    \item Nilpotent groups and polycyclic groups (Kimpe's groups)
+    \item (Co)homology of groups
+\end{enumerate}
+
+
+Exam:
+\begin{itemize}
+    \item List of 10 problems (hand in before the exam) \hfill 8/20
+    \item Written exam (3 hours). Open book. Three question, one from each part, each for 4 points.
+        Questions comparable to problems, or explain proof of a theorem in detail. \hfill 12/20
+\end{itemize}
+
+Exercise sessions:
+\begin{itemize}
+    \item Given by Bramm Verjans
+    \item Everyone allowed to attend? Let's see what happens \ldots Be on time!
+\end{itemize}
+
+\part{Representation Theory}
+
+\nchapter{2}{Representations of finite groups}
+
+\section{Linear representations}
+
+In what follows, let $G$ be a finite group; $k$ or  $K$ will always be a field of characteristic $0$; $V$ is a finite dimensional vector space over $k$.
+
+\begin{definition}
+    A linear representation of $G$ (over $V$) is a morphism of groups 
+    \[
+        \rho: G \to  \GL_k(V)
+    .\] 
+\end{definition}
+
+So each $\rho(g) \in \GL_k(V)$ is a linear map.
+We denote
+\[
+    \rho(g) (v) = g\cdot v = {}^{g} v
+.\] 
+
+We say that \emph{$G$ acts on $V$ } and \emph{$V$ is a $G$-module}.
+
+
+Often, we fix a basis $ v = \{v_1, \ldots, v_n\}$ of $V $ and then we denote the matrix of $\rho(g)$ w.r.t. $v$ as $[r(g)]_v = (r_{ij}(g))$.
+We put images of the $i$th basis vector in the $i$th column, i.e.
+\[
+    \rho(g)(v_i) = \sum_{k=1}^{n} r_{ki} v_k
+.\] 
+
+\begin{eg}[Representations to small vector spaces]
+    Let $\dim V = 1$
+    Then if $\rho: G\to \GL_k(V)$ is a representation, then for all $g \in G$, there exists a $\lambda_g \in k^{*}$ such that\footnote{Here we use $k^{*}$ to denote invertible elements of $k$}
+    \[
+        \rho(g)(v) = \lambda_g v \qquad \forall  v \in V
+    .\] 
+    Moreover, $\rho(gh) = \rho(g) \rho(h)$.
+    So we have that  $\lambda_{gh} = \lambda_g \lambda_h.$
+    Therefore, $\rho$ corresponds to a morphism
+    \[
+    \lambda: G \to  k^{*}
+    .\] 
+    Moreover, $G$ is finite. Therefore, $\lambda_g^{|G|} = \lambda_e = 1$.
+    %TODO So $\im \lambda \subset \{\text{order-of-$G$ roots of $1$ in $k^{*}$}\}$.
+\end{eg}
+
+\begin{eg}[Representations from small groups]
+    The trivial group $G = 1$ is trivial.
+    $G = \Z_2 = \left<1, \tau \right>$ with $\tau^2 = 1$.
+    Let $\rho: G \to  \GL_k(V)$ be a representation.
+    Define the following linear maps:
+    \begin{align*}
+        \epsilon_+&: V \to  V : v \mapsto  \frac{1}{2} (v + \tau\cdot v)\\
+        \epsilon_-&: V \to  V : v \mapsto  \frac{1}{2} (v - \tau\cdot v)\\
+    .\end{align*} 
+    (We can divide by two because char = 0. This doesn't work for char = 2)
+
+    Claim. Let $w \in  \im (\epsilon_+)$, which is a subspace of $V$.
+    Then $\tau\cdot w$, with $w = \frac{1}{2}(v + \tau\cdot v)$, equals 
+    \[
+        \tau\cdot w = \frac{1}{2}(\tau v + \tau \tau v) = 
+        \frac{1}{2}(\tau v + 1 v)  = w
+    .\] 
+
+    Let $w \in  \im (\epsilon_-)$, then
+    \[
+    \tau\cdot w = - w
+    .\]
+
+    So we have two subspaces, one on which $\tau$ acts on as the identitiy, and another on which $\tau$ is doing $\cdot -1$.
+
+    Claim:
+    \[
+        V = \im (\epsilon_+)  \oplus \im(\epsilon_-)
+    .\] 
+
+    \begin{enumerate}[(a)]
+        \item $\im(\epsilon_-) \cap \im(\epsilon_+) = 0$. Indeed, pick a vector in the intersection. Then apply $\tau$ and we get that $v = -v$, so  $v = 0$.
+        \item  $\im(\epsilon_+) + \im(\epsilon_-) = V$. Easy:
+             \[
+                 v = \frac{1}{2} (v + \tau v) + \frac{1}{2}(v - \tau v)
+            .\] 
+    \end{enumerate}
+
+    So a representation of $\Z_2$ is a reflection of a subspace. (This subspace could also be empty, or the whole space)
+\end{eg}
+
+
+\begin{definition}[$G$-subspace]
+    Let $V$ be a $G$-module.
+    A $G$-subspace, $G$-submodule, $G$-subrepresentation  is a subspace $W$ of $V$ such that $G\cdot W \subset W$, and hence $G \cdot W = W$.\footnote{Map is invertible and hence preservers dimension.}
+\end{definition}
+
+\begin{eg}
+    The subspaces $\im(\epsilon_+)$ and  $\im(\epsilon_-)$ are $G$ subspaces of $V$. (where $G = \left<1, \tau \right>$).
+    Also $0$ and $V$ are $G$-subspaces.
+\end{eg}
+
+If $W$ is a $G$-subspace of $V$.
+Then there is an induced (restricted) representation:
+\[
+    \rho|_W : G \to \GL_k(W) : g \mapsto (w \mapsto \rho(g)(w))
+.\] 
+There is also an induced representation on the quotient:
+\[
+    \overline{\rho}: G \to  \GL_k(V / W) : g \mapsto (v + W \mapsto  \rho(g)(v) + W)
+.\]
+
+
+\begin{remark}
+    Let $ w_1, w_2, \ldots, w_k$ be a basis of $W$ and extend this to a basis $v = \{w_1, w_2, \ldots, w_k, v_{k+1}, \ldots, v_n\}$ of $V$.
+    Then
+    \[
+        [\rho(g)]_v = 
+        \begin{pmatrix}
+            [\rho|_W(g)]_w & * \\
+            0 & [\overline{\rho}(g)]_{\overline{v}}
+        \end{pmatrix}
+    ,\] 
+    where $\overline{v} = \{\overline{v_k}, \ldots, \overline{v_n}\}$.
+\end{remark}
+
+\begin{remark}
+    We will show that every group has good representations.
+    The number of conjugacy classes determines the number of irreducible representations!
+\end{remark}
+
+\section{$G$-homomorphisms and irreducible representations}
+
+
+\begin{definition}[$G$-homomorphisms]
+    Let $\rho: G \to  \GL_k(V)$ and $\sigma: G \to  \GL_k(W)$ be two representations.
+    A \emph{$G$-map (or $G$-equivariant map, $G$-homomorphism)} from $V$ to $W$ is a linear map $f: V \to  W$ such that  for all $g \in G$ and $v \in V$:
+    \[
+        f(g\cdot v) = g\cdot f(v)
+    .\] 
+    With more precise notation:
+    \[
+        f(\rho(g)(v)) = \sigma(g)(f(v))
+    .\] 
+
+    The map $f$ is a \emph{$G$-equivalence} ($G$ isomorphism) if $f$ is an isomorphism of vector spaces and a  $G$-map
+
+\end{definition}
+
+In other words, this definition says that the following diagram is commutative:
+\[
+    \begin{tikzcd}
+        V \arrow[r, "f"] \arrow[d, "\rho(g)"]& W \arrow[d, "\sigma(g)"]\\
+        V \arrow[r, "f"] & W
+    \end{tikzcd}
+\]
+
+
+What does this imply for matrices?
+Choose basis $\mathbf{v}$ of $V$ and  $\mathbf{w}$ of  $W$.
+
+% \[ TODO
+%     \begin{tikzcd}
+%         V \arrow[r, "f = A"] \arrow[d, "B(g) = [\rho(g)]_v"]& W \arrow[d, "C(g) = [\sigma(g)]_w"]\\
+%         V \arrow[r, "f = A"] & W
+%     \end{tikzcd}
+% \]
+
+Note that $A$ is not necessarily square.
+Then we get:
+\[
+    A \cdot  B(g) = C(g) \cdot A
+.\] 
+
+Suppose that $V = W$ and  $\rho = \sigma$ and  $\mathbf{v} = \mathbf{w}$.
+Then we have
+\[
+    A \cdot B(g) = B(g)\cdot  A
+.\] 
+
+So $G$ maps are represented by matrices that commute with all $B(g)$'s.
+We always have the $0$ map,  identity map and scalar multiplication.
+By looking at these matrices, we can also solve for $A$.
+
+
+\begin{definition}
+    Let $\rho: G \to  \GL_k(V)$ be a representation.
+    Then $\rho$ is irreducible iff the only $G$-subspaces of $V$ are $0$ and $V$.
+\end{definition}
+\begin{eg}
+    One dimensional representations are always irreducible.
+\end{eg}
+
+\begin{prop}[2.7]
+    Let $\rho: G > \GL_k(V)$ and  $\sigma: G \to  \GL_{k}(W)$ be two representations and $f: V \to  W$ a $G$-map.
+    Then $\Ker f$ is a $G$-subspace of  $V$ and $\im(f)$ is a $G$-subspace of $W$.
+\end{prop}
+\begin{proof}
+    Note that $\Ker(f)$ and  $\im(f)$ are subspaces.
+    Now we check that they are equivariant under $G$-action.
+
+    \begin{enumerate}[(a)]
+        \item Let $v \in \Ker f$.
+            Then $ f(\rho(g) v) = \sigma(g) f(v) = \sigma(g)(0) = 0 .$ 
+            So $\rho(g)(v) \in \Ker f$
+        \item Let $w  = f(v) \in \im f$.
+            Then $ g\cdot w = g \cdot  f(v) = f (g\cdot v) \in \im f
+            .$ 
+    \end{enumerate}
+\end{proof}
+
+
+One of the most important results in representation theory:
+
+% If you have 
+\begin{theorem}[2.8, Schur's lemma]
+    Let $\rho: G \to  \GL_k(V)$, $\sigma: G \to  \GL_k(W)$ be two \emph{irreducible} representation and $f: V \to  W$ a $G$-map. Then
+    \begin{enumerate}[(a)]
+        \item Either $f \equiv 0$, or $f$ is a $G$-isomorphism. (This implies that $\dim V  = \dim W$ if  $f \not\equiv 0$.)
+        \item If $k = \C$ and $V = W$ and  $\rho = \sigma$.
+            Then there exists $\lambda \in \C$ such that $f(v) = \lambda v$.
+            (So the only $G$-maps are $0$, identity and multiplication by scalar)
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}[(a)]
+        \item $\Ker(f)$ is a  $G$-subspace of $V$.
+            \begin{itemize}
+                \item Because representation is irreducible, we have that $\Ker(f) = 0$ or  $\Ker (f) = V$.
+                    In the last case,  $f = 0$.
+                    In the first case,  we know that $f$ is injective and not identically $0$.
+                \item Because the representation is irreducible we have that $\im(f) = 0$ or  $\im(f) = W$. The first case has been handled.
+                    In the other case, $f$ is onto.
+            \end{itemize}
+            Conclusion: $f$ is bijective. So  $f$ is a $G$-isomorphism.
+        \item Take $\lambda$ an eigenvalue of the linear map $f$ and $v_0$ a non-zero eigenvector corresponding to $\lambda$. (Here we are using the fact that $\C$ is algebraically closed.) 
+
+            Let  $f_\lambda: V \to  V: v \mapsto  f(v) - \lambda v$.
+            Note that $f_\lambda$ is a linear map.
+
+            Now we want to show that  $f$ commutes with $G$-action:
+            \[
+                f_\lambda ( g\cdot v ) = f(g\cdot v) - \lambda (g\cdot v)
+                = g \cdot f(v)  - g\cdot (\lambda v) = g\cdot (f(v) - \lambda v) = g\cdot f_\lambda(v)
+            .\] 
+            Conclusion: $f_\lambda$ is a  $G$-linear map.
+
+            We have proven in point $(a)$ that $f_\lambda$ is either a $0$ or an isomorphism.
+            Note that $f_\lambda(v_0)  = f(v_0) - \lambda v_0 = 0$
+            So we have a non-zero vector mapped to a vector that is zero.
+            So $f_\lambda$ is not an isomorphism. Conclusion:  $f_\lambda = 0$
+            or $f(v) = \lambda v$ for all  $v$.
+    \end{enumerate}
+\end{proof}
+
+% TODO: macro repr

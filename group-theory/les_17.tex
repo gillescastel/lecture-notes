@@ -1,0 +1,306 @@
+\lesson{17}{di 24 nov 2020 10:38}{}
+\url{https://www.youtube.com/watch?v=2r5-l0cuEwA}
+
+Starts with recap about derived functors.
+
+\begin{definition}
+$T$ is a covariant functor from $R$-modules to $S$-modules.
+For a given $R$-module $A$, consider the projective resolution
+\[
+\to  P_3 \to  P_2 \to  P_1 \to  P_0 \to A  \to  0
+.\] 
+Discard $A$ and apply $T$ :
+\[
+    \to  TP_3 \to  TP_2 \to  TP_1 \to  TP_0 \to  0
+.\] 
+Then the left derived functor is
+\[
+    (L_n T)(A) = H_n(TP_A)
+.\] 
+\end{definition}
+The left derived functor applied to a map $A \to  B$ is defined as follows. Write down projective resolution of $A$ and $B$. We can find maps $f_i: P_i \to  P_i'$. Then $(L_n T)(f) = T(f_n)_*$. 
+These maps $f_i$ are not unique but unique upto homotopy, so we have same induced maps.
+
+\begin{lemma}[2.5, Horsehoe lemma]
+    Suppose we have a projective resolution of $A$ and $A''$
+    \[
+        \begin{tikzcd}
+            & \vdots \arrow[d, ""] & & \vdots \arrow[d, ""] &\\
+            & P_0 \arrow[d, ""] & & P_0'' \arrow[d, ""]&\\
+            0 \arrow[r, ""] & A'\arrow[d, ""] \arrow[r, " "] & A \arrow[r, " "] &A''\arrow[d, ""]   \arrow[r, ""] &0 \\
+                            & 0 & & 0 &
+        \end{tikzcd}
+    \]
+    Then we can find a projective solution of $A$ such that the diagram commutes and every row is an exact sequence.
+\end{lemma}
+\begin{proof}
+    We will by induction construct layer by layer.
+    Let's start with
+    \[
+        \begin{tikzcd}
+            & P_0' \arrow[d, "\epsilon'"] & & P_0'' \arrow[d, "\epsilon''"]\\
+            0 \arrow[r, ""] & A'\arrow[d, ""] \arrow[r, ""] & A \arrow[r, ""] & A'' \arrow[d, ""]\arrow[r, ""] & 0\\
+                            & 0 & & 0 &
+        \end{tikzcd}
+    \]
+    How to construct $P_0$ and $\epsilon$?
+    Take  $ P_0 = P_0' \oplus P_0''$. Then clearly short exact:
+
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""]& P_0' \arrow[r, ""]\arrow[d, "\epsilon'"] & P_0' \oplus P_0'' \arrow[r, " "]& P_0'' \arrow[d, "\epsilon''"] \arrow[r, ""] & 0\\
+            0 \arrow[r, ""] & A'\arrow[d, ""] \arrow[r, "i"] & A \arrow[r, "p"] & A'' \arrow[d, ""]\arrow[r, ""] & 0\\
+                            & 0 & & 0 &
+        \end{tikzcd}
+    \]
+    (Note that $ P_0$ is a projective module, because it is a direct sum of projective modules. Reasoning: projective if it is a direct factor of a free module. Direct of free modules is free. So direct sum of projective still direct factor of free. Done)
+    Now we use that $ P_0''$ is projective. One of the definitions gives then $\sigma$:
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""]& P_0' \arrow[r, ""]\arrow[d, "\epsilon'"] & P_0' \oplus P_0'' \arrow[r, " "]& P_0'' \arrow[d, "\epsilon''"] \arrow[r, ""]\arrow[dl, "\sigma"] & 0\\
+            0 \arrow[r, ""] & A'\arrow[d, ""] \arrow[r, "i"] & A \arrow[r, "p"] & A'' \arrow[d, ""]\arrow[r, ""] & 0\\
+                            & 0 & & 0 &
+        \end{tikzcd}
+    \]
+    Then we can define
+    \[
+        \epsilon(x', x'') = i(\epsilon'(x')) + \sigma(x'')
+    .\] 
+    Show that $\epsilon$ is onto, which follows from $\epsilon'$ and $\epsilon''$ being onto. (Exercise!!)
+    By construction, the diagram is commutative.
+
+    Now, we can apply the snake lemma.
+    Write  $K_0'$,  $K_0$, $ K_0''$ for the kernels, and the cokernels are zero.
+    So snake gives us then that $K_0'' \to  \text{cokernel} = 0$, so we have
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""] & K_0' \arrow[d, ""]\arrow[r, ""] & K_0 \arrow[d, ""]\arrow[r, ""] & K_0'' \arrow[d, ""]\arrow[r, ""] & 0\\
+            0 \arrow[r, ""]& P_0' \arrow[r, ""]\arrow[d, "\epsilon'"] & P_0' \oplus P_0'' \arrow[d, "\epsilon"]\arrow[r, " "]& P_0'' \arrow[d, "\epsilon''"] \arrow[r, ""]\arrow[dl, "\sigma"] & 0\\
+            0 \arrow[r, ""] & A'\arrow[d, ""] \arrow[r, "i"] & A \arrow[d, ""] \arrow[r, "p"] & A'' \arrow[d, ""]\arrow[r, ""] & 0\\
+                            & 0 & 0& 0 &
+        \end{tikzcd}
+    \]
+    so we know something about the kernels, which is useful for induction.
+    Induction: video.
+
+\begin{figure}[H]
+    \centering
+    \incfig{diagram}
+    \caption{TODO diagram}
+    \label{fig:diagram}
+\end{figure}
+\end{proof}
+
+\begin{theorem}[2.6]
+    Let $0 \to  A' \to  A \to A'' \to  0$ be a short exact sequence of $R$-modules.
+    Then we obtain a long exact sequence of derived functors
+    \[
+        \to  (L_n T)(A) \to  (L_nT)(A'') \xrightarrow{\delta}   (L_{n-1}T)(A') \to  \cdots \to  (L_0T)A \to  (L_0 T)(A'') \to  0
+    .\] 
+\end{theorem}
+\begin{proof}
+    By the previous lemma, we have a commutative diagram:
+    \[
+        \begin{tikzcd}
+            0\arrow[r, ""]& P_2' \arrow[r, ""] \arrow[d, ""]& P_2 \arrow[r, ""] \arrow[d, ""]& P_2'' \arrow[d, ""] \arrow[r, ""]& 0\\
+            0\arrow[r, ""]& P_1' \arrow[r, ""] \arrow[d, ""]& P_1 \arrow[r, ""] \arrow[d, ""]& P_1'' \arrow[d, ""] \arrow[r, ""]& 0\\
+0\arrow[r, ""]            & P_0' \arrow[r, ""] \arrow[d, ""]& P_0 \arrow[r, ""] \arrow[d, ""]& P_0'' \arrow[d, ""] \arrow[r, ""]& 0\\
+0\arrow[r, ""]            & A' \arrow[r, ""] \arrow[d, ""]& A \arrow[r, ""] \arrow[d, ""]& A'' \arrow[d, ""] \arrow[r, ""]& 0\\
+                          & 0 & 0 & 0 &
+        \end{tikzcd}
+    \]
+    Now, add $T$s everywhere and ditch row with $A$.
+    Original short exact sequences are still exact after applying $T$.
+    $0 \to  A \to  B \to  P \to  0$ always splits.
+    \begin{uovt}
+    Exercise: If $T$ is an additive functor then it preserves split exact sequences.
+    \end{uovt}
+    This induces a long exact sequence on homology.
+    \[
+        \cdots \to  H_n(TP') \to  H_n(TP) \to  H_n(TP'') \to  H_{n-1}(TP') \to  \cdots
+    ,\] 
+    so by definition of $L_nT$ we have de desired result.
+
+    What are these maps? They are defined as before. In notes: spend too much time on this. (Orally video.)
+\end{proof}
+
+\begin{remark}
+    If $T$ is a contravariant additive functor, we can do the same thing.
+    Let $A$ be an $R$-module. Consider deleted projective resolution of $A$
+    \[
+    P_3 \to  P_2 \to  P_1 \to  P_0 \to  0
+    .\] 
+    Applying $T$, we have
+    \[
+        0 \to  T(P_0) \to  T(P_1) \to  \cdots
+    .\] 
+    This is a cochain complex.
+    Then we have the right derived functor:
+    \[
+        (R^{n} T)(A) = H^{n}((TP_A)^{n})
+    .\] 
+
+If $0 \to  A' \to  A \to  A'' \to  0$ is a short exact sequence of $R$-modules and $T$ is a contravariant functor from $R$-modules to $S$-modules, then there is a long exact sequence going the other way around.
+\[
+    (R^{n} T)(A'') \to (R^{n}T)(A) \to  (R^{n}T)(A') \to (R^{n+1}T)(A'') \to  \cdots
+.\] 
+\end{remark}
+
+\section{Ext}
+Let $G$ be an $R$-module.\footnote{Annoying notation}
+Let $T = \Hom_R(-, G)$ the functor we are fixing.
+This is a contravariant functor from $R$-modules to abelian groups.
+
+\begin{definition}
+    \[
+        \Ext^{n}_R(A, G) = (R^{n}(\Hom_{R}(-, G)))(A)
+    .\] 
+\end{definition}
+How do we ``compute'' $\Ext ^{n}_R (A, G)$?
+Pick projective resolution.
+\[
+P_3 \to  P_2 \to  P_1 \to  P_0 \to  A \to  0
+.\] 
+Then we have
+\[
+0 \to  \Hom_{R}(P_0, G) \xrightarrow{d_1^{*}}  \Hom_{R}(P1,G) \xrightarrow{d_2^{*}}  \to  \Hom_{R}(P_2, G) \xrightarrow{d_3^{*}}    \cdots
+.\] 
+This is a cochain complex.
+Then 
+\[
+    H^{n}(-) = \Ext_R^{n}(A, G) = \frac{\Ker d_{n+1}^{*}}{\im d_n^{*}}
+.\] 
+
+\begin{prop}[2.9]
+    $\Ext_R^{0}(A, G) \cong \Hom_{R}(A, G)$
+\end{prop}
+\begin{proof}
+    \[
+    P_2  \xrightarrow{d_1}  P_1 \xrightarrow{\epsilon} \to  A \to  0
+    .\] 
+    If we apply $\Hom_{R}(-, G)$ to this, and as we know this functor is left exact, we have
+    \[
+    0 \to \Hom_{R}(A, G) \xrightarrow{\epsilon^{*}} \Hom_{R}(P_0, G) \xrightarrow{d_1^{*}}  \Hom_{R}(P_1, G)
+    .\] 
+    So,
+    \[
+        \Ext_R^{0}(A, G = \Ker d_1^{*} = \im \epsilon^{*} \cong \Hom_{R}(A, G)
+    ,\] 
+    because injectivity $0 \to $.
+\end{proof}
+
+\begin{theorem}[2.10]
+    If $0 \to  A' \to  A \to  A'' \to  0$ is a short exact sequence of $R$-modules, we get a long exact sequence
+    \[
+        \cdots \to \Ext_R^{n}(A, G) \to  \Ext_R^{n}(A', G) \to  \Ext_R^{n+1}(A'', G) \to  \cdots
+    .\] 
+\end{theorem}
+So arrows in other direction than arrows between $A$
+
+\begin{theorem}[2.11]
+    If $0\to  G' \to  G \to  G'' \to  0$ is a short exact sequence of $R$-modules, then there is a long exact sequence
+    \[
+        \cdots \to \Ext_R^{n}(A, G) \to  \Ext_R^{n}(A, G'') \to  \Ext_R^{n+1}(A, G') \to  \cdots
+    .\] 
+\end{theorem}
+Here arrows in same direction as arrows between $G$.
+
+\begin{proof}
+    \[
+        0 \to  G' \to  G \to  G'' \to  0
+    \]
+    We apply $\Hom_{R}(P_n, -)$ to this ses.
+    Then we have
+    \[
+     0 \to  \Hom_{R}(P_n, G') \to  \Hom_{R}(P_n, G) \to  \Hom_{R}(P_n, G'') \to  0
+    ,\] 
+    and because $P_n$ is projective, this functor is exact, so this sequence is exact.
+    We can do this at any level, e.g.\ $P_{n+1}$.
+    Now we can find maps between
+    $\Hom_{R}(P_n, G') \to \Hom_{R}(P_{n+1}, G')$
+    $\Hom_{R}(P_n, G) \to \Hom_{R}(P_{n+1}, G)$
+    $\Hom_{R}(P_n, G'') \to \Hom_{R}(P_{n+1}, G'')$.
+    Then we have cochaincomplexes vertaal and this then becomes a short exact sequence in cochain complexes and this gives rise to long exact sequence in homology.
+
+\end{proof}
+
+\begin{theorem}[2.12]
+    Let $P$ be an $R$-module.
+    Then $P$ is projective iff $\Ext_R^{n}(P, M) = 0$ for all $n \ge 1$ and all $R$-modules $M$.
+\end{theorem}
+\begin{proof}
+    $\implies$. When $P$ is projective, then  the following is a projective resolution:
+    \[
+    \cdots \to  0 \to  0 \to  P \xrightarrow{\epsilon = \operatorname{Id}}   P \to  0
+    .\] 
+    So applying Hom to deleted resolution:
+    \[
+    0 \to  \Hom_{R}(P, M) \to  \Hom_{R}(0, M) \to  \cdots
+    .\] 
+    Now we have to compute the cohomology, so zero if $n \ge 1$.
+
+    $\impliedby$. Other direction.
+    Assume that $\Ext_R^{n}(P, M) = 0$ for all $n \ge 1$ and for all $M$.
+    Let
+     \[
+    0 \to  A \to  B \to  C \to  0
+    \] 
+    be a ses of modules.
+    Then $P$ is a projective module iff $ \Hom_{R}(P, -)$ applied to this short exact sequence is again a short exact sequence.
+
+    We do get a long exact sequence of Ext functors.
+
+    \[
+        0 \to  \Hom_{R}(P, A) \to \Hom_{R}(P, B) \to \Hom_{R}(P, C) \to  \Ext_R^{1} (P, A) \to  \cdots
+    .\] 
+    So we have, assume exts are zero:
+    \[
+        0 \to  \Hom_{R}(P, A) \to \Hom_{R}(P, B) \to \Hom_{R}(P, C) \to  0
+    ,\] 
+    so ses so $P$ is projective module.
+\end{proof}
+
+Where does name come from?
+
+\begin{definition}
+    An extension of an $R$-module $C$ by $A$ is a ses
+    \[
+    0 \to A \to  B \to  C \to  0
+    .\] 
+\end{definition}
+If we know something about Ext then we know something about the extensions.
+For example, there always exists the trivial extension:
+\[
+0 \to  A \to A \oplus C \to  C \to  0 
+.\] 
+\begin{definition}
+    Two extensions of $C$ by $A$ are equivalent iff
+    \[
+        \begin{tikzcd}
+            0 \arrow[r, ""] & A\arrow[d, "Id"] \arrow[r, ""] & B \arrow[d, "", dashed]\arrow[r, ""] & C \arrow[r, ""] \arrow[d, "Id"]& 0\\
+            0 \arrow[r, ""] & A \arrow[r, ""] & B' \arrow[r, ""] & C \arrow[r, ""] & 0\\
+        \end{tikzcd}
+    \]
+    the dashed arrow exists and commutes. It will automatically be an isomorphism.
+\end{definition}
+\begin{eg}
+    For example, an extension of $C$ by $A$ is equivalent to  the trivial extension $0 \to  A \to  A \oplus C \to  C \to  0$ iff the extension splits.
+\end{eg}
+
+\begin{prop}[2.13]
+    If $\Ext_R^{1}(C, A)$ is zero, then every extension of $C$ by $A$ splits!
+\end{prop}
+\begin{proof}
+    Let $0 \to  A \to B \to  C \to  0$ be an extension.
+    Then there is a long exact sequence of ext functors.
+    We will fix $C$ and put  $A$, $B$, and $C$ at the second place.
+
+    \[
+        0 \to  \Hom_{R}(C, A) \to  \Hom_{R}(C, B) \to \Hom_{R}(C, C) \xrightarrow{p_{*}}  \Ext_R^{1}(C, A) = 0
+    ,\] 
+    so $p_*$ is surjective.
+    So there exists a morphism  $C \to  B$ which is mapped to $\operatorname{Id}: C \to  C$.  Remember that $p_*(s) = p  \circ  s$. So indeed, $s$ is a section $C\to  B$.
+    So the sequence splits.
+\end{proof}
+
+Even more is true: set of equivalence relations of extensions is in one to one correspondence with $\Ext_R^{1}(C, A)$.

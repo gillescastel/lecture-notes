@@ -1,0 +1,225 @@
+\lesson{10}{di 27 okt 2020 15:43}{}
+
+\nsection{16}{3}{Nilpotent groups of automorphisms}
+
+\paragraph{Holomorph of a group}
+
+\[
+    \Hol(G) = G \rtimes \Aut G
+.\] 
+As a set: $G \rtimes \Aut G = G \times  \Aut G$.
+For all $(g, \phi), (h, \psi)$ in  $\Hol g$ we have
+ \[
+     (g, \phi)(h, \psi) = (g \phi(h), \phi \psi)
+.\] 
+
+This is a group.
+E.g. what is the inverse?
+\[
+    (g, \phi)^{-1} = (\phi^{-1}(g^{-1}), \phi^{-1})
+.\] 
+
+We can view $G$ as a subgroup of $G \rtimes \Aut G$ as follows:
+\[
+    g \mapsto (g, 1)
+.\] 
+Indeed, $(g, 1)(h, 1) = (gh, 1)$.
+Similar for  $\Aut G \le G \rtimes \Aut G$.
+More is true, in fact $G \triangleleft \Hol G$.
+\[
+    (h, \phi)(g, 1)(h, \phi)^{-1} = (\ldots, 1) \in G
+.\] 
+$\Aut G$ is in general not a normal subgroup.
+
+\begin{theorem}[16.3.1]
+Consider a group  $G$ and a series of normal subgroups:
+\[
+G = G_0 \ge  G_1 \ge  \cdots \ge  G_r = 1
+.\]
+
+Let $\Phi = \{\phi \in  \Aut G  \mid  \phi(G_i) = G_i \text{ and } \phi \text{ induces identity on }G_i / G_{i+1} \} $
+
+So for any $g \in G_i$, we have
+\[
+\phi(g) = gx \qquad \text{with } x \in G_{i+1}
+.\] 
+
+Then $\Phi$ is nilpotent of class $<r$.
+\end{theorem}
+
+\begin{remark}
+    
+Compare with the following. Let $k$ a field.
+Take the sequence
+ \[
+k^{n} \ge  k^{n-1} \ge  \cdots \ge  k^{1} \ge  1
+.\] 
+Where e.g. $k^{n-2} \ni (0, 0, *, \cdots *)$
+and $k^{n-3} \ni (0, 0, 0, *, \cdots *)$.
+Then
+\[
+\Phi = \{\phi \in \GL_n(k)\}   \mid  \phi(k^{i}) = k^{i} \text{ and $\phi$ induces identity on } k^{i+1} / k^{i}\}
+.\] 
+
+Choose basis such that $\left<e_1\right> = k^{1}$ , $ \left<e_1, e_2 \right> = k^{2}$, \ldots
+Then we have 
+
+\[
+\phi \in \Phi \sim \begin{pmatrix}
+    1 & * & * & *\\
+    0 & 1 & * & *\\
+    0 & 0 & 1 & * \\
+    0 & 0 & 0 & 1
+\end{pmatrix}
+.\] 
+\end{remark}
+
+\begin{proof}
+    First consider the following:
+    
+    
+    \begin{align*}
+        [g, \phi] &= (g^{-1}, 1)(1, \phi^{-1})(g, 1) (1, \phi)\\
+                  &= (g^{-1}, \phi^{-1})(g, \phi)\\
+                  &= (g^{-1} \phi^{-1}(g), 1)
+    .\end{align*}
+    Why interesting?
+    For any $\phi \in \Aut G$
+    Note $\phi \in \Phi$ iff $\phi^{-1} \in \Phi$ because this is a group.
+    An actually $\phi^{-1} \in \Phi$ iff for all 
+    \begin{align*}
+     &\iff \forall g \in G_i:  \phi^{-1}(g) = gh \qquad \text{ with } h \in G_{i+1}\\
+     &\iff \forall g \in G_i: g^{-1} \phi^{-1}(g) \in G_{i+1}\\
+     &\iff \forall g \in G_i:  [g, \phi] \in G_{i+1}
+    .\end{align*} 
+    This implies that $[G_i, \Phi] \le  G_{i+1}$.
+    This actually defines $\Phi$ as being the largest group for which this holds.
+
+
+For any $j \in \{1, 2, \ldots\} $, let $\Phi_j \le  \Phi$ consisting of all $\phi \in \Phi$ such that $\phi$ induces the identity on $G_i / G_{i+j}$.\footnote{Yes, $+j$, not  $+1$!}
+
+So then $\Phi = \Phi_1$.
+And we have
+\[
+\Phi = \Phi_1 \ge  \Phi_2 \ge  \Phi \ge  \cdots \ge  \Phi_r = 1
+,\] 
+because $\Phi_r$ contains elements that are identity on  $ G_0  / G_r = G$.
+
+
+\begin{remark}
+    As an example
+
+    \[
+    \Phi_1\ni\phi  \sim \begin{pmatrix}
+        1 & 0 & * & *\\
+        0 & 1 & 0 & *\\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}
+\qquad
+    \Phi_2\ni\phi   \sim \begin{pmatrix}
+        1 & 0 & 0 & *\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}
+    .\] 
+\end{remark}
+
+Claim: this is a central sequence.
+
+Note $\phi \in \Phi_j$ if for all $g \in G_i$, $[g, \phi] \in G_{i+j + 1}$, by the previous calculation.
+
+
+To proof that this is a central sequence, we need to prove that
+\[
+    [\Phi_{j}, \Phi] \le  \Phi_{j+1} \qquad \forall j
+.\] 
+Because our defining identity for $\Phi_j$ we have that this is equivalent to
+ \[
+     [G_i, [\Phi_j, \Phi]] \le  G_{i+j+1}
+.\] 
+
+
+\paragraph{Subgroup Lemma}
+Let $N \triangleleft G$ and $A, B, C \le G$.
+Then if $[A, [B, C] \le N$ and $[B, [C, A] \le  N$ then $[C, [A, B] \le N$.
+
+To apply this, consider
+\[
+N = G_{i+j+1} \triangleleft G \rtimes \Phi \qquad A = \Phi_j \qquad B = \Phi \qquad C = G_i
+.\] 
+So then we have
+
+\[
+    [\Phi_j, \underbrace{[\Phi_, G_i]}_{\le G_{i+1}}] \le G_{i+1+j}
+    \qquad
+    [\Phi, \underbrace{[G_i, \Phi_j]}_{\le G_{i+j}}] \le  G_{i+j+1}
+.\] 
+Then the Subgroup Lemma gives $[G_i, [\Phi_j, \Phi] \le  G_{i+j+1}$.
+This proves that the series was a central series.
+
+\end{proof}
+
+\begin{remark}
+    This is proof of Theorem 16.3.1 (First part).
+
+    There is also a stronger theorem which works for any subgroups (where consequent subgroups are normal in each other but not in the total group.
+\end{remark}
+
+\nchapter{17}{The most important subclasses}
+\nsection{17}{1}{Finite nilpotent groups}
+
+\begin{prop}
+    Let $G$ be a finite $p$-group, by which we mean that $\# G = p^{k}$.
+    Then $Z(G) \neq 1$.
+\end{prop}
+\begin{proof}
+    Partition group in conjugacy classes. $ c_1 = \{1\}, \ldots$
+    Then
+    \[
+    \# G = 1 + \# C_2 + \# C_3 + \cdots + \# C_r
+    .\] 
+    Now let $C_i$ be the conjugacy class of $c_i$.
+    Then
+    \[
+        \# C_i =
+        \frac{\# G}{\# \text{Orbit}_{\text{conj. action $G$ on  $G$}}} = 
+        \frac{\# G}{\# C_G(c_i)} = p^{k-\ell}
+    ,\] 
+    where $\# C_G(c_i) = p^{\ell}$
+    If $ \ell \neq k$, so $C_G(c_i) \neq G$, then  $p  \mid  \# C_i$.
+    The $\#C_G(c_i)$ are  $1$ or $p^{\ldots}$, so we have
+
+    \begin{align*}
+        0 = \# G &=
+        1 + \# C_2 + \# C_3 + \cdots \# C_s + \#C_{s+1} + \cdots + \# C_r\\
+                 & =1  + 1 + 1 + \cdots + 1 + 0 + \cdots + 0
+        \mod p
+    \end{align*}
+    So $0 = s \mod p$, so in particular,  $s \ge  2$.
+    So $c_2 \in Z(G)$, so $Z(G) \neq 1$.
+\end{proof}
+
+\begin{corollary}
+Any finite $p$-group is nilpotent.
+\end{corollary}
+\begin{proof}
+    We start with $G$ and have  $Z_1(G) \neq 1$.
+    If $ Z_1(G) \neq G$ we're done with sequence.
+    If $ Z_1(G) \neq G$ then $G / Z_1(G)$ is a finite $p$-group
+    then $Z(G / Z_1(G)) \neq 1$ so $Z_2(G) / Z_1(G) \neq 1$.
+    Go on \ldots
+    So we have a strict sequence:
+    \[
+        1 < Z_1(G) < Z_2(G) < \cdots < G
+    .\] 
+\end{proof}
+
+\begin{eg}[Other examples of finite nilpotent groups]
+    If $H$ is nilpotent group and $K$ is a nilpotent group then $H \times K$ is also a nilpotent group.
+    Indeed, $Z(H \times K) = Z(H) \times Z(K)$ with nilpotency class the maximum of the nilpotency classes.
+    This implies that $Z_i(H \times K) = Z_i(H) \times Z_i(K)$.
+
+    We will later show that these are the only types of finite nilpotent groups.
+\end{eg}

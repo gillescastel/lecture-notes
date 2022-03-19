@@ -1,0 +1,246 @@
+\lesson{9}{di 27 okt 2020 10:44}{}
+
+\begin{theorem}[16.2.3]
+    Let $G$ be a nilpotent group and $H \triangleleft G$.
+    If $H \neq 1$ then $H \cap Z(G) \neq 1$.
+\end{theorem}
+
+So every normal subgroup does intersect the center in a non-trivial way. So there are always non-trivial center elements in any normal subgroup.
+
+\begin{proof}
+    Let $G$ be nilpotent of class $c$.
+    If $c = 1$, then abelian, so $G = Z(G)$, then the result is trivial.
+
+    Assume $c>1$.
+    \begin{description}
+        \item [If $H \le Z(G)$], then we're done
+        \item [Otherwise] Consider $ \frac{HZ(c)}{Z(G)} \triangleleft  \frac{G}{Z(G)}$.
+            Then $H Z(G) / Z(G)$ is not trivial, and  $G / Z(G)$ is nilpotent of class  $c - 1$.\footnote{
+                $Z(G / Z(G)) = Z_2(G) / Z_1(G)$ by definition of $ Z_2$ (`the second center').
+                And moreover $ Z_2 (G / Z(G)) = Z_3(G) / Z_1(G)$ and so on, $Z_{c-1}(G / Z(G)) = \frac{Z_c(G)}{Z_1(G)} = G / Z(G)$.
+                So if we mod out the center, we just kill one nilpotency class.
+            }
+            So we can apply the induction hypothesis.
+            So
+            \[
+                \frac{HZ(G)}{Z(G)} \cap Z\left( \frac{G}{Z(G)} \right)  \neq 1
+            .\] 
+            But $Z(G / Z(G)) = Z_2(G) / Z(G)$, so 
+            \[
+                \frac{HZ(G)}{Z(G)} \cap  \frac{Z_2}{Z(G)} \neq 1
+            ,\] 
+            so there is non-trivial element in $HZ(G) \cap Z_2$ and $x \not\in Z(G)$.
+
+            So $x = hz$ with  $h \in H$, $z \in Z(G)$ and also an element of $ Z_2(G) \setminus Z_1(G)$.
+            But then it follows that $hz z^{-1} = h \in Z_2(G)$, because $Z(G)$ is a subgroup of  $ Z_2(G)$, but still $h \not\in Z\left( G \right) $.
+            So 
+            \[
+                h \in Z_2(G) \setminus Z(G)
+            .\] 
+            But this is not what we want, we want an element in the center that is not trivial.
+            But the previous statement translates to `there exists a $g \in G$ such that $[h,g] \neq  1$.'
+            But $[h, g] \in H$\footnote{Why? $H$ is normal so  $[H, G] \le H$}
+            Secondly because central series: $[Z_2(G), G] \le Z_1(G)$.
+            So $[h, g] \in H \cap Z(G)$.
+            This finishes the proof.
+    \end{description}
+\end{proof}
+
+\begin{theorem}[16.2.5]
+    Let $G$ be nilpotent.
+    Assume that $A \le G$ such that $A [G, G] = G$.
+    Then $A = G$.
+\end{theorem}
+\begin{proof}
+    Assume that $A \neq G$.
+    Define $A_i = A Z_i$ where  $Z_i = Z_i(G)$.
+    Then $A_0 = A \neq G$.
+    This is also an increasing sequence:
+    \[
+    G \neq A_0 \le  A_1 \le  A_2 \le  \cdots \le  A_c = G
+    .\] 
+    Let $n$ be such that $A_n \neq G$ and $A_{n+1} = G$.
+    Note $A_i \triangleleft A_{i+1}$.\footnote {
+    We need to show $A Z_i \triangleleft A Z_{i+1}$.
+    Take conjugate of element an use fact that $a z_{i+1} = z_{i+1} a \mod Z_i$.
+}
+    Now, $\frac{A Z_{i+1}}{A Z_i}$ is abelian!
+    Why? Consider the morphism 
+    \[
+    \frac{Z_{i+1}}{Z_i} \to  \frac{A Z_{i+1}}{A Z_i}: z Z_i \mapsto  z A Z_i
+    .\] 
+    This is well defined and also epi (onto), because we mod out the $A$ (check)
+    The left group is abelian (quotient of central series), so the right one is as well. (Or show directly like in the footnote)
+    So $\frac{A_{i+1}}{ A_i}$ are abelian.
+    In particular, $\frac{A_{n+1}}{ A_n} = \frac{G}{A_n}$ is abelian. This implies that $[G, G] \le A_n$. Indeed
+    \[
+        \left[\frac{G}{A_n}, \frac{G}{A_n}\right] = \frac{A_n}{A_n} = 1
+    ,\] 
+    so $[G, G] \le A_n$.
+
+    Now we're done!
+    Why?
+    $[G, G] \le A_n = A Z_n$.
+    This implies that $[G, G] A \le  A_n$.
+    But $[G, G] A= G$, so  $G \le A_n \le G$.
+    This is contradiction. We assumed $A_n$ was not already $G$, but now we have that $G$ is a subgroup of  $A_n$.
+\end{proof}
+
+What's the use of this theorem?
+
+\begin{eg}[Application, not in the text]
+    Let $G$ be a nilpotent group.
+    Let $\phi: G \to  G$ be a morphism.
+    Then $\phi([G, G]) \le [G, G]$.\footnote{This is a general fact, not requiring nilpotency}
+    So $\phi$ induces a well-defined morphism
+    \[
+        \overline{\phi}: \frac{G}{[G, G]} \to  \frac{G}{[G, G]}
+    .\] 
+    Claim: $\phi$ is surjective iff $\overline{\phi}$ is surjective.
+\end{eg}
+\begin{explanation}
+    If $\phi$ is surjective then certainly $\overline{\phi}$ is as well.
+    Conversely, suppose $\overline{\phi}$ is surjective.
+    So then $\operatorname{Im}(\overline{\phi}) = \frac{G}{[G, G]}$.
+    This implies that $\frac{\operatorname{Im}(\phi) [G, G]}{[G, G]} = \frac{G}{[G, G]}$, which implies that
+    \[
+        \operatorname{Im} (\phi) [G, G] = G
+    .\] 
+    By the previous result, $\operatorname{Im}(\phi) = G$.
+\end{explanation}
+
+Strange result:
+
+\begin{theorem}[16.2.6]
+    In a nilpotent group $G$, every maximal normal abelian subgroup\footnote{If $A \le  B \triangleleft G$ and $B$ is abelian, then $A = B$}  $A$ is its own centralizer.
+\end{theorem}
+\begin{proof}
+    Let $H = C_G(A) = \{g \in G  \mid  g a = a g \quad \forall a \in A\} $.
+    Note $H \triangleleft G$. (exercise).
+    Claim: for all $i = 0, 1, \ldots$ we have
+    \[
+    H \cap Z_i \le A
+    .\] 
+    At a certain moment, we have $Z_i = G$ so then  $H \le A$.
+    \begin{itemize}
+        \item[$i=0$] We are done: $ Z_0 = 1$.
+        \item[$i>0$] Assume $H \cap Z_i \le A$ and let $x \in H \cap Z_{i+1}$.
+            Let $g \in G$, then because $H$ is normal,  $[H, G] \le H$ and $[Z_{i+1}, G] \le Z_i$, we have
+            \[
+                [x, g]  \in H \cap Z_i \le A
+            .\] 
+            This implies that $\left<a, A \right> \triangleleft G$.\footnote{Check this is normal for yourself! $g^{-1} x^{-1} g x \in A$, so $g^{-1} x^{-1} g \in \left<x, A \right>$. Now do the rest\ldots}
+            Moreover, this group is abelian. Indeed, $A$ is ablian and $x \in H$ and $H$ is the centralizer of  $A$. 
+            This is an abelian normal subgroup of $G$, so  $\left<x, A \right> = A$ by maximality of $A$. So $x \in A$.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    Under conditions of the previous theorem, there is an injective homomorphism
+    \[
+        \phi: G / A \to  \operatorname{Aut}(A)
+    .\] 
+\end{corollary}
+\begin{proof}
+    Let \[
+        \psi: G \to  \operatorname{Aut}(A): g \mapsto (a \mapsto g a g^{-1})
+    \]
+    We can do this for any normal subgroup.
+    Now, \begin{align*}\Ker \psi &= \{ g \in G  \mid \psi(g) = 1_A\}\\
+        &= \{ g \in G  \mid  g a ^{-1} g = a \quad \forall  a \in A\} \\
+        &= C_G(A) = A.
+    \end{align*}
+    So modding out by the kernel, we have something injective:
+    \[
+        \psi: \frac{G}{A} \to \operatorname{Aut}(A)
+    .\] 
+\end{proof}
+\begin{eg}
+    If $A = \Z^{k}$, then $\operatorname{Aut}(A)$ are matrices, which gives then a nice representation of the group $G / A$.
+\end{eg}
+
+
+
+Recall: if $G$ is nilpotent group, then  $\tau G \triangleleft  G$. Then $G / \tau G$ is a torsion free group!
+
+\begin{theorem}
+    In a torsion-free nilpotent group, taking roots is a well-defined operation.
+    In other words:
+    \[
+    \forall a, b \in G: \forall n \in \N_0: a^{n} = b^{n} \implies a = b
+    .\] 
+\end{theorem}
+\begin{proof}
+    By induction of the nilpotency class of $G$.
+    If $G$ is abelian, then $a^{n} = b^{n}$ implies that $a^{n} b^{-n}=1$, so $(a b^{-1})^{n} = 1$. Since the group is torsion free, $ab^{-1} = 1$ so $a = b$.
+
+    Now assume $G$ is nilpotent of class  $c\ge 2$
+    Then $\left<a, [G, G] \right>$ is nilpotent of class $<c$.
+    We know that $\left<a, [G, G] \right> \triangleleft G$.\footnote{Why? Any group containing the commutator subgroup is normal! $[G, G] \le H$ so $[H, G] \le H$.} So $b a b^{-1} \in \left<a, [G, G] \right>$.
+    So then
+    \[
+        (b a b^{-1})^{n} = b a^{n} b^{-1} = b b^{n} b^{-1} = b^{n} = a^{n}
+    .\] 
+    So because we're in a lower nilpotency class, by induction then $b a b^{-1} = a$.
+    This shows that $ba = ab$.
+    So $a$ and  $b$ commute. So we can do the same argument as in the beginning!!
+    \[
+        a^{n} = b^{n} \implies a^{n} b^{-n} = 1 \implies (a b^{-1})^{n} = 1 \implies ab^{-1} = 1 \implies a = b
+    .\] 
+\end{proof}
+
+Interesting corollary: Torsion free nilpotent groups. Then all quotients of upper central series are torsion free too! This does not hold for lower central series.
+
+\begin{theorem}[16.2.12, Fitting]
+    If $A \triangleleft G$ and $B \triangleleft G$. If $A$ is nilpotent of class $s$ and $B$ is nilpotent of class $t$.
+    Then $AB \triangleleft G$ is also a nilpotent group of class  $\le s + t$.
+\end{theorem}
+\begin{remark}
+    For all $a, b, c \in G$ we have
+    \[
+        [ab, c] = [a,c]^{b} [b,c] = [a^{b}, c^{b}] [b, c]
+    ,\] 
+    where $x^{b} = b^{-1} x b$.
+\end{remark}
+\begin{proof}
+    Let $a \in A$, $ b \in B$ and $c \in N\triangleleft G$, where $N$ is a normal subgroup of  $G$.
+    Then
+    \[
+        [ab, c] = [b^{-1}ab, b^{-1} c b][b, c]
+    .\] 
+    Now, $b^{-1} a b =: a'\in A$ and $b^{-1} c b=: c' \in N$.
+    So
+    \[
+    [ab, c] \in  [A, N][B, N]
+    .\] 
+    Claim $\gamma_i(AB) \le  \prod [H_1, [H_2, [H_3, \ldots, H_i]]\cdots]$ where $H_j$ is  $A$ or  $B$.
+    So more concretely, 
+    \begin{align*}
+        \gamma_2(AB) = [AB, AB] &\le  [A, AB] [B, AB]\\
+                                &\le  [A, A] [A, B] [ B,A] [B, B]
+    .\end{align*} 
+    Then
+    \[
+        \gamma_{i+1}(AB) = [AB, \gamma_i(AB)] = \ldots
+    \] 
+    This is all what we needed to show!
+    Indeed,
+    \[
+        \gamma_{s+t+1}(AB) \le  \prod [H_1, [H_2, [\cdots, [H_{s+t}, H_{s+t+1}]] ]
+    .\] 
+    We claim that all of these terms are trivial.
+    For example, take $s = 3$ and  $t = 4$.
+    Let's take an element in the product, say
+     \[
+         [A, [B, [B, [A, [B, [A, [A, A]]]]]]]
+    .\] 
+    We can forget all the $B$'s because  $[B, N] \le  N$ for any normal subgroup. We start with $[A, A]$, which is a normal subgroup. Taking commutators,  $[N, M] \triangleleft G$ is still normal.
+    Forgetting about $B$ makes this group only bigger. 
+    We get
+    \[
+        [A, [B, [B, [A, [B, [A, [A, A]]]]]]] \le \gamma_5(A) = 1
+    .\] 
+
+    So in the product in each term, or there's at least $s+1$  $A$'s or  $t+1$  $B$'s, so then  $\le  \gamma_{t+1}(B) = 1$.
+    This completes the proof.
+\end{proof}
